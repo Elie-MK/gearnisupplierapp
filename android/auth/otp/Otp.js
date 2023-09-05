@@ -8,20 +8,80 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Color from "../../../utilities/Color";
 import { AntDesign } from "@expo/vector-icons";
 import { verticalScale } from "../../../utilities/Metrics";
 import { useState } from "react";
 import { Button } from "@rneui/base";
+import Alert from "../../components/Alert";
 
 const Otp = ({ navigation }) => {
-  const [otp1, setOtp1] = useState("");
-  const [otp2, setOtp2] = useState("");
-  const [otp3, setOtp3] = useState("");
-  const [otp4, setOtp4] = useState("");
-  const [otp5, setOtp5] = useState("");
-  const [otp6, setOtp6] = useState("");
+    const otpRefs = useRef([]);
+
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [timer, setTimer] = useState(30);
+  const [attempts, setAttempts] = useState(0);
+  const [dismis, setDismis] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+
+
+  const handleSubmit = () => {
+    const otpValue = otp.join('')
+    setAttempts(0)
+    navigation.navigate('flow')
+  };
+  const updateTimer = () => {
+    if (timer > 0) {
+      setTimer(timer - 1);
+    } else {
+      
+      if (attempts === 0) {
+        setTimer(30); 
+      } else if (attempts === 1) {
+        setTimer(30); 
+      } else if (attempts === 2) {
+        setTimer(3600); 
+      }
+    }
+  };
+
+  useEffect(() => {
+    const countdown = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(countdown);
+  }, [attempts]);
+
+  const handleOtpChange = (text, index) => {
+    const newOtp = [...otp];
+
+    if (text.length === 1) {
+      newOtp[index] = text;
+      setOtp(newOtp);
+
+      if (index < 5) {
+        otpRefs.current[index + 1].focus();
+      }
+    } else if (text.length === 0) {
+      newOtp[index] = '';
+      setOtp(newOtp);
+
+      if (index > 0) {
+        otpRefs.current[index - 1].focus();
+      }
+    }
+  };
+ 
+  const handleResend = () => {
+    if (attempts < 2) {
+      setVisible(!visible)
+      setAttempts(attempts + 1);
+    } else {
+      setDismis(!dismis)
+      setVisible(!visible)
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -47,104 +107,44 @@ const Otp = ({ navigation }) => {
             marginTop: 20,
           }}
         >
+         
+         {otp.map((digit, index) => (
           <TextInput
-            value={otp1}
-            onChangeText={(e) => setOtp1(e)}
+            key={index}
+            ref={(ref) => (otpRefs.current[index] = ref)}
             style={{
               borderWidth: 1,
               padding: 15,
               borderRadius: 10,
               fontSize: 20,
             }}
-            textAlign="center"
             keyboardType="numeric"
-            maxLength={1}
-            cursorColor={Color.light.main}
-          />
-          <TextInput
-            value={otp2}
-            onChangeText={(e) => setOtp2(e)}
-            style={{
-              borderWidth: 1,
-              padding: 15,
-              borderRadius: 10,
-              fontSize: 20,
-            }}
             textAlign="center"
-            keyboardType="numeric"
             maxLength={1}
-            cursorColor={Color.light.main}
+            value={digit}
+            onChangeText={(text) => handleOtpChange(text, index)}
           />
-          <TextInput
-            value={otp3}
-            onChangeText={(e) => setOtp3(e)}
-            style={{
-              borderWidth: 1,
-              padding: 15,
-              borderRadius: 10,
-              fontSize: 20,
-            }}
-            textAlign="center"
-            keyboardType="numeric"
-            maxLength={1}
-            cursorColor={Color.light.main}
-          />
-          <TextInput
-            value={otp4}
-            onChangeText={(e) => setOtp4(e)}
-            style={{
-              borderWidth: 1,
-              padding: 15,
-              borderRadius: 10,
-              fontSize: 20,
-            }}
-            textAlign="center"
-            keyboardType="numeric"
-            maxLength={1}
-            cursorColor={Color.light.main}
-          />
-          <TextInput
-            value={otp5}
-            onChangeText={(e) => setOtp5(e)}
-            style={{
-              borderWidth: 1,
-              padding: 15,
-              borderRadius: 10,
-              fontSize: 20,
-            }}
-            textAlign="center"
-            keyboardType="numeric"
-            maxLength={1}
-            cursorColor={Color.light.main}
-          />
-          <TextInput
-            value={otp6}
-            onChangeText={(e) => setOtp6(e)}
-            style={{
-              borderWidth: 1,
-              padding: 15,
-              borderRadius: 10,
-              fontSize: 20,
-            }}
-            textAlign="center"
-            keyboardType="numeric"
-            maxLength={1}
-            cursorColor={Color.light.main}
-          />
+        ))}
+        
         </View>
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <Text>An SMS should arrive shortly</Text>
           <Text style={{ marginTop: 20, fontWeight: "bold", fontSize: 25 }}>
-            00:30
+            00:{timer}
           </Text>
         </View>
         <View style={{marginTop:120}}>
           <Button
             title="Verify"
+            disabled={dismis}
+            onPress={handleSubmit}
             buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
             titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
           />
         </View>
+
+        {
+          !dismis?
         <View
           style={{
             flexDirection: "row",
@@ -154,10 +154,32 @@ const Otp = ({ navigation }) => {
           }}
         >
           <Text>I haven't received the code.  </Text>
-          <Pressable >
+          <Pressable onPress={()=>setVisible(!visible)}>
             <Text style={{ fontWeight: "bold" }}>Resend </Text>
-          </Pressable>
+          </Pressable> 
+          
+        </View>:   <View
+          style={{
+            flexDirection: "row",
+            alignContent: "center",
+            justifyContent: "center",
+            marginTop: verticalScale(20),
+          }}
+        >
+          <Text>Encoutering issues ?  </Text>
+          <Pressable onPress={handleResend}>
+            <Text style={{ fontWeight: "bold" }}>Contact Support</Text>
+          </Pressable> 
+          
         </View>
+        }
+      </View>
+      <View>
+        <Alert
+          visible={visible}
+          dismis={() => setVisible(!visible)}
+          onPress={handleResend}
+        />
       </View>
     </View>
   );

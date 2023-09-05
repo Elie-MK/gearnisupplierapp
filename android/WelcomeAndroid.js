@@ -7,6 +7,7 @@ import {
   Platform,
   StatusBar,
   Dimensions,
+  Image
 } from "react-native";
 import React from "react";
 import Color from "../utilities/Color";
@@ -19,7 +20,7 @@ const WelcomeAndroid = ({ navigation }) => {
       <View style={styles.secondContainer}>
         <View>
           <View>
-            <Text>Gearni </Text>
+            <Image resizeMode="contain" style={{width:horizontalScale(200), marginTop:-20}} source={require("../assets/gear.png")} />
           </View>
           <View style={styles.buttonContainer}>
             <Button
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    marginTop: verticalScale(500),
+    marginTop: verticalScale(200),
     width: horizontalScale(200),
   },
   btn: {

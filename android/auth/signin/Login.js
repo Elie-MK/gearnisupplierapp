@@ -7,7 +7,7 @@ import {
   TextInput,
   Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
 import { horizontalScale, verticalScale } from "../../../utilities/Metrics";
@@ -15,13 +15,28 @@ import { Button, Input } from "@rneui/base";
 import Alert from "../../components/Alert";
 
 const Login = ({ navigation }) => {
-  const [code, setCode] = useState("");
+  const [countryCode, setCountryCode] = useState("+216");
   const [number, setNumber] = useState("");
   const [visible, setVisible] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    const regex = /^\+\d{1,4}$/;
+    const isValidCode = regex.test(countryCode);
+
+    if (isValidCode === true) {
+      setIsValid(isValid);
+    } else {
+      setIsValid(!isValid);
+    }
+  }, [countryCode]);
 
   const handleSubmit = () => {
-    setVisible(!visible)
+    const number = countryCode + number
+    setVisible(!visible);
   };
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
@@ -36,8 +51,9 @@ const Login = ({ navigation }) => {
             <AntDesign name="search1" size={24} color={Color.light.black} />
             <TextInput
               style={styles.input}
-              onChangeText={(e) => setCode(e)}
-              value={code}
+              onChangeText={(e) => setCountryCode(e)}
+              value={countryCode}
+              maxLength={4}
               keyboardType="phone-pad"
             />
           </View>
@@ -46,10 +62,12 @@ const Login = ({ navigation }) => {
               style={styles.input2}
               onChangeText={(e) => setNumber(e)}
               value={number}
+              maxLength={10}
               keyboardType="numeric"
             />
           </View>
         </View>
+
         <View
           style={{
             position: "absolute",
@@ -62,6 +80,11 @@ const Login = ({ navigation }) => {
         >
           <Text>Your mobile Number</Text>
         </View>
+        {isValid && (
+          <Text style={{ color: "red" }}>
+            the country code must begin for "+"
+          </Text>
+        )}
 
         <View style={styles.btnContainer}>
           <Button
@@ -99,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: Color.light.themeColor,
-    height:Dimensions.get("screen").height
+    height: Dimensions.get("screen").height,
   },
   secondContainer: {
     marginLeft: 20,
@@ -119,10 +142,12 @@ const styles = StyleSheet.create({
   input: {
     width: 64,
     paddingLeft: 15,
+    fontSize: 18,
   },
   input2: {
     borderLeftWidth: 1,
     paddingLeft: 20,
+    fontSize: 18,
   },
   btnContainer: {
     marginTop: verticalScale(90),
