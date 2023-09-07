@@ -1,4 +1,4 @@
-import { View, Text, Modal } from "react-native";
+import { View, Text, Modal, Image } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
 import ReactNativeModal from "react-native-modal";
@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
 
-const Alert = ({ visible, dismis, onPress, text }) => {
+const Alert = ({ visible, dismis, onPress, text, btnText }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -34,11 +34,7 @@ const Alert = ({ visible, dismis, onPress, text }) => {
           >
             <View style={{ alignItems: "center" }}>
               <View style={{ alignItems: "center" }}>
-                <MaterialCommunityIcons
-                  name="cellphone-message"
-                  size={40}
-                  color="black"
-                />
+               <Image resizeMode="contain"  source={require('../../assets/phone.png') } style={{height:60, width:70}} />
                 <Text
                   style={{
                     marginTop: 10,
@@ -55,7 +51,7 @@ const Alert = ({ visible, dismis, onPress, text }) => {
             </View>
             <View style={{ alignItems: "center", marginTop: 20 }}>
               <Button
-                title="confirm"
+                title={btnText}
                 onPress={onPress}
                 containerStyle={{ width: horizontalScale(95), borderRadius: 5 }}
                 buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.regular }}

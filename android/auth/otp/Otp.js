@@ -21,16 +21,13 @@ const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
 
     const {routes}=route.params
-
-    
-
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
-  const [timer, setTimer] = useState(30);
+  const [time, setTime] = useState({minutes :0, secondes:30});
   const [attempts, setAttempts] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
   const [dismis, setDismis] = useState(false);
   const [visible, setVisible] = useState(false);
-
-
 
   const handleSubmit = () => {
     const otpValue = otp.join('')
@@ -41,32 +38,12 @@ const Otp = ({ navigation, route }) => {
       navigation.navigate('flow')
     }
   };
-  const updateTimer = () => {
-    if (timer > 0) {
-      setTimer(timer - 1);
-    } else {
-      
-      if (attempts === 0) {
-        setTimer(30); 
-      } else if (attempts === 1) {
-        setTimer(30); 
-      } else if (attempts === 2) {
-        setTimer(3600); 
-      }
-    }
-  };
-
-  useEffect(() => {
-    const countdown = setInterval(updateTimer, 1000);
-
-    return () => clearInterval(countdown);
-  }, [attempts]);
 
   const handleOtpChange = (text, index) => {
     const newOtp = [...otp];
 
     if (text.length === 1) {
-      newOtp[index] = text;
+      newOtp[index] = text
       setOtp(newOtp);
 
       if (index < 5) {
@@ -82,21 +59,48 @@ const Otp = ({ navigation, route }) => {
     }
   };
  
+
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      if (!isPaused) {
+        if (time.minutes === 0 && time.secondes === 0) {
+          if (attempts <= 2) {
+            setIsPaused(true);
+            setAttempts(attempts + 1);
+          } else {
+            setTime({ minutes: 59, secondes: 59 });
+            setDismis(!dismis)
+            setVisible(!visible)
+          }
+        } else {
+          setTime((prevTime) => {
+            if (prevTime.secondes === 0) {
+              return { minutes: prevTime.minutes - 1, secondes: 59 };
+            } else {
+              return { minutes: prevTime.minutes, secondes: prevTime.secondes - 1 };
+            }
+          });
+        }
+      }
+    },1000)
+
+    return ()=>clearInterval(interval)
+  },[ time, attempts, isPaused])
   const handleResend = () => {
-    if (attempts < 2) {
-      setVisible(!visible)
+    if (isPaused) {
+      setTime({ minutes: 0, secondes: 30 });
       setAttempts(attempts + 1);
-    } else {
-      setDismis(!dismis)
-      setVisible(!visible)
+      setIsPaused(false);
     }
-  };
+   };
+ 
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
   }
-
+console.log(attempts);
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
@@ -143,9 +147,14 @@ const Otp = ({ navigation, route }) => {
         </View>
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <Text style={{fontFamily:fontGotham.regular}}>An SMS should arrive shortly</Text>
-          <Text style={{ marginTop: 20, fontSize: 25, fontFamily:fontGotham.bold }}>
-            00:{timer}
-          </Text>
+          {
+            dismis? <Text style={{ marginTop: 20, fontSize: 15, textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
+            Account has been templorarily locked for 24 houres due to suspicious activity
+          </Text> : <Text style={{ marginTop: 20, fontSize: 25, fontFamily:fontGotham.bold }}>
+            {String(time.minutes).padStart(2, '0')}:{String(time.secondes).padStart(2, '0')}
+          </Text>  
+          }
+         
         </View>
         <View style={{marginTop:120}}>
           <Button
@@ -168,7 +177,7 @@ const Otp = ({ navigation, route }) => {
           }}
         >
           <Text style={{fontFamily:fontGotham.regular}}>I haven't received the code.  </Text>
-          <Pressable onPress={()=>setVisible(!visible)}>
+          <Pressable onPress={handleResend} >
             <Text style={{ fontFamily:fontGotham.bold }}>Resend </Text>
           </Pressable> 
           
@@ -181,7 +190,7 @@ const Otp = ({ navigation, route }) => {
           }}
         >
           <Text style={{fontFamily:fontGotham.regular}}>Encoutering issues ?  </Text>
-          <Pressable onPress={handleResend}>
+          <Pressable onPress={()=>navigation.navigate('contact')}>
             <Text style={{ fontFamily:fontGotham.bold }}>Contact Support</Text>
           </Pressable> 
           
@@ -192,8 +201,9 @@ const Otp = ({ navigation, route }) => {
         <Alert
           visible={visible}
           dismis={() => setVisible(!visible)}
-          onPress={handleResend}
-          text={"We sent you a verification code an SMS should arrive shortly"}
+          onPress={() => setVisible(!visible)}
+          btnText={"Close"}
+          text={"We're sorry, but your acoount has been temporarily locked for 24 houres. Please feel free to contact our support team."}
         />
       </View>
     </View>
