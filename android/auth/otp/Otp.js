@@ -100,7 +100,7 @@ const Otp = ({ navigation, route }) => {
   if (!fontsLoaded) {
     return null;
   }
-console.log(attempts);
+// console.log(attempts);
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
