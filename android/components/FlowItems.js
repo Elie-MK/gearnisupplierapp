@@ -1,13 +1,15 @@
-import { Animated, FlatList, StyleSheet, Text, View } from "react-native";
+import { Animated, FlatList, StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { horizontalScale } from "../../utilities/Metrics";
-import slide from "../../utilities/slide";
 import { useRef } from "react";
 import { useState } from "react";
 import Paginator from "./Paginator";
 import { Button } from "@rneui/base";
 import Color from "../../utilities/Color";
 import { useNavigation } from "@react-navigation/native";
+import SvgUri from "react-native-svg-uri";
+import slide from "./slide";
+import { useCustomFonts } from "../../utilities/Fonts";
 
 const FlowItems = () => {
     const navigation = useNavigation()
@@ -28,7 +30,10 @@ const FlowItems = () => {
   };
 
 
-
+  const { fontGotham, fontsLoaded } = useCustomFonts();
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View>
       <FlatList
@@ -46,16 +51,21 @@ const FlowItems = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View>
-            <Text style={{ fontSize: 30, width: horizontalScale(250) }}>
+            <Text style={{ fontSize: 30, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
+
+            <View style={{alignItems:"center", padding:10}}>
+            <Image resizeMode="contain"  source={item.img} style={{width:230, height:220}} />
+            </View>
             <View style={{ alignItems: "center" }}>
               <Text
                 style={{
                   fontSize: 20,
                   textAlign: "center",
-                  marginTop: 300,
+                  marginTop: 20,
                   width: horizontalScale(340),
+                  fontFamily:fontGotham.regular
                 }}
               >
                 {item.desc}
@@ -69,7 +79,7 @@ const FlowItems = () => {
         ref={slidesRef}
       />
 
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 20 }}>
         {currentIndex === 3 ? (
           <Button
             title="Continue"

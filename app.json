@@ -11,9 +11,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#FFC244"
     },
-    "assetBundlePatterns": [
-      "**/*"
+    "fonts": [
+      { "asset": "./assets/font/GothamBold.ttf", 
+      "fontWeight": "bold" 
+    },
+      { "asset": "./assets/font/GothamMedium.ttf", 
+      "fontWeight": "normal" 
+    }
     ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

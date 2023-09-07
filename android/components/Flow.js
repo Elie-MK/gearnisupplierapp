@@ -13,11 +13,17 @@ import Color from "../../utilities/Color";
 import { horizontalScale, verticalScale } from "../../utilities/Metrics";
 import { AntDesign } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
-import slide from "../../utilities/slide";
 import FlowItems from "./FlowItems";
+import { useCustomFonts } from "../../utilities/Fonts";
 
-const Flow = () => {
+const Flow = ({navigation, route}) => {
+  const routes = route.name
   const { width } = useWindowDimensions();
+
+  const { fontGotham, fontsLoaded } = useCustomFonts();
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={[styles.container, width]}>
       <View style={styles.secondContainer}>
@@ -28,14 +34,14 @@ const Flow = () => {
             alignItems: "center",
           }}
         >
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => navigation.navigate('otp',{routes})}>
             <AntDesign name="arrowleft" size={30} color={Color.light.black} />
           </Pressable>
           <Pressable onPress={() => navigation.navigate("adminRegistration")}>
-            <Text>SKIP</Text>
+            <Text style={{fontFamily:fontGotham.regular}}>SKIP</Text>
           </Pressable>
         </View>
-        <View>
+        <View style={{marginTop:30}}>
          <FlowItems />
         </View>
        

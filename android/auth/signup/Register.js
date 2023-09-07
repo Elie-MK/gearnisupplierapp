@@ -13,12 +13,17 @@ import Color from "../../../utilities/Color";
 import { horizontalScale, verticalScale } from "../../../utilities/Metrics";
 import { Button, Input } from "@rneui/base";
 import Alert from "../../components/Alert";
+import CountryList from "country-list-with-dial-code-and-flag";
+import { useCustomFonts } from "../../../utilities/Fonts";
 
-const Register = ({navigation}) => {
+const Register = ({navigation, route}) => {
   const [countryCode, setCountryCode] = useState("+216");
   const [number, setNumber] = useState("");
+  const [flag, setFlag] = useState([]);
   const [visible, setVisible] = useState(false);
   const [isValid, setIsValid] = useState(false);
+
+  const routes = route.name
 
   useEffect(() => {
     const regex = /^\+\d{1,4}$/;
@@ -29,12 +34,32 @@ const Register = ({navigation}) => {
     } else {
       setIsValid(!isValid);
     }
+
+    const datas = CountryList.getAll()
+
+  // console.log(datas);
+
+    const handleCountry = (code)=>{
+      try {
+        const data = datas.filter(item => item.dial_code.toLocaleLowerCase().includes(code.toLocaleLowerCase())  )
+        setFlag(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    handleCountry(countryCode)
   }, [countryCode]);
 
   const handleSubmit = () => {
     const number = countryCode + number
     setVisible(!visible);
   };
+
+  const { fontGotham, fontsLoaded } = useCustomFonts();
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
     <View style={styles.secondContainer}>
@@ -42,14 +67,18 @@ const Register = ({navigation}) => {
         <AntDesign name="arrowleft" size={30} color={Color.light.black} />
       </Pressable>
       <View style={styles.textContainer}>
-        <Text style={{ color: Color.light.main, fontSize: 30 }}>HELLO</Text>
-        <Text style={{  fontSize: 30 }}>WHAT'S YOUR PHONE NUMBER ?</Text>
+        <Text style={{ color: Color.light.main, fontSize: 30, fontFamily:fontGotham.medium }}>HELLO</Text>
+        <Text style={{  fontSize: 30, fontFamily:fontGotham.medium }}>WHAT'S YOUR PHONE NUMBER ?</Text>
       </View>
       <View style={styles.inputContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <AntDesign name="search1" size={24} color={Color.light.black} />
+        <Text style={{fontSize:20}}>
+                {
+                flag[0]?.flag == undefined ? flag[0]?.flag : flag[0]?.flag
+              }
+              </Text>          
           <TextInput
-            style={styles.input}
+            style={[styles.input, {fontFamily:fontGotham.medium}]}
             onChangeText={(e) => setCountryCode(e)}
             value={countryCode}
             maxLength={4}
@@ -58,7 +87,7 @@ const Register = ({navigation}) => {
         </View>
         <View>
           <TextInput
-            style={styles.input2}
+            style={[styles.input2, {fontFamily:fontGotham.medium}]}
             onChangeText={(e) => setNumber(e)}
             value={number}
             maxLength={10}
@@ -70,7 +99,7 @@ const Register = ({navigation}) => {
       <View
         style={{
           position: "absolute",
-          marginTop: verticalScale(320),
+          marginTop: verticalScale(295),
           padding: 2,
           marginLeft: 20,
           width: horizontalScale(125),
@@ -80,7 +109,7 @@ const Register = ({navigation}) => {
         <Text>Your mobile Number</Text>
       </View>
       {isValid && (
-        <Text style={{ color: "red" }}>
+        <Text style={{ color: "red",fontFamily:fontGotham.medium }}>
           the country code must begin for "+"
         </Text>
       )}
@@ -89,7 +118,7 @@ const Register = ({navigation}) => {
         <Button
           title="Confim"
           buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
-          titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
+          titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold}}
           onPress={handleSubmit}
         />
       </View>
@@ -101,17 +130,18 @@ const Register = ({navigation}) => {
           marginTop: verticalScale(20),
         }}
       >
-        <Text>Don't have an account ? </Text>
+        <Text style={{fontFamily:fontGotham.regular}}>Don't have an account ? </Text>
         <Pressable onPress={() => navigation.navigate("login")}>
-          <Text style={{ fontWeight: "bold" }}>Login</Text>
+          <Text style={{ fontFamily:fontGotham.bold }}>Login</Text>
         </Pressable>
       </View>
     </View>
     <View>
       <Alert
-        visible={visible}
-        dismis={() => setVisible(!visible)}
-        onPress={() => navigation.navigate("otp")}
+         visible={visible}
+          dismis={() => setVisible(!visible)}
+          text={"We sent you a verification code an SMS should arrive shortly"}
+        onPress={() => navigation.navigate("otp", {routes})}
       />
     </View>
   </View>

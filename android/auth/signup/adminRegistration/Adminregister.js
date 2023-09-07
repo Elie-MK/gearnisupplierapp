@@ -1,10 +1,13 @@
-import { Dimensions, Pressable, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Dimensions, Pressable, StatusBar, StyleSheet, Text, View, Image } from 'react-native'
+import React, { useEffect } from 'react'
 import Color from '../../../../utilities/Color'
 import { verticalScale } from '../../../../utilities/Metrics'
 import { AntDesign } from '@expo/vector-icons'
+import CountryList from 'country-list-with-dial-code-and-flag'
+import SvgUri from 'react-native-svg-uri'
 
 const Adminregister = ({navigation}) => {
+
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
@@ -14,6 +17,8 @@ const Adminregister = ({navigation}) => {
         <View>
           <Text style={{fontSize:25, fontWeight:"600"}}>Admin </Text>
           <Text style={{fontSize:25, fontWeight:"600"}}>Registration </Text>
+   
+      
         </View>
       </View>
     </View>
