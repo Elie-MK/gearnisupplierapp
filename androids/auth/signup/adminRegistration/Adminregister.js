@@ -21,12 +21,11 @@ import ModalCountry from "../../../components/ModalCountry";
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
   const [namecountry, setNameCountry] = useState(defaultCountryName);
-  const [filteredPosts, setFilteredPosts] = useState([]);
   const [value, setValue] = useState("");
   const [visibleModal, setVisibleModal] = useState(false);
 
   const onCountryChange = (item) => {
-    setNameCountry(item.name);
+    setNameCountry(item.name)
     setVisibleModal(!visibleModal);
   };
 
@@ -294,7 +293,7 @@ const Adminregister = ({ navigation }) => {
             <ModalCountry
               value={value}
               isVisible={visibleModal}
-              hideModal={() => setVisibleModal(!visibleModal)}
+              hideModal={()=>setVisibleModal(!visibleModal)}
               setValue={(text)=>setValue(text)}
               onCountryChange={(item)=>onCountryChange(item)}
             />
