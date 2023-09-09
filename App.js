@@ -7,14 +7,16 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from "react-native";
-import WelcomeAndroid from "./android/WelcomeAndroid";
 import WelcomeIos from "./ios/WelcomeIos";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "./android/auth/signin/Login";
-import Register from "./android/auth/signup/Register";
-import Otp from "./android/auth/otp/Otp";
-import Flow from "./android/components/Flow";
-import Adminregister from "./android/auth/signup/adminRegistration/Adminregister";
+import WelcomeAndroid from "./androids/WelcomeAndroid";
+import Login from "./androids/auth/signin/Login";
+import Register from "./androids/auth/signup/Register";
+import Otp from "./androids/auth/otp/Otp";
+import Flow from "./androids/components/Flow";
+import Adminregister from "./androids/auth/signup/adminRegistration/Adminregister";
+import Registercompany from "./androids/auth/signup/companyRegister/Registercompany";
+
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -33,7 +35,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="adminRegistration"
+              initialRouteName="companyRegistration"
             >
               <Stack.Screen name="welcome" component={WelcomeAndroid} />
               <Stack.Screen name="login" component={Login} />
@@ -41,6 +43,7 @@ export default function App() {
               <Stack.Screen name="otp" component={Otp} />
               <Stack.Screen name="flow" component={Flow} />
               <Stack.Screen name="adminRegistration" component={Adminregister} />
+              <Stack.Screen name="companyRegistration" component={Registercompany} />
             </Stack.Navigator>
           </NavigationContainer>
         </KeyboardAvoidingView>
