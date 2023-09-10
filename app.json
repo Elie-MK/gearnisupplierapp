@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "gearnisupplierapp",
+    "slug": "gearnisupplierapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/gear.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFC244"
+    },
+    "fonts": [
+      {
+        "asset": "./assets/font/GothamBold.ttf",
+        "fontWeight": "bold"
+      },
+      {
+        "asset": "./assets/font/GothamMedium.ttf",
+        "fontWeight": "normal"
+      }
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.zedigital.gearnisupplierapp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "39820126-bb82-4b26-b887-04caaa5db21c"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/39820126-bb82-4b26-b887-04caaa5db21c"
+    }
+  }
+}
