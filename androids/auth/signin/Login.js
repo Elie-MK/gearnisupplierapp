@@ -51,7 +51,7 @@ const Login = ({ navigation, route }) => {
       const data = datas.filter((item) =>
         (item.name.indexOf(value)> - 1 || item.flag.indexOf(value)>-1))
     
-      setFilteredPosts(data);
+      setFilteredPosts(data)
   
    }else{
     setFilteredPosts(datas)
