@@ -25,7 +25,7 @@ const Registercompany = ({navigation}) => {
 
   const onCountryChange = (item) => {
     setNameCountry(item.name);
-    setModal(!modal)
+    setVisibleModal(!visibleModal)
   };
 
 

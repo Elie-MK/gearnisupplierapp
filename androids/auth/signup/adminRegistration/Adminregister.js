@@ -19,7 +19,7 @@ import CountryList from "country-list-with-dial-code-and-flag";
 import ModalCountry from "../../../components/ModalCountry";
 
 const Adminregister = ({ navigation }) => {
-  const defaultCountryName = "Tunisia";
+  const defaultCountryName = "Tunisia"
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
   const [visibleModal, setVisibleModal] = useState(false);

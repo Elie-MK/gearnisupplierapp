@@ -177,7 +177,6 @@ const WelcomeAndroid = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     height:Dimensions.get("screen").height
   },
   secondContainer: {

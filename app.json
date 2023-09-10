@@ -2,7 +2,7 @@
   "expo": {
     "name": "gearnisupplierapp",
     "slug": "gearnisupplierapp",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,16 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#FFC244"
     },
-    "fonts": [
-      {
-        "asset": "./assets/font/GothamBold.ttf",
-        "fontWeight": "bold"
-      },
-      {
-        "asset": "./assets/font/GothamMedium.ttf",
-        "fontWeight": "normal"
-      }
-    ],
     "assetBundlePatterns": [
       "**/*"
     ],

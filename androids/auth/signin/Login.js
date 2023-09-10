@@ -121,11 +121,11 @@ const Login = ({ navigation, route }) => {
             marginTop: 245,
             padding: 2,
             marginLeft: 20,
-            width: horizontalScale(125),
+            width: horizontalScale(140),
             backgroundColor: Color.light.themeColor,
           }}
         >
-          <Text>Your mobile Number</Text>
+          <Text style={{textAlign:"center"}}>Your mobile Number</Text>
         </View>
         
 
