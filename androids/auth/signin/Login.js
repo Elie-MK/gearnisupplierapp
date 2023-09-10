@@ -45,7 +45,7 @@ const Login = ({ navigation, route }) => {
     handleCountry(value);
   }, [value]);
 
-  const datas = CountryList.getAll();
+  const datas = CountryList.getAll()
   const handleCountry = (value) => {
    if(value){
       const data = datas.filter((item) =>
