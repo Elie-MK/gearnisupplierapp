@@ -42,7 +42,7 @@ const Login = ({ navigation, route }) => {
     } else {
       setIsValid(!isValid);
     }
-    handleCountry(value);
+    handleCountry(value)
   }, [value]);
 
   const datas = CountryList.getAll();
