@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/gearniIcon.png",
+        "foregroundImage": "./assets/gearniIcons.png",
         "backgroundColor": "#FFC244"
       },
       "package": "com.zedigital.gearnisupplierapp"
