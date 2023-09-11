@@ -20,10 +20,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/gearniIcons.png",
+        "foregroundImage": "./assets/GearniBlack.png",
         "backgroundColor": "#FFC244"
       },
-      "package": "com.zedigital.gearnisupplierapp"
+      "package": "com.gearnisupplierapp.gearnisupplierapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

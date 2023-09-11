@@ -118,7 +118,7 @@ const handleSubmit = ()=>{
         <View
           style={{
             position: "absolute",
-            marginTop: 260,
+            marginTop: 247,
             padding: 2,
             marginLeft: 20,
             width: horizontalScale(140),

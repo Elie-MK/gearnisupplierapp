@@ -8,6 +8,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../../../../utilities/Color";
@@ -17,6 +18,7 @@ import { useCustomFonts } from "../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
 import CountryList from "country-list-with-dial-code-and-flag";
 import ModalCountry from "../../../components/ModalCountry";
+import KeyboardAvoid from "../../../components/KeyboardAvoid";
 
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
@@ -36,18 +38,20 @@ const Adminregister = ({ navigation }) => {
 
   // console.log(namecountry);
   return (
+    <KeyboardAvoid>
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("register")}>
           <AntDesign name="arrowleft" size={30} color={Color.light.black} />
         </Pressable>
-        <View style={{ marginTop: 20 }}>
-          <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
+         <View style={{marginTop:15}}>
+         <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
             Admin{" "}
           </Text>
           <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
             Registration{" "}
           </Text>
+         </View>
           <View style={{ marginTop: 30 }}>
             <View style={{ flexDirection: "row", gap: 9 }}>
               {/* First Name */}
@@ -191,6 +195,7 @@ const Adminregister = ({ navigation }) => {
                     width: horizontalScale(140),
                     padding: 12,
                   }}
+                  shoda
                 />
               </View>
               <Text
@@ -313,9 +318,9 @@ const Adminregister = ({ navigation }) => {
               />
             </View>
           </View>
-        </View>
       </View>
     </View>
+    </KeyboardAvoid>
   );
 };
 

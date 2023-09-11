@@ -16,6 +16,7 @@ import Otp from "./androids/auth/otp/Otp";
 import Flow from "./androids/components/Flow";
 import Adminregister from "./androids/auth/signup/adminRegistration/Adminregister";
 import Registercompany from "./androids/auth/signup/companyRegister/Registercompany";
+import Completeregistration from "./androids/auth/signup/registrationcomplete/Completeregistration";
 
 
 export default function App() {
@@ -25,17 +26,13 @@ export default function App() {
     <>
       {/* Android */}
       {Platform.OS === "android" && (
-        <KeyboardAvoidingView
-          behavior="margin"
-          style={{ flex: 1 }}
-      
-        >
+     
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="welcome"
+              initialRouteName="companyRegistration"
             >
               <Stack.Screen name="welcome" component={WelcomeAndroid} />
               <Stack.Screen name="login" component={Login} />
@@ -44,9 +41,9 @@ export default function App() {
               <Stack.Screen name="flow" component={Flow} />
               <Stack.Screen name="adminRegistration" component={Adminregister} />
               <Stack.Screen name="companyRegistration" component={Registercompany} />
+              <Stack.Screen name="registrationComplete" component={Completeregistration} />
             </Stack.Navigator>
           </NavigationContainer>
-        </KeyboardAvoidingView>
       )}
 
       {/* IOS */}
