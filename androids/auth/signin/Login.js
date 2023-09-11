@@ -94,7 +94,7 @@ const Login = ({ navigation, route }) => {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingRight:5, gap:5 }}>
+          <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
             <Text style={{ fontSize: 20 }}>
               {namecountry}
             </Text>
@@ -104,7 +104,7 @@ const Login = ({ navigation, route }) => {
 
             </Text>
           </TouchableOpacity>
-          <View>
+          <View style={{ padding: 12, width: horizontalScale(150)}}>
             <TextInput
               style={[styles.input2, { fontFamily: fontGotham.medium }]}
               onChangeText={(e) => setNumber(e)}
@@ -118,14 +118,14 @@ const Login = ({ navigation, route }) => {
         <View
           style={{
             position: "absolute",
-            marginTop: verticalScale(295),
+            marginTop: 260,
             padding: 2,
             marginLeft: 20,
-            width: horizontalScale(125),
+            width: horizontalScale(140),
             backgroundColor: Color.light.themeColor,
           }}
         >
-          <Text>Your mobile Number</Text>
+          <Text style={{textAlign:"center"}}>Your mobile Number</Text>
         </View>
         
 
@@ -225,14 +225,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: verticalScale(150),
-    padding: 12,
     borderWidth: 1,
     flexDirection: "row",
-  },
-  input: {
-    width: 64,
-    paddingLeft: 8,
-    fontSize: 18,
   },
   input2: {
     borderLeftWidth: 1,
