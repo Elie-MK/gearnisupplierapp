@@ -7,6 +7,7 @@ import {
   Pressable,
   TextInput,
   Image,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import Color from "../../../../utilities/Color";
@@ -48,6 +49,7 @@ const Registercompany = ({navigation}) => {
             Registration{" "}
           </Text>
           </View>
+<ScrollView style={{}}>
 
           <View>
             {/* Comany Name */}
@@ -69,8 +71,8 @@ const Registercompany = ({navigation}) => {
                   style={{
                     fontSize: 20,
                     paddingLeft: 10,
+                    width: 339,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
                     padding: 12,
                   }}
                 />
@@ -106,8 +108,8 @@ const Registercompany = ({navigation}) => {
                   style={{
                     fontSize: 20,
                     paddingLeft: 10,
+                    width: 339,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
                     padding: 12,
                   }}
                 />
@@ -139,12 +141,12 @@ const Registercompany = ({navigation}) => {
                   source={require("../../../../assets/icons/hashtag.png")}
                 />
                 <TextInput
-                  placeholder="Email"
+                  placeholder="12345/M/A/E/001"
                   style={{
                     fontSize: 20,
                     paddingLeft: 10,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
+                    width: 339,
                     padding: 12,
                   }}
                 />
@@ -181,8 +183,8 @@ const Registercompany = ({navigation}) => {
                   style={{
                     fontSize: 20,
                     paddingLeft: 10,
+                    width: 339,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
                     padding: 12,
                   }}
                 />
@@ -219,8 +221,8 @@ const Registercompany = ({navigation}) => {
                     style={{
                       fontSize: 20,
                       paddingLeft: 10,
+                      width: 339,
                       fontFamily: fontGotham.regular,
-                      width: horizontalScale(140),
                       padding: 12,
                     }}
                   >
@@ -266,7 +268,7 @@ const Registercompany = ({navigation}) => {
                     fontSize: 20,
                     paddingLeft: 10,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
+                    width: 339,
                     padding: 12,
                   }}
                 />
@@ -284,6 +286,7 @@ const Registercompany = ({navigation}) => {
               </Text>
             </View>
           </View>
+</ScrollView>
         </View>
       </View>
       <ModalCountry
