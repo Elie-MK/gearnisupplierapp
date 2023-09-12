@@ -6,6 +6,7 @@ import Color from '../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import { Button } from '@rneui/base'
+import SvgUri from 'react-native-svg-uri'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -24,9 +25,9 @@ const Completeregistration = ({navigation}) => {
             <Text style={{fontFamily:fontGotham.bold, fontSize:30}}>Complete</Text>
         </View>
 
-        <View style={{justifyContent:"center", marginTop:20, flexDirection:"row"}}>
-           <View style={{backgroundColor:Color.light.main, padding:50, borderRadius:50}}>
-           <Image resizeMode='contain' source={require('../../../../assets/icons/document-text-1.png')} />
+        <View style={{justifyContent:"center", marginTop:40, flexDirection:"row"}}>
+           <View style={{backgroundColor:Color.light.main, padding:30, borderRadius:50}}>
+           <SvgUri width={"100"} height={"100"}  source={require('../../../../assets/iconsSvg/document-text-1.svg')}/>
            </View>
         </View>
 
@@ -67,7 +68,7 @@ const Completeregistration = ({navigation}) => {
         </View>
 
         <View>
-        <View style={{marginTop:150}}>
+        <View style={{marginTop:120}}>
           <Button
             title="Go to Company Profile"
             buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
