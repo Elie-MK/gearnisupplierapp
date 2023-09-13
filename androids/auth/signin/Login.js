@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
-import { horizontalScale, verticalScale } from "../../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { Button, Divider, Input } from "@rneui/base";
 import Alert from "../../components/Alert";
 import CountryList from "country-list-with-dial-code-and-flag";
@@ -77,21 +77,27 @@ const Login = ({ navigation, route }) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("welcome")}>
-          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
         </Pressable>
+        <View style={{marginTop:verticalScale(15)}}>
         <View style={styles.textContainer}>
           <Text
             style={{
               color: Color.light.main,
-              fontSize: 30,
+              fontSize: moderateScale(35),
               fontFamily: fontGotham.medium,
             }}
           >
             HELLO
           </Text>
-          <Text style={{ fontSize: 30, fontFamily: fontGotham.medium }}>
-            WHAT'S YOUR PHONE NUMBER?
+         <View style={{marginTop:15}}>
+         <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
+            WHAT'S YOUR PHONE 
           </Text>
+          <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
+             NUMBER?
+          </Text>
+         </View>
         </View>
         <View style={styles.inputContainer}>
           <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
@@ -113,12 +119,10 @@ const Login = ({ navigation, route }) => {
               keyboardType="numeric"
             />
           </View>
-        </View>
-
         <View
           style={{
             position: "absolute",
-            marginTop: 247,
+            marginTop: -14,
             padding: 2,
             marginLeft: 20,
             width: horizontalScale(140),
@@ -127,6 +131,8 @@ const Login = ({ navigation, route }) => {
         >
           <Text style={{textAlign:"center"}}>Your mobile Number</Text>
         </View>
+        </View>
+
         
 
         <View style={styles.btnContainer}>
@@ -137,6 +143,7 @@ const Login = ({ navigation, route }) => {
               color: Color.light.black,
               fontFamily: fontGotham.bold,
             }}
+            containerStyle={{width:315, borderRadius:4}}
             onPress={() => navigation.navigate("otp", { routes })}
           />
         </View>
@@ -156,6 +163,7 @@ const Login = ({ navigation, route }) => {
               Sign Up{" "}
             </Text>
           </Pressable>
+        </View>
         </View>
       </View>
       <View>
@@ -225,7 +233,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: verticalScale(150),
-    borderWidth: 1,
+    borderWidth: 2,
+    padding:8,
     flexDirection: "row",
   },
   input2: {
@@ -235,6 +244,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     marginTop: verticalScale(90),
+    alignItems:"center"
   },
 });
 export default Login;

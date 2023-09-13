@@ -17,6 +17,7 @@ import Flow from "./androids/components/Flow";
 import Adminregister from "./androids/auth/signup/adminRegistration/Adminregister";
 import Registercompany from "./androids/auth/signup/companyRegister/Registercompany";
 import Completeregistration from "./androids/auth/signup/registrationcomplete/Completeregistration";
+import Navigation from "./androids/home/homeNavigation/Navigation";
 
 
 export default function App() {
@@ -32,7 +33,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="registrationComplete"
+              initialRouteName="welcome"
             >
               <Stack.Screen name="welcome" component={WelcomeAndroid} />
               <Stack.Screen name="login" component={Login} />
@@ -42,6 +43,7 @@ export default function App() {
               <Stack.Screen name="adminRegistration" component={Adminregister} />
               <Stack.Screen name="companyRegistration" component={Registercompany} />
               <Stack.Screen name="registrationComplete" component={Completeregistration} />
+              <Stack.Screen name="home" component={Navigation} />
             </Stack.Navigator>
           </NavigationContainer>
       )}

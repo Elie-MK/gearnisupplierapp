@@ -26,7 +26,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
               backgroundColor: "#fff",
               borderRadius: 10,
               borderWidth: 2,
-              borderColor: Color.light.main,
+              borderColor: Color.light.black,
 
               width: horizontalScale(250),
               padding: 30,
@@ -38,7 +38,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 <Text
                   style={{
                     marginTop: 10,
-                    fontSize: 20,
+                    fontSize: 16,
                     fontFamily: fontGotham.bold,
                   }}
                 >
@@ -46,7 +46,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 </Text>
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center" }}>{text}</Text>
+                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:14 }}>{text}</Text>
               </View>
             </View>
             <View style={{ alignItems: "center", marginTop: 20 }}>
@@ -55,7 +55,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 onPress={onPress}
                 containerStyle={{ width: horizontalScale(95), borderRadius: 5 }}
                 buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.regular }}
-                titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
+                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:14 }}
               />
             </View>
           </View>

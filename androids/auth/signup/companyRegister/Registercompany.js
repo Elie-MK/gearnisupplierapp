@@ -117,10 +117,10 @@ const Registercompany = ({ navigation }) => {
           </Pressable>
           <View style={{ marginTop: 20 }}>
             <View>
-              <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
                 Company{" "}
               </Text>
-              <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
                 Registration{" "}
               </Text>
             </View>
@@ -157,6 +157,7 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Company Name
@@ -194,6 +195,7 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Comany Phone Number
@@ -232,6 +234,7 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Company Registration Number
@@ -269,6 +272,7 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Company Location
@@ -317,6 +321,7 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Country
@@ -354,27 +359,29 @@ const Registercompany = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   Billing Adress
                 </Text>
               </View>
               <Divider color="black" width={1} style={{marginTop:30}} />
-              <Text style={{ fontFamily: fontGotham.bold, fontSize: 20, marginTop:30 }}>
+              <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Licence file
       </Text>
               <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={pickImage} fileName={fileName} />
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
-              <View style={{ marginTop: 30, marginBottom:20 }}>
+              <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
               <Button
                 onPress={() => navigation.navigate("registrationComplete")}
                 title={"Continue"}
                 buttonStyle={{ padding: 18, backgroundColor: Color.light.main }}
                 titleStyle={{
-                  fontSize: 20,
+                  fontSize: 16,
                   color: "black",
                   fontFamily: fontGotham.bold,
                 }}
+                containerStyle={{width:315}}
               />
             </View>
             </View>

@@ -19,6 +19,7 @@ import { Button, Input } from "@rneui/base";
 import CountryList from "country-list-with-dial-code-and-flag";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
+import SvgUri from "react-native-svg-uri";
 
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
@@ -45,17 +46,17 @@ const Adminregister = ({ navigation }) => {
           <AntDesign name="arrowleft" size={30} color={Color.light.black} />
         </Pressable>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
             Admin{" "}
           </Text>
-          <Text style={{ fontSize: 25, fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
             Registration{" "}
           </Text>
          </View>
           <View style={{ marginTop: 30 }}>
             <View style={{ flexDirection: "row", gap: 9 }}>
               {/* First Name */}
-              <View>
+              <View style={{width:"50%"}}>
                 <View
                   style={{
                     borderWidth: 1,
@@ -86,13 +87,14 @@ const Adminregister = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:12
                   }}
                 >
                   First Name
                 </Text>
               </View>
               {/* Last Name */}
-              <View>
+              <View style={{width:"48%"}}>
                 <View
                   style={{
                     borderWidth: 1,
@@ -153,7 +155,7 @@ const Adminregister = ({ navigation }) => {
                     padding: 12,
                   }}
                 />
-                <TouchableOpacity>
+                <TouchableOpacity style={{marginLeft:-10}}>
                   <Image
                     resizeMode="contain"
                     source={require("../../../../assets/icons/close-circle.png")}
@@ -275,11 +277,10 @@ const Adminregister = ({ navigation }) => {
                     {namecountry}
                   </Text>
                 </View>
-                <MaterialIcons
+               <MaterialIcons
                   name="keyboard-arrow-down"
                   size={24}
                   color="black"
-                  style={{ marginRight: 5 }}
                 />
               </Pressable>
               <Text
@@ -289,6 +290,7 @@ const Adminregister = ({ navigation }) => {
                   position: "absolute",
                   marginTop: -12,
                   marginLeft: 10,
+                  fontSize:12
                 }}
               >
                 Country of Residence
@@ -305,16 +307,17 @@ const Adminregister = ({ navigation }) => {
 
             {/* Btn */}
 
-            <View style={{ marginTop: 25 }}>
+            <View style={{ marginTop: 25, alignItems:"center" }}>
               <Button
                 onPress={() => navigation.navigate("companyRegistration")}
                 title={"Continue"}
                 buttonStyle={{ padding: 18, backgroundColor: Color.light.main }}
                 titleStyle={{
-                  fontSize: 20,
+                  fontSize: 16,
                   color: "black",
                   fontFamily: fontGotham.bold,
                 }}
+                containerStyle={{width:315}}
               />
             </View>
           </View>

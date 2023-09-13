@@ -109,10 +109,10 @@ const Otp = ({ navigation, route }) => {
         </Pressable>
 
         <View style={{ marginTop: 10 }}>
-          <Text style={{ color: Color.light.main, fontSize: 30, fontFamily:fontGotham.medium }}>
+          <Text style={{ color: Color.light.main, fontSize: 32, lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
           </Text>
-          <Text style={{ fontSize: 25,fontFamily:fontGotham.bold }}>
+          <Text style={{ fontSize: 20,fontFamily:fontGotham.bold }}>
             PLEASE ENTER YOUR VERIFICATION CODE
           </Text>
         </View>
@@ -120,9 +120,10 @@ const Otp = ({ navigation, route }) => {
         <View
           style={{
             flexDirection: "row",
+            justifyContent:"center",
             alignItems: "center",
             gap: 5,
-            marginTop: 20,
+            marginTop: 50,
           }}
         >
          
@@ -145,23 +146,24 @@ const Otp = ({ navigation, route }) => {
         ))}
         
         </View>
-        <View style={{ alignItems: "center", marginTop: 20 }}>
-          <Text style={{fontFamily:fontGotham.regular}}>An SMS should arrive shortly</Text>
+        <View style={{ alignItems: "center", marginTop: 17 }}>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:14}}>An SMS should arrive shortly</Text>
           {
             dismis? <Text style={{ marginTop: 20, fontSize: 15, textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
             Account has been templorarily locked for 24 houres due to suspicious activity
-          </Text> : <Text style={{ marginTop: 20, fontSize: 25, fontFamily:fontGotham.bold }}>
+          </Text> : <Text style={{ marginTop: 20, fontSize: 20, fontFamily:fontGotham.bold }}>
             {String(time.minutes).padStart(2, '0')}:{String(time.secondes).padStart(2, '0')}
           </Text>  
           }
          
         </View>
-        <View style={{marginTop:120}}>
+        <View style={{marginTop:120, alignItems:"center"}}>
           <Button
             title="Verify"
             disabled={dismis}
             onPress={handleSubmit}
-            buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
+            containerStyle={{width:315}}
+            buttonStyle={{ backgroundColor: Color.light.main, padding: 16 }}
             titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold}}
           />
         </View>

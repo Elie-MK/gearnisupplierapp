@@ -83,15 +83,20 @@ const handleSubmit = ()=>{
           <Text
             style={{
               color: Color.light.main,
-              fontSize: 30,
+              fontSize: 32,
               fontFamily: fontGotham.medium,
             }}
           >
             HELLO
           </Text>
-          <Text style={{ fontSize: 30, fontFamily: fontGotham.medium }}>
-            WHAT'S YOUR PHONE NUMBER?
+         <View style={{marginTop:15}}>
+         <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+            WHAT'S YOUR PHONE 
           </Text>
+          <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+             NUMBER?
+          </Text>
+         </View>
         </View>
         <View style={styles.inputContainer}>
           <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
@@ -118,7 +123,7 @@ const handleSubmit = ()=>{
         <View
           style={{
             position: "absolute",
-            marginTop: 247,
+            marginTop: 275,
             padding: 2,
             marginLeft: 20,
             width: horizontalScale(140),
@@ -136,6 +141,7 @@ const handleSubmit = ()=>{
               color: Color.light.black,
               fontFamily: fontGotham.bold,
             }}
+            containerStyle={{width:315, borderRadius:4}}
             onPress={handleSubmit}
           />
         </View>
@@ -248,6 +254,8 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     marginTop: verticalScale(90),
+    alignItems:"center"
+
   },
 });
 

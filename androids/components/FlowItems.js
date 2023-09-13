@@ -51,20 +51,20 @@ const FlowItems = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View>
-            <Text style={{ fontSize: 30, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
+            <Text style={{ fontSize: 32, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
 
-            <View style={{alignItems:"center", padding:10}}>
+            <View style={{alignItems:"center", padding:10, marginTop:40}}>
             <Image resizeMode="contain"  source={item.img} style={{width:230, height:220}} />
             </View>
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center", marginTop:34,width: horizontalScale(340),
+ }}>
               <Text
                 style={{
-                  fontSize: 20,
+                  fontSize: 14,
                   textAlign: "center",
                   marginTop: 20,
-                  width: horizontalScale(340),
                   fontFamily:fontGotham.regular
                 }}
               >
@@ -81,7 +81,8 @@ const FlowItems = () => {
 
       <View style={{ marginTop: 20 }}>
         {currentIndex === 3 ? (
-          <Button
+       <View style={{alignItems:"center"}}>
+           <Button
             title="Continue"
             onPress={()=>navigation.navigate('adminRegistration')}
             buttonStyle={{
@@ -89,10 +90,13 @@ const FlowItems = () => {
               padding: 15,
               marginBottom: 15,
             }}
+            containerStyle={{width:315}}
             titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
           />
+       </View>
         ) : (
-          <Button
+       <View style={{alignItems:"center"}}>
+           <Button
             title="Continue"
             onPress={ScrollTo}
             buttonStyle={{
@@ -100,8 +104,10 @@ const FlowItems = () => {
               padding: 15,
               marginBottom: 15,
             }}
+            containerStyle={{width:315}}
             titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
           />
+       </View>
         )}
       </View>
       <Paginator data={slide} scrollX={ScrollX} />
