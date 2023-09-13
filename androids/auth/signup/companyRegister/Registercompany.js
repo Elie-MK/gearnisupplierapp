@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 import Color from "../../../../utilities/Color";
 import { Platform } from "react-native";
-import { horizontalScale, verticalScale } from "../../../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../../../utilities/Metrics";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useCustomFonts } from "../../../../utilities/Fonts";
 import ModalCountry from "../../../components/ModalCountry";
@@ -101,7 +101,7 @@ const Registercompany = ({ navigation }) => {
 
   const onCountryChange = (item) => {
     setNameCountry(item.name);
-    setModal(!modal);
+    setVisibleModal(!visibleModal);
   };
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -113,14 +113,14 @@ const Registercompany = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.secondContainer}>
           <Pressable onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" size={30} color={Color.light.black} />
+            <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
           </Pressable>
           <View style={{ marginTop: 20 }}>
             <View>
-              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:moderateScale(35), fontFamily: fontGotham.medium }}>
                 Company{" "}
               </Text>
-              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:moderateScale(35), fontFamily: fontGotham.medium }}>
                 Registration{" "}
               </Text>
             </View>
@@ -133,6 +133,7 @@ const Registercompany = ({ navigation }) => {
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:8
                   }}
                 >
                   <Image
@@ -164,13 +165,14 @@ const Registercompany = ({ navigation }) => {
                 </Text>
               </View>
               {/* Company Phone Number */}
-              <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 25 }}>
                 <View
                   style={{
                     borderWidth: 1,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:8
                   }}
                 >
                   <Image
@@ -198,17 +200,18 @@ const Registercompany = ({ navigation }) => {
                     fontSize:12
                   }}
                 >
-                  Comany Phone Number
+                  Company Phone Number
                 </Text>
               </View>
               {/* Comapny Registration Number */}
-              <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 25 }}>
                 <View
                   style={{
                     borderWidth: 1,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:8
                   }}
                 >
                   <Image
@@ -241,13 +244,14 @@ const Registercompany = ({ navigation }) => {
                 </Text>
               </View>
               {/* Company Location */}
-              <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 25 }}>
                 <View
                   style={{
                     borderWidth: 1,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:8
                   }}
                 >
                   <Image
@@ -279,7 +283,7 @@ const Registercompany = ({ navigation }) => {
                 </Text>
               </View>
               {/* Country */}
-              <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 25 }}>
                 <Pressable
                   onPress={() => setVisibleModal(!visibleModal)}
                   style={{
@@ -288,6 +292,7 @@ const Registercompany = ({ navigation }) => {
                     alignItems: "center",
                     paddingLeft: 6,
                     justifyContent: "space-between",
+                    borderRadius:8
                   }}
                 >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -328,13 +333,14 @@ const Registercompany = ({ navigation }) => {
                 </Text>
               </View>
               {/* Billing Adress */}
-              <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 25 }}>
                 <View
                   style={{
                     borderWidth: 1,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:8
                   }}
                 >
                   <Image
@@ -366,18 +372,21 @@ const Registercompany = ({ navigation }) => {
                 </Text>
               </View>
               <Divider color="black" width={1} style={{marginTop:30}} />
-              <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
+              <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(20), marginTop:30 }}>
         Upload Licence file
       </Text>
               <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={pickImage} fileName={fileName} />
+              <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(20), marginTop:30 }}>
+        Upload VAT file
+      </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
               <Button
                 onPress={() => navigation.navigate("registrationComplete")}
                 title={"Continue"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main }}
+                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
                 titleStyle={{
-                  fontSize: 16,
+                  fontSize: moderateScale(20),
                   color: "black",
                   fontFamily: fontGotham.bold,
                 }}

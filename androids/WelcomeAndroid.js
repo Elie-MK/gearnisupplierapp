@@ -56,13 +56,13 @@ const WelcomeAndroid = ({ navigation, route }) => {
         </View>
         <Pressable
           onPress={() => setVisible(!visible)}
-       style={{alignItems:"center"}}
+       style={{alignItems:"center", marginTop: verticalScale(60),}}
         >
           <View    style={{
             flexDirection: "row",
             gap: 15,
             alignItems:"center",
-            marginTop: verticalScale(60),
+            
           }}>
 
           <View>

@@ -2,7 +2,7 @@ import { View, Text, Modal, Image } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
 import ReactNativeModal from "react-native-modal";
-import { horizontalScale } from "../../utilities/Metrics";
+import { horizontalScale, moderateScale } from "../../utilities/Metrics";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
@@ -38,7 +38,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 <Text
                   style={{
                     marginTop: 10,
-                    fontSize: 16,
+                    fontSize: moderateScale(20),
                     fontFamily: fontGotham.bold,
                   }}
                 >
@@ -46,7 +46,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 </Text>
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:14 }}>{text}</Text>
+                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:moderateScale(16) }}>{text}</Text>
               </View>
             </View>
             <View style={{ alignItems: "center", marginTop: 20 }}>
@@ -55,7 +55,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 onPress={onPress}
                 containerStyle={{ width: horizontalScale(95), borderRadius: 5 }}
                 buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.regular }}
-                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:14 }}
+                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:moderateScale(15)}}
               />
             </View>
           </View>

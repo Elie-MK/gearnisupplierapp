@@ -15,10 +15,10 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
 import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { Button, Divider, Input } from "@rneui/base";
-import Alert from "../../components/Alert";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { useCustomFonts } from "../../../utilities/Fonts";
 import { FlatList } from "react-native-gesture-handler";
+import { ActivityIndicator } from "react-native-paper";
 
 const Login = ({ navigation, route }) => {
   const routes = route.name;
@@ -32,6 +32,7 @@ const Login = ({ navigation, route }) => {
   const [number, setNumber] = useState("");
   const [visible, setVisible] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const [valided, setValided] = useState(false);
 
   useEffect(() => {
     const regex = /^\+\d{1,4}$/;
@@ -64,6 +65,18 @@ const Login = ({ navigation, route }) => {
     setVisible(!visible)
   }
 
+const handleSubmit = ()=>{
+  if(!number){
+    alert("Enter your number")
+  }else{
+    setValided(!valided)
+      setTimeout(() => {
+        navigation.navigate("otp", { routes })
+        setValided(false)
+      }, 3000);
+     
+  }
+}
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -136,17 +149,21 @@ const Login = ({ navigation, route }) => {
         
 
         <View style={styles.btnContainer}>
-          <Button
-            title="Confim"
-            buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
-            titleStyle={{
-              color: Color.light.black,
-              fontFamily: fontGotham.bold,
-              fontSize:moderateScale(18)
-            }}
-            containerStyle={{width:315, borderRadius:4}}
-            onPress={() => navigation.navigate("otp", { routes })}
-          />
+       {
+        valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
+          <ActivityIndicator animating={true} color={Color.light.main}/>
+        </View> :  <Button
+        title="Confirm"
+        buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
+        titleStyle={{
+          color: Color.light.black,
+          fontFamily: fontGotham.bold,
+          fontSize:moderateScale(18)
+        }}
+        containerStyle={{width:315, borderRadius:4}}
+        onPress={handleSubmit}
+      />
+       }
         </View>
         <View
           style={{
@@ -237,6 +254,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding:8,
     flexDirection: "row",
+    borderRadius:8
   },
   input2: {
     borderLeftWidth: 1,

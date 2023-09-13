@@ -16,6 +16,7 @@ import { useState } from "react";
 import { Button } from "@rneui/base";
 import Alert from "../../components/Alert";
 import { useCustomFonts } from "../../../utilities/Fonts";
+import { ActivityIndicator } from "react-native-paper";
 
 const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
@@ -25,15 +26,26 @@ const Otp = ({ navigation, route }) => {
   const [time, setTime] = useState({minutes :0, secondes:30});
   const [attempts, setAttempts] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const [dismis, setDismis] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [valided, setValided] = useState(false);
+
 
   const handleSubmit = () => {
     const otpValue = otp.join('')
     setAttempts(1)
     if(routes == "login"){
-      navigation.navigate('home')
+      if(otpValue.length < 6){
+        alert("Enter your otp code")
+      }else{
+        setValided(!valided)
+        setTimeout(() => {
+          navigation.navigate('home')
+          setValided(false)
+        }, 3000);
+      }
     }else{
       navigation.navigate('flow')
     }
@@ -52,7 +64,6 @@ const Otp = ({ navigation, route }) => {
     } else if (text.length === 0) {
       newOtp[index] = '';
       setOtp(newOtp);
-
       if (index > 0) {
         otpRefs.current[index - 1].focus();
       }
@@ -105,9 +116,9 @@ const Otp = ({ navigation, route }) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate('login')}>
-          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={35} color={Color.light.black} />
         </Pressable>
-
+        <View style={{marginTop:20}}>
         <View style={{ marginTop: 10 }}>
           <Text style={{ color: Color.light.main, fontSize: moderateScale(35), lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
@@ -122,7 +133,7 @@ const Otp = ({ navigation, route }) => {
             flexDirection: "row",
             justifyContent:"center",
             alignItems: "center",
-            gap: 5,
+            gap: 10,
             marginTop: 50,
           }}
         >
@@ -149,9 +160,9 @@ const Otp = ({ navigation, route }) => {
         
         </View>
         <View style={{ alignItems: "center", marginTop: 17 }}>
-          <Text style={{fontFamily:fontGotham.regular, fontSize:14}}>An SMS should arrive shortly</Text>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:20}}>An SMS should arrive shortly</Text>
           {
-            dismis? <Text style={{ marginTop: 20, fontSize: 15, textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
+            dismis? <Text style={{ marginTop: 20, fontSize: 25, textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
             Account has been templorarily locked for 24 houres due to suspicious activity
           </Text> : <Text style={{ marginTop: 20, fontSize: 20, fontFamily:fontGotham.bold }}>
             {String(time.minutes).padStart(2, '0')}:{String(time.secondes).padStart(2, '0')}
@@ -160,7 +171,10 @@ const Otp = ({ navigation, route }) => {
          
         </View>
         <View style={{marginTop:120, alignItems:"center"}}>
-          <Button
+          {
+             valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
+             <ActivityIndicator animating={true} color={Color.light.main}/>
+           </View> : <Button
             title="Verify"
             disabled={dismis}
             onPress={handleSubmit}
@@ -168,6 +182,8 @@ const Otp = ({ navigation, route }) => {
             buttonStyle={{ backgroundColor: Color.light.main, padding: 16 }}
             titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold}}
           />
+          }
+          
         </View>
 
         {
@@ -180,9 +196,9 @@ const Otp = ({ navigation, route }) => {
             marginTop: verticalScale(20),
           }}
         >
-          <Text style={{fontFamily:fontGotham.regular}}>I haven't received the code.  </Text>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:15}}>I haven't received the code.  </Text>
           <Pressable onPress={handleResend} >
-            <Text style={{ fontFamily:fontGotham.bold }}>Resend </Text>
+            <Text style={{ fontFamily:fontGotham.bold, fontSize:15 }}>Resend </Text>
           </Pressable> 
           
         </View>:   <View
@@ -211,6 +227,7 @@ const Otp = ({ navigation, route }) => {
         />
       </View>
     </View>
+    </View>
   );
 };
 
@@ -225,6 +242,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(20),
     marginRight: 20,
   },
+
 });
 
 export default Otp;

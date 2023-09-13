@@ -24,6 +24,7 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
           marginTop: 20,
           borderColor: Color.light.main,
           padding: 5,
+          borderRadius :8 ,
         }}
       >
         <View

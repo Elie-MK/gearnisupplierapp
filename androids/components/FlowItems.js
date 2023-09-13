@@ -1,6 +1,6 @@
-import { Animated, FlatList, StyleSheet, Text, View, Image } from "react-native";
+import { Animated, FlatList, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import React from "react";
-import { horizontalScale } from "../../utilities/Metrics";
+import { horizontalScale, moderateScale } from "../../utilities/Metrics";
 import { useRef } from "react";
 import { useState } from "react";
 import Paginator from "./Paginator";
@@ -50,8 +50,8 @@ const FlowItems = () => {
         )}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View>
-            <Text style={{ fontSize: 32, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
+          <View style={{width:Dimensions.get('screen').width}}>
+            <Text style={{ fontSize: 35, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
 
@@ -62,7 +62,7 @@ const FlowItems = () => {
  }}>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: moderateScale(23),
                   textAlign: "center",
                   marginTop: 20,
                   fontFamily:fontGotham.regular
@@ -91,7 +91,7 @@ const FlowItems = () => {
               marginBottom: 15,
             }}
             containerStyle={{width:315}}
-            titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
+            titleStyle={{ color: Color.light.black, fontSize:moderateScale(20) }}
           />
        </View>
         ) : (
@@ -105,7 +105,7 @@ const FlowItems = () => {
               marginBottom: 15,
             }}
             containerStyle={{width:315}}
-            titleStyle={{ color: Color.light.black, fontWeight: "bold" }}
+            titleStyle={{ color: Color.light.black, fontSize:moderateScale(20)}}
           />
        </View>
         )}

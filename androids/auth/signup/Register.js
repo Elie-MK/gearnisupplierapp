@@ -13,11 +13,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
-import { horizontalScale, verticalScale } from "../../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { Button, Divider, Input } from "@rneui/base";
 import Alert from "../../components/Alert";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { useCustomFonts } from "../../../utilities/Fonts";
+import { ActivityIndicator } from "react-native-paper";
 
 const Register = ({navigation, route}) => {
   const routes = route.name;
@@ -32,6 +33,8 @@ const Register = ({navigation, route}) => {
   const [visible, setVisible] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const [valided, setValided] = useState(false);
+
 
   useEffect(() => {
     const regex = /^\+\d{1,4}$/;
@@ -63,10 +66,18 @@ const Register = ({navigation, route}) => {
     setNameCountry(item.flag)
     setVisibleModal(!visibleModal)
   }
-const handleSubmit = ()=>{
-  
-    setVisible(!visible)
 
+const handleSubmit = ()=>{
+  if(!number){
+    alert("Enter your number")
+  }else{
+    setValided(!valided)
+      setTimeout(() => {
+        setVisible(!visible)
+        setValided(false)
+      }, 3000);
+     
+  }
 }
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -77,27 +88,30 @@ const handleSubmit = ()=>{
     <View style={styles.container}>
      <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("welcome")}>
-          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
         </Pressable>
+        <View style={{marginTop:verticalScale(15)}}>
+
         <View style={styles.textContainer}>
           <Text
             style={{
               color: Color.light.main,
-              fontSize: 32,
+              fontSize: moderateScale(35),
               fontFamily: fontGotham.medium,
             }}
           >
             HELLO
           </Text>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
             WHAT'S YOUR PHONE 
           </Text>
-          <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
              NUMBER?
           </Text>
          </View>
         </View>
+        
         <View style={styles.inputContainer}>
           <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
             <Text style={{ fontSize: 20 }}>
@@ -118,12 +132,10 @@ const handleSubmit = ()=>{
               keyboardType="numeric"
             />
           </View>
-        </View>
-
         <View
           style={{
             position: "absolute",
-            marginTop: 275,
+            marginTop: -14,
             padding: 2,
             marginLeft: 20,
             width: horizontalScale(140),
@@ -132,18 +144,24 @@ const handleSubmit = ()=>{
         >
           <Text style={{textAlign:"center"}}>Your mobile Number</Text>
         </View>
+        </View>
        
         <View style={styles.btnContainer}>
-          <Button
-            title="Confim"
-            buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
-            titleStyle={{
-              color: Color.light.black,
-              fontFamily: fontGotham.bold,
-            }}
-            containerStyle={{width:315, borderRadius:4}}
-            onPress={handleSubmit}
-          />
+        {
+        valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
+          <ActivityIndicator animating={true} color={Color.light.main}/>
+        </View> :  <Button
+        title="Confirm"
+        buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
+        titleStyle={{
+          color: Color.light.black,
+          fontFamily: fontGotham.bold,
+          fontSize:moderateScale(18)
+        }}
+        containerStyle={{width:315, borderRadius:4}}
+        onPress={handleSubmit}
+      />
+       }
         </View>
         <View
           style={{
@@ -153,15 +171,16 @@ const handleSubmit = ()=>{
             marginTop: verticalScale(20),
           }}
         >
-          <Text style={{ fontFamily: fontGotham.regular }}>
-             have an account ?{" "}
+          <Text style={{ fontFamily: fontGotham.regular, fontSize:moderateScale(15) }}>
+            Don't have an account ?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("login")}>
-            <Text style={{ fontWeight: "bold", fontFamily: fontGotham.bold }}>
-              Sign In
+            <Text style={{ fontSize:moderateScale(15), fontFamily: fontGotham.bold }}>
+              Sign In{" "}
             </Text>
           </Pressable>
         </View>
+      </View>
       </View>
     <View>
         <Modal visible={visibleModal} animationType="slide">
@@ -239,8 +258,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: verticalScale(150),
-    borderWidth: 1,
+    borderWidth: 2,
+    padding:8,
     flexDirection: "row",
+    borderRadius:8
   },
   input: {
     width: 64,

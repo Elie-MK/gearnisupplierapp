@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../../../../utilities/Color";
-import { horizontalScale, verticalScale } from "../../../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../../../utilities/Metrics";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useCustomFonts } from "../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
@@ -43,13 +43,13 @@ const Adminregister = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("register")}>
-          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
         </Pressable>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: moderateScale(35), fontFamily: fontGotham.medium }}>
             Admin{" "}
           </Text>
-          <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: moderateScale(35), fontFamily: fontGotham.medium }}>
             Registration{" "}
           </Text>
          </View>
@@ -63,6 +63,7 @@ const Adminregister = ({ navigation }) => {
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:5
                   }}
                 >
                   <Image
@@ -101,6 +102,7 @@ const Adminregister = ({ navigation }) => {
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
+                    borderRadius:5
                   }}
                 >
                   <Image
@@ -132,13 +134,14 @@ const Adminregister = ({ navigation }) => {
               </View>
             </View>
             {/* Birthday */}
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 25 }}>
               <View
                 style={{
                   borderWidth: 1,
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
+                  borderRadius:5
                 }}
               >
                 <Image
@@ -175,13 +178,14 @@ const Adminregister = ({ navigation }) => {
               </Text>
             </View>
             {/* Email */}
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 25 }}>
               <View
                 style={{
                   borderWidth: 1,
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
+                  borderRadius:5
                 }}
               >
                 <Image
@@ -213,13 +217,14 @@ const Adminregister = ({ navigation }) => {
               </Text>
             </View>
             {/* Adress */}
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 25 }}>
               <View
                 style={{
                   borderWidth: 1,
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
+                  borderRadius:5
                 }}
               >
                 <Image
@@ -250,13 +255,14 @@ const Adminregister = ({ navigation }) => {
               </Text>
             </View>
             {/* Country */}
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 25 }}>
               <Pressable onPress={()=>setVisibleModal(!visibleModal)}
                 style={{
                   borderWidth: 1,
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
+                  borderRadius:5,
                   justifyContent: "space-between",
                 }}
               >
@@ -307,13 +313,13 @@ const Adminregister = ({ navigation }) => {
 
             {/* Btn */}
 
-            <View style={{ marginTop: 25, alignItems:"center" }}>
+            <View style={{ marginTop: verticalScale(45), alignItems:"center" }}>
               <Button
                 onPress={() => navigation.navigate("companyRegistration")}
                 title={"Continue"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main }}
+                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
                 titleStyle={{
-                  fontSize: 16,
+                  fontSize: moderateScale(18),
                   color: "black",
                   fontFamily: fontGotham.bold,
                 }}
@@ -334,7 +340,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: Color.light.themeColor,
-    height: Dimensions.get("screen").height,
+    height: Dimensions.get("window").height,
   },
   secondContainer: {
     marginLeft: 20,
