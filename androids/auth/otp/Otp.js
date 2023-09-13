@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useRef } from "react";
 import Color from "../../../utilities/Color";
 import { AntDesign } from "@expo/vector-icons";
-import { verticalScale } from "../../../utilities/Metrics";
+import { moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { useState } from "react";
 import { Button } from "@rneui/base";
 import Alert from "../../components/Alert";
@@ -109,10 +109,10 @@ const Otp = ({ navigation, route }) => {
         </Pressable>
 
         <View style={{ marginTop: 10 }}>
-          <Text style={{ color: Color.light.main, fontSize: 32, lineHeight:38, fontFamily:fontGotham.medium }}>
+          <Text style={{ color: Color.light.main, fontSize: moderateScale(35), lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
           </Text>
-          <Text style={{ fontSize: 20,fontFamily:fontGotham.bold }}>
+          <Text style={{ fontSize: moderateScale(25),fontFamily:fontGotham.bold }}>
             PLEASE ENTER YOUR VERIFICATION CODE
           </Text>
         </View>
@@ -132,13 +132,15 @@ const Otp = ({ navigation, route }) => {
             key={index}
             ref={(ref) => (otpRefs.current[index] = ref)}
             style={{
-              borderWidth: 1,
+              borderWidth: 2,
               padding: 15,
-              borderRadius: 10,
+              borderRadius: 5,
+              
               fontSize: 20,
             }}
             keyboardType="numeric"
             textAlign="center"
+            selectionColor={Color.light.main}
             maxLength={1}
             value={digit}
             onChangeText={(text) => handleOtpChange(text, index)}

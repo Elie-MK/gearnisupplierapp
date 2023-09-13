@@ -142,6 +142,7 @@ const Login = ({ navigation, route }) => {
             titleStyle={{
               color: Color.light.black,
               fontFamily: fontGotham.bold,
+              fontSize:moderateScale(18)
             }}
             containerStyle={{width:315, borderRadius:4}}
             onPress={() => navigation.navigate("otp", { routes })}
@@ -155,11 +156,11 @@ const Login = ({ navigation, route }) => {
             marginTop: verticalScale(20),
           }}
         >
-          <Text style={{ fontFamily: fontGotham.regular }}>
+          <Text style={{ fontFamily: fontGotham.regular, fontSize:moderateScale(15) }}>
             Don't have an account ?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("register")}>
-            <Text style={{ fontWeight: "bold", fontFamily: fontGotham.bold }}>
+            <Text style={{ fontSize:moderateScale(15), fontFamily: fontGotham.bold }}>
               Sign Up{" "}
             </Text>
           </Pressable>
