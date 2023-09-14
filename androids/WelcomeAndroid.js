@@ -13,13 +13,14 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../utilities/Color";
-import { horizontalScale, verticalScale } from "../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../utilities/Metrics";
 import { Button, CheckBox, Divider } from "@rneui/base";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import ReactNativeModal from "react-native-modal";
 import { Flag } from "./components/ModalLanguage";
 import { useCustomFonts } from "../utilities/Fonts";
 import { BlurView } from "expo-blur";
+import { DocumentText } from "iconsax-react-native";
 
 const WelcomeAndroid = ({ navigation, route }) => {
   const [visible, setVisible] = useState(false);
@@ -47,7 +48,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
             buttonStyle={styles.btn}
             titleStyle={{
               color: Color.light.black,
-              fontSize: 20,
+              fontSize: moderateScale(20),
               fontFamily: fontGotham.medium,
             }}
             type="outline"
@@ -60,18 +61,18 @@ const WelcomeAndroid = ({ navigation, route }) => {
         >
           <View    style={{
             flexDirection: "row",
-            gap: 15,
+            gap: 10,
             alignItems:"center",
             
           }}>
 
           <View>
-            <Feather name="globe" size={30} color="black" />
+            <Feather name="globe" size={moderateScale(25)} color="black" />
           </View>
           <View>
             <Text
               style={{
-                fontSize: 25,
+                fontSize: moderateScale(20),
                 fontWeight: "bold",
                 fontFamily: fontGotham.medium,
               }}
@@ -80,7 +81,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
             </Text>
           </View>
           <View>
-            <MaterialIcons name="keyboard-arrow-down" size={30} color="black" />
+            <MaterialIcons name="keyboard-arrow-down" size={moderateScale(30)} color="black" />
           </View>
           </View>
         </Pressable>
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     borderColor: Color.light.black,
     borderWidth: 2,
     width: 236,
-    borderRadius :4,
+    borderRadius :8,
     padding:20
   },
 });

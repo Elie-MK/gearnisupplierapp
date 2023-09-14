@@ -6,7 +6,6 @@ import Color from '../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import { Button } from'@rneui/base'
-import SvgUri from 'react-native-svg-uri'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();

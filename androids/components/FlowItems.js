@@ -7,7 +7,6 @@ import Paginator from "./Paginator";
 import { Button } from "@rneui/base";
 import Color from "../../utilities/Color";
 import { useNavigation } from "@react-navigation/native";
-import SvgUri from "react-native-svg-uri";
 import slide from "./slide";
 import { useCustomFonts } from "../../utilities/Fonts";
 

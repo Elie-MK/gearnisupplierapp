@@ -242,7 +242,7 @@ const Registercompany = ({ navigation }) => {
                     }}
                   />
                 </View>
-                <Text>Supporting text</Text>
+                {/* <Text>Supporting text</Text> */}
                 <Text
                   style={{
                     backgroundColor: "white",

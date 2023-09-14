@@ -111,7 +111,7 @@ const handleSubmit = ()=>{
           </Text>
          </View>
         </View>
-        
+        <View style={{alignItems:"center"}}>
         <View style={styles.inputContainer}>
           <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
             <Text style={{ fontSize: 14 }}>
@@ -142,6 +142,7 @@ const handleSubmit = ()=>{
           }}
         >
           <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Your mobile Number</Text>
+        </View>
         </View>
         </View>
         <View style={styles.btnContainer}>

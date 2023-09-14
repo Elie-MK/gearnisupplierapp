@@ -19,7 +19,6 @@ import { Button, Input } from "@rneui/base";
 import CountryList from "country-list-with-dial-code-and-flag";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
-import SvgUri from "react-native-svg-uri";
 
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";

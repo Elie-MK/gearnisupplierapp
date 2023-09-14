@@ -3,6 +3,7 @@ import React from 'react'
 import Dashboard from '../Dashboard/Dashboard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import Menus from '../Dashboard/Menus';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ const Navigation = () => {
         initialRouteName="dashboard"
       >
         <Stack.Screen name='dashboard' component={Dashboard} />
+        <Stack.Screen name='menu' component={Menus} />
       </Stack.Navigator>
 )}
 

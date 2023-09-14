@@ -24,6 +24,5 @@ const styles = StyleSheet.create({
       secondContainer: {
         marginLeft: 20,
         marginTop: verticalScale(20),
-        marginRight: 20,
       },
 })
