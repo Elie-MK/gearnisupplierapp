@@ -2,7 +2,7 @@ import { View, Text, Modal, Image } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
 import ReactNativeModal from "react-native-modal";
-import { horizontalScale, moderateScale } from "../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../utilities/Metrics";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
@@ -24,11 +24,12 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
           <View
             style={{
               backgroundColor: "#fff",
-              borderRadius: 10,
-              borderWidth: 2,
+              borderRadius: 14,
+              borderWidth: 1,
+              
               borderColor: Color.light.black,
 
-              width: horizontalScale(250),
+              width: horizontalScale(312),
               padding: 30,
             }}
           >
@@ -38,24 +39,24 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 <Text
                   style={{
                     marginTop: 10,
-                    fontSize: moderateScale(20),
+                    fontSize: moderateScale(16),
                     fontFamily: fontGotham.bold,
                   }}
                 >
                   Code sent
                 </Text>
               </View>
-              <View style={{ marginTop: 20 }}>
-                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:moderateScale(16) }}>{text}</Text>
+              <View style={{ marginTop: verticalScale(20)}}>
+                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:moderateScale(14) }}>{text}</Text>
               </View>
             </View>
-            <View style={{ alignItems: "center", marginTop: 20 }}>
+            <View style={{ alignItems: "center", marginTop: verticalScale(20)}}>
               <Button
                 title={btnText}
                 onPress={onPress}
-                containerStyle={{ width: horizontalScale(95), borderRadius: 5 }}
+                containerStyle={{ width: horizontalScale(116), borderRadius: 5 }}
                 buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.regular }}
-                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:moderateScale(15)}}
+                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:moderateScale(14)}}
               />
             </View>
           </View>

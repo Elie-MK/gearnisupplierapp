@@ -96,17 +96,17 @@ const handleSubmit = ()=>{
           <Text
             style={{
               color: Color.light.main,
-              fontSize: moderateScale(35),
+              fontSize: moderateScale(32),
               fontFamily: fontGotham.medium,
             }}
           >
             HELLO
           </Text>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: moderateScale(20), fontFamily: fontGotham.medium }}>
             WHAT'S YOUR PHONE 
           </Text>
-          <Text style={{ fontSize: moderateScale(25), fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: moderateScale(20), fontFamily: fontGotham.medium }}>
              NUMBER?
           </Text>
          </View>
@@ -114,11 +114,11 @@ const handleSubmit = ()=>{
         
         <View style={styles.inputContainer}>
           <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 20 }}>
+            <Text style={{ fontSize: 14 }}>
               {namecountry}
             </Text>
-            <AntDesign name="caretdown" size={15} color="black" />
-            <Text style={{ fontSize: 20 }}>
+            <AntDesign name="caretdown" size={14} color="black" />
+            <Text style={{ fontSize: 14 }}>
             {countryCode}
 
             </Text>
@@ -135,19 +135,17 @@ const handleSubmit = ()=>{
         <View
           style={{
             position: "absolute",
-            marginTop: -14,
-            padding: 2,
+            marginTop: -11,
             marginLeft: 20,
-            width: horizontalScale(140),
+            width: horizontalScale(130),
             backgroundColor: Color.light.themeColor,
           }}
         >
-          <Text style={{textAlign:"center"}}>Your mobile Number</Text>
+          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Your mobile Number</Text>
         </View>
         </View>
-       
         <View style={styles.btnContainer}>
-        {
+       {
         valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
           <ActivityIndicator animating={true} color={Color.light.main}/>
         </View> :  <Button
@@ -156,9 +154,9 @@ const handleSubmit = ()=>{
         titleStyle={{
           color: Color.light.black,
           fontFamily: fontGotham.bold,
-          fontSize:moderateScale(18)
+          fontSize:moderateScale(15)
         }}
-        containerStyle={{width:315, borderRadius:4}}
+        containerStyle={{width:horizontalScale(315), borderRadius:4}}
         onPress={handleSubmit}
       />
        }
@@ -168,14 +166,14 @@ const handleSubmit = ()=>{
             flexDirection: "row",
             alignContent: "center",
             justifyContent: "center",
-            marginTop: verticalScale(20),
+            marginTop: verticalScale(17),
           }}
         >
-          <Text style={{ fontFamily: fontGotham.regular, fontSize:moderateScale(15) }}>
+          <Text style={{ fontFamily: fontGotham.regular, fontSize:moderateScale(14) }}>
             Don't have an account ?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("login")}>
-            <Text style={{ fontSize:moderateScale(15), fontFamily: fontGotham.bold }}>
+            <Text style={{ fontSize:moderateScale(14), fontFamily: fontGotham.bold }}>
               Sign In{" "}
             </Text>
           </Pressable>
@@ -257,26 +255,21 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   inputContainer: {
-    marginTop: verticalScale(150),
-    borderWidth: 2,
+    marginTop: verticalScale(56),
+    borderWidth: 1,
+    width:horizontalScale(315),
     padding:8,
     flexDirection: "row",
     borderRadius:8
   },
-  input: {
-    width: 64,
-    paddingLeft: 15,
-    fontSize: 18,
-  },
   input2: {
     borderLeftWidth: 1,
     paddingLeft: 20,
-    fontSize: 18,
+    fontSize: 14,
   },
   btnContainer: {
-    marginTop: verticalScale(90),
+    marginTop:verticalScale(60),
     alignItems:"center"
-
   },
 });
 

@@ -43,27 +43,28 @@ const Adminregister = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("register")}>
-          <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={moderateScale(30)} color={Color.light.black} />
         </Pressable>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: moderateScale(35), fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: moderateScale(32), fontFamily: fontGotham.medium }}>
             Admin{" "}
           </Text>
-          <Text style={{ fontSize: moderateScale(35), fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: moderateScale(32), fontFamily: fontGotham.medium }}>
             Registration{" "}
           </Text>
          </View>
-          <View style={{ marginTop: 30 }}>
-            <View style={{ flexDirection: "row", gap: 9 }}>
+          <View style={{ marginTop: verticalScale(56), alignItems:"center" }}>
+            <View style={{ flexDirection: "row", gap: 9, width:horizontalScale(315) }}>
               {/* First Name */}
-              <View style={{width:"50%"}}>
+              <View style={{}}>
                 <View
                   style={{
                     borderWidth: 1,
                     flexDirection: "row",
                     alignItems: "center",
                     paddingLeft: 6,
-                    borderRadius:5
+                    borderRadius:5,
+                    
                   }}
                 >
                   <Image
@@ -73,10 +74,11 @@ const Adminregister = ({ navigation }) => {
                   <TextInput
                     placeholder="Joe"
                     style={{
-                      fontSize: 20,
+                      fontSize: moderateScale(14),
                       paddingLeft: 10,
                       fontFamily: fontGotham.regular,
-                      width: horizontalScale(136),
+                      width: horizontalScale(125),
+                      paddingRight:9,
                       padding: 12,
                     }}
                   />
@@ -88,14 +90,14 @@ const Adminregister = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
-                    fontSize:12
+                    fontSize:moderateScale(12)
                   }}
                 >
                   First Name
                 </Text>
               </View>
               {/* Last Name */}
-              <View style={{width:"48%"}}>
+              <View style={{}}>
                 <View
                   style={{
                     borderWidth: 1,
@@ -112,10 +114,11 @@ const Adminregister = ({ navigation }) => {
                   <TextInput
                     placeholder="Joe"
                     style={{
-                      fontSize: 20,
+                      fontSize:moderateScale(12),
                       paddingLeft: 10,
+                      paddingRight:9,
                       fontFamily: fontGotham.regular,
-                      width: horizontalScale(136),
+                      width: horizontalScale(125),
                       padding: 12,
                     }}
                   />
@@ -127,6 +130,7 @@ const Adminregister = ({ navigation }) => {
                     position: "absolute",
                     marginTop: -12,
                     marginLeft: 10,
+                    fontSize:moderateScale(12)
                   }}
                 >
                   Last Name
@@ -141,7 +145,8 @@ const Adminregister = ({ navigation }) => {
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
-                  borderRadius:5
+                  borderRadius:5,
+                  width:horizontalScale(315)
                 }}
               >
                 <Image
@@ -151,14 +156,14 @@ const Adminregister = ({ navigation }) => {
                 <TextInput
                   placeholder="mm/dd/yyyy"
                   style={{
-                    fontSize: 20,
+                    fontSize: moderateScale(14),
                     paddingLeft: 10,
                     fontFamily: fontGotham.regular,
-                    width: horizontalScale(280),
+                    width: horizontalScale(315),
                     padding: 12,
                   }}
                 />
-                <TouchableOpacity style={{marginLeft:-10}}>
+                <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
                   <Image
                     resizeMode="contain"
                     source={require("../../../../assets/icons/close-circle.png")}
@@ -172,6 +177,7 @@ const Adminregister = ({ navigation }) => {
                   position: "absolute",
                   marginTop: -12,
                   marginLeft: 10,
+                  fontSize:moderateScale(12)
                 }}
               >
                 Birthday
@@ -185,7 +191,8 @@ const Adminregister = ({ navigation }) => {
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
-                  borderRadius:5
+                  borderRadius:5,
+                  width:horizontalScale(315)
                 }}
               >
                 <Image
@@ -195,13 +202,13 @@ const Adminregister = ({ navigation }) => {
                 <TextInput
                   placeholder="Email"
                   style={{
-                    fontSize: 20,
+                    fontSize:moderateScale(14),
                     paddingLeft: 10,
                     fontFamily: fontGotham.regular,
                     width: horizontalScale(140),
                     padding: 12,
                   }}
-                  shoda
+                  
                 />
               </View>
               <Text
@@ -211,6 +218,7 @@ const Adminregister = ({ navigation }) => {
                   position: "absolute",
                   marginTop: -12,
                   marginLeft: 10,
+                  fontSize:moderateScale(12)
                 }}
               >
                 Email
@@ -224,7 +232,8 @@ const Adminregister = ({ navigation }) => {
                   flexDirection: "row",
                   alignItems: "center",
                   paddingLeft: 6,
-                  borderRadius:5
+                  borderRadius:5,
+                  width:horizontalScale(315)
                 }}
               >
                 <Image
@@ -234,7 +243,7 @@ const Adminregister = ({ navigation }) => {
                 <TextInput
                   placeholder="Adress"
                   style={{
-                    fontSize: 20,
+                    fontSize:moderateScale(14),
                     paddingLeft: 10,
                     fontFamily: fontGotham.regular,
                     width: horizontalScale(140),
@@ -249,6 +258,7 @@ const Adminregister = ({ navigation }) => {
                   position: "absolute",
                   marginTop: -12,
                   marginLeft: 10,
+                  fontSize:moderateScale(12)
                 }}
               >
                 Your Adress
@@ -263,7 +273,9 @@ const Adminregister = ({ navigation }) => {
                   alignItems: "center",
                   paddingLeft: 6,
                   borderRadius:5,
+                  padding:12,
                   justifyContent: "space-between",
+                  width:horizontalScale(315)
                 }}
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -273,11 +285,10 @@ const Adminregister = ({ navigation }) => {
                   />
                   <Text
                     style={{
-                      fontSize: 20,
+                      fontSize:moderateScale(14),
                       paddingLeft: 10,
                       fontFamily: fontGotham.regular,
                       width: horizontalScale(140),
-                      padding: 12,
                     }}
                   >
                     {namecountry}
@@ -313,17 +324,17 @@ const Adminregister = ({ navigation }) => {
 
             {/* Btn */}
 
-            <View style={{ marginTop: verticalScale(45), alignItems:"center" }}>
+            <View style={{ marginTop: verticalScale(30), alignItems:"center" }}>
               <Button
                 onPress={() => navigation.navigate("companyRegistration")}
                 title={"Continue"}
                 buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
                 titleStyle={{
-                  fontSize: moderateScale(18),
+                  fontSize: moderateScale(16),
                   color: "black",
                   fontFamily: fontGotham.bold,
                 }}
-                containerStyle={{width:315}}
+                containerStyle={{width:horizontalScale(315)}}
               />
             </View>
           </View>
@@ -344,7 +355,7 @@ const styles = StyleSheet.create({
   },
   secondContainer: {
     marginLeft: 20,
-    marginTop: verticalScale(20),
+    marginTop: verticalScale(5),
     marginRight: 20,
   },
 });

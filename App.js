@@ -33,7 +33,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="adminRegistration"
+              initialRouteName="companyRegistration"
             >
               <Stack.Screen name="welcome" component={WelcomeAndroid} />
               <Stack.Screen name="login" component={Login} />

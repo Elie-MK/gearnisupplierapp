@@ -6,6 +6,7 @@ import { ProgressBar } from "react-native-paper";
 import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
+import { horizontalScale } from "../../utilities/Metrics";
 const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur
 
 const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
@@ -20,11 +21,12 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
      
       <View
         style={{
-          borderWidth: 3,
+          borderWidth: 2,
           marginTop: 20,
           borderColor: Color.light.main,
           padding: 5,
           borderRadius :8 ,
+          width:horizontalScale(315)
         }}
       >
         <View
@@ -61,7 +63,7 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
             </View>
           </TouchableOpacity>
       {/* <Button title="Téléverser" onPress={uploadFile} /> */}
-          <TouchableOpacity style={{marginLeft:-10}}>
+          <TouchableOpacity style={{marginLeft:-40, padding:5}}>
             <Image
               resizeMode="contain"
               source={require("../../assets/icons/close-circle.png")}

@@ -43,7 +43,7 @@ const ModalCountry = ({
   if (!fontsLoaded) {
     return null;
   }
-// console.log(value);
+// console.log(datas);
   return (
     <Modal visible={isVisible} animationType="slide">
       <View style={{ padding: 10 }}>

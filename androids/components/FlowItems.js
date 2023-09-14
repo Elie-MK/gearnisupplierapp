@@ -1,6 +1,6 @@
 import { Animated, FlatList, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import React from "react";
-import { horizontalScale, moderateScale } from "../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../utilities/Metrics";
 import { useRef } from "react";
 import { useState } from "react";
 import Paginator from "./Paginator";
@@ -51,18 +51,18 @@ const FlowItems = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={{width:Dimensions.get('screen').width}}>
-            <Text style={{ fontSize: 35, width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
+            <Text style={{ fontSize: moderateScale(32), width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
 
-            <View style={{alignItems:"center", padding:10, marginTop:40}}>
-            <Image resizeMode="contain"  source={item.img} style={{width:230, height:220}} />
+            <View style={{alignItems:"center", marginTop:verticalScale(40)}}>
+            <Image resizeMode="contain"  source={item.img} style={{width:horizontalScale(213), height:verticalScale(200)}} />
             </View>
-            <View style={{ alignItems: "center", marginTop:34,width: horizontalScale(340),
+            <View style={{ alignItems: "center", marginTop:verticalScale(34),width: horizontalScale(315)
  }}>
               <Text
                 style={{
-                  fontSize: moderateScale(23),
+                  fontSize: moderateScale(14),
                   textAlign: "center",
                   marginTop: 20,
                   fontFamily:fontGotham.regular
@@ -81,31 +81,31 @@ const FlowItems = () => {
 
       <View style={{ marginTop: 20 }}>
         {currentIndex === 3 ? (
-       <View style={{alignItems:"center"}}>
+       <View style={{alignItems:"center", marginTop:verticalScale(60)}}>
            <Button
             title="Continue"
             onPress={()=>navigation.navigate('adminRegistration')}
             buttonStyle={{
               backgroundColor: Color.light.main,
               padding: 15,
-              marginBottom: 15,
+              marginBottom: verticalScale(15),
             }}
-            containerStyle={{width:315}}
-            titleStyle={{ color: Color.light.black, fontSize:moderateScale(20) }}
+            containerStyle={{width:horizontalScale(315)}}
+            titleStyle={{ color: Color.light.black, fontSize:moderateScale(16) }}
           />
        </View>
         ) : (
-       <View style={{alignItems:"center"}}>
+       <View style={{alignItems:"center",marginTop:verticalScale(60)}}>
            <Button
             title="Continue"
             onPress={ScrollTo}
             buttonStyle={{
               backgroundColor: Color.light.main,
               padding: 15,
-              marginBottom: 15,
+              marginBottom: verticalScale(15),
             }}
-            containerStyle={{width:315}}
-            titleStyle={{ color: Color.light.black, fontSize:moderateScale(20)}}
+            containerStyle={{width:horizontalScale(315)}}
+            titleStyle={{ color: Color.light.black, fontSize:moderateScale(16)}}
           />
        </View>
         )}

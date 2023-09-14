@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
-import { horizontalScale, verticalScale } from "../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../utilities/Metrics";
 import { AntDesign } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import FlowItems from "./FlowItems";
@@ -34,11 +34,11 @@ const Flow = ({navigation, route}) => {
             alignItems: "center",
           }}
         >
-          <Pressable onPress={() => navigation.navigate('otp',{routes})}>
+          <Pressable onPress={() => navigation.navigate('welcome',{routes})}>
             <AntDesign name="arrowleft" size={30} color={Color.light.black} />
           </Pressable>
           <Pressable onPress={() => navigation.navigate("adminRegistration")}>
-            <Text style={{fontFamily:fontGotham.regular}}>SKIP</Text>
+            <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>SKIP</Text>
           </Pressable>
         </View>
         <View style={{marginTop:30}}>

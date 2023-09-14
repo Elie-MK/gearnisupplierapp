@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useRef } from "react";
 import Color from "../../../utilities/Color";
 import { AntDesign } from "@expo/vector-icons";
-import { moderateScale, verticalScale } from "../../../utilities/Metrics";
+import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { useState } from "react";
 import { Button } from "@rneui/base";
 import Alert from "../../components/Alert";
@@ -26,7 +26,7 @@ const Otp = ({ navigation, route }) => {
   const [time, setTime] = useState({minutes :0, secondes:30});
   const [attempts, setAttempts] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+  const [isFocused, setIsFocused] = useState([false, false, false, false, false, false]);
 
   const [dismis, setDismis] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -53,23 +53,28 @@ const Otp = ({ navigation, route }) => {
 
   const handleOtpChange = (text, index) => {
     const newOtp = [...otp];
-
+  
     if (text.length === 1) {
-      newOtp[index] = text
+      newOtp[index] = text;
       setOtp(newOtp);
-
+  
       if (index < 5) {
         otpRefs.current[index + 1].focus();
       }
     } else if (text.length === 0) {
       newOtp[index] = '';
       setOtp(newOtp);
+  
       if (index > 0) {
         otpRefs.current[index - 1].focus();
       }
     }
+  
+    const newIsFocused = [...isFocused];
+    newIsFocused[index] = text.length === 1;
+    setIsFocused(newIsFocused);
   };
- 
+  
 
 
   useEffect(()=>{
@@ -107,6 +112,7 @@ const Otp = ({ navigation, route }) => {
    };
  
 
+
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -119,11 +125,11 @@ const Otp = ({ navigation, route }) => {
           <AntDesign name="arrowleft" size={35} color={Color.light.black} />
         </Pressable>
         <View style={{marginTop:20}}>
-        <View style={{ marginTop: 10 }}>
-          <Text style={{ color: Color.light.main, fontSize: moderateScale(35), lineHeight:38, fontFamily:fontGotham.medium }}>
+        <View style={{ marginTop: verticalScale(38) }}>
+          <Text style={{ color: Color.light.main, fontSize: moderateScale(32), lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
           </Text>
-          <Text style={{ fontSize: moderateScale(25),fontFamily:fontGotham.bold }}>
+          <Text style={{ fontSize: moderateScale(20),fontFamily:fontGotham.bold }}>
             PLEASE ENTER YOUR VERIFICATION CODE
           </Text>
         </View>
@@ -134,7 +140,7 @@ const Otp = ({ navigation, route }) => {
             justifyContent:"center",
             alignItems: "center",
             gap: 10,
-            marginTop: 50,
+            marginTop: verticalScale(50),
           }}
         >
          
@@ -143,11 +149,12 @@ const Otp = ({ navigation, route }) => {
             key={index}
             ref={(ref) => (otpRefs.current[index] = ref)}
             style={{
-              borderWidth: 2,
+              borderWidth: 1,
               padding: 15,
-              borderRadius: 5,
-              
-              fontSize: 20,
+              borderRadius: 4,
+              fontSize: 14,
+              width:horizontalScale(50),
+             borderColor:isFocused[index]?Color.light.main:"black"
             }}
             keyboardType="numeric"
             textAlign="center"
@@ -155,32 +162,33 @@ const Otp = ({ navigation, route }) => {
             maxLength={1}
             value={digit}
             onChangeText={(text) => handleOtpChange(text, index)}
+         
           />
         ))}
         
         </View>
-        <View style={{ alignItems: "center", marginTop: 17 }}>
-          <Text style={{fontFamily:fontGotham.regular, fontSize:20}}>An SMS should arrive shortly</Text>
+        <View style={{ alignItems: "center", marginTop: verticalScale(17) }}>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(12)}}>An SMS should arrive shortly</Text>
           {
-            dismis? <Text style={{ marginTop: 20, fontSize: 25, textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
+            dismis? <Text style={{ marginTop: verticalScale(15), fontSize: moderateScale(14), textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
             Account has been templorarily locked for 24 houres due to suspicious activity
-          </Text> : <Text style={{ marginTop: 20, fontSize: 20, fontFamily:fontGotham.bold }}>
+          </Text> : <Text style={{ marginTop: verticalScale(15), fontSize:moderateScale(20), fontFamily:fontGotham.bold }}>
             {String(time.minutes).padStart(2, '0')}:{String(time.secondes).padStart(2, '0')}
           </Text>  
           }
          
         </View>
-        <View style={{marginTop:120, alignItems:"center"}}>
+        <View style={{marginTop:verticalScale(60), alignItems:"center"}}>
           {
-             valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
+             valided? <View style={{width:horizontalScale(315), borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
              <ActivityIndicator animating={true} color={Color.light.main}/>
            </View> : <Button
             title="Verify"
             disabled={dismis}
             onPress={handleSubmit}
-            containerStyle={{width:315}}
+            containerStyle={{width:horizontalScale(315)}}
             buttonStyle={{ backgroundColor: Color.light.main, padding: 16 }}
-            titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold}}
+            titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold, fontSize:moderateScale(16)}}
           />
           }
           
@@ -196,9 +204,9 @@ const Otp = ({ navigation, route }) => {
             marginTop: verticalScale(20),
           }}
         >
-          <Text style={{fontFamily:fontGotham.regular, fontSize:15}}>I haven't received the code.  </Text>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>I haven't received the code.  </Text>
           <Pressable onPress={handleResend} >
-            <Text style={{ fontFamily:fontGotham.bold, fontSize:15 }}>Resend </Text>
+            <Text style={{ fontFamily:fontGotham.bold, fontSize:moderateScale(14) }}>Resend </Text>
           </Pressable> 
           
         </View>:   <View
@@ -209,9 +217,9 @@ const Otp = ({ navigation, route }) => {
             marginTop: verticalScale(20),
           }}
         >
-          <Text style={{fontFamily:fontGotham.regular}}>Encoutering issues ?  </Text>
+          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>Encoutering issues ?  </Text>
           <Pressable onPress={()=>navigation.navigate('contact')}>
-            <Text style={{ fontFamily:fontGotham.bold }}>Contact Support</Text>
+            <Text style={{ fontFamily:fontGotham.bold, fontSize:moderateScale(14) }}>Contact Support</Text>
           </Pressable> 
           
         </View>
@@ -239,7 +247,7 @@ const styles = StyleSheet.create({
   },
   secondContainer: {
     marginLeft: 20,
-    marginTop: verticalScale(20),
+    marginTop: verticalScale(24),
     marginRight: 20,
   },
 
