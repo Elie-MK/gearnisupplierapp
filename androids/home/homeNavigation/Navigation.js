@@ -2,8 +2,10 @@ import { View, Text, Platform } from 'react-native'
 import React from 'react'
 import Dashboard from '../Dashboard/Dashboard';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 import Menus from '../Dashboard/Menus';
+import Notifications from '../Dashboard/Notifications';
+import Profiles from '../Profile/Profiles';
+import Companyprofile from '../companyProfile/Companyprofile';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -17,10 +19,13 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="dashboard"
+        initialRouteName="menu"
       >
         <Stack.Screen name='dashboard' component={Dashboard} />
         <Stack.Screen name='menu' component={Menus} />
+        <Stack.Screen name='notification' component={Notifications} />
+        <Stack.Screen name='profile' component={Profiles} />
+        <Stack.Screen name='companyprofile' component={Companyprofile} />
       </Stack.Navigator>
 )}
 

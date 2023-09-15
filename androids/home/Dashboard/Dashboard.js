@@ -21,7 +21,7 @@ const Dashboard = ({navigation}) => {
             <View>
                 <Text style={{fontSize:moderateScale(22), fontFamily:fontGotham.medium}}>Dashboard</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
               <Notification size={30} color='black' />
             </TouchableOpacity>
         </View>
