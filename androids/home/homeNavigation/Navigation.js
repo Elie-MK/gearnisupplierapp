@@ -19,7 +19,7 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="menu"
+        initialRouteName="profile"
       >
         <Stack.Screen name='dashboard' component={Dashboard} />
         <Stack.Screen name='menu' component={Menus} />
