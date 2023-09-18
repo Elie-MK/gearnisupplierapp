@@ -2,10 +2,10 @@
   "expo": {
     "name": "Gearni Supplier",
     "slug": "gearnisupplierapp",
-    "version": "1.0.11 ",
+    "version": "1.0.1 ",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/gear.png",
       "resizeMode": "contain",
@@ -29,14 +29,14 @@
     },
     "extra": {
       "eas": {
-        "projectId": "6a80be73-8c42-4187-8c26-a9c8388820d7"
+        "projectId": "fe996409-3eda-461e-9fa4-6a91cdda87fb"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/6a80be73-8c42-4187-8c26-a9c8388820d7"
+      "url": "https://u.expo.dev/fe996409-3eda-461e-9fa4-6a91cdda87fb"
     }
   }
 }

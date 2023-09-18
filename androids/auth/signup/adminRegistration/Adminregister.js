@@ -16,7 +16,6 @@ import { horizontalScale, moderateScale, verticalScale } from "../../../../utili
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useCustomFonts } from "../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
-import CountryList from "country-list-with-dial-code-and-flag";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
 
@@ -70,6 +69,7 @@ const Adminregister = ({ navigation }) => {
                     resizeMode="contain"
                     source={require("../../../../assets/icons/frame.png")}
                   />
+                  
                   <TextInput
                     placeholder="Joe"
                     style={{
