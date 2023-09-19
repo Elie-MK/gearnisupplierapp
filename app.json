@@ -4,7 +4,7 @@
     "slug": "gearnisupplierapp",
     "version": "1.0.1 ",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/BlackAndYellowGearni.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/gear.png",
@@ -25,18 +25,18 @@
       "package": "com.gearnisupplierapp.gearnisupplierapp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/BlackAndYellowGearni.png"
     },
     "extra": {
       "eas": {
-        "projectId": "fe996409-3eda-461e-9fa4-6a91cdda87fb"
+        "projectId": "55ebe068-bbda-4f42-a5e5-3bd6dcc32a9d"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/fe996409-3eda-461e-9fa4-6a91cdda87fb"
-    } 
+      "url": "https://u.expo.dev/55ebe068-bbda-4f42-a5e5-3bd6dcc32a9d"
+    }
   }
 }

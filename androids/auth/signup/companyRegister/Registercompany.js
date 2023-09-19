@@ -22,6 +22,7 @@ import { Button, Divider } from "@rneui/base";
 import UploadInput from "../../../components/UploadInput";
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
+import { Flag, Hashtag, Location, ShopAdd } from "iconsax-react-native";
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
@@ -148,10 +149,7 @@ const Registercompany = ({ navigation }) => {
                     width: horizontalScale(315),
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/shop-add.png")}
-                  />
+                  <ShopAdd  color="black"/>
                   <TextInput
                     placeholder="Top Gear"
                     style={{
@@ -227,10 +225,8 @@ const Registercompany = ({ navigation }) => {
 
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/hashtag.png")}
-                  />
+              
+                  <Hashtag color="black" />
                   <TextInput
                     placeholder="12345/M/A/E/001"
                     style={{
@@ -269,10 +265,7 @@ const Registercompany = ({ navigation }) => {
 
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/location.png")}
-                  />
+                  <Location color="black" />
                   <TextInput
                     placeholder="Location"
                     style={{
@@ -312,10 +305,7 @@ const Registercompany = ({ navigation }) => {
                   }}
                 >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Image
-                      resizeMode="contain"
-                      source={require("../../../../assets/icons/flag.png")}
-                    />
+                    <Flag color="black" />
                     <Text
                       style={{
                         fontSize: 20,
@@ -361,10 +351,7 @@ const Registercompany = ({ navigation }) => {
 
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/location.png")}
-                  />
+                  <Location color="black" />
                   <TextInput
                     placeholder="Location"
                     style={{

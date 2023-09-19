@@ -7,6 +7,7 @@ import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import { horizontalScale } from "../../utilities/Metrics";
+import { CloseCircle } from "iconsax-react-native";
 const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur
 
 const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
@@ -64,10 +65,7 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
           </TouchableOpacity>
       {/* <Button title="Téléverser" onPress={uploadFile} /> */}
           <TouchableOpacity style={{marginLeft:-40, padding:5}}>
-            <Image
-              resizeMode="contain"
-              source={require("../../assets/icons/close-circle.png")}
-            />
+         <CloseCircle color="black" />
           </TouchableOpacity>
         </View>
       </View>

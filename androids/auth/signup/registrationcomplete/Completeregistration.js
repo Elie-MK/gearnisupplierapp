@@ -6,6 +6,7 @@ import Color from '../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import { Button } from'@rneui/base'
+import { DocumentText } from 'iconsax-react-native'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -26,7 +27,7 @@ const Completeregistration = ({navigation}) => {
 
         <View style={{justifyContent:"center", marginTop:40, flexDirection:"row"}}>
            <View style={{backgroundColor:Color.light.main, padding:30, borderRadius:50}}>
-            <Image source={require('../../../../assets/icons/document-text-1.png')} />
+            <DocumentText color='black' />
            </View>
         </View>
 

@@ -18,7 +18,7 @@ import { useCustomFonts } from "../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
-import {User, CalendarSearch, CloseCircle} from 'iconsax-react-native';
+import {User, CalendarSearch, CloseCircle, Sms, Location, Flag} from 'iconsax-react-native';
 
 
 const Adminregister = ({ navigation }) => {
@@ -186,10 +186,7 @@ const Adminregister = ({ navigation }) => {
                   width:horizontalScale(315)
                 }}
               >
-                <Image
-                  resizeMode="contain"
-                  source={require("../../../../assets/icons/sms.png")}
-                />
+                <Sms color="black" />
                 <TextInput
                   placeholder="Email"
                   style={{
@@ -227,10 +224,7 @@ const Adminregister = ({ navigation }) => {
                   width:horizontalScale(315)
                 }}
               >
-                <Image
-                  resizeMode="contain"
-                  source={require("../../../../assets/icons/location.png")}
-                />
+                <Location color="black" />
                 <TextInput
                   placeholder="Adress"
                   style={{
@@ -270,10 +264,7 @@ const Adminregister = ({ navigation }) => {
                 }}
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/flag.png")}
-                  />
+                  <Flag color="black" />
                   <Text
                     style={{
                       fontSize:moderateScale(14),
