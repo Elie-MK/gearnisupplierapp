@@ -18,6 +18,8 @@ import { useCustomFonts } from "../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
+import {User, CalendarSearch, CloseCircle} from 'iconsax-react-native';
+
 
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
@@ -65,11 +67,8 @@ const Adminregister = ({ navigation }) => {
                     
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/frame.png")}
-                  />
-                  
+               
+                  <User  color="black"/>
                   <TextInput
                     placeholder="Joe"
                     style={{
@@ -106,10 +105,8 @@ const Adminregister = ({ navigation }) => {
                     borderRadius:5
                   }}
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/frame.png")}
-                  />
+                  <User  color="black"/>
+
                   <TextInput
                     placeholder="Joe"
                     style={{
@@ -148,10 +145,8 @@ const Adminregister = ({ navigation }) => {
                   width:horizontalScale(315)
                 }}
               >
-                <Image
-                  resizeMode="contain"
-                  source={require("../../../../assets/icons/calendar-search.png")}
-                />
+         
+                <CalendarSearch color='black' />
                 <TextInput
                   placeholder="mm/dd/yyyy"
                   style={{
@@ -163,10 +158,7 @@ const Adminregister = ({ navigation }) => {
                   }}
                 />
                 <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
-                  <Image
-                    resizeMode="contain"
-                    source={require("../../../../assets/icons/close-circle.png")}
-                  />
+                 <CloseCircle color="black"/>
                 </TouchableOpacity>
               </View>
               <Text
