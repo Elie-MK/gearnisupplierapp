@@ -6,6 +6,7 @@ import Menus from '../Dashboard/Menus';
 import Notifications from '../Dashboard/Notifications';
 import Profiles from '../Profile/Profiles';
 import Companyprofile from '../companyProfile/Companyprofile';
+import Branches from '../Branches/Branches';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -19,13 +20,14 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="companyprofile"
+        initialRouteName="dashboard"
       >
         <Stack.Screen name='dashboard' component={Dashboard} />
         <Stack.Screen name='menu' component={Menus} />
         <Stack.Screen name='notification' component={Notifications} />
         <Stack.Screen name='profile' component={Profiles} />
         <Stack.Screen name='companyprofile' component={Companyprofile} />
+        <Stack.Screen name='branches' component={Branches} />
       </Stack.Navigator>
 )}
 

@@ -26,7 +26,7 @@ const Inputs = ({iconsLeft, iconsRight, label, placeholder, editable,defaultValu
         editable={editable}
         defaultValue={defaultValue}
         style={{
-          fontSize: moderateScale(14),
+          fontSize: 14,
           paddingLeft: 10,
           fontFamily: fontGotham.regular,
           width: horizontalScale(315),
@@ -44,7 +44,7 @@ const Inputs = ({iconsLeft, iconsRight, label, placeholder, editable,defaultValu
         position: "absolute",
         marginTop: -12,
         marginLeft: 10,
-        fontSize:moderateScale(12)
+        fontSize:12
       }}
     >
       {label}

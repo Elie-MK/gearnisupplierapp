@@ -23,11 +23,8 @@ const Dropdowns = ({icons, label}) => {
     <View style={{ marginTop: 15 }}>
       <View
         style={{
-          flexDirection: "row",
           alignItems: "center",
-          paddingLeft: 6,
           borderRadius: 5,
-          width: horizontalScale(315),
         }}
       >
         <Dropdown
@@ -73,19 +70,19 @@ const styles = StyleSheet.create({
     dropdown: {
       borderBottomColor: 'gray',
       borderWidth:1, 
-      width:horizontalScale(315),
+      width:horizontalScale(316),
       padding: 10,
       borderRadius:5
     },
     icon: {
-      marginRight: 5,
+      paddingRight: 5,
     },
     placeholderStyle: {
       fontSize: 16,
     },
     selectedTextStyle: {
       fontSize: 16,
-      marginLeft:20
+      paddingLeft:20
     },
     iconStyle: {
       width: 20,

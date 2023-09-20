@@ -9,6 +9,7 @@ import Color from "../../utilities/Color";
 import { useNavigation } from "@react-navigation/native";
 import slide from "./slide";
 import { useCustomFonts } from "../../utilities/Fonts";
+import { Paragraph } from "react-native-paper";
 
 const FlowItems = () => {
     const navigation = useNavigation()
@@ -50,25 +51,28 @@ const FlowItems = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={{width:Dimensions.get('screen').width}}>
-            <Text style={{ fontSize: moderateScale(32), width: horizontalScale(250), fontFamily:fontGotham.medium, fontWeight:"500" }}>
+            <Text style={{ fontSize: 32, width: 250, fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
 
             <View style={{alignItems:"center", marginTop:verticalScale(40)}}>
-            <Image resizeMode="contain"  source={item.img} style={{width:horizontalScale(213), height:verticalScale(200)}} />
+            <Image resizeMode="contain"  source={item.img} style={{width:213, height:200}} />
             </View>
-            <View style={{ alignItems: "center", marginTop:verticalScale(34),width: horizontalScale(315)
+            <View style={{alignItems:"center"}}>
+            <View style={{  marginTop:verticalScale(34),
  }}>
-              <Text
+              <Paragraph
+              numberOfLines={3}
                 style={{
-                  fontSize: moderateScale(14),
+                  fontSize: 14,
                   textAlign: "center",
                   marginTop: 20,
                   fontFamily:fontGotham.regular
                 }}
               >
                 {item.desc}
-              </Text>
+              </Paragraph>
+            </View>
             </View>
           </View>
         )}
@@ -86,11 +90,11 @@ const FlowItems = () => {
             onPress={()=>navigation.navigate('adminRegistration')}
             buttonStyle={{
               backgroundColor: Color.light.main,
-              padding: 15,
+              height:60,
               marginBottom: verticalScale(15),
             }}
             containerStyle={{width:horizontalScale(315)}}
-            titleStyle={{ color: Color.light.black, fontSize:moderateScale(16) }}
+            titleStyle={{ color: Color.light.black, fontSize:16 }}
           />
        </View>
         ) : (
@@ -100,11 +104,11 @@ const FlowItems = () => {
             onPress={ScrollTo}
             buttonStyle={{
               backgroundColor: Color.light.main,
-              padding: 15,
+             height:60,
               marginBottom: verticalScale(15),
             }}
             containerStyle={{width:horizontalScale(315)}}
-            titleStyle={{ color: Color.light.black, fontSize:moderateScale(16)}}
+            titleStyle={{ color: Color.light.black, fontSize:16}}
           />
        </View>
         )}

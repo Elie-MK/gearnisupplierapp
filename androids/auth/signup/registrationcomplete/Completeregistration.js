@@ -6,7 +6,7 @@ import Color from '../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import { Button } from'@rneui/base'
-import { DocumentText } from 'iconsax-react-native'
+import { DocumentText, DocumentText1 } from 'iconsax-react-native'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -26,8 +26,8 @@ const Completeregistration = ({navigation}) => {
         </View>
 
         <View style={{justifyContent:"center", marginTop:40, flexDirection:"row"}}>
-           <View style={{backgroundColor:Color.light.main, padding:30, borderRadius:50}}>
-            <DocumentText color='black' />
+           <View style={{backgroundColor:Color.light.main, padding:15, borderRadius:50}}>
+            <DocumentText1 color='black' size={64} />
            </View>
         </View>
 
@@ -73,11 +73,11 @@ const Completeregistration = ({navigation}) => {
         <View style={{marginTop:verticalScale(120), alignItems:"center"}}>
           <Button
             title="Go to Company Profile"
-            buttonStyle={{ backgroundColor: Color.light.main, padding: 15,borderRadius:4 }}
+            buttonStyle={{ backgroundColor: Color.light.main,borderRadius:4, height:60}}
             titleStyle={{
               color: Color.light.black,
               fontFamily: fontGotham.bold,
-              fontSize:moderateScale(16)
+              fontSize:16
             }}
             containerStyle={{width:horizontalScale(315)}}
             onPress={()=>navigation.navigate('home')}

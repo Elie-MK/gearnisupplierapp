@@ -29,7 +29,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
               
               borderColor: Color.light.black,
 
-              width: horizontalScale(312),
+              width: 312,
               padding: 30,
             }}
           >
@@ -55,7 +55,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 title={btnText}
                 onPress={onPress}
                 containerStyle={{ width: horizontalScale(116), borderRadius: 5 }}
-                buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.regular }}
+                buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
                 titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:moderateScale(14)}}
               />
             </View>

@@ -18,10 +18,10 @@ const Menus = ({navigation}) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          marginLeft:150,
           marginRight:20
         }}
       >
+        <View></View>
         <View>
           <Text
             style={{
@@ -78,7 +78,7 @@ const Menus = ({navigation}) => {
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
         {/* Branches */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(15)}}>
+        <TouchableOpacity onPress={()=>navigation.navigate('branches')} style={{marginTop:verticalScale(15)}}>
           <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
           <Shop size={30} color="black" />
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Branches</Text>

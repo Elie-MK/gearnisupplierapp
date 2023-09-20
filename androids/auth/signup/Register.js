@@ -137,7 +137,7 @@ const handleSubmit = ()=>{
             position: "absolute",
             marginTop: -11,
             marginLeft: 20,
-            width: horizontalScale(130),
+            width: 130,
             backgroundColor: Color.light.themeColor,
           }}
         >
@@ -151,10 +151,10 @@ const handleSubmit = ()=>{
           <ActivityIndicator animating={true} color={Color.light.main}/>
         </View> :  <Button
         title="Confirm"
-        buttonStyle={{ backgroundColor: Color.light.main, padding: 15 }}
+        buttonStyle={{ backgroundColor: Color.light.main, height:60 }}
         titleStyle={{
           color: Color.light.black,
-          fontFamily: fontGotham.bold,
+          fontFamily: fontGotham.medium,
           fontSize:moderateScale(15)
         }}
         containerStyle={{width:horizontalScale(315), borderRadius:4}}

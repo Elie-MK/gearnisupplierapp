@@ -31,7 +31,7 @@ const Dashboard = ({navigation}) => {
         <View style={{marginTop:30}}>
           <Itemshome />
         </View>
-        <View style={{marginTop:30}}>
+        <View >
           <Itemsorders />
           <Itemsorders />
           <Itemsorders />

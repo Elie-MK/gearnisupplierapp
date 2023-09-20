@@ -126,11 +126,14 @@ const Otp = ({ navigation, route }) => {
         </Pressable>
         <View style={{marginTop:20}}>
         <View style={{ marginTop: verticalScale(38) }}>
-          <Text style={{ color: Color.light.main, fontSize: moderateScale(32), lineHeight:38, fontFamily:fontGotham.medium }}>
+          <Text style={{ color: Color.light.main, fontSize:32, lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
           </Text>
-          <Text style={{ fontSize: moderateScale(20),fontFamily:fontGotham.bold }}>
-            PLEASE ENTER YOUR VERIFICATION CODE
+          <Text style={{ fontSize:20, fontFamily:fontGotham.bold }}>
+            PLEASE ENTER YOUR 
+          </Text>
+          <Text style={{ fontSize:20, fontFamily:fontGotham.bold }}>
+           VERIFICATION CODE
           </Text>
         </View>
 
@@ -187,8 +190,8 @@ const Otp = ({ navigation, route }) => {
             disabled={dismis}
             onPress={handleSubmit}
             containerStyle={{width:horizontalScale(315)}}
-            buttonStyle={{ backgroundColor: Color.light.main, padding: 16 }}
-            titleStyle={{ color: Color.light.black, fontFamily:fontGotham.bold, fontSize:moderateScale(16)}}
+            buttonStyle={{ backgroundColor: Color.light.main, height:60 }}
+            titleStyle={{ color: Color.light.black, fontFamily:fontGotham.medium, fontSize:moderateScale(16)}}
           />
           }
           

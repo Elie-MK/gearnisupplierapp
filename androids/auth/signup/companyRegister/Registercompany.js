@@ -391,11 +391,11 @@ const Registercompany = ({ navigation }) => {
               <Button
                 onPress={() => navigation.navigate("registrationComplete")}
                 title={"Continue"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
+                buttonStyle={{ height:60, backgroundColor: Color.light.main, borderRadius:8 }}
                 titleStyle={{
                   fontSize: moderateScale(16),
                   color: "black",
-                  fontFamily: fontGotham.bold,
+                  fontFamily: fontGotham.medium,
                 }}
                 containerStyle={{width:horizontalScale(315)}}
               />

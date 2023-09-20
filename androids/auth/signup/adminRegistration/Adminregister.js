@@ -114,7 +114,7 @@ const Adminregister = ({ navigation }) => {
                       paddingLeft: 10,
                       paddingRight:9,
                       fontFamily: fontGotham.regular,
-                      width: horizontalScale(125),
+                      width: 133,
                       padding: 12,
                     }}
                   />
@@ -157,7 +157,7 @@ const Adminregister = ({ navigation }) => {
                     padding: 12,
                   }}
                 />
-                <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
+                <TouchableOpacity style={{marginLeft:-65}}>
                  <CloseCircle color="black"/>
                 </TouchableOpacity>
               </View>
@@ -310,11 +310,11 @@ const Adminregister = ({ navigation }) => {
               <Button
                 onPress={() => navigation.navigate("companyRegistration")}
                 title={"Continue"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
+                buttonStyle={{ height:60, backgroundColor: Color.light.main, borderRadius:8 }}
                 titleStyle={{
                   fontSize: moderateScale(16),
                   color: "black",
-                  fontFamily: fontGotham.bold,
+                  fontFamily: fontGotham.medium,
                 }}
                 containerStyle={{width:horizontalScale(315)}}
               />

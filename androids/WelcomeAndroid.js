@@ -20,7 +20,7 @@ import ReactNativeModal from "react-native-modal";
 import { Flag } from "./components/ModalLanguage";
 import { useCustomFonts } from "../utilities/Fonts";
 import { BlurView } from "expo-blur";
-import { DocumentText } from "iconsax-react-native";
+import { CloseCircle, DocumentText } from "iconsax-react-native";
 
 const WelcomeAndroid = ({ navigation, route }) => {
   const [visible, setVisible] = useState(false);
@@ -120,8 +120,8 @@ const WelcomeAndroid = ({ navigation, route }) => {
                   width:320
                 }}
               >
-                <Pressable onPress={() => setVisible(!visible)}>
-                  <MaterialIcons name="cancel" size={24} color="black" />
+                <Pressable onPress={() => setVisible(!visible)} style={{alignItems:"flex-end"}}>
+                  <CloseCircle color="black" size={24}  />
                 </Pressable>
                 <Text
                   style={{
@@ -162,7 +162,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
                           style={{
                             fontSize: 20,
                             marginLeft: 20,
-                            fontFamily: fontGotham.medium,
+                            fontFamily: fontGotham.book,
                           }}
                         >
                           {item.language}
@@ -199,7 +199,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
                     }}
                     titleStyle={{
                       color: Color.light.black,
-                      fontFamily: fontGotham.bold,
+                      fontFamily: fontGotham.medium,
                       fontSize:18,
                       padding:20,
                     }}

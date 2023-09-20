@@ -10,7 +10,7 @@ import { horizontalScale } from "../../utilities/Metrics";
 import { CloseCircle } from "iconsax-react-native";
 const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur
 
-const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
+const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgress, clear}) => {
 
 // console.log(fileName);
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -54,7 +54,7 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
             >
               <View>
                 <Text style={{fontSize:10}}>{fileName}</Text>
-                <ProgressBar  progress={0.5} style={{marginTop:5}} color={Color.light.main} />
+                <ProgressBar  progress={uploadProgress/1.0} style={{marginTop:5}} color={Color.light.main} />
               </View>
               <View >
               {uploadProgress > 0 && (
@@ -63,8 +63,7 @@ const UploadInput = ({selectedImage, fileName, pickImage, uploadProgress}) => {
               </View>
             </View>
           </TouchableOpacity>
-      {/* <Button title="Téléverser" onPress={uploadFile} /> */}
-          <TouchableOpacity style={{marginLeft:-40, padding:5}}>
+          <TouchableOpacity style={{marginLeft:-40, padding:5}} onPress={clear}>
          <CloseCircle color="black" />
           </TouchableOpacity>
         </View>
