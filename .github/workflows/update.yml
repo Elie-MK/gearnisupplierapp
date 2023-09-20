@@ -1,5 +1,5 @@
 name: update
-on: pull-request
+on: pull_request
 
 jobs:
   update:
