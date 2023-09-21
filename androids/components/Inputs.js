@@ -16,7 +16,6 @@ const Inputs = ({namecountry, countryCode, number, onChangeText, onPress, label}
     <View style={{    
         borderWidth: 1,
         width:horizontalScale(315),
-        height:56,
         flexDirection: "row",
         borderRadius:8}}>
           <TouchableOpacity onPress={onPress} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>

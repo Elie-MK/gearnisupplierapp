@@ -19,7 +19,7 @@ const Dashboard = ({navigation}) => {
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
             <View>
-                <Text style={{fontSize:moderateScale(22), fontFamily:fontGotham.medium}}>Dashboard</Text>
+                <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium}}>Dashboard</Text>
             </View>
             <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
               <Notification size={30} color='black' />

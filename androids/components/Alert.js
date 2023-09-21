@@ -37,7 +37,6 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
               borderWidth: 1,
               borderColor: Color.light.black,
               width: 312,
-              height:260,
               padding: 30,
             }}
           >

@@ -139,8 +139,8 @@ const Registercompany = ({ navigation }) => {
                 Registration{" "}
               </Text>
             </View>
-            <View  >
-              <View style={{alignItems:"center"}}>
+            <View style={{}} >
+              <View style={{alignItems:"center", marginTop:verticalScale(56)}}>
               {/* Comany Name */}
               <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
