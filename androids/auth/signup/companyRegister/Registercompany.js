@@ -34,7 +34,7 @@ const Registercompany = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
   const [number, setNumber] = useState("");
 
-  const [visibled, setVisibled] = useState(false);
+  const [open, setOpen] = useState(false);
   const [countryCode, setCountryCode] = useState(defaultCountryCode);
   const [flag, setFlag] = useState(defaultFlag);
   const [namecountry, setNameCountry] = useState(defaultCountryName);
@@ -114,7 +114,7 @@ const Registercompany = ({ navigation }) => {
     setNameCountry(item.name);
     setCountryCode(item.dial_code);
     setFlag(item.flag)
-    setVisibled(!visibled);
+    setOpen(!open);
     };
 
 
@@ -144,7 +144,7 @@ const Registercompany = ({ navigation }) => {
               <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
               <View style={{  marginTop: verticalScale(15),}}>
-        <Inputs label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setVisibled(!visibled)} />
+        <Inputs label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setOpen(!open)} />
         </View>
               {/* Comapny Registration Number */}
              <InputsText label={"Company Registration Number"} width={horizontalScale(315)} placeholder={"1234567/M/A/E/001"} iconsLeft={<Hashtag color="black" />} />
@@ -177,8 +177,8 @@ const Registercompany = ({ navigation }) => {
         </View>
         <ModalCountry
           value={value}
-          isVisible={visibled}
-          hideModal={() => setVisibled(!visibled)}
+          isVisible={open}
+          hideModal={() => setOpen(!open)}
           setValue={(text) => setValue(text)}
           onCountryChange={(item) => onCountryChange(item)}
         />

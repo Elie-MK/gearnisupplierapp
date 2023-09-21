@@ -26,7 +26,7 @@ const Branches = () => {
         }}
       >
           <TouchableOpacity onPress={() => setOpen(!open)}>
-        <View style={{ width: horizontalScale(315), height:open?111:350, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
+        <View style={{ width: horizontalScale(315), height:!open?111:350, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
               <View style={{height:17}}>
                 <Text
@@ -39,7 +39,7 @@ const Branches = () => {
                 </Text>
               </View>
               <View>
-                {open ? (
+                {!open ? (
                   <MaterialIcons
                     name="keyboard-arrow-down"
                     size={moderateScale(30)}
@@ -61,7 +61,7 @@ const Branches = () => {
               <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>Nasir Al Qasimi</Text>
               <Text style={{fontSize:14, fontFamily:fontGotham.bold, display:open==false?"none":"flex"}}>Manage</Text>
             </View>
-            <View style={{marginTop:5, display:open==true?"none":"flex"}}>
+            <View style={{marginTop:5, display:!open?"none":"flex"}}>
               <Divider  color="black" style={{marginTop:12}} />
              <View style={{marginTop:8}}>
              <View style={{marginTop:10}}>
