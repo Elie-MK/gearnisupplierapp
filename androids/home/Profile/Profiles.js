@@ -12,6 +12,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { Button, Divider } from '@rneui/base'
 import UploadInput from '../../components/UploadInput'
 import * as ImagePicker from 'expo-image-picker';
+import InputsText from '../../components/InputsText'
+import Inputs from '../../components/Inputs'
+import NotEditableInput from '../../components/NotEditableInput'
+import InputCountries from '../../components/InputCountries'
+import Buttons from '../../components/Buttons'
 
 
 const Profiles = ({navigation}) => {
@@ -24,7 +29,7 @@ const Profiles = ({navigation}) => {
   const [value, setValue]=useState('')
   const [nationality, setNationality]=useState(defaultCountry)
   const [country, setCountry]=useState(defaultCountry)
-  const [visible, setVisible]=useState(false)
+  const [visibleM, setVisibleM]=useState(false)
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -84,119 +89,14 @@ const Profiles = ({navigation}) => {
  {/* Input Text */}
         <View >
         <View style={{marginTop:verticalScale(50), alignItems:"center"}}>
-        <View style={{ flexDirection: "row", gap: 9, width:horizontalScale(315) }}>
+        <View style={{ flexDirection: "row", gap: 10, width:horizontalScale(315) }}>
               {/* First Name */}
-              <View style={{}}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:5,
-                  }}
-                >
-              <User color='black' />
-                  <TextInput
-                    defaultValue='Elie'
-                    style={{
-                      fontSize: moderateScale(14),
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(125),
-                      paddingRight:9,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  First Name *
-                </Text>
-              </View>
+             <InputsText placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
-              <View style={{}}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:5
-                  }}
-                >
-                 <User color='black' />
-                  <TextInput
-                    defaultValue='MK'
-                    style={{
-                      fontSize:moderateScale(12),
-                      paddingLeft: 10,
-                      paddingRight:9,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(125),
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Last Name *
-                </Text>
-              </View>
-            </View>
-            <View style={{  marginTop: verticalScale(15),
-    borderWidth: 1,
-    width:horizontalScale(315),
-    flexDirection: "row",
-    borderRadius:8}}>
-          <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 14 }}>
-            {flag}
-            </Text>
-            <Text style={{ fontSize: 14 }}>
-           {countryCode}
-            </Text>
-          </TouchableOpacity>
-          <View style={{ padding: 12, width: horizontalScale(150)}}>
-            <TextInput
-              defaultValue="123654478"
-              style={ { fontFamily: fontGotham.medium,   borderLeftWidth: 1,
-                paddingLeft: 20,
-                fontSize: 14, }}
-              onChangeText={(e) => setNumber(e)}
-              // value={number}
-              // editable={false}
-              maxLength={10}
-              keyboardType="numeric"
-            />
-          </View>
-        <View
-          style={{
-            position: "absolute",
-            marginTop: -9,
-            marginLeft: 20,
-            width: horizontalScale(100),
-            backgroundColor: Color.light.themeColor,
-          }}
-        >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Phone Number</Text>
-        </View>
+             <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
+             </View>
+            <View style={{  marginTop: verticalScale(15),}}>
+        <Inputs label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />
         </View>
         {/* Mobile Number */}
         <View style={{  marginTop: verticalScale(15),
@@ -236,346 +136,25 @@ const Profiles = ({navigation}) => {
         </View>
         </View>
          {/* Birthday */}
-         <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-              <CalendarSearch color='black' />
-                <TextInput
-                  placeholder="mm/dd/yyyy"
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
-                 <CloseCircle color='black' />
-                </TouchableOpacity>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Birthday
-              </Text>
-            </View>
+         <InputsText label={"Birthdate *"} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} iconsRight={<CloseCircle color='black' />} iconsLeft={<CalendarSearch  color='black'/>} />
             {/* Email */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-              <Sms color='black' />
-                <TextInput
-                  placeholder="email"
-                  defaultValue='name@email.com'
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
-                 <CloseCircle color='black' />
-                </TouchableOpacity>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Email
-              </Text>
-            </View>
+            <InputsText label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"} iconsRight={<CloseCircle color='black' />} iconsLeft={<Sms color='black' />} />
             {/* Job Title */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-              <SearchNormal color='black' />
-                <TextInput
-                  placeholder="email"
-                  defaultValue='Job Title'
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <TouchableOpacity style={{marginLeft:horizontalScale(-60)}}>
-                 <CloseCircle color='black' />
-                </TouchableOpacity>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Job Title
-              </Text>
-            </View>
+           <InputsText label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}iconsRight={<CloseCircle color='black' />}  iconsLeft={<SearchNormal color='black' />} />
             {/* Role */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-                <TextInput
-                  placeholder="email"
-                  editable={false}
-                  defaultValue='Company Owner'
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <View style={{marginLeft:horizontalScale(-40)}}>
-                 <CloseCircle color='black' />
-                </View>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Role *
-              </Text>
-            </View>
+            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} iconsRight={<CloseCircle color='black' />}/>
           {/* Branch */}
-          <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-                <Shop color='black' />
-                <TextInput
-                  placeholder="email"
-                  editable={false}
-                  defaultValue='Branch Name'
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <View style={{marginLeft:horizontalScale(-60)}}>
-                 <CloseCircle color='black' />
-                </View>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Branch *
-              </Text>
-            </View>
+          <NotEditableInput width iconsLeft={<Shop color='black' />}  label={"Branch *"} placeholder={"Branch Name"} iconsRight={<CloseCircle color='black' />} />
             {/* Identity Card */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-                <Hashtag color='black' />
-                <TextInput
-                  defaultValue='123456974'
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-
-                />
-                <View style={{marginLeft:horizontalScale(-60)}}>
-                 <CloseCircle color='black' />
-                </View>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Branch *
-              </Text>
-            </View>
+           <InputsText label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)} iconsRight={<CloseCircle color='black' />} />
             {/* Nationality */}
-            <View style={{ marginTop: 25 }}>
-              <Pressable onPress={()=>setVisible(!visible)}
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  padding:12,
-                  justifyContent: "space-between",
-                  width:horizontalScale(315)
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Flag color='black' />
-                  <Text
-                    style={{
-                      fontSize:moderateScale(14),
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(140),
-                    }}
-                  >
-                    {nationality}
-                  </Text>
-                </View>
-               <MaterialIcons
-                  name="keyboard-arrow-down"
-                  size={24}
-                  color="black"
-                />
-              </Pressable>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:12
-                }}
-              >
-                Nationality
-              </Text>
-            </View>
+            <InputCountries country={country} label={"Nationality"} press={()=>setVisibleM(!visibleM)} />
         {/* Country */}
-        <View style={{ marginTop: 25 }}>
-              <Pressable onPress={()=>setVisible(!visible)}
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  padding:12,
-                  justifyContent: "space-between",
-                  width:horizontalScale(315)
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Flag color='black' />
-                  <Text
-                    style={{
-                      fontSize:moderateScale(14),
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(140),
-                    }}
-                  >
-                    {country}
-                  </Text>
-                </View>
-               <MaterialIcons
-                  name="keyboard-arrow-down"
-                  size={24}
-                  color="black"
-                />
-              </Pressable>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:12
-                }}
-              >
-                Country
-              </Text>
-            </View>
+            <InputCountries country={country} label={"Country"} press={()=>setVisibleM(!visibleM)} />
         </View>
-        <View style={{marginTop:10, alignItems:"center"}}>
+
+
+        <View style={{marginTop:25, alignItems:"center",}}>
         <Divider color='gray' width={2} style={{marginBottom:10, width:350}} />
         </View>
         <View style={{alignItems:"center"}}>
@@ -588,23 +167,13 @@ const Profiles = ({navigation}) => {
       </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-              <Button
-               
-                title={"Save"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
-                titleStyle={{
-                  fontSize: moderateScale(16),
-                  color: "black",
-                  fontFamily: fontGotham.bold,
-                }}
-                containerStyle={{width:horizontalScale(315)}}
-              />
+                <Buttons title={"Save"} />
             </View>
             </View>
         </View>
         <ModalCountry  value={value}
-          isVisible={visible}
-          hideModal={() => setVisible(!visible)}
+          isVisible={visibleM}
+          hideModal={() => setVisibleM(!visibleM)}
           setValue={(text) => setValue(text)}
           onCountryChange={(item) => onCountryChange(item)}  />
           </View>

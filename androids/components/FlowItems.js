@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import slide from "./slide";
 import { useCustomFonts } from "../../utilities/Fonts";
 import { Paragraph } from "react-native-paper";
+import Buttons from "./Buttons";
 
 const FlowItems = () => {
     const navigation = useNavigation()
@@ -50,10 +51,15 @@ const FlowItems = () => {
         )}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={{width:Dimensions.get('screen').width}}>
-            <Text style={{ fontSize: 32, width: 250, fontFamily:fontGotham.medium, fontWeight:"500" }}>
+          <View style={{width:Dimensions.get('window').width}}>
+          <View style={{marginLeft:20}}>
+          <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, fontWeight:"500" }}>
               {item.title}
             </Text>
+            <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, fontWeight:"500" }}>
+              {item.subtitle}
+            </Text>
+          </View>
 
             <View style={{alignItems:"center", marginTop:verticalScale(40)}}>
             <Image resizeMode="contain"  source={item.img} style={{width:213, height:200}} />
@@ -61,8 +67,7 @@ const FlowItems = () => {
             <View style={{alignItems:"center"}}>
             <View style={{  marginTop:verticalScale(34),
  }}>
-              <Paragraph
-              numberOfLines={3}
+              <Text
                 style={{
                   fontSize: 14,
                   textAlign: "center",
@@ -71,7 +76,16 @@ const FlowItems = () => {
                 }}
               >
                 {item.desc}
-              </Paragraph>
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  textAlign: "center",
+                  fontFamily:fontGotham.regular
+                }}
+              >
+                {item.subdesc}
+              </Text>
             </View>
             </View>
           </View>
@@ -82,34 +96,14 @@ const FlowItems = () => {
         ref={slidesRef}
       />
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginTop: 20, marginBottom:15 }}>
         {currentIndex === 3 ? (
        <View style={{alignItems:"center", marginTop:verticalScale(60)}}>
-           <Button
-            title="Continue"
-            onPress={()=>navigation.navigate('adminRegistration')}
-            buttonStyle={{
-              backgroundColor: Color.light.main,
-              height:60,
-              marginBottom: verticalScale(15),
-            }}
-            containerStyle={{width:horizontalScale(315)}}
-            titleStyle={{ color: Color.light.black, fontSize:16 }}
-          />
+          <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate('adminRegistration')} />
        </View>
         ) : (
        <View style={{alignItems:"center",marginTop:verticalScale(60)}}>
-           <Button
-            title="Continue"
-            onPress={ScrollTo}
-            buttonStyle={{
-              backgroundColor: Color.light.main,
-             height:60,
-              marginBottom: verticalScale(15),
-            }}
-            containerStyle={{width:horizontalScale(315)}}
-            titleStyle={{ color: Color.light.black, fontSize:16}}
-          />
+           <Buttons title={"Continue"} handleSubmit={ScrollTo} />
        </View>
         )}
       </View>

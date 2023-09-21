@@ -32,6 +32,8 @@ const Flow = ({navigation, route}) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            marginLeft:20, 
+            marginRight:20
           }}
         >
           <Pressable onPress={() => navigation.navigate('welcome',{routes})}>
@@ -56,9 +58,8 @@ const styles = StyleSheet.create({
     height: Dimensions.get("screen").height,
   },
   secondContainer: {
-    marginLeft: 20,
+
     marginTop: verticalScale(20),
-    marginRight: 20,
   },
 });
 export default Flow;

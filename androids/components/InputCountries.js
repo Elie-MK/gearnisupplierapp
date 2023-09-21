@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
-import { useCustomFonts } from '../../../../utilities/Fonts';
-import { horizontalScale, moderateScale } from '../../../../utilities/Metrics';
+import { useCustomFonts } from '../../utilities/Fonts';
+import { horizontalScale, moderateScale } from '../../utilities/Metrics';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Flag } from 'iconsax-react-native';
 
@@ -19,7 +19,7 @@ const InputCountries = ({press, country, label, }) => {
         alignItems: "center",
         paddingLeft: 6,
         borderRadius:5,
-        padding:12,
+        height:56,
         justifyContent: "space-between",
         width:horizontalScale(315)
       }}

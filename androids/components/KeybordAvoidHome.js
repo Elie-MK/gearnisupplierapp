@@ -6,7 +6,7 @@ import { useCustomFonts } from '../../utilities/Fonts'
 import Color from '../../utilities/Color'
 import { useNavigation } from '@react-navigation/native'
 
-const KeybordAvoidHome = ({title, children}) => {
+const KeybordAvoidHome = ({title, children, size}) => {
   const navigation = useNavigation()
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
@@ -15,12 +15,12 @@ const KeybordAvoidHome = ({title, children}) => {
   return (
     <KeyboardAvoidingView style={{flex:1,paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     paddingBottom:5, backgroundColor:Color.light.themeColor}} >
-            <View style={{flexDirection:"row", justifyContent:"space-between", marginRight:20, marginLeft:20}}>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginRight:20, marginLeft:20}}>
             <TouchableOpacity onPress={()=>navigation.navigate("menu")}>
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
             <View>
-                <Text style={{fontSize:moderateScale(22), fontFamily:fontGotham.medium}}>{title}</Text>
+                <Text style={{fontSize:size?22:14, fontFamily:fontGotham.medium}}>{title}</Text>
             </View>
             <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
               <Notification size={30} color='black' />

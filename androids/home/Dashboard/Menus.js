@@ -26,7 +26,7 @@ const Menus = ({navigation}) => {
           <Text
             style={{
               fontFamily: fontGotham.medium,
-              fontSize: moderateScale(22),
+              fontSize: 22,
             }}
           >
             Menu

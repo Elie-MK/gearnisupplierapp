@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
@@ -19,6 +21,10 @@ import Alert from "../../components/Alert";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { useCustomFonts } from "../../../utilities/Fonts";
 import { ActivityIndicator } from "react-native-paper";
+import ModalCountry from "../../components/ModalCountry";
+import ActivityIndicators from "../../components/ActivityIndicator";
+import Buttons from "../../components/Buttons";
+import Inputs from "../../components/Inputs";
 
 const Register = ({navigation, route}) => {
   const routes = route.name;
@@ -86,12 +92,12 @@ const handleSubmit = ()=>{
   }
   return (
     <View style={styles.container}>
-     <View style={styles.secondContainer}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("welcome")}>
           <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
         </Pressable>
         <View style={{marginTop:verticalScale(15)}}>
-
         <View style={styles.textContainer}>
           <Text
             style={{
@@ -111,55 +117,12 @@ const handleSubmit = ()=>{
           </Text>
          </View>
         </View>
-        <View style={{alignItems:"center"}}>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 14 }}>
-              {namecountry}
-            </Text>
-            <AntDesign name="caretdown" size={14} color="black" />
-            <Text style={{ fontSize: 14 }}>
-            {countryCode}
-
-            </Text>
-          </TouchableOpacity>
-          <View style={{ padding: 12, width: horizontalScale(150)}}>
-            <TextInput
-              style={[styles.input2, { fontFamily: fontGotham.medium }]}
-              onChangeText={(e) => setNumber(e)}
-              value={number}
-              maxLength={10}
-              keyboardType="numeric"
-            />
-          </View>
-        <View
-          style={{
-            position: "absolute",
-            marginTop: -11,
-            marginLeft: 20,
-            width: 130,
-            backgroundColor: Color.light.themeColor,
-          }}
-        >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Your mobile Number</Text>
-        </View>
-        </View>
+        <View style={{alignItems:"center", marginTop: verticalScale(56)}}>
+          <Inputs label={"Your mobile Number"} countryCode={countryCode} namecountry={namecountry} number={number} onPress={()=>setVisible(!visible)} onChangeText={(e) => setNumber(e)} />
         </View>
         <View style={styles.btnContainer}>
        {
-        valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
-          <ActivityIndicator animating={true} color={Color.light.main}/>
-        </View> :  <Button
-        title="Confirm"
-        buttonStyle={{ backgroundColor: Color.light.main, height:60 }}
-        titleStyle={{
-          color: Color.light.black,
-          fontFamily: fontGotham.medium,
-          fontSize:moderateScale(15)
-        }}
-        containerStyle={{width:horizontalScale(315), borderRadius:4}}
-        onPress={handleSubmit}
-      />
+        valided? <ActivityIndicators />  :  <Buttons handleSubmit={handleSubmit} title={"Confirm"} />
        }
         </View>
         <View
@@ -179,55 +142,12 @@ const handleSubmit = ()=>{
             </Text>
           </Pressable>
         </View>
+        </View>
+      <View>
+        <ModalCountry isVisible={visibleModal} onCountryChange={(item)=>onCountryChange(item)} hideModal={()=>setVisibleModal(!visibleModal) } setValue={(e)=>setValue(e)} values={value} />
       </View>
       </View>
-    <View>
-        <Modal visible={visibleModal} animationType="slide">
-          <View style={{ padding: 10 }}>
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 30 }}
-            >
-              <Pressable onPress={() => setVisibleModal(!visibleModal)}>
-                <MaterialIcons name="cancel" size={24} color="black" />
-              </Pressable>
-              <TextInput
-                style={{
-                  fontFamily: fontGotham.medium,
-                  width: horizontalScale(250),
-                  padding: 5,
-                  paddingLeft: 15,
-                  fontSize: 15,
-                }}
-                onChangeText={(newVal) => setValue(newVal)}
-                value={value}
-                maxLength={10}
-                placeholder="Enter country name"
-              />
-            </View>
-          </View>
-          <View>
-            <ScrollView style={{ padding: 15 }}>
-              {filteredPosts.map((item, index) => (
-                <TouchableOpacity key={index} onPress={()=>onCountryChange(item)}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 10,
-                      padding: 10,
-                    }}
-                  >
-                    <Text >{item.flag}</Text>
-                    <Text>{item.name}</Text>
-                    <Text>({item.dial_code})</Text>
-                  </View>
-                  <Divider />
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
-        </Modal>
-      </View>
+      </TouchableWithoutFeedback>
     <View>
       <Alert
          visible={visible}

@@ -1,4 +1,4 @@
-import { View, Text, Modal, Image } from "react-native";
+import { View, Text, Modal, Image, Dimensions, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
 import ReactNativeModal from "react-native-modal";
@@ -6,6 +6,7 @@ import { horizontalScale, moderateScale, verticalScale } from "../../utilities/M
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
+import { BlurView } from "expo-blur";
 
 const Alert = ({ visible, dismis, onPress, text, btnText }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -14,22 +15,29 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
   }
   return (
     <>
-      <ReactNativeModal
-        isVisible={visible}
-        backdropColor="white"
-        backdropOpacity={0.6}
-        onBackdropPress={dismis}
+      <Modal
+      visible={visible}
+      onDismiss={dismis}
+      onRequestClose={dismis}
       >
-        <View style={{ alignItems: "center" }}>
+      <TouchableWithoutFeedback onPress={dismis}>
+            <BlurView
+            intensity={8}
+            tint="dark"
+            style={{
+              height: Dimensions.get("window").height,
+              width: Dimensions.get("window").width,
+            }}
+          >
+        <View style={{ alignItems: "center", marginTop:75 }}>
           <View
             style={{
               backgroundColor: "#fff",
               borderRadius: 14,
               borderWidth: 1,
-              
               borderColor: Color.light.black,
-
               width: 312,
+              height:260,
               padding: 30,
             }}
           >
@@ -61,7 +69,9 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
             </View>
           </View>
         </View>
-      </ReactNativeModal>
+        </BlurView>
+        </TouchableWithoutFeedback>
+      </Modal>
     </>
   );
 };

@@ -9,12 +9,14 @@ import { useCustomFonts } from '../../../utilities/Fonts'
 import Dropdowns from './components/Dropdowns'
 import ModalCountry from '../../components/ModalCountry'
 import InputsNumber from './components/InputsNumber'
-import InputCountries from './components/InputCountries'
 import * as ImagePicker from 'expo-image-picker';
 import { Divider } from '@rneui/base'
 import UploadInput from '../../components/UploadInput'
 import { Button } from '@rneui/themed'
 import Color from '../../../utilities/Color'
+import InputCountries from '../../components/InputCountries'
+import InputsText from '../../components/InputsText'
+import Buttons from '../../components/Buttons'
 
 const Companyprofile = () => {
   const defaultCountryCode = "+216"
@@ -91,32 +93,32 @@ const Companyprofile = () => {
     </View>
     <View style={{alignItems:"center"}}>
    <View>
-   <Inputs label={"Company Name *"} iconsLeft={<Shop color='black' />} 
+   <InputsText width={horizontalScale(315)} label={"Company Name *"} iconsLeft={<Shop color='black' />} 
       placeholder={"Input"} editable={false}
       />
    </View>
     <View>
-    <Inputs label={"Company Owner Full Name *"} iconsLeft={<User color='black' />} 
+    <InputsText width={horizontalScale(315)} label={"Company Owner Full Name *"} iconsLeft={<User color='black' />} 
       placeholder={"Input"} editable={false}
       />
     </View>
      <View>
-     <Inputs label={"Identity Card *"} iconsLeft={<Hashtag color='black' />} 
+     <InputsText width={horizontalScale(315)} label={"Identity Card *"} iconsLeft={<Hashtag color='black' />} 
        defaultValue={"123456698"} iconsRight={<CloseCircle color='black' />}
       />
      </View>
     <View>
-    <Inputs label={"Date of Birth *"} iconsLeft={<CalendarSearch color='black' />} 
+    <InputsText width={horizontalScale(315)} label={"Date of Birth *"} iconsLeft={<CalendarSearch color='black' />} 
       defaultValue={"14/12/1920"}  iconsRight={<CloseCircle color='black' />}
       />
     </View>
      <View>
-     <Inputs label={"Nationality *"} iconsLeft={<Flag color='black' />} 
+     <InputsText width={horizontalScale(315)} label={"Nationality *"} iconsLeft={<Flag color='black' />} 
       placeholder={"Input"} defaultValue={"Tunisia"} 
       />
      </View>
      <View>
-     <Inputs label={"Tax Registration Number *"} iconsLeft={<Hashtag color='black' />} 
+     <InputsText width={horizontalScale(315)} label={"Tax Registration Number *"} iconsLeft={<Hashtag color='black' />} 
       placeholder={"Input"} defaultValue={"123456987/M/A/E/001"}  iconsRight={<CloseCircle color='black' />}
       />
      </View>
@@ -139,7 +141,7 @@ const Companyprofile = () => {
   <InputsNumber label={"Mobile Number"} flag={flag2} countryCode={countryCode2} defaultValue={"123456789"} onChangeNumber={(e)=>setValue2(e)} press={()=>setVisible2(!visible2)} />
 </View>
 <View>
-<Inputs label={"Email *"} iconsLeft={<Sms color='black' />} 
+<InputsText width={horizontalScale(315)} label={"Email *"} iconsLeft={<Sms color='black' />} 
       placeholder={"Input"} defaultValue={"name@email.com"}  iconsRight={<CloseCircle color='black' />}
       />
 </View>
@@ -147,7 +149,7 @@ const Companyprofile = () => {
   <InputCountries label={"Country of residence *"} country={country} press={()=>setVisible(!visible)} />
 </View>
 <View>
-<Inputs label={"Physical adress *"} iconsLeft={<Location color='black' />} 
+<InputsText width={horizontalScale(315)} label={"Physical adress *"} iconsLeft={<Location color='black' />} 
        defaultValue={"tunis tunis "}  iconsRight={<CloseCircle color='black' />}
       />
 </View>
@@ -178,16 +180,7 @@ const Companyprofile = () => {
            </View>
               
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-              <Button
-                title={"Save"}
-                buttonStyle={{ padding: 18, backgroundColor: Color.light.main, borderRadius:8 }}
-                titleStyle={{
-                  fontSize: moderateScale(16),
-                  color: "black",
-                  fontFamily: fontGotham.bold,
-                }}
-                containerStyle={{width:horizontalScale(315)}}
-              />
+            <Buttons title={"Save"} />
             </View>
             </View>
     

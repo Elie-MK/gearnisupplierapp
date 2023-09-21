@@ -10,6 +10,7 @@ import {
   Image,
   TouchableOpacity,
   Modal,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../utilities/Color";
@@ -96,7 +97,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
         transparent={true}
         style={{ margin: 0 }}
       >
-        <TouchableOpacity onPress={() => setVisible(!visible)}>
+        <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
           <BlurView
             intensity={8}
             tint="dark"
@@ -209,7 +210,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
               </View>
             </View>
           </BlurView>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </Modal>
     </SafeAreaView>
   );

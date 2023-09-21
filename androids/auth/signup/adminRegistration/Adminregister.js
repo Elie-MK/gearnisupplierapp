@@ -19,6 +19,9 @@ import { Button, Input } from "@rneui/base";
 import ModalCountry from "../../../components/ModalCountry";
 import KeyboardAvoid from "../../../components/KeyboardAvoid";
 import {User, CalendarSearch, CloseCircle, Sms, Location, Flag} from 'iconsax-react-native';
+import InputsText from "../../../components/InputsText";
+import InputCountries from "../../../components/InputCountries";
+import Buttons from "../../../components/Buttons";
 
 
 const Adminregister = ({ navigation }) => {
@@ -43,258 +46,31 @@ const Adminregister = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Pressable onPress={() => navigation.navigate("register")}>
-          <AntDesign name="arrowleft" size={moderateScale(30)} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
         </Pressable>
          <View style={{marginTop:15}}>
-         <Text style={{ fontSize: moderateScale(32), fontFamily: fontGotham.medium }}>
+         <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
             Admin{" "}
           </Text>
-          <Text style={{ fontSize: moderateScale(32), fontFamily: fontGotham.medium }}>
+          <Text style={{ fontSize: 32, fontFamily: fontGotham.medium }}>
             Registration{" "}
           </Text>
          </View>
           <View style={{ marginTop: verticalScale(56), alignItems:"center" }}>
-            <View style={{ flexDirection: "row", gap: 9, width:horizontalScale(315) }}>
+            <View style={{ flexDirection: "row", gap: 10, width:horizontalScale(315) }}>
               {/* First Name */}
-              <View style={{}}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:5,
-                    
-                  }}
-                >
-               
-                  <User  color="black"/>
-                  <TextInput
-                    placeholder="Joe"
-                    style={{
-                      fontSize: moderateScale(14),
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(125),
-                      paddingRight:9,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  First Name
-                </Text>
-              </View>
+             <InputsText placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
-              <View style={{}}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:5
-                  }}
-                >
-                  <User  color="black"/>
-
-                  <TextInput
-                    placeholder="Joe"
-                    style={{
-                      fontSize:moderateScale(12),
-                      paddingLeft: 10,
-                      paddingRight:9,
-                      fontFamily: fontGotham.regular,
-                      width: 133,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Last Name
-                </Text>
-              </View>
-            </View>
+             <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
+             </View>
             {/* Birthday */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-         
-                <CalendarSearch color='black' />
-                <TextInput
-                  placeholder="mm/dd/yyyy"
-                  style={{
-                    fontSize: moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(315),
-                    padding: 12,
-                  }}
-                />
-                <TouchableOpacity style={{marginLeft:-65}}>
-                 <CloseCircle color="black"/>
-                </TouchableOpacity>
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Birthday
-              </Text>
-            </View>
+            <InputsText width={horizontalScale(315)} label={"Birthday"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
             {/* Email */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-                <Sms color="black" />
-                <TextInput
-                  placeholder="Email"
-                  style={{
-                    fontSize:moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
-                    padding: 12,
-                  }}
-                  
-                />
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Email
-              </Text>
-            </View>
+           <InputsText width={horizontalScale(315)} iconsLeft={<Sms color="black" />} label={"Email"} placeholder={"Email"} />
             {/* Adress */}
-            <View style={{ marginTop: 25 }}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  width:horizontalScale(315)
-                }}
-              >
-                <Location color="black" />
-                <TextInput
-                  placeholder="Adress"
-                  style={{
-                    fontSize:moderateScale(14),
-                    paddingLeft: 10,
-                    fontFamily: fontGotham.regular,
-                    width: horizontalScale(140),
-                    padding: 12,
-                  }}
-                />
-              </View>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:moderateScale(12)
-                }}
-              >
-                Your Adress
-              </Text>
-            </View>
+           <InputsText width={horizontalScale(315)} iconsLeft={<Location color="black" />} placeholder={"Adress"} label={"Your Adress"} />
             {/* Country */}
-            <View style={{ marginTop: 25 }}>
-              <Pressable onPress={()=>setVisibleModal(!visibleModal)}
-                style={{
-                  borderWidth: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingLeft: 6,
-                  borderRadius:5,
-                  padding:12,
-                  justifyContent: "space-between",
-                  width:horizontalScale(315)
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Flag color="black" />
-                  <Text
-                    style={{
-                      fontSize:moderateScale(14),
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(140),
-                    }}
-                  >
-                    {namecountry}
-                  </Text>
-                </View>
-               <MaterialIcons
-                  name="keyboard-arrow-down"
-                  size={24}
-                  color="black"
-                />
-              </Pressable>
-              <Text
-                style={{
-                  backgroundColor: "white",
-                  padding: 2,
-                  position: "absolute",
-                  marginTop: -12,
-                  marginLeft: 10,
-                  fontSize:12
-                }}
-              >
-                Country of Residence
-              </Text>
-            </View>
+            <InputCountries label={"Country Of Residence"} country={namecountry} press={(item)=>onCountryChange(item)} />
 
             <ModalCountry
               value={value}
@@ -305,19 +81,8 @@ const Adminregister = ({ navigation }) => {
             />
 
             {/* Btn */}
-
             <View style={{ marginTop: verticalScale(30), alignItems:"center" }}>
-              <Button
-                onPress={() => navigation.navigate("companyRegistration")}
-                title={"Continue"}
-                buttonStyle={{ height:60, backgroundColor: Color.light.main, borderRadius:8 }}
-                titleStyle={{
-                  fontSize: moderateScale(16),
-                  color: "black",
-                  fontFamily: fontGotham.medium,
-                }}
-                containerStyle={{width:horizontalScale(315)}}
-              />
+              <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate("companyRegistration")} />
             </View>
           </View>
       </View>

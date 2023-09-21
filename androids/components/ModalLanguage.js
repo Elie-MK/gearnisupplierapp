@@ -1,7 +1,7 @@
 export  const Flag = [
     {
       id: 1,
-      language: "عرب",
+      language: "العربية",
       flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Flag_of_the_Arab_League.svg/1280px-Flag_of_the_Arab_League.svg.png",
     },
     {

@@ -23,6 +23,10 @@ import UploadInput from "../../../components/UploadInput";
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import { Flag, Hashtag, Location, ShopAdd } from "iconsax-react-native";
+import InputsText from "../../../components/InputsText";
+import Inputs from "../../../components/Inputs";
+import InputCountries from "../../../components/InputCountries";
+import Buttons from "../../../components/Buttons";
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
@@ -107,7 +111,7 @@ const Registercompany = ({ navigation }) => {
     }
   };
 
-  const onCountryChange = (item) => {
+  const onCountryChange = (item, flag, code, names) => {
     setNameCountry(item.name);
     setCountryCode(item.dial_code);
     setFlag(item.flag)
@@ -124,258 +128,33 @@ const Registercompany = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.secondContainer}>
           <Pressable onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" size={moderateScale(30)} color={Color.light.black} />
+            <AntDesign name="arrowleft" size={30} color={Color.light.black} />
           </Pressable>
           <View style={{ marginTop: 20 }}>
             <View>
-              <Text style={{ fontSize:moderateScale(32), fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
                 Company{" "}
               </Text>
-              <Text style={{ fontSize:moderateScale(32), fontFamily: fontGotham.medium }}>
+              <Text style={{ fontSize:32, fontFamily: fontGotham.medium }}>
                 Registration{" "}
               </Text>
             </View>
             <View  >
               <View style={{alignItems:"center"}}>
               {/* Comany Name */}
-              <View style={{ marginTop: 35 }}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:8,
-                    width: horizontalScale(315),
-                  }}
-                >
-                  <ShopAdd  color="black"/>
-                  <TextInput
-                    placeholder="Top Gear"
-                    style={{
-                      fontSize: 20,
-                      paddingLeft: 10,
-                      width: horizontalScale(315),
-                      fontFamily: fontGotham.regular,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Company Name
-                </Text>
-              </View>
+              <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
-              <View style={{  marginTop: verticalScale(15),
-    borderWidth: 1,
-    width:horizontalScale(315),
-    flexDirection: "row",
-    borderRadius:8}}>
-          <TouchableOpacity onPress={()=>setVisibleModal(!visibleModal)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 14 }}>
-              {flag}
-            </Text>
-            <AntDesign name="caretdown" size={14} color="black" />
-            <Text style={{ fontSize: 14 }}>
-            {countryCode}
-            </Text>
-          </TouchableOpacity>
-          <View style={{ padding: 12, width: horizontalScale(150)}}>
-            <TextInput
-              style={ { fontFamily: fontGotham.medium,   borderLeftWidth: 1,
-                paddingLeft: 20,
-                fontSize: 14, }}
-              onChangeText={(e) => setNumber(e)}
-              value={number}
-              maxLength={10}
-              keyboardType="numeric"
-            />
-          </View>
-        <View
-          style={{
-            position: "absolute",
-            marginTop: -11,
-            marginLeft: 20,
-            width: horizontalScale(130),
-            backgroundColor: Color.light.themeColor,
-          }}
-        >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Your mobile Number</Text>
-        </View>
+              <View style={{  marginTop: verticalScale(15),}}>
+        <Inputs label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setVisibleModal(!visibleModal)} />
         </View>
               {/* Comapny Registration Number */}
-              <View style={{ marginTop: 25 }}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:8,
-                    width: horizontalScale(315),
-
-                  }}
-                >
-              
-                  <Hashtag color="black" />
-                  <TextInput
-                    placeholder="12345/M/A/E/001"
-                    style={{
-                      fontSize: 20,
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: horizontalScale(315),
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                {/* <Text>Supporting text</Text> */}
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Company Registration Number
-                </Text>
-              </View>
+             <InputsText label={"Company Registration Number"} width={horizontalScale(315)} placeholder={"1234567/M/A/E/001"} iconsLeft={<Hashtag color="black" />} />
               {/* Company Location */}
-              <View style={{ marginTop: 25 }}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:8,
-                    width: horizontalScale(315),
-
-                  }}
-                >
-                  <Location color="black" />
-                  <TextInput
-                    placeholder="Location"
-                    style={{
-                      fontSize: 20,
-                      paddingLeft: 10,
-                      width: horizontalScale(315),
-                      fontFamily: fontGotham.regular,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:12
-                  }}
-                >
-                  Company Location
-                </Text>
-              </View>
+              <InputsText label={"Company Location"} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} width={horizontalScale(315)}  />
               {/* Country */}
-              <View style={{ marginTop: 25 }}>
-                <Pressable
-                  onPress={() => setVisibleModal(!visibleModal)}
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    justifyContent: "space-between",
-                    borderRadius:8,
-                    width: horizontalScale(315),
-                  }}
-                >
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Flag color="black" />
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        paddingLeft: 10,
-                        width: horizontalScale(315),
-                        fontFamily: fontGotham.regular,
-                        padding: 12,
-                      }}
-                    >
-                      {namecountry}
-                    </Text>
-                  </View>
-                  <MaterialIcons
-                    name="keyboard-arrow-down"
-                    size={24}
-                    color="black"
-                    style={{ marginLeft: -80, padding:5 }}
-                  />
-                </Pressable>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Country
-                </Text>
-              </View>
+              <InputCountries country={namecountry} label={"Country"} press={(item)=>onCountryChange(item)} />
               {/* Billing Adress */}
-              <View style={{ marginTop: 25 }}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: 6,
-                    borderRadius:8,
-                    width: horizontalScale(315),
-
-                  }}
-                >
-                  <Location color="black" />
-                  <TextInput
-                    placeholder="Location"
-                    style={{
-                      fontSize: 20,
-                      paddingLeft: 10,
-                      fontFamily: fontGotham.regular,
-                      width: 339,
-                      padding: 12,
-                    }}
-                  />
-                </View>
-                <Text
-                  style={{
-                    backgroundColor: "white",
-                    padding: 2,
-                    position: "absolute",
-                    marginTop: -12,
-                    marginLeft: 10,
-                    fontSize:moderateScale(12)
-                  }}
-                >
-                  Billing Adress
-                </Text>
-              </View>
+              <InputsText label={"Billing Adress"} width={horizontalScale(315)} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} />
               </View>
               <Divider color="black" style={{marginTop:verticalScale(30)}} />
               <View style={{alignItems:"center"}}>
@@ -388,17 +167,7 @@ const Registercompany = ({ navigation }) => {
       </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-              <Button
-                onPress={() => navigation.navigate("registrationComplete")}
-                title={"Continue"}
-                buttonStyle={{ height:60, backgroundColor: Color.light.main, borderRadius:8 }}
-                titleStyle={{
-                  fontSize: moderateScale(16),
-                  color: "black",
-                  fontFamily: fontGotham.medium,
-                }}
-                containerStyle={{width:horizontalScale(315)}}
-              />
+             <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate("registrationComplete")} />
             </View>
             </View>
 

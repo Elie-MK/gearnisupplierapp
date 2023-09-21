@@ -7,6 +7,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import { Button } from'@rneui/base'
 import { DocumentText, DocumentText1 } from 'iconsax-react-native'
+import Buttons from '../../../components/Buttons'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -71,17 +72,7 @@ const Completeregistration = ({navigation}) => {
         </View>
         <View>
         <View style={{marginTop:verticalScale(120), alignItems:"center"}}>
-          <Button
-            title="Go to Company Profile"
-            buttonStyle={{ backgroundColor: Color.light.main,borderRadius:4, height:60}}
-            titleStyle={{
-              color: Color.light.black,
-              fontFamily: fontGotham.bold,
-              fontSize:16
-            }}
-            containerStyle={{width:horizontalScale(315)}}
-            onPress={()=>navigation.navigate('home')}
-          />
+         <Buttons title={"Go to Company Profile"} handleSubmit={()=>navigation.navigate('home')} />
         </View>
         </View>
       </View>

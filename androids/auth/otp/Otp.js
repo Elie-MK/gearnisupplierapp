@@ -17,6 +17,8 @@ import { Button } from "@rneui/base";
 import Alert from "../../components/Alert";
 import { useCustomFonts } from "../../../utilities/Fonts";
 import { ActivityIndicator } from "react-native-paper";
+import Buttons from "../../components/Buttons";
+import ActivityIndicators from "../../components/ActivityIndicator";
 
 const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
@@ -110,8 +112,6 @@ const Otp = ({ navigation, route }) => {
       setIsPaused(false);
     }
    };
- 
-
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -125,14 +125,14 @@ const Otp = ({ navigation, route }) => {
           <AntDesign name="arrowleft" size={35} color={Color.light.black} />
         </Pressable>
         <View style={{marginTop:20}}>
-        <View style={{ marginTop: verticalScale(38) }}>
+        <View >
           <Text style={{ color: Color.light.main, fontSize:32, lineHeight:38, fontFamily:fontGotham.medium }}>
             VERIFICATION
           </Text>
-          <Text style={{ fontSize:20, fontFamily:fontGotham.bold }}>
+          <Text style={{ fontSize:20, fontFamily:fontGotham.medium }}>
             PLEASE ENTER YOUR 
           </Text>
-          <Text style={{ fontSize:20, fontFamily:fontGotham.bold }}>
+          <Text style={{ fontSize:20, fontFamily:fontGotham.medium }}>
            VERIFICATION CODE
           </Text>
         </View>
@@ -183,16 +183,7 @@ const Otp = ({ navigation, route }) => {
         </View>
         <View style={{marginTop:verticalScale(60), alignItems:"center"}}>
           {
-             valided? <View style={{width:horizontalScale(315), borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
-             <ActivityIndicator animating={true} color={Color.light.main}/>
-           </View> : <Button
-            title="Verify"
-            disabled={dismis}
-            onPress={handleSubmit}
-            containerStyle={{width:horizontalScale(315)}}
-            buttonStyle={{ backgroundColor: Color.light.main, height:60 }}
-            titleStyle={{ color: Color.light.black, fontFamily:fontGotham.medium, fontSize:moderateScale(16)}}
-          />
+             valided? <ActivityIndicators /> : <Buttons title={"Verify"} handleSubmit={handleSubmit} />
           }
           
         </View>
