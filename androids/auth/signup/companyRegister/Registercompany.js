@@ -39,7 +39,6 @@ const Registercompany = ({ navigation }) => {
   const [flag, setFlag] = useState(defaultFlag);
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
-  const [visibleModal, setVisibleModal] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImage2, setSelectedImage2] = useState(null);
@@ -49,7 +48,7 @@ const Registercompany = ({ navigation }) => {
   const [uploadProgress2, setUploadProgress2] = useState(0);
 
 
-  const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur
+  const SERVER_URL = 'URL_DU_SERVEUR'; 
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -115,7 +114,7 @@ const Registercompany = ({ navigation }) => {
     setNameCountry(item.name);
     setCountryCode(item.dial_code);
     setFlag(item.flag)
-    setVisibleModal(!visibleModal);
+    setVisibled(!visibled);
     };
 
 
@@ -145,7 +144,7 @@ const Registercompany = ({ navigation }) => {
               <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
               <View style={{  marginTop: verticalScale(15),}}>
-        <Inputs label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setVisibleModal(!visibleModal)} />
+        <Inputs label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setVisibled(!visibled)} />
         </View>
               {/* Comapny Registration Number */}
              <InputsText label={"Company Registration Number"} width={horizontalScale(315)} placeholder={"1234567/M/A/E/001"} iconsLeft={<Hashtag color="black" />} />
@@ -158,7 +157,8 @@ const Registercompany = ({ navigation }) => {
               </View>
               <Divider color="black" style={{marginTop:verticalScale(30)}} />
               <View style={{alignItems:"center"}}>
-              <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+   <View>
+   <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
         Upload Licence file
       </Text>
               <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={pickImage} fileName={fileName} />
@@ -166,6 +166,7 @@ const Registercompany = ({ navigation }) => {
         Upload VAT file
       </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
+   </View>
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
              <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate("registrationComplete")} />
             </View>
@@ -176,8 +177,8 @@ const Registercompany = ({ navigation }) => {
         </View>
         <ModalCountry
           value={value}
-          isVisible={visibleModal}
-          hideModal={() => setVisibleModal(!visibleModal)}
+          isVisible={visibled}
+          hideModal={() => setVisibled(!visibled)}
           setValue={(text) => setValue(text)}
           onCountryChange={(item) => onCountryChange(item)}
         />

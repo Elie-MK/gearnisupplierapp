@@ -17,6 +17,7 @@ const Inputs = ({namecountry, countryCode, number, onChangeText, onPress, label}
         borderWidth: 1,
         width:horizontalScale(315),
         flexDirection: "row",
+          height:56,
         borderRadius:8}}>
           <TouchableOpacity onPress={onPress} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
             <Text style={{ fontSize: 14 }}>
@@ -43,7 +44,6 @@ const Inputs = ({namecountry, countryCode, number, onChangeText, onPress, label}
             marginTop: -11,
             marginLeft: 20,
             padding:2,
-            height:16,
             backgroundColor: Color.light.themeColor,
           }}
         >
