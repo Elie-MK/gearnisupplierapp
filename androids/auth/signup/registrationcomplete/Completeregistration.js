@@ -18,12 +18,12 @@ const Completeregistration = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.secondContainer}>
       <Pressable onPress={() => navigation.goBack()}>
-          <AntDesign name="arrowleft" size={moderateScale(30)} color={Color.light.black} />
+          <AntDesign name="arrowleft" size={30} color={Color.light.black} />
         </Pressable>
 
         <View style={{marginTop:20}}>
-            <Text style={{fontFamily:fontGotham.bold, fontSize:moderateScale(32)}}>Registration</Text>
-            <Text style={{fontFamily:fontGotham.bold, fontSize:moderateScale(32)}}>Complete</Text>
+            <Text style={{fontFamily:fontGotham.bold, fontSize:32}}>Registration</Text>
+            <Text style={{fontFamily:fontGotham.bold, fontSize:32}}>Complete</Text>
         </View>
 
         <View style={{justifyContent:"center", marginTop:40, flexDirection:"row"}}>

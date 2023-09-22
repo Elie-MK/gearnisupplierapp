@@ -59,7 +59,7 @@ const Branches = () => {
             </View>
             <View style={{flexDirection:"row", justifyContent:"space-between", marginTop:13}}>
               <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>Nasir Al Qasimi</Text>
-              <Text style={{fontSize:14, fontFamily:fontGotham.bold, display:open==false?"none":"flex"}}>Manage</Text>
+              <Text style={{fontSize:14, fontFamily:fontGotham.bold, display:!open?"flex":"none"}}>Manage</Text>
             </View>
             <View style={{marginTop:5, display:!open?"none":"flex"}}>
               <Divider  color="black" style={{marginTop:12}} />

@@ -63,7 +63,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 onPress={onPress}
                 containerStyle={{ width: horizontalScale(116), borderRadius: 5 }}
                 buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
-                titleStyle={{ color: Color.light.black, fontWeight: "bold", fontSize:moderateScale(14)}}
+                titleStyle={{ color: Color.light.black, fontSize:moderateScale(14)}}
               />
             </View>
           </View>
