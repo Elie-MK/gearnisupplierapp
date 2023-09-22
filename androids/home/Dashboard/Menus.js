@@ -103,12 +103,12 @@ const Menus = ({navigation}) => {
         <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(15)}}>
           <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
           <Information size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Customer Support</Text>
+          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium}}>Customer Support</Text>
           </View>
         </TouchableOpacity>
 
         {/* Logout */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(20)}}>
+        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(50)}}>
           <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
           <LogoutCurve size={30} color="black" />
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Logout</Text>

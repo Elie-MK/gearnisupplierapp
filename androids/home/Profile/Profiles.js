@@ -73,7 +73,7 @@ const Profiles = ({navigation}) => {
     setNationality(item.name)
     setCountry(item.name)
     setFlag(item.flag)
-    setVisible(!visible);
+    setVisibleM(!visibleM);
     };
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -89,14 +89,14 @@ const Profiles = ({navigation}) => {
  {/* Input Text */}
         <View >
         <View style={{marginTop:verticalScale(50), alignItems:"center"}}>
-        <View style={{ flexDirection: "row", gap: 10, width:horizontalScale(315) }}>
+        <View style={{ flexDirection: "row", gap: 5, width:horizontalScale(315) }}>
               {/* First Name */}
              <InputsText placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
              <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
             <View style={{  marginTop: verticalScale(15),}}>
-        <Inputs label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />
+        <Inputs placeholder={"12345678"} label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />
         </View>
         {/* Mobile Number */}
         <View style={{  marginTop: verticalScale(15),
@@ -158,11 +158,11 @@ const Profiles = ({navigation}) => {
         <Divider color='gray' width={2} style={{marginBottom:10, width:350}} />
         </View>
         <View style={{alignItems:"center"}}>
-              <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+              <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Front Identity Card
       </Text>
               <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={pickImage} fileName={fileName} />
-              <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+              <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Back Identity Card
       </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />

@@ -17,6 +17,7 @@ import Color from '../../../utilities/Color'
 import InputCountries from '../../components/InputCountries'
 import InputsText from '../../components/InputsText'
 import Buttons from '../../components/Buttons'
+import NotEditableInput from '../../components/NotEditableInput'
 
 const Companyprofile = () => {
   const defaultCountryCode = "+216"
@@ -87,18 +88,18 @@ const Companyprofile = () => {
     <View style={{alignItems:"center", marginTop:verticalScale(20)}}>
       <Picturepprofile  />
       <View style={{flexDirection:"row", alignItems:"center", gap:4, marginTop:10}}>
-      <Text style={{fontFamily:fontGotham.bold}}>Verified</Text>
+      <Text style={{fontFamily:fontGotham.medium}}>Verified</Text>
       <Verify color='blue' />
       </View>
     </View>
     <View style={{alignItems:"center"}}>
    <View>
-   <InputsText width={horizontalScale(315)} label={"Company Name *"} iconsLeft={<Shop color='black' />} 
+   <NotEditableInput width={horizontalScale(315)} label={"Company Name *"} iconsLeft={<Shop color='black' />} 
       placeholder={"Input"} editable={false}
       />
    </View>
     <View>
-    <InputsText width={horizontalScale(315)} label={"Company Owner Full Name *"} iconsLeft={<User color='black' />} 
+    <NotEditableInput width={horizontalScale(315)} label={"Company Owner Full Name *"} iconsLeft={<User color='black' />} 
       placeholder={"Input"} editable={false}
       />
     </View>
@@ -109,13 +110,12 @@ const Companyprofile = () => {
      </View>
     <View>
     <InputsText width={horizontalScale(315)} label={"Date of Birth *"} iconsLeft={<CalendarSearch color='black' />} 
-      defaultValue={"14/12/1920"}  iconsRight={<CloseCircle color='black' />}
+      placeholder={"mm/dd/yyyy"}  iconsRight={<CloseCircle color='black' />}
       />
     </View>
      <View>
-     <InputsText width={horizontalScale(315)} label={"Nationality *"} iconsLeft={<Flag color='black' />} 
-      placeholder={"Input"} defaultValue={"Tunisia"} 
-      />
+     <InputCountries label={"Nationality *"} country={country} press={(item)=>onCountryChange(item)} />
+
      </View>
      <View>
      <InputsText width={horizontalScale(315)} label={"Tax Registration Number *"} iconsLeft={<Hashtag color='black' />} 
@@ -138,7 +138,7 @@ const Companyprofile = () => {
   <InputsNumber label={"Phone Number"}  flag={flag} countryCode={countryCode} defaultValue={"123456789"} onChangeNumber={(e)=>setValue(e)} press={()=>setVisible(!visible)} />
 </View>
 <View>
-  <InputsNumber label={"Mobile Number"} flag={flag2} countryCode={countryCode2} defaultValue={"123456789"} onChangeNumber={(e)=>setValue2(e)} press={()=>setVisible2(!visible2)} />
+  <InputsNumber label={"Mobile Number *"} flag={flag2} countryCode={countryCode2} defaultValue={"123456789"} onChangeNumber={(e)=>setValue2(e)} press={()=>setVisible2(!visible2)} />
 </View>
 <View>
 <InputsText width={horizontalScale(315)} label={"Email *"} iconsLeft={<Sms color='black' />} 
@@ -146,11 +146,11 @@ const Companyprofile = () => {
       />
 </View>
 <View>
-  <InputCountries label={"Country of residence *"} country={country} press={()=>setVisible(!visible)} />
+  <InputCountries label={"Country of residence *"} country={country} press={(item)=>onCountryChange(item)} />
 </View>
 <View>
 <InputsText width={horizontalScale(315)} label={"Physical adress *"} iconsLeft={<Location color='black' />} 
-       defaultValue={"tunis tunis "}  iconsRight={<CloseCircle color='black' />}
+       defaultValue={"tunis tunisie "}  iconsRight={<CloseCircle color='black' />}
       />
 </View>
     </View>
@@ -161,19 +161,19 @@ const Companyprofile = () => {
 
     <View style={{alignItems:"center"}}>
            <View>
-           <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+           <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload VAT file*
       </Text>
               <UploadInput selectedImage={selectedImage} percent={0.1} uploadProgress={uploadProgress} clear={()=>handleClear(setSelectedImage, setFileName)} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
            </View>
            <View>
-           <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+           <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload License file*
       </Text>
               <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
            </View>
            <View>
-           <Text style={{ fontFamily: fontGotham.bold, fontSize: moderateScale(16), marginTop:30 }}>
+           <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload CIN*
       </Text>
               <UploadInput selectedImage={selectedImage3} uploadProgress={uploadProgress3} pickImage={()=>pickImage(setSelectedImage3, setFileName3)} fileName={fileName3} />

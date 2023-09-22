@@ -14,10 +14,8 @@ import Login from "./androids/auth/signin/Login";
 import Register from "./androids/auth/signup/Register";
 import Otp from "./androids/auth/otp/Otp";
 import Flow from "./androids/components/Flow";
-import Adminregister from "./androids/auth/signup/adminRegistration/Adminregister";
-import Registercompany from "./androids/auth/signup/companyRegister/Registercompany";
-import Completeregistration from "./androids/auth/signup/registrationcomplete/Completeregistration";
 import Navigation from "./androids/home/homeNavigation/Navigation";
+import NavigationPage from "./androids/auth/signup/pages/NavigationPage";
 
 
 export default function App() {
@@ -40,9 +38,7 @@ export default function App() {
               <Stack.Screen name="register" component={Register} />
               <Stack.Screen name="otp" component={Otp} />
               <Stack.Screen name="flow" component={Flow} />
-              <Stack.Screen name="adminRegistration" component={Adminregister} />
-              <Stack.Screen name="companyRegistration" component={Registercompany} />
-              <Stack.Screen name="registrationComplete" component={Completeregistration} />
+              <Stack.Screen  name='navppage'component= {NavigationPage}/>
               <Stack.Screen name="home" component={Navigation} />
             </Stack.Navigator>
           </NavigationContainer>

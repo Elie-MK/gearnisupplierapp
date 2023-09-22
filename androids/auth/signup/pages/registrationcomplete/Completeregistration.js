@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, Dimensions, Platform, Pressable, Image } from 'react-native'
 import React from 'react'
-import { horizontalScale, moderateScale, verticalScale } from '../../../../utilities/Metrics'
+import { horizontalScale, moderateScale, verticalScale } from '../../../../../utilities/Metrics'
 import { StatusBar } from 'react-native'
-import Color from '../../../../utilities/Color'
+import Color from '../../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
-import { useCustomFonts } from '../../../../utilities/Fonts'
+import { useCustomFonts } from '../../../../../utilities/Fonts'
 import { Button } from'@rneui/base'
 import { DocumentText, DocumentText1 } from 'iconsax-react-native'
-import Buttons from '../../../components/Buttons'
+import Buttons from '../../../../components/Buttons'
 
 const Completeregistration = ({navigation}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -22,13 +22,13 @@ const Completeregistration = ({navigation}) => {
         </Pressable>
 
         <View style={{marginTop:20}}>
-            <Text style={{fontFamily:fontGotham.bold, fontSize:32}}>Registration</Text>
-            <Text style={{fontFamily:fontGotham.bold, fontSize:32}}>Complete</Text>
+            <Text style={{fontFamily:fontGotham.medium, fontSize:32}}>Registration</Text>
+            <Text style={{fontFamily:fontGotham.medium, fontSize:32}}>Complete</Text>
         </View>
 
         <View style={{justifyContent:"center", marginTop:40, flexDirection:"row"}}>
-           <View style={{backgroundColor:Color.light.main, padding:15, borderRadius:50}}>
-            <DocumentText1 color='black' size={64} />
+           <View style={{backgroundColor:Color.light.main, padding:25, borderRadius:50}}>
+            <DocumentText1 color='black' size={60} />
            </View>
         </View>
 
@@ -58,7 +58,7 @@ const Completeregistration = ({navigation}) => {
             </View>
             </View>
             <View style={{marginLeft:15}}>
-            <View style={{backgroundColor:Color.light.main, padding:25, borderRadius:22, marginTop:-30 }}>
+            <View style={{backgroundColor:"#FFE1A2", padding:25, borderRadius:22, marginTop:-30 }}>
             
             </View>
             <View style={{position:"absolute", width:90, marginTop:30, marginLeft:-25 }}>

@@ -11,28 +11,28 @@ import {
   ScrollView
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Color from "../../../../utilities/Color";
-import { horizontalScale, moderateScale, verticalScale } from "../../../../utilities/Metrics";
+import Color from "../../../../../utilities/Color";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { useCustomFonts } from "../../../../utilities/Fonts";
+import { useCustomFonts } from "../../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
-import ModalCountry from "../../../components/ModalCountry";
-import KeyboardAvoid from "../../../components/KeyboardAvoid";
+import ModalCountry from "../../../../components/ModalCountry";
+import KeyboardAvoid from "../../../../components/KeyboardAvoid";
 import {User, CalendarSearch, CloseCircle, Sms, Location, Flag} from 'iconsax-react-native';
-import InputsText from "../../../components/InputsText";
-import InputCountries from "../../../components/InputCountries";
-import Buttons from "../../../components/Buttons";
+import InputsText from "../../../../components/InputsText";
+import InputCountries from "../../../../components/InputCountries";
+import Buttons from "../../../../components/Buttons";
+import { horizontalScale, verticalScale } from "../../../../../utilities/Metrics";
 
 
 const Adminregister = ({ navigation }) => {
   const defaultCountryName = "Tunisia";
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
-  const [visibleModal, setVisibleModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const onCountryChange = (item) => {
     setNameCountry(item.name)
-    setVisibleModal(!visibleModal);
+    setModalOpen(!modalOpen);
   };
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -57,25 +57,25 @@ const Adminregister = ({ navigation }) => {
           </Text>
          </View>
           <View style={{ marginTop: verticalScale(56), alignItems:"center" }}>
-            <View style={{ flexDirection: "row", gap: 10, width:horizontalScale(315) }}>
+            <View style={{ flexDirection: "row", gap: 5, width:horizontalScale(315) }}>
               {/* First Name */}
              <InputsText placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
              <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
             {/* Birthday */}
-            <InputsText width={horizontalScale(315)} label={"Birthday"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+            <InputsText placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
             {/* Email */}
            <InputsText width={horizontalScale(315)} iconsLeft={<Sms color="black" />} label={"Email"} placeholder={"Email"} />
             {/* Adress */}
            <InputsText width={horizontalScale(315)} iconsLeft={<Location color="black" />} placeholder={"Adress"} label={"Your Adress"} />
-            {/* Country */}
+            {/*Country */}
             <InputCountries label={"Country Of Residence"} country={namecountry} press={(item)=>onCountryChange(item)} />
 
             <ModalCountry
               value={value}
-              isVisible={visibleModal}
-              hideModal={()=>setVisibleModal(!visibleModal)}
+              isVisible={modalOpen}
+              hideModal={()=>setModalOpen(!modalOpen)}
               setValue={(text)=>setValue(text)}
               onCountryChange={(item)=>onCountryChange(item)}
             />

@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { useState } from "react";
 import { Button } from "@rneui/base";
-import Alert from "../../components/Alert";
+import Alert from "../../components/AlertModal";
 import { useCustomFonts } from "../../../utilities/Fonts";
 import { ActivityIndicator } from "react-native-paper";
 import Buttons from "../../components/Buttons";
@@ -49,7 +49,17 @@ const Otp = ({ navigation, route }) => {
         }, 3000);
       }
     }else{
-      navigation.navigate('flow')
+      if(routes == "register"){
+        if(otpValue.length < 6){
+          alert("Enter your otp code")
+        }else{
+          setValided(!valided)
+          setTimeout(() => {
+            navigation.navigate('flow')
+            setValided(false)
+          }, 3000);
+        }
+      }
     }
   };
 
@@ -117,7 +127,7 @@ const Otp = ({ navigation, route }) => {
   if (!fontsLoaded) {
     return null;
   }
-// console.log(attempts);
+// console.log(routes);
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>

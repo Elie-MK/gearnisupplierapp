@@ -4,27 +4,21 @@ import {
   StyleSheet,
   StatusBar,
   Pressable,
-  TextInput,
   Dimensions,
-  TouchableOpacity,
-  Modal,
-  ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign} from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
 import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
-import { Button, Divider, Input } from "@rneui/base";
-import Alert from "../../components/Alert";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { useCustomFonts } from "../../../utilities/Fonts";
-import { ActivityIndicator } from "react-native-paper";
 import ModalCountry from "../../components/ModalCountry";
 import ActivityIndicators from "../../components/ActivityIndicator";
 import Buttons from "../../components/Buttons";
 import Inputs from "../../components/Inputs";
+import AlertModal from "../../components/AlertModal";
 
 const Register = ({navigation, route}) => {
   const routes = route.name;
@@ -36,7 +30,7 @@ const Register = ({navigation, route}) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   const [number, setNumber] = useState("");
-  const [visible, setVisible] = useState(false);
+  const [visibled, setVisibled] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [valided, setValided] = useState(false);
@@ -79,9 +73,9 @@ const handleSubmit = ()=>{
   }else{
     setValided(!valided)
       setTimeout(() => {
-        setVisible(!visible)
+        setVisibled(!visibled)
         setValided(false)
-      }, 3000);
+      }, 1000);
      
   }
 }
@@ -149,12 +143,12 @@ const handleSubmit = ()=>{
       </View>
       </TouchableWithoutFeedback>
     <View>
-      <Alert
-         visible={visible}
+      <AlertModal
+         visible={visibled}
          btnText={"Confirm"}
-          dismis={() => setVisible(!visible)}
-          text={"We sent you a verification code an SMS should arrive shortly"}
-        onPress={() => navigation.navigate("otp", {routes})}
+          dismis={() => setVisibled(!visibled)}
+          text={"We sent you a verification code, an SMS should arrive shortly"}
+        onPress={()=>navigation.replace("otp", {routes})}
       />
     </View>
   </View>

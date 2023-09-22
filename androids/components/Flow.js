@@ -39,7 +39,7 @@ const Flow = ({navigation, route}) => {
           <Pressable onPress={() => navigation.navigate('welcome',{routes})}>
             <AntDesign name="arrowleft" size={30} color={Color.light.black} />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate("adminRegistration")}>
+          <Pressable onPress={() => navigation.replace("navppage")}>
             <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>SKIP</Text>
           </Pressable>
         </View>

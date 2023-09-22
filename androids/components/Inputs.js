@@ -5,7 +5,7 @@ import { horizontalScale, verticalScale } from '../../utilities/Metrics';
 import { AntDesign } from '@expo/vector-icons';
 import Color from '../../utilities/Color';
 
-const Inputs = ({namecountry, countryCode, number, onChangeText, onPress, label}) => {
+const Inputs = ({placeholder,namecountry, countryCode, number, onChangeText, onPress, label}) => {
     
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -33,6 +33,7 @@ const Inputs = ({namecountry, countryCode, number, onChangeText, onPress, label}
                 paddingLeft: 20,
                 fontSize: 14, }}
               onChangeText={onChangeText}
+              placeholder={placeholder}
               value={number}
               maxLength={10}
               keyboardType="numeric"

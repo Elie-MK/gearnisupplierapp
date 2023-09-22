@@ -11,7 +11,7 @@ const Itemshome = () => {
       return null;
     }
   return (
-    <View>
+    <View style={{marginLeft:25}}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}   >
         <View style={{width:130, backgroundColor:Color.light.main, borderRadius:16, padding:16, height:130, shadowColor:"black", elevation:20, marginBottom:20}}>
         <View style={{alignItems:"center"}}>

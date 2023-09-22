@@ -17,7 +17,9 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
         alignItems: "center",
         paddingLeft: 6,
         borderRadius:5,
-        width:horizontalScale(315)
+        width:horizontalScale(315),
+        backgroundColor:'#e3e3e3',
+        borderColor:"gray"
       }}
     >
 
@@ -40,7 +42,7 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
     </View>
     <Text
       style={{
-        backgroundColor: "white",
+        backgroundColor: '#e3e3e3',
         padding: 2,
         position: "absolute",
         marginTop: -12,

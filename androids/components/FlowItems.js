@@ -4,12 +4,9 @@ import { horizontalScale, moderateScale, verticalScale } from "../../utilities/M
 import { useRef } from "react";
 import { useState } from "react";
 import Paginator from "./Paginator";
-import { Button } from "@rneui/base";
-import Color from "../../utilities/Color";
 import { useNavigation } from "@react-navigation/native";
 import slide from "./slide";
 import { useCustomFonts } from "../../utilities/Fonts";
-import { Paragraph } from "react-native-paper";
 import Buttons from "./Buttons";
 
 const FlowItems = () => {
@@ -53,10 +50,10 @@ const FlowItems = () => {
         renderItem={({ item }) => (
           <View style={{width:Dimensions.get('window').width}}>
           <View style={{marginLeft:20}}>
-          <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, fontWeight:"500" }}>
+          <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, }}>
               {item.title}
             </Text>
-            <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, fontWeight:"500" }}>
+            <Text style={{ fontSize: 32, fontFamily:fontGotham.medium, }}>
               {item.subtitle}
             </Text>
           </View>
@@ -99,7 +96,7 @@ const FlowItems = () => {
       <View style={{ marginTop: 20, marginBottom:15 }}>
         {currentIndex === 3 ? (
        <View style={{alignItems:"center", marginTop:verticalScale(60)}}>
-          <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate('adminRegistration')} />
+          <Buttons title={"Continue"} handleSubmit={()=>navigation.replace('navppage')} />
        </View>
         ) : (
        <View style={{alignItems:"center",marginTop:verticalScale(60)}}>

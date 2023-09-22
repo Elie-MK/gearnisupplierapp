@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { useCustomFonts } from "../../utilities/Fonts";
 import Color from "../../utilities/Color";
 import { ProgressBar } from "react-native-paper";
-import * as FileSystem from 'expo-file-system';
-import * as ImagePicker from 'expo-image-picker';
-import axios from 'axios';
 import { horizontalScale } from "../../utilities/Metrics";
 import { CloseCircle } from "iconsax-react-native";
 const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur

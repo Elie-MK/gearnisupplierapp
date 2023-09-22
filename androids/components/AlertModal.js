@@ -1,14 +1,12 @@
 import { View, Text, Modal, Image, Dimensions, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import Color from "../../utilities/Color";
-import ReactNativeModal from "react-native-modal";
 import { horizontalScale, moderateScale, verticalScale } from "../../utilities/Metrics";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
 import { BlurView } from "expo-blur";
 
-const Alert = ({ visible, dismis, onPress, text, btnText }) => {
+const AlertModal = ({ visible, dismis, onPress, text, btnText }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -37,7 +35,7 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
               borderWidth: 1,
               borderColor: Color.light.black,
               width: 312,
-              padding: 30,
+              padding: 24,
             }}
           >
             <View style={{ alignItems: "center" }}>
@@ -46,18 +44,18 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
                 <Text
                   style={{
                     marginTop: 10,
-                    fontSize: moderateScale(16),
-                    fontFamily: fontGotham.bold,
+                    fontSize: 16,
+                    fontFamily: fontGotham.medium,
                   }}
                 >
                   Code sent
                 </Text>
               </View>
               <View style={{ marginTop: verticalScale(20)}}>
-                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:moderateScale(14) }}>{text}</Text>
+                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:14 }}>{text}</Text>
               </View>
             </View>
-            <View style={{ alignItems: "center", marginTop: verticalScale(20)}}>
+            <View style={{ alignItems: "center", marginTop: verticalScale(30)}}>
               <Button
                 title={btnText}
                 onPress={onPress}
@@ -75,4 +73,4 @@ const Alert = ({ visible, dismis, onPress, text, btnText }) => {
   );
 };
 
-export default Alert;
+export default AlertModal;
