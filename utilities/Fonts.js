@@ -2,10 +2,10 @@ import { useFonts } from "expo-font";
 
 export const useCustomFonts = () => {
   const [fontsLoaded] = useFonts({
-    "Gotham-Bold": require("../assets/font/GothamBold.ttf"),
-    "Gotham-Book": require("../assets/font/GothamBook.ttf"),
-    "Gotham-Medium": require("../assets/font/GothamMedium.ttf"),
-    "Gotham-Regular": require("../assets/font/GothamLight.ttf"),
+    "Gotham-Bold": require("../assets/font/GothamBold.otf"),
+    "Gotham-Book": require("../assets/font/GothamBook.otf"),
+    "Gotham-Medium": require("../assets/font/GothamMedium.otf"),
+    "Gotham-Regular": require("../assets/font/GothamLight.otf"),
   });
 
   return {
