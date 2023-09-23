@@ -9,7 +9,8 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
     return null
   }
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 15,  }}>
+      <View style={{backgroundColor:"#fff"}}>
     <View
       style={{
         borderWidth: 1,
@@ -18,13 +19,13 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
         paddingLeft: 6,
         borderRadius:5,
         width:horizontalScale(315),
-        backgroundColor:'#e3e3e3',
-        borderColor:"gray"
+        borderColor:"#dfdfdf"
       }}
     >
 
       {iconsLeft}
       <TextInput
+      
         placeholder={placeholder}
         editable={false}
         defaultValue={defaultValue}
@@ -32,6 +33,7 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
           fontSize: 14,
           paddingLeft: 10,
           fontFamily: fontGotham.regular,
+          color:"#dfdfdf",
           width: horizontalScale(300),
           height:56,
         }}
@@ -42,16 +44,18 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
     </View>
     <Text
       style={{
-        backgroundColor: '#e3e3e3',
+        backgroundColor: '#fff',
         padding: 2,
         position: "absolute",
         marginTop: -12,
         marginLeft: 10,
-        fontSize:12
+        fontSize:12,
+        color:"#dfdfdf"
       }}
     >
       {label}
     </Text>
+  </View>
   </View>
   )
 }

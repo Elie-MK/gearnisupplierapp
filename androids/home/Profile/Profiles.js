@@ -103,20 +103,22 @@ const Profiles = ({navigation}) => {
     borderWidth: 1,
     width:horizontalScale(315),
     flexDirection: "row",
-    borderRadius:8, backgroundColor:'#e3e3e3'}}>
+    borderColor:"#dfdfdf",
+    borderRadius:8, backgroundColor:'white'}}>
           <View  style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 14 }}>
+            <Text style={{ fontSize: 14,  }}>
             🇹🇳
             </Text>
-            <Text style={{ fontSize: 14 }}>
+            <Text style={{ fontSize: 14, color:"#dfdfdf" }}>
            +216
             </Text>
           </View>
           <View style={{ padding: 12, width: horizontalScale(150)}}>
             <TextInput
               defaultValue="123654478"
-              style={ { fontFamily: fontGotham.medium,   borderLeftWidth: 1,
+              style={ { fontFamily: fontGotham.medium,   borderLeftWidth: 1, borderLeftColor:"#dfdfdf",
                 paddingLeft: 20,
+                color:"#dfdfdf",
                 fontSize: 14, }}
               editable={false}
               maxLength={10}
@@ -129,10 +131,10 @@ const Profiles = ({navigation}) => {
             marginTop: -9,
             marginLeft: 20,
             width: horizontalScale(100),
-           backgroundColor:'#e3e3e3'
+           backgroundColor:'white'
           }}
         >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Mobile  Number</Text>
+          <Text style={{textAlign:"center", color:"#dfdfdf", fontSize:12, fontFamily:fontGotham.regular}}>Mobile  Number</Text>
         </View>
         </View>
          {/* Birthday */}
@@ -142,9 +144,9 @@ const Profiles = ({navigation}) => {
             {/* Job Title */}
            <InputsText label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}iconsRight={<CloseCircle color='black' />}  iconsLeft={<SearchNormal color='black' />} />
             {/* Role */}
-            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} iconsRight={<CloseCircle color='black' />}/>
+            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} iconsRight={<CloseCircle color='#dfdfdf' />}/>
           {/* Branch */}
-          <NotEditableInput width iconsLeft={<Shop color='black' />}  label={"Branch *"} placeholder={"Branch Name"} iconsRight={<CloseCircle color='black' />} />
+          <NotEditableInput width iconsLeft={<Shop color='#dfdfdf' />}  label={"Branch *"} placeholder={"Branch Name"} iconsRight={<CloseCircle color='#dfdfdf' />} />
             {/* Identity Card */}
            <InputsText label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)} iconsRight={<CloseCircle color='black' />} />
             {/* Nationality */}

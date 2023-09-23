@@ -39,7 +39,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
         <View style={{alignItems:"center"}}>
           <Image 
           resizeMode="contain"
-            style={{ width:horizontalScale(260), height:verticalScale(110), top: 106 }}
+            style={{ width:210, height:88, top: 106 }}
             source={require("../assets/GearniFull.png")}
           />
         </View>
@@ -49,7 +49,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
             buttonStyle={styles.btn}
             titleStyle={{
               color: Color.light.black,
-              fontSize: moderateScale(20),
+              fontSize: 20,
               fontFamily: fontGotham.medium,
             }}
             type="outline"
@@ -73,8 +73,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
           <View>
             <Text
               style={{
-                fontSize: moderateScale(20),
-                fontWeight: "bold",
+                fontSize: 20,
                 fontFamily: fontGotham.medium,
               }}
             >

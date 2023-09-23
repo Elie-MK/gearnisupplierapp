@@ -96,7 +96,7 @@ const Registercompany = ({ navigation }) => {
     }
   };
 
-  const onCountryChange = (item, flag, code, names) => {
+  const onCountryChange = (item) => {
     setNameCountry(item.name);
     setCountryCode(item.dial_code);
     setFlag(item.flag)

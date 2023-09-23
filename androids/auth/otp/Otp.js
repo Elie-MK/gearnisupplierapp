@@ -19,6 +19,7 @@ import { useCustomFonts } from "../../../utilities/Fonts";
 import { ActivityIndicator } from "react-native-paper";
 import Buttons from "../../components/Buttons";
 import ActivityIndicators from "../../components/ActivityIndicator";
+import AlertModal from "../../components/AlertModal";
 
 const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
@@ -33,6 +34,8 @@ const Otp = ({ navigation, route }) => {
   const [dismis, setDismis] = useState(false);
   const [visible, setVisible] = useState(false);
   const [valided, setValided] = useState(false);
+  const [visibled, setVisibled] = useState(false);
+
 
 
   const handleSubmit = () => {
@@ -120,6 +123,7 @@ const Otp = ({ navigation, route }) => {
       setTime({ minutes: 0, secondes: 30 });
       setAttempts(attempts + 1);
       setIsPaused(false);
+      setVisibled(!visibled)
     }
    };
 
@@ -150,8 +154,8 @@ const Otp = ({ navigation, route }) => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent:"center",
             alignItems: "center",
+            justifyContent:"center",
             gap: 10,
             marginTop: verticalScale(50),
           }}
@@ -163,10 +167,10 @@ const Otp = ({ navigation, route }) => {
             ref={(ref) => (otpRefs.current[index] = ref)}
             style={{
               borderWidth: 1,
-              padding: 15,
               borderRadius: 4,
               fontSize: 14,
-              width:horizontalScale(50),
+              width:50,
+              height:50,
              borderColor:isFocused[index]?Color.light.main:"black"
             }}
             keyboardType="numeric"
@@ -230,6 +234,13 @@ const Otp = ({ navigation, route }) => {
         }
       </View>
       <View>
+      <AlertModal
+         visible={visibled}
+         btnText={"Confirm"}
+          dismis={() => setVisibled(!visibled)}
+          text={"We sent you a verification code, an SMS should arrive shortly"}
+        onPress={() => setVisibled(!visibled)}
+      />
         <Alert
           visible={visible}
           dismis={() => setVisible(!visible)}

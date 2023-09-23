@@ -28,7 +28,7 @@ const InputsNumber = ({flag, label, countryCode, onChangeNumber, defaultValue, p
               <View style={{ padding: 12, width: horizontalScale(150)}}>
                 <TextInput
                   defaultValue={defaultValue}
-                  style={ { fontFamily: fontGotham.medium,   borderLeftWidth: 1,
+                  style={ { fontFamily: fontGotham.regular,   borderLeftWidth: 1,
                     paddingLeft: 20,
                     fontSize: 14, }}
                   onChangeText={onChangeNumber}

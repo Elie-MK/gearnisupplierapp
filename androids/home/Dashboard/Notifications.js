@@ -26,7 +26,7 @@ const Notifications = ({ navigation }) => {
           <View>
             <Text
               style={{
-                fontSize: moderateScale(22),
+                fontSize: moderateScale(14),
                 fontFamily: fontGotham.medium,
               }}
             >

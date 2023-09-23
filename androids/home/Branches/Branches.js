@@ -26,9 +26,9 @@ const Branches = () => {
         }}
       >
           <TouchableOpacity onPress={() => setOpen(!open)}>
-        <View style={{ width: horizontalScale(315), height:!open?111:350, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
+        <View style={{ width: horizontalScale(315), height:!open?115:380, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
-              <View style={{height:17}}>
+              <View style={{}}>
                 <Text
                   style={{
                     fontSize: moderateScale(14),

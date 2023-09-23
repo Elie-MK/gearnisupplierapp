@@ -94,12 +94,12 @@ const Companyprofile = () => {
     </View>
     <View style={{alignItems:"center"}}>
    <View>
-   <NotEditableInput width={horizontalScale(315)} label={"Company Name *"} iconsLeft={<Shop color='black' />} 
+   <NotEditableInput width={horizontalScale(315)} label={"Company Name *"} iconsLeft={<Shop color='#dfdfdf' />} 
       placeholder={"Input"} editable={false}
       />
    </View>
     <View>
-    <NotEditableInput width={horizontalScale(315)} label={"Company Owner Full Name *"} iconsLeft={<User color='black' />} 
+    <NotEditableInput width={horizontalScale(315)} label={"Company Owner Full Name *"} iconsLeft={<User color='#dfdfdf' />} 
       placeholder={"Input"} editable={false}
       />
     </View>
