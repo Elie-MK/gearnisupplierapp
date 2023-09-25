@@ -197,7 +197,7 @@ const Otp = ({ navigation, route }) => {
         </View>
         <View style={{marginTop:verticalScale(60), alignItems:"center"}}>
           {
-             valided? <ActivityIndicators /> : <Buttons disabled={visible} title={"Verify"} handleSubmit={handleSubmit} />
+             valided? <ActivityIndicators /> : <Buttons disabled={dismis} title={"Verify"} handleSubmit={handleSubmit} />
           }
           
         </View>
