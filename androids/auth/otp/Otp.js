@@ -197,7 +197,7 @@ const Otp = ({ navigation, route }) => {
         </View>
         <View style={{marginTop:verticalScale(60), alignItems:"center"}}>
           {
-             valided? <ActivityIndicators /> : <Buttons title={"Verify"} handleSubmit={handleSubmit} />
+             valided? <ActivityIndicators /> : <Buttons disabled={visible} title={"Verify"} handleSubmit={handleSubmit} />
           }
           
         </View>
@@ -237,12 +237,14 @@ const Otp = ({ navigation, route }) => {
       <AlertModal
          visible={visibled}
          btnText={"Confirm"}
+         title={"Code sent"}
           dismis={() => setVisibled(!visibled)}
           text={"We sent you a verification code, an SMS should arrive shortly"}
         onPress={() => setVisibled(!visibled)}
       />
         <Alert
           visible={visible}
+          title={"Account Locked"}
           dismis={() => setVisible(!visible)}
           onPress={() => setVisible(!visible)}
           btnText={"Close"}

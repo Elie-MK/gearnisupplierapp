@@ -6,7 +6,7 @@ import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
 import { BlurView } from "expo-blur";
 
-const AlertModal = ({ visible, dismis, onPress, text, btnText }) => {
+const AlertModal = ({ visible, dismis, onPress, text, btnText, title }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -48,7 +48,7 @@ const AlertModal = ({ visible, dismis, onPress, text, btnText }) => {
                     fontFamily: fontGotham.medium,
                   }}
                 >
-                  Code sent
+                  {title}
                 </Text>
               </View>
               <View style={{ marginTop: verticalScale(20)}}>

@@ -146,6 +146,7 @@ const handleSubmit = ()=>{
       <AlertModal
          visible={visibled}
          btnText={"Confirm"}
+         title={"Code sent"}
           dismis={() => setVisibled(!visibled)}
           text={"We sent you a verification code, an SMS should arrive shortly"}
         onPress={()=>navigation.replace("otp", {routes})}

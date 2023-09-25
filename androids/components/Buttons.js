@@ -5,7 +5,7 @@ import Color from '../../utilities/Color'
 import { useCustomFonts } from '../../utilities/Fonts'
 import { horizontalScale, moderateScale } from '../../utilities/Metrics'
 
-const Buttons = ({title, handleSubmit}) => {
+const Buttons = ({title, handleSubmit, disabled}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -14,6 +14,7 @@ const Buttons = ({title, handleSubmit}) => {
   return (
     <Button
         title={title}
+        disabled={disabled}
         buttonStyle={{ backgroundColor: Color.light.main, height:60}}
         titleStyle={{
           color: Color.light.black,
