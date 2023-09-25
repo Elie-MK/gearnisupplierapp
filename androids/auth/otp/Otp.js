@@ -20,6 +20,7 @@ import { ActivityIndicator } from "react-native-paper";
 import Buttons from "../../components/Buttons";
 import ActivityIndicators from "../../components/ActivityIndicator";
 import AlertModal from "../../components/AlertModal";
+import { Lock, SmsTracking } from "iconsax-react-native";
 
 const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
@@ -89,9 +90,7 @@ const Otp = ({ navigation, route }) => {
     newIsFocused[index] = text.length === 1;
     setIsFocused(newIsFocused);
   };
-  
-
-
+  console.log(attempts);
   useEffect(()=>{
     const interval = setInterval(()=>{
       if (!isPaused) {
@@ -99,7 +98,7 @@ const Otp = ({ navigation, route }) => {
           if (attempts <= 2) {
             setIsPaused(true);
             setAttempts(attempts + 1);
-          } else {
+          } else{
             setTime({ minutes: 59, secondes: 59 });
             setDismis(!dismis)
             setVisible(!visible)
@@ -165,13 +164,14 @@ const Otp = ({ navigation, route }) => {
           <TextInput
             key={index}
             ref={(ref) => (otpRefs.current[index] = ref)}
+            editable={!dismis}
             style={{
               borderWidth: 1,
               borderRadius: 4,
               fontSize: 14,
               width:50,
               height:50,
-             borderColor:isFocused[index]?Color.light.main:"black"
+             borderColor:!dismis?isFocused[index]?Color.light.main:"black":"#dfdfdf"
             }}
             keyboardType="numeric"
             textAlign="center"
@@ -236,7 +236,8 @@ const Otp = ({ navigation, route }) => {
       <View>
       <AlertModal
          visible={visibled}
-         btnText={"Confirm"}
+         btnText={"Close"}
+         icons={<SmsTracking color="black" size={34} />}
          title={"Code sent"}
           dismis={() => setVisibled(!visibled)}
           text={"We sent you a verification code, an SMS should arrive shortly"}
@@ -244,6 +245,7 @@ const Otp = ({ navigation, route }) => {
       />
         <Alert
           visible={visible}
+          icons={<Lock color="black" size={34} />}
           title={"Account Locked"}
           dismis={() => setVisible(!visible)}
           onPress={() => setVisible(!visible)}

@@ -9,7 +9,7 @@ import Color from "../../../utilities/Color";
 import { Button, Divider } from "@rneui/themed";
 import Buttons from "../../components/Buttons";
 
-const Branches = () => {
+const Branches = ({navigation}) => {
   const [open, setOpen] = useState(false);
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -94,7 +94,7 @@ const Branches = () => {
         </View>
           </TouchableOpacity>
           <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-              <Buttons title={"Add New Branch"} />
+              <Buttons handleSubmit={()=>navigation.navigate('addbranches')}  title={"Add New Branch"} />
             </View>
       </View>
     </KeybordAvoidHome>

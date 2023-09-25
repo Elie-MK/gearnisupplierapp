@@ -17,6 +17,7 @@ import Inputs from '../../components/Inputs'
 import NotEditableInput from '../../components/NotEditableInput'
 import InputCountries from '../../components/InputCountries'
 import Buttons from '../../components/Buttons'
+import EmptyUploadButton from '../../components/EmptyUploadButton'
 
 
 const Profiles = ({navigation}) => {
@@ -38,35 +39,21 @@ const Profiles = ({navigation}) => {
   const [uploadProgress2, setUploadProgress2] = useState(0);
 
 
-  const pickImage = async () => {
+  const pickImage = async (selected, fileNames) => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
     });
   
     if (!result.canceled && result.assets.length > 0) {
       const selectedAsset = result.assets[0];
-      setSelectedImage(selectedAsset.uri);
+      selected(selectedAsset.uri);
   
       const uriComponents = selectedAsset.uri.split('/');
       const fileName = uriComponents[uriComponents.length - 1];
-      setFileName(fileName);
+      fileNames(fileName);
     }
   };
-  const pickImage2 = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-    });
   
-    if (!result.canceled && result.assets.length > 0) {
-      const selectedAsset = result.assets[0];
-      setSelectedImage2(selectedAsset.uri);
-  
-      const uriComponents = selectedAsset.uri.split('/');
-      const fileName = uriComponents[uriComponents.length - 1];
-      setFileName2(fileName);
-    }
-  };
-
   
   const onCountryChange = (item) => {
     setCountryCode(item.dial_code);
@@ -75,6 +62,11 @@ const Profiles = ({navigation}) => {
     setFlag(item.flag)
     setVisibleM(!visibleM);
     };
+
+    const handleClear = (namesFiles, imagesSelected)=>{
+      namesFiles(null)
+      imagesSelected(null)
+    }
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null
@@ -163,11 +155,16 @@ const Profiles = ({navigation}) => {
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Front Identity Card
       </Text>
-              <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={pickImage} fileName={fileName} />
+      {
+        fileName|selectedImage === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage, setFileName)} /> : <UploadInput  clear={()=>handleClear(setSelectedImage, setFileName)}  selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+       }
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Back Identity Card
       </Text>
-              <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={pickImage2} fileName={fileName2} />
+      {
+        fileName2|selectedImage2 === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage2, setFileName2)} /> : <UploadInput clear={()=>handleClear(setSelectedImage2, setFileName2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+      }
+              
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
                 <Buttons title={"Save"} />
             </View>

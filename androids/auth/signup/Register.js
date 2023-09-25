@@ -19,6 +19,7 @@ import ActivityIndicators from "../../components/ActivityIndicator";
 import Buttons from "../../components/Buttons";
 import Inputs from "../../components/Inputs";
 import AlertModal from "../../components/AlertModal";
+import { SmsTracking } from "iconsax-react-native";
 
 const Register = ({navigation, route}) => {
   const routes = route.name;
@@ -145,7 +146,8 @@ const handleSubmit = ()=>{
     <View>
       <AlertModal
          visible={visibled}
-         btnText={"Confirm"}
+         icons={<SmsTracking color="black" size={34} />}
+         btnText={"Close"}
          title={"Code sent"}
           dismis={() => setVisibled(!visibled)}
           text={"We sent you a verification code, an SMS should arrive shortly"}

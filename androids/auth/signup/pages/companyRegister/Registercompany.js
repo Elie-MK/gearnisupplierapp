@@ -27,6 +27,7 @@ import InputsText from "../../../../components/InputsText";
 import Inputs from "../../../../components/Inputs";
 import InputCountries from "../../../../components/InputCountries";
 import Buttons from "../../../../components/Buttons";
+import EmptyUploadButton from "../../../../components/EmptyUploadButton";
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
@@ -103,6 +104,11 @@ const Registercompany = ({ navigation }) => {
     setOpen(!open);
     };
 
+    const handleClear = (namesFiles, imagesSelected)=>{
+      namesFiles(null)
+      imagesSelected(null)
+    }
+
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -147,11 +153,17 @@ const Registercompany = ({ navigation }) => {
    <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Licence file
       </Text>
-              <UploadInput selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+      {
+        fileName|selectedImage === null? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage, setFileName)} /> : <UploadInput clear={()=>handleClear(setFileName, setSelectedImage)} selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+
+      }
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload VAT file
       </Text>
-              <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+      {
+        fileName2|selectedImage2 ===null? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage2, setFileName2)} />:<UploadInput clear={()=>handleClear(setFileName2, setSelectedImage2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+
+      }
    </View>
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
              <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate("registrationComplete")} />

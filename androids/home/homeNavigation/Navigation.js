@@ -7,6 +7,7 @@ import Notifications from '../Dashboard/Notifications';
 import Profiles from '../Profile/Profiles';
 import Companyprofile from '../companyProfile/Companyprofile';
 import Branches from '../Branches/Branches';
+import AddBranches from '../addBranches/AddBranches';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ const Navigation = () => {
         <Stack.Screen name='profile' component={Profiles} />
         <Stack.Screen name='companyprofile' component={Companyprofile} />
         <Stack.Screen name='branches' component={Branches} />
+        <Stack.Screen name='addbranches' component={AddBranches} />
       </Stack.Navigator>
 )}
 

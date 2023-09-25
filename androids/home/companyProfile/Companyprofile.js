@@ -18,6 +18,7 @@ import InputCountries from '../../components/InputCountries'
 import InputsText from '../../components/InputsText'
 import Buttons from '../../components/Buttons'
 import NotEditableInput from '../../components/NotEditableInput'
+import EmptyUploadButton from '../../components/EmptyUploadButton'
 
 const Companyprofile = () => {
   const defaultCountryCode = "+216"
@@ -73,9 +74,9 @@ const Companyprofile = () => {
     setVisible2(!visible2);
     };
 
-    const handleClear = (clear, nameClear)=>{
-      clear('')
-      nameClear('')
+    const handleClear = (namesFiles, imagesSelected)=>{
+      namesFiles(null)
+      imagesSelected(null)
     }
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -164,19 +165,28 @@ const Companyprofile = () => {
            <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload VAT file*
       </Text>
-              <UploadInput selectedImage={selectedImage} percent={0.1} uploadProgress={uploadProgress} clear={()=>handleClear(setSelectedImage, setFileName)} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+      {
+        fileName|selectedImage === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage, setFileName)} /> : <UploadInput selectedImage={selectedImage} percent={0.1} uploadProgress={uploadProgress} clear={()=>handleClear(setSelectedImage, setFileName)} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+
+      }
            </View>
            <View>
            <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload License file*
       </Text>
-              <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+            {
+              fileName2|selectedImage2 === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage2, setFileName2)} /> : <UploadInput selectedImage={selectedImage2} uploadProgress={uploadProgress2} clear={()=>handleClear(setSelectedImage2, setFileName2)} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />           
+              }  
+
            </View>
            <View>
            <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
               Upload CIN*
       </Text>
-              <UploadInput selectedImage={selectedImage3} uploadProgress={uploadProgress3} pickImage={()=>pickImage(setSelectedImage3, setFileName3)} fileName={fileName3} />
+      {
+        fileName3|selectedImage3 === null?  <EmptyUploadButton onPress={()=>pickImage(setSelectedImage3, setFileName3)} /> : <UploadInput selectedImage={selectedImage3} uploadProgress={uploadProgress3} clear={()=>handleClear(setSelectedImage3, setFileName3)} pickImage={()=>pickImage(setSelectedImage3, setFileName3)} fileName={fileName3} />
+
+      }
            </View>
               
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>

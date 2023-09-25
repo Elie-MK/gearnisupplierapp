@@ -5,8 +5,9 @@ import { horizontalScale, moderateScale, verticalScale } from "../../utilities/M
 import { Button } from "@rneui/base";
 import { useCustomFonts } from "../../utilities/Fonts";
 import { BlurView } from "expo-blur";
+import { SmsTracking } from "iconsax-react-native";
 
-const AlertModal = ({ visible, dismis, onPress, text, btnText, title }) => {
+const AlertModal = ({ visible, dismis, onPress, text, btnText, title, icons }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -40,7 +41,7 @@ const AlertModal = ({ visible, dismis, onPress, text, btnText, title }) => {
           >
             <View style={{ alignItems: "center" }}>
               <View style={{ alignItems: "center" }}>
-               <Image resizeMode="contain"  source={require('../../assets/phone.png') } style={{height:60, width:70}} />
+                {icons}
                 <Text
                   style={{
                     marginTop: 10,
@@ -57,11 +58,12 @@ const AlertModal = ({ visible, dismis, onPress, text, btnText, title }) => {
             </View>
             <View style={{ alignItems: "center", marginTop: verticalScale(30)}}>
               <Button
+              type="outline"
                 title={btnText}
                 onPress={onPress}
-                containerStyle={{ width: horizontalScale(116), borderRadius: 5 }}
-                buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
-                titleStyle={{ color: Color.light.black, fontSize:moderateScale(14)}}
+                containerStyle={{ width: horizontalScale(116), borderColor:'#E34B4B',  }}
+                buttonStyle={{  fontFamily:fontGotham.medium,borderColor:'#E34B4B', borderWidth:1,borderRadius: 4 }}
+                titleStyle={{ color:'#E34B4B',  fontSize:moderateScale(14)}}
               />
             </View>
           </View>
