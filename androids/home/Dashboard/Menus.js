@@ -2,12 +2,13 @@ import { View, Text, TouchableOpacity, ScrollView, Pressable, Dimensions } from 
 import React, { useState } from "react";
 import Global from "../../components/Global";
 import { useCustomFonts } from "../../../utilities/Fonts";
-import { Notification, Menu,   User, Buildings, Car, Shop, People, LogoutCurve, Information } from "iconsax-react-native";
+import { Notification, Menu,   User, Buildings, Car, Shop, People, LogoutCurve, Information, LoginCurve, Logout } from "iconsax-react-native";
 import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
 import { BottomSheet, Button, Divider } from "@rneui/base";
 import MenuItems from "../../components/MenuItems";
 import { BlurView } from "expo-blur";
 import Color from "../../../utilities/Color";
+import HeaderHome from "../../components/HeaderHome";
 
 const Menus = ({navigation}) => {
   const [touchable, setTouchable]=useState("dashboard")
@@ -27,30 +28,7 @@ const Menus = ({navigation}) => {
     return null;
   }
   return (
-    <Global>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginRight:20
-        }}
-      >
-        <View></View>
-        <View>
-          <Text
-            style={{
-              fontFamily: fontGotham.medium,
-              fontSize: 22,
-            }}
-          >
-            Menu
-          </Text>
-        </View>
-        <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
-          <Notification size={30} color="black" />
-        </TouchableOpacity>
-      </View>
+    <HeaderHome title={"Menu"} onPress={()=>navigation.goBack()}>
       <View style={{marginTop:verticalScale(40)}}>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View>
@@ -106,27 +84,33 @@ const Menus = ({navigation}) => {
               height: Dimensions.get("window").height,
               width: Dimensions.get("window").width,
             }}>
-               <View style={{ alignItems: "center", marginTop:350 }}>
+               <View style={{ alignItems: "center", marginTop:200 }}>
           <View
             style={{
               backgroundColor: "#fff",
               borderRadius: 14,
               borderWidth: 1,
-              borderColor: "red",
+              borderColor: "black",
               width: 312,
-              padding: 24,
+              height:260,
             }}
           >
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center", marginTop:30 }}>
               <View style={{ alignItems: "center" }}>
-                <Text
-                  style={{
-                    marginTop: 10,
+                <LogoutCurve color="black" size={30} />
+                <Text style={{
+                    marginTop: 20,
                     fontSize: 16,
                     fontFamily: fontGotham.medium,
+                  }}>Logout</Text>
+                <Text
+                  style={{
+                    marginTop: 20,
+                    fontSize: 14,
+                    fontFamily: fontGotham.book,
                   }}
                 >
-                  Are you sure to log out?
+                  Are you sure want to log out?
                 </Text>
               </View>
   
@@ -134,18 +118,19 @@ const Menus = ({navigation}) => {
           <View style={{alignItems:"center"}}>
           <View style={{ alignItems:"center",  marginTop: verticalScale(30), flexDirection:"row", gap:10}}>
               <Button
-                title="Yes"
+                title="Logout"
                 onPress={handleLogout}
-                containerStyle={{ width: horizontalScale(90), borderRadius: 5 }}
-                buttonStyle={{ backgroundColor:"red", fontFamily:fontGotham.medium }}
-                titleStyle={{ color: Color.light.themeColor, fontSize:moderateScale(14)}}
+                containerStyle={{ width:116, borderRadius: 4 }}
+                buttonStyle={{  backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
+                titleStyle={{ color: Color.light.black, fontSize:14}}
               />
               <Button
-                title="No"
+              type="outline"
+                title="Cancel"
                 onPress={()=>setIsVisible(!isVisible)}
-                containerStyle={{ width: horizontalScale(90), borderRadius: 5 }}
-                buttonStyle={{ backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
-                titleStyle={{ color: Color.light.black, fontSize:moderateScale(14)}}
+                containerStyle={{ width: 116,  }}
+                buttonStyle={{ borderColor:"red", fontFamily:fontGotham.medium,borderRadius: 4 }}
+                titleStyle={{ color: "red", fontSize:14, }}
               />
             </View>
           </View>
@@ -155,7 +140,7 @@ const Menus = ({navigation}) => {
           </TouchableOpacity>
         </BottomSheet>
       </View>
-    </Global>
+    </HeaderHome>
   );
 };
 

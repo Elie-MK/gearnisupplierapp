@@ -1,12 +1,13 @@
-import { HambergerMenu, Notification } from 'iconsax-react-native'
+import { HambergerMenu, Notification, NotificationBing } from 'iconsax-react-native'
 import { Dimensions, Platform, StatusBar, TouchableOpacity } from 'react-native'
 import { View, Text, Keyboard, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback } from 'react-native'
 import { moderateScale } from '../../utilities/Metrics'
 import { useCustomFonts } from '../../utilities/Fonts'
 import Color from '../../utilities/Color'
 import { useNavigation } from '@react-navigation/native'
+import { MaterialIcons } from '@expo/vector-icons'
 
-const KeybordAvoidHome = ({title, children, size}) => {
+const KeybordAvoidHome = ({title, children, size, onPress}) => {
   const navigation = useNavigation()
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
@@ -19,13 +20,15 @@ const KeybordAvoidHome = ({title, children, size}) => {
             <TouchableOpacity onPress={()=>navigation.navigate("menu")}>
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
-            <View>
-                <Text style={{fontSize:size?22:14, fontFamily:fontGotham.medium}}>{title}</Text>
-            </View>
+            
             <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
-              <Notification size={30} color='black' />
+              <NotificationBing size={30} color='black' />
             </TouchableOpacity>
         </View>
+        <View style={{marginLeft:36, marginRight:20, alignItems:"center", flexDirection:"row", gap:140, paddingBottom:10}}>
+        <TouchableOpacity onPress={onPress} ><MaterialIcons name="arrow-back-ios" size={24} color="black" /></TouchableOpacity>
+                <Text style={{fontSize:size?22:14, fontFamily:fontGotham.medium}}>{title}</Text>
+            </View>
         <ScrollView showsVerticalScrollIndicator={false}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             {children}

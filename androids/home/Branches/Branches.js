@@ -16,7 +16,7 @@ const Branches = ({navigation}) => {
     return null;
   }
   return (
-    <KeybordAvoidHome title={"Branches"}>
+    <KeybordAvoidHome onPress={()=>navigation.goBack()} title={"Branches"}>
       <View
         style={{
           marginLeft: horizontalScale(20),

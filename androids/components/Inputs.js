@@ -29,7 +29,7 @@ const Inputs = ({placeholder,namecountry, countryCode, number, onChangeText, onP
           </TouchableOpacity>
           <View style={{ padding: 12, width: horizontalScale(150)}}>
             <TextInput
-              style={{fontFamily: fontGotham.medium,     borderLeftWidth: 1,
+              style={{fontFamily: fontGotham.book,     borderLeftWidth: 1,
                 paddingLeft: 20,
                 fontSize: 14, }}
               onChangeText={onChangeText}

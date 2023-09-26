@@ -3,7 +3,7 @@ import React from 'react'
 import { useCustomFonts } from '../../utilities/Fonts';
 import { horizontalScale } from '../../utilities/Metrics';
 
-const InputsText = ({width,iconsLeft, iconsRight, label, placeholder, editable,defaultValue }) => {
+const InputsText = ({width,iconsLeft,onChangeText,value, hide, iconsRight, label, placeholder, editable,defaultValue }) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -25,21 +25,24 @@ const InputsText = ({width,iconsLeft, iconsRight, label, placeholder, editable,d
       <TextInput
         placeholder={placeholder}
         editable={editable}
+        onChangeText={onChangeText}
+        value={value}
         defaultValue={defaultValue}
         style={{
           fontSize: 14,
           paddingLeft: 10,
           fontFamily: fontGotham.regular,
-          width: width,
+          width: 315,
           height:56,
         }}
       />
-      <TouchableOpacity style={{marginLeft:-65}}>
+      <TouchableOpacity style={{marginLeft:15}}>
        {iconsRight}
       </TouchableOpacity>
     </View>
     <Text
       style={{
+        display:hide?"none":"flex",
         backgroundColor: "white",
         padding: 2,
         position: "absolute",

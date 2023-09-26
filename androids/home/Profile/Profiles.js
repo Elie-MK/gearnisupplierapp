@@ -72,7 +72,7 @@ const Profiles = ({navigation}) => {
     return null
   }
   return (
-    <KeybordAvoidHome title={"My Profile"}>
+    <KeybordAvoidHome onPress={()=>navigation.goBack()} title={"My Profile"}>
       <View>
         {/* Profile Image */}
         <View style={{marginTop:verticalScale(20), alignItems:"center"}}>

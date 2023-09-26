@@ -4,6 +4,7 @@ import Global from "../../components/Global";
 import { HambergerMenu, Notification } from "iconsax-react-native";
 import { useCustomFonts } from "../../../utilities/Fonts";
 import { moderateScale, verticalScale } from "../../../utilities/Metrics";
+import HeaderHome from "../../components/HeaderHome";
 
 const Notifications = ({ navigation }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -11,32 +12,9 @@ const Notifications = ({ navigation }) => {
     return null;
   }
   return (
-    <Global>
+    <HeaderHome title={"Notifications"} onPress={()=>navigation.goBack()}>
       <View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginRight: 20,
-          }}
-        >
-          <TouchableOpacity onPress={() => navigation.navigate("menu")}>
-            <HambergerMenu size={30} color="black" />
-          </TouchableOpacity>
-          <View>
-            <Text
-              style={{
-                fontSize: moderateScale(14),
-                fontFamily: fontGotham.medium,
-              }}
-            >
-              Notifications
-            </Text>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate("notification")}>
-            <Notification size={30} color="black" />
-          </TouchableOpacity>
-        </View>
+        
         <ScrollView showsVerticalScrollIndicator={false}  style={{ marginTop: verticalScale(20) }}>
           <Text
             style={{ fontSize: moderateScale(14), fontFamily: fontGotham.bold }}
@@ -53,7 +31,7 @@ const Notifications = ({ navigation }) => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-    </Global>
+    </HeaderHome>
   );
 };
 

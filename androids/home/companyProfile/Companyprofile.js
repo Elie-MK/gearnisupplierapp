@@ -84,7 +84,7 @@ const Companyprofile = () => {
     return null
   }
   return (
-   <KeybordAvoidHome title={"Company Profile"}>
+   <KeybordAvoidHome onPress={()=>navigation.goBack()} title={"Company Profile"}>
     <View>
     <View style={{alignItems:"center", marginTop:verticalScale(20)}}>
       <Picturepprofile  />
