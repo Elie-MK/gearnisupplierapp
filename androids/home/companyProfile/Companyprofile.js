@@ -20,7 +20,7 @@ import Buttons from '../../components/Buttons'
 import NotEditableInput from '../../components/NotEditableInput'
 import EmptyUploadButton from '../../components/EmptyUploadButton'
 
-const Companyprofile = () => {
+const Companyprofile = ({navigation}) => {
   const defaultCountryCode = "+216"
   const defaultCountry = "Tunisia"
   const defaultFlag = "🇹🇳"
