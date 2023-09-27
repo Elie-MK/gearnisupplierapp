@@ -17,7 +17,7 @@ const AddBranches = ({navigation}) => {
 
 
   return (
-    <HeaderHome title={"Add Branch"} onPress={()=>navigation.goBack()}>
+    <HeaderHome show title={"Add Branch"} onPress={()=>navigation.goBack()}>
       <View>
         <View style={{marginTop:50, marginLeft:10, marginRight:20, alignItems:"center"}}>
         {/* branch name */}

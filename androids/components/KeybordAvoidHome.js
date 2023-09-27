@@ -17,7 +17,7 @@ const KeybordAvoidHome = ({title, children, size, onPress}) => {
     <KeyboardAvoidingView style={{flex:1,paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     paddingBottom:5, backgroundColor:Color.light.themeColor, marginTop:20}} >
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between", marginRight:20, marginLeft:20, paddingBottom:10}}>
-            <TouchableOpacity onPress={()=>navigation.navigate("menu")}>
+            <TouchableOpacity onPress={()=>navigation.openDrawer()}>
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
             

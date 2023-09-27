@@ -6,8 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { moderateScale, verticalScale } from '../../utilities/Metrics'
 import { useCustomFonts } from '../../utilities/Fonts'
 import Color from '../../utilities/Color'
-import DrawerContainer from '../home/homeNavigation/DrawerNavigation'
-import DrawerNavigation from '../home/homeNavigation/DrawerNavigation'
+
 
 const HeaderHome = ({children, show, title, onPress}) => {
     const navigation = useNavigation()
@@ -19,7 +18,7 @@ const HeaderHome = ({children, show, title, onPress}) => {
     <View style={styles.container}>
         <View style={styles.secondContainer}>
           <View style={{flexDirection:"row", justifyContent:"space-between", marginRight:20}}>
-            <TouchableOpacity onPress={()=>navigation.navigate("menu")}>
+            <TouchableOpacity onPress={()=>navigation.openDrawer()}>
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
