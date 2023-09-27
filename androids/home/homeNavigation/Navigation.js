@@ -24,7 +24,13 @@ const Navigation = () => {
         }}
         initialRouteName="main"
       >
-        
+          {/* <Stack.Screen name='main'>
+            {
+              ()=>(
+                <DrawerNavigation />
+              )
+            }
+          </Stack.Screen> */}
         
         <Stack.Screen name='dashboard' component={Dashboard} />
         <Stack.Screen name='menu' component={Menus} />

@@ -22,7 +22,7 @@ const Buttons = ({title, handleSubmit, disabled}) => {
               height:60}}>
             <Text style={{ color:Color.light.black,
               fontSize: 15,
-              fontFamily: fontGotham.medium, textAlign:"center", marginTop:15}}>{title}</Text>
+              fontFamily: fontGotham.medium, textAlign:"center", marginTop:18}}>{title}</Text>
           </View>
           </TouchableOpacity>
     // <Button

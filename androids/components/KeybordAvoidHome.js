@@ -25,10 +25,8 @@ const KeybordAvoidHome = ({title, children, size, onPress}) => {
               <NotificationBing size={30} color='black' />
             </TouchableOpacity>
         </View>
-        <View style={{marginLeft:36, marginRight:20, alignItems:"center", flexDirection:"row", justifyContent:"space-between", paddingBottom:10}}>
-        <TouchableOpacity onPress={onPress} ><MaterialIcons name="arrow-back-ios" size={24} color="black" /></TouchableOpacity>
+        <View style={{marginLeft:36, marginRight:20, alignItems:"center", paddingBottom:10}}>
                 <Text style={{fontSize:size?22:14, fontFamily:fontGotham.medium}}>{title}</Text>
-                <View></View>
             </View>
         <ScrollView showsVerticalScrollIndicator={false}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
