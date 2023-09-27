@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native'
 import { moderateScale, verticalScale } from '../../utilities/Metrics'
 import { useCustomFonts } from '../../utilities/Fonts'
 import Color from '../../utilities/Color'
+import DrawerContainer from '../home/homeNavigation/DrawerNavigation'
+import DrawerNavigation from '../home/homeNavigation/DrawerNavigation'
 
 const HeaderHome = ({children, show, title, onPress}) => {
     const navigation = useNavigation()

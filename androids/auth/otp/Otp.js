@@ -39,6 +39,7 @@ const Otp = ({ navigation, route }) => {
 
 
 
+
   const handleSubmit = () => {
     const otpValue = otp.join('')
     setAttempts(1)
@@ -90,7 +91,6 @@ const Otp = ({ navigation, route }) => {
     newIsFocused[index] = text.length === 1;
     setIsFocused(newIsFocused);
   };
-  console.log(attempts);
   useEffect(()=>{
     const interval = setInterval(()=>{
       if (!isPaused) {

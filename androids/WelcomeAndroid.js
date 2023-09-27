@@ -2,15 +2,13 @@ import {
   View,
   Text,
   Pressable,
-  SafeAreaView,
   StyleSheet,
-  Platform,
-  StatusBar,
   Dimensions,
   Image,
   TouchableOpacity,
   Modal,
   TouchableWithoutFeedback,
+  TouchableOpacityBase,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../utilities/Color";
@@ -23,19 +21,29 @@ import { useCustomFonts } from "../utilities/Fonts";
 import { BlurView } from "expo-blur";
 import { CloseCircle, CloudChange, DocumentText, InfoCircle, Refresh, Refresh2, RefreshSquare, } from "iconsax-react-native";
 import AlertModal from "./components/AlertModal";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 const WelcomeAndroid = ({ navigation, route }) => {
   const [visible, setVisible] = useState(false);
   const [changes, setChanges]=useState(false)
   const [show, setShow]=useState(false)
+  const [splah, setSplah]=useState(false)
   const [checked, setChecked] = useState("English");
 
+
+  useEffect(()=>{
+    setSplah(!splah)
+    setTimeout(() => {
+      setSplah(false)
+    }, 2000);
+  },[])
 const toggleChange = ()=>{
   setChanges(!changes)
   if(!changes){
     setShow(!show)
   }
 }
+
 const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transform: [{ rotate: '90deg' }] };
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -46,76 +54,81 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
       <View style={{ backgroundColor: changes?Color.light.black:Color.light.main,
     height: Dimensions.get("screen").height,
     alignItems: "center",}}>
-        <View style={{marginTop:90}}>
-        <View style={{alignItems:"center"}}>
-       {
-        changes?<Image 
-        resizeMode="contain"
-          style={{ width:210, height:88, top: 106 }}
-          source={require("../assets/GearniYellow.png")}
-        />:   <Image 
-        resizeMode="contain"
-          style={{ width:210, height:88, top: 106 }}
-          source={require("../assets/GearniFull.png")}
-        /> 
-       }
-        </View>
-        <View style={styles.buttonContainer}>
-        <View style={{marginBottom:50}}>
-          <TouchableOpacity onPress={toggleChange}>
-           <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-           <Refresh color={changes?Color.light.main:"black"} style={[iconRotation]} />
-            <Text style={{fontSize:20, fontFamily:fontGotham.medium, color:changes?Color.light.main:Color.light.black}}>Switch</Text>
-           </View>
-          </TouchableOpacity>
-        </View>
-          <Button
-            title="Get Started !"
-            buttonStyle={{  borderColor:changes?Color.light.main:Color.light.black,
-              borderWidth: 2,
-              width: 236,
-              borderRadius :8,
-              padding:20}}
-            titleStyle={{
-              color:changes?Color.light.main:Color.light.black,
-              fontSize: 20,
-              fontFamily: fontGotham.medium,
-            }}
-            type="outline"
-            onPress={() => navigation.navigate("login")}
-          />
-        </View>
-        <Pressable
-          onPress={() => setVisible(!visible)}
-       style={{alignItems:"center", marginTop: verticalScale(60),}}
-        >
-          <View    style={{
-            flexDirection: "row",
-            gap: 10,
-            alignItems:"center",
-            
-          }}>
-
-          <View>
-            <Feather name="globe" size={moderateScale(25)} color={changes?Color.light.main:"black"} />
+      {
+        !splah?null:(<Image source={require("../assets/GearniFull.png")} resizeMode="contain" style={{width:350, height:350, marginTop:250}}/>)
+      }
+      {
+        splah === false && (
+          <View style={{marginTop:90}}>
+          <View style={{alignItems:"center"}}>
+         {
+          changes?<Image 
+          resizeMode="contain"
+            style={{ width:210, height:88, top: 106 }}
+            source={require("../assets/GearniYellow.png")}
+          />:   <Image 
+          resizeMode="contain"
+            style={{ width:210, height:88, top: 106 }}
+            source={require("../assets/GearniFull.png")}
+          /> 
+         }
           </View>
-          <View>
-            <Text
-              style={{
+          <View style={styles.buttonContainer}>
+          <View style={{marginBottom:50}}>
+            <TouchableOpacity onPress={toggleChange}>
+             <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
+             <Refresh color={changes?Color.light.main:"black"} style={[iconRotation]} />
+              <Text style={{fontSize:20, fontFamily:fontGotham.medium, color:changes?Color.light.main:Color.light.black}}>Switch</Text>
+             </View>
+            </TouchableOpacity>
+          </View>
+    
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("login")}>
+            <View style={{borderColor:changes?Color.light.main:Color.light.black,
+                borderWidth: 2,
+                width: 236,
+                borderRadius :8,
+                padding:20}}>
+              <Text style={{ color:changes?Color.light.main:Color.light.black,
                 fontSize: 20,
-                fontFamily: fontGotham.medium,
-                color:changes?Color.light.main:"black"
-              }}
-            >
-              {checked}
-            </Text>
+                fontFamily: fontGotham.medium, textAlign:"center"}}>Get Started</Text>
+            </View>
+            </TouchableOpacity>
           </View>
-          <View>
-            <MaterialIcons name="keyboard-arrow-down" size={moderateScale(30)} color={changes?Color.light.main:"black"} />
-          </View>
-          </View>
-        </Pressable>
-      </View>
+           
+          <Pressable
+            onPress={() => setVisible(!visible)}
+         style={{alignItems:"center", marginTop: verticalScale(60),}}
+          >
+            <View    style={{
+              flexDirection: "row",
+              gap: 10,
+              alignItems:"center",
+              
+            }}>
+  
+            <View>
+              <Feather name="globe" size={moderateScale(25)} color={changes?Color.light.main:"black"} />
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontFamily: fontGotham.medium,
+                  color:changes?Color.light.main:"black"
+                }}
+              >
+                {checked}
+              </Text>
+            </View>
+            <View>
+              <MaterialIcons name="keyboard-arrow-down" size={moderateScale(30)} color={changes?Color.light.main:"black"} />
+            </View>
+            </View>
+          </Pressable>
+        </View>
+        )
+      }
       <AlertModal onPress={()=>setShow(!show)} dismis={()=>setShow(!show)} visible={show} show icons={<InfoCircle color="black" />} title={"Info"} btnText={"Understood"} text={"This is only for experiemntal usage and not for final product. User Experience Test"} />
       </View>
 

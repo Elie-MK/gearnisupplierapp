@@ -83,9 +83,9 @@ const Profiles = ({navigation}) => {
         <View style={{marginTop:verticalScale(50), alignItems:"center"}}>
         <View style={{ flexDirection: "row", gap: 5, width:horizontalScale(315) }}>
               {/* First Name */}
-             <InputsText placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
+             <InputsText padding placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
-             <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
+             <InputsText padding placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
             <View style={{  marginTop: verticalScale(15),}}>
         <Inputs placeholder={"12345678"} label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />

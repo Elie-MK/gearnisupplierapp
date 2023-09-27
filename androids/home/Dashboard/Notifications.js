@@ -12,7 +12,7 @@ const Notifications = ({ navigation }) => {
     return null;
   }
   return (
-    <HeaderHome title={"Notifications"} onPress={()=>navigation.goBack()}>
+    <HeaderHome title={"Notifications"} show>
       <View>
         
         <ScrollView showsVerticalScrollIndicator={false}  style={{ marginTop: verticalScale(20) }}>

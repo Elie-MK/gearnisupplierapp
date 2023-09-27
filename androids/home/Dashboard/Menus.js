@@ -28,7 +28,7 @@ const Menus = ({navigation}) => {
     return null;
   }
   return (
-    <HeaderHome title={"Menu"} onPress={()=>navigation.goBack()}>
+    <HeaderHome title={"Menu"} show >
       <View style={{marginTop:verticalScale(40)}}>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View>

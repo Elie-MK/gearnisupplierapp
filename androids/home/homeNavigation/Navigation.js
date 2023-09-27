@@ -8,6 +8,7 @@ import Profiles from '../Profile/Profiles';
 import Companyprofile from '../companyProfile/Companyprofile';
 import Branches from '../Branches/Branches';
 import AddBranches from '../addBranches/AddBranches';
+import DrawerNavigation from './DrawerNavigation';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -21,8 +22,10 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="dashboard"
+        initialRouteName="main"
       >
+        
+        
         <Stack.Screen name='dashboard' component={Dashboard} />
         <Stack.Screen name='menu' component={Menus} />
         <Stack.Screen name='notification' component={Notifications} />
@@ -32,6 +35,7 @@ const Navigation = () => {
         <Stack.Screen name='addbranches' component={AddBranches} />
       </Stack.Navigator>
 )}
+
 
 {/* IOS */}
 {Platform.OS == "ios" && (

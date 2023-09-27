@@ -4,6 +4,7 @@ import { Button } from '@rneui/base'
 import Color from '../../utilities/Color'
 import { useCustomFonts } from '../../utilities/Fonts'
 import { horizontalScale, moderateScale } from '../../utilities/Metrics'
+import { TouchableOpacity } from 'react-native'
 
 const Buttons = ({title, handleSubmit, disabled}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -12,18 +13,30 @@ const Buttons = ({title, handleSubmit, disabled}) => {
     }
   
   return (
-    <Button
-        title={title}
-        disabled={disabled}
-        buttonStyle={{ backgroundColor: Color.light.main, height:60}}
-        titleStyle={{
-          color: Color.light.black,
-          fontFamily: fontGotham.medium,
-          fontSize:moderateScale(15)
-        }}
-        containerStyle={{width:horizontalScale(315), borderRadius:4, }}
-        onPress={handleSubmit}
-      />
+
+    <TouchableOpacity activeOpacity={0.5} onPress={handleSubmit}>
+          <View style={{backgroundColor:Color.light.main,
+
+              width:horizontalScale(315),
+              borderRadius :8,
+              height:60}}>
+            <Text style={{ color:Color.light.black,
+              fontSize: 15,
+              fontFamily: fontGotham.medium, textAlign:"center", marginTop:15}}>{title}</Text>
+          </View>
+          </TouchableOpacity>
+    // <Button
+    //     title={}
+    //     disabled={disabled}
+    //     buttonStyle={{ backgroundColor: Color.light.main, height:60}}
+    //     titleStyle={{
+    //       color: Color.light.black,
+    //       fontFamily: fontGotham.medium,
+    //       fontSize:moderateScale(15)
+    //     }}
+    //     containerStyle={{width:horizontalScale(315), borderRadius:4, }}
+    //     onPress={handleSubmit}
+    //   />
   )
 }
 
