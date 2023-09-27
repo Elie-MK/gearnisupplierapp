@@ -5,12 +5,12 @@ import Dashboard from '../Dashboard/Dashboard';
 import DrawerContent from './DrawerContent';
 import Menus from '../Dashboard/Menus';
 import Branches from '../Branches/Branches';
-import AddBranches from '../addBranches/AddBranches';
 import { Buildings, Car, Home, Information, Menu, People, Shop, User } from 'iconsax-react-native';
 import Profiles from '../Profile/Profiles';
 import Companyprofile from '../companyProfile/Companyprofile';
 import { useCustomFonts } from '../../../utilities/Fonts';
 import Notifications from '../Dashboard/Notifications';
+import AddBranches from '../Branches/addBranches/AddBranches';
 
 const DrawerNavigation = () => {
     const Drawer = createDrawerNavigator();

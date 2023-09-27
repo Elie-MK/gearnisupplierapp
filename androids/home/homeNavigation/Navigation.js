@@ -7,8 +7,8 @@ import Notifications from '../Dashboard/Notifications';
 import Profiles from '../Profile/Profiles';
 import Companyprofile from '../companyProfile/Companyprofile';
 import Branches from '../Branches/Branches';
-import AddBranches from '../addBranches/AddBranches';
 import DrawerNavigation from './DrawerNavigation';
+import AddBranches from '../Branches/addBranches/AddBranches';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
