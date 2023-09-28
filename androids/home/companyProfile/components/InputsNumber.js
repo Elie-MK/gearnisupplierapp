@@ -5,7 +5,7 @@ import { horizontalScale, verticalScale } from '../../../../utilities/Metrics'
 import { useCustomFonts } from '../../../../utilities/Fonts'
 import Color from '../../../../utilities/Color'
 
-const InputsNumber = ({flag, label, countryCode, onChangeNumber, defaultValue, press }) => {
+const InputsNumber = ({flag, label, countryCode, number, onChangeNumber, defaultValue, press }) => {
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -32,7 +32,7 @@ const InputsNumber = ({flag, label, countryCode, onChangeNumber, defaultValue, p
                     paddingLeft: 20,
                     fontSize: 14, }}
                   onChangeText={onChangeNumber}
-                  // value={number}
+                  value={number}
                   // editable={false}
                   maxLength={10}
                   keyboardType="numeric"

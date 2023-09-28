@@ -7,7 +7,7 @@ import { useCustomFonts } from "../../utilities/Fonts";
 import { BlurView } from "expo-blur";
 import { SmsTracking } from "iconsax-react-native";
 
-const AlertModal = ({ show, visible, dismis, onPress, text, btnText, title, icons }) => {
+const AlertModal = ({ subtext,show, visible, dismis, onPress, text, btnText, title, icons }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -54,6 +54,7 @@ const AlertModal = ({ show, visible, dismis, onPress, text, btnText, title, icon
               </View>
               <View style={{ marginTop: verticalScale(20)}}>
                 <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:14 }}>{text}</Text>
+                <Text style={{ fontFamily: fontGotham.regular, textAlign:"center", fontSize:14 }}>{subtext}</Text>
               </View>
             </View>
             <View style={{ alignItems: "center", marginTop: verticalScale(30)}}>

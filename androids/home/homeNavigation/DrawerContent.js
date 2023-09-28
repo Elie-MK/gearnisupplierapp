@@ -2,7 +2,7 @@ import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
-import { Buildings, Car, Home, Information, LogoutCurve, Menu, People, Shop, User } from 'iconsax-react-native'
+import { Buildings, Car, Card, Home, Information, LogoutCurve, Menu, People, Shop, User } from 'iconsax-react-native'
 import { useCustomFonts } from '../../../utilities/Fonts'
 import { TouchableOpacity } from 'react-native'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ import { BlurView } from 'expo-blur'
 import { ScrollView } from 'react-native'
 import { moderateScale, verticalScale } from '../../../utilities/Metrics'
 import Color from '../../../utilities/Color'
+import AlertBottomSheet from '../../components/AlertBottomSheet'
 
 const DrawerContent = (props) => {
   const [touchable, setTouchable]=useState("dashboard")
@@ -56,7 +57,9 @@ const DrawerContent = (props) => {
         {/* Branches */}
         <MenuItems icons={<Shop size={30} color="black" />} touchable={touchable} items={"branches"} title={"Branches"} onPress={()=>handleNavigation("branches")} />
         {/* Users */}
-        <MenuItems icons={<People size={30} color="black" />} touchable={touchable} items={"users"} title={"Users"} onPress={()=>handleNavigation("users")} />
+        <MenuItems icons={<People size={30} color="black" />} touchable={touchable} items={"users"} title={"Users"} onPress={()=>handleNavigation("listusers")} />
+        {/* My Order */}
+        <MenuItems icons={<Card size={30} color="black" />} touchable={touchable} items={"order"} title={"My Order"} onPress={()=>handleNavigation("orders")} />
         {/* Divider */}
         <View style={{marginTop:verticalScale(15), marginRight:20}}>
           <Divider color="black" width={1} />
@@ -78,69 +81,7 @@ const DrawerContent = (props) => {
         </TouchableOpacity>
         </View>
         </ScrollView>
-        <BottomSheet isVisible={isVisible} >
-          <TouchableOpacity onPress={()=>setIsVisible(!isVisible)}>
-            <BlurView  intensity={8}
-            tint="dark"
-            style={{
-              height: Dimensions.get("window").height,
-              width: Dimensions.get("window").width,
-            }}>
-               <View style={{ alignItems: "center", marginTop:200 }}>
-          <View
-            style={{
-              backgroundColor: "#fff",
-              borderRadius: 14,
-              borderWidth: 1,
-              borderColor: "black",
-              width: 312,
-              height:260,
-            }}
-          >
-            <View style={{ alignItems: "center", marginTop:30 }}>
-              <View style={{ alignItems: "center" }}>
-                <LogoutCurve color="black" size={30} />
-                <Text style={{
-                    marginTop: 20,
-                    fontSize: 16,
-                    fontFamily: fontGotham.medium,
-                  }}>Logout</Text>
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontSize: 14,
-                    fontFamily: fontGotham.book,
-                  }}
-                >
-                  Are you sure want to log out?
-                </Text>
-              </View>
-  
-            </View>
-          <View style={{alignItems:"center"}}>
-          <View style={{ alignItems:"center",  marginTop: verticalScale(30), flexDirection:"row", gap:10}}>
-              <Button
-                title="Logout"
-                onPress={handleLogout}
-                containerStyle={{ width:116, borderRadius: 4 }}
-                buttonStyle={{  backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
-                titleStyle={{ color: Color.light.black, fontSize:14}}
-              />
-              <Button
-              type="outline"
-                title="Cancel"
-                onPress={()=>setIsVisible(!isVisible)}
-                containerStyle={{ width: 116,  }}
-                buttonStyle={{ borderColor:"red", fontFamily:fontGotham.medium,borderRadius: 4 }}
-                titleStyle={{ color: "red", fontSize:14, }}
-              />
-            </View>
-          </View>
-          </View>
-        </View>
-            </BlurView>
-          </TouchableOpacity>
-        </BottomSheet>
+        <AlertBottomSheet icons={<LogoutCurve color="black" size={30} />} isVisible={isVisible} textbtn={"Logout"} pressValidBtn={handleLogout} pressBtn={()=>setIsVisible(!isVisible)} text={"Are you sure want to log out?"} title={"Logout"} onPress={()=>setIsVisible(!isVisible)} />
       </View>
   </DrawerContentScrollView>
   )

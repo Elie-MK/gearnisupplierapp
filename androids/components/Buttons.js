@@ -6,7 +6,7 @@ import { useCustomFonts } from '../../utilities/Fonts'
 import { horizontalScale, moderateScale } from '../../utilities/Metrics'
 import { TouchableOpacity } from 'react-native'
 
-const Buttons = ({title, handleSubmit, disabled}) => {
+const Buttons = ({title, handleSubmit, hide, hided}) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -15,12 +15,13 @@ const Buttons = ({title, handleSubmit, disabled}) => {
   return (
 
     <TouchableOpacity activeOpacity={0.5} onPress={handleSubmit}>
-          <View style={{backgroundColor:Color.light.main,
-
+          <View style={{backgroundColor:hide?null:Color.light.main,
+          borderColor:hided?"red":Color.light.main,
+          borderWidth:2,
               width:horizontalScale(315),
               borderRadius :8,
               height:60}}>
-            <Text style={{ color:Color.light.black,
+            <Text style={{ color:hided?"red":hide?Color.light.main:Color.light.black,
               fontSize: 15,
               fontFamily: fontGotham.medium, textAlign:"center", marginTop:18}}>{title}</Text>
           </View>

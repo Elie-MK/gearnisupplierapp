@@ -9,6 +9,10 @@ import Companyprofile from '../companyProfile/Companyprofile';
 import Branches from '../Branches/Branches';
 import DrawerNavigation from './DrawerNavigation';
 import AddBranches from '../Branches/addBranches/AddBranches';
+import UserList from '../Users/UserList';
+import CreateUser from '../Users/CreateUser';
+import EditBranch from '../Branches/EditBranch/EditBranch';
+import EditUser from '../Users/EditUser';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -29,19 +33,21 @@ const Navigation = () => {
               ()=>(
                 <DrawerNavigation>
  <Stack.Screen name='dashboard' component={Dashboard} />
-        <Stack.Screen name='menu' component={Menus} />
         <Stack.Screen name='notifications' component={Notifications} />
-        <Stack.Screen name='profile' component={Profiles} />
-        <Stack.Screen name='companyprofile' component={Companyprofile} />
-        <Stack.Screen name='branches' component={Branches} />
-        <Stack.Screen name='addbranches' component={AddBranches} />
+       
                 </DrawerNavigation>
               )
             }
 
           </Stack.Screen>
-        
-       
+          <Stack.Screen name='profile' component={Profiles} />
+        <Stack.Screen name='companyprofile' component={Companyprofile} />
+        <Stack.Screen name='listusers' component={UserList} />
+        <Stack.Screen name='branches' component={Branches} />
+        <Stack.Screen name='createuser' component={CreateUser} />
+        <Stack.Screen name='addbranches' component={AddBranches} />
+        <Stack.Screen name='editbranch' component={EditBranch} />
+        <Stack.Screen name='edituser' component={EditUser} />
       </Stack.Navigator>
 )}
 

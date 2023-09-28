@@ -13,6 +13,7 @@ import { useState } from 'react'
 import Dropdowns from '../../companyProfile/components/Dropdowns'
 import Buttons from '../../../components/Buttons'
 import KeybordAvoidHome from '../../../components/KeybordAvoidHome'
+import Header from '../../../components/Header'
 
 const AddBranches = ({navigation}) => {
   const [branchText, setBranchText]=useState('')
@@ -20,7 +21,7 @@ const AddBranches = ({navigation}) => {
 
 
   return (
-    <KeybordAvoidHome show title={"Add Branch"} onPress={()=>navigation.goBack()}>
+    <Header   title={"Add Branch"} nav={()=>navigation.goBack()}>
       <View>
         <View style={{marginTop:50, marginLeft:10, marginRight:20, alignItems:"center"}}>
         {/* branch name */}
@@ -35,13 +36,13 @@ const AddBranches = ({navigation}) => {
             style={{marginRight:10}}
             />}  label={"Add User"} />
 
-            <View style={{marginTop:120, marginBottom:50}}>
+            <View style={{marginTop:50, marginBottom:50}}>
             <Buttons title={"Add Branch"} />
             </View>
         </View>
 
       </View>
-    </KeybordAvoidHome>
+    </Header>
   )
 }
 

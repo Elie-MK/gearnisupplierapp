@@ -12,6 +12,7 @@ import * as Animatable from 'react-native-animatable';
 import { Pressable } from "react-native";
 import { LayoutAnimation } from "react-native";
 import { toggleAnimation } from "../../components/toggleAnimation";
+import Header from "../../components/Header";
 
 
 const Branches = ({navigation}) => {
@@ -41,7 +42,7 @@ const Branches = ({navigation}) => {
     return null;
   }
   return (
-    <KeybordAvoidHome onPress={()=>navigation.goBack()} title={"Branches"}>
+    <Header nav={()=>navigation.goBack()} title={"Branches"}>
       <View
         style={{
           marginLeft: horizontalScale(20),
@@ -50,8 +51,8 @@ const Branches = ({navigation}) => {
           alignItems:"center"
         }}
       >
+        <View    style={{ width: horizontalScale(315), height:!open?115:380, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
           <Pressable onPress={toggleDropdown}>
-        <Animatable.View    style={{ width: horizontalScale(315), height:!open?115:380, backgroundColor:Color.light.themeColor, padding:10, borderRadius:5, elevation: 5, marginBottom:1 }}>
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
               <View style={{}}>
                 <Text
@@ -76,12 +77,16 @@ const Branches = ({navigation}) => {
             
               </View>
             </View>
+            </Pressable>
+
             <View>
               <Text style={{fontSize:14, fontFamily:fontGotham.bold}}>Manager</Text>
             </View>
             <View style={{flexDirection:"row", justifyContent:"space-between", marginTop:13}}>
               <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>Nasir Al Qasimi</Text>
+              <TouchableOpacity onPress={()=>navigation.navigate('editbranch')}>
               <Text style={{fontSize:14, fontFamily:fontGotham.bold, color:!open?'black':"white", display:!open?"flex":"none"}}>Manage</Text>
+              </TouchableOpacity>
             </View>
             <View style={{marginTop:5, display:!open?"none":"flex"}}>
               <Divider  color={!open?"white":'black'} style={{marginTop:12}} />
@@ -105,7 +110,9 @@ const Branches = ({navigation}) => {
                   </Text>
                 </View>
                 <View>
-                <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.bold, color:!open?"white":'black'}}>Manage</Text>
+                  <TouchableOpacity onPress={()=>navigation.navigate('editbranch')}>
+                  <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.bold, color:!open?"white":'black'}}>Manage</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
               </View>
@@ -113,14 +120,13 @@ const Branches = ({navigation}) => {
              </View>
             
             </View>
-        </Animatable.View>
-          </Pressable>
+        </View>
           <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
               <Buttons handleSubmit={()=>navigation.navigate('addbranches')}  title={"Add New Branch"} />
             </View>
       </View>
   
-    </KeybordAvoidHome>
+    </Header>
   );
 };
 

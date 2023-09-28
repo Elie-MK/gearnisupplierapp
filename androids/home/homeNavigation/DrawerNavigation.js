@@ -11,6 +11,9 @@ import Companyprofile from '../companyProfile/Companyprofile';
 import { useCustomFonts } from '../../../utilities/Fonts';
 import Notifications from '../Dashboard/Notifications';
 import AddBranches from '../Branches/addBranches/AddBranches';
+import EditBranch from '../Branches/EditBranch/EditBranch';
+import UserList from '../Users/UserList';
+import CreateUser from '../Users/CreateUser';
 
 const DrawerNavigation = () => {
     const Drawer = createDrawerNavigator();
@@ -36,47 +39,8 @@ const DrawerNavigation = () => {
     }}
     >
 
-    <Drawer.Screen name="dashboard" options={{
-      title:'Dashboard',
-      drawerIcon:()=><Menu size={30} color="black"/>,
-     
-    }} component={Dashboard} />
-  
-    <Drawer.Screen name='profile' component={Profiles} options={{
-      title:"My Profile",
-      drawerIcon:()=><User size={30} color="black"/>,
-    }} />
-    <Drawer.Screen name='companyprofile' component={Companyprofile} options={{
-      title:"Company Profile",
-      drawerIcon:()=><Buildings size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='makemodel' component={Companyprofile} options={{
-      title:"Makes and Models",
-      drawerIcon:()=><Car size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='branches' component={Branches} options={{
-      title:"Branches",
-      drawerIcon:()=><Shop size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='users' component={Branches} options={{
-      title:"Users",
-      drawerIcon:()=><People size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='contact' component={Branches} options={{
-      title:"Customer Support",
-      drawerIcon:()=><Information size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='addbranches' component={AddBranches} options={{
-      title:"Customer Support",
-      drawerIcon:()=><Information size={30} color="black" />,
-    }} />
-    <Drawer.Screen name='notification' component={Notifications} options={{
-      title:"Customer Support",
-      drawerIcon:()=><Information size={30} color="black" />,
-    }} />
-
-
-
+    <Drawer.Screen name='dashboard' component={Dashboard}  />
+    <Drawer.Screen name='notification' component={Notifications}  />
 
   </Drawer.Navigator>
   )
