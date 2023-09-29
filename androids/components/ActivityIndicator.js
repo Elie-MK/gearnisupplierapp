@@ -6,9 +6,9 @@ import Color from '../../utilities/Color'
 
 const ActivityIndicators = () => {
   return (
-    <View style={{width:horizontalScale(315), borderRadius:4, backgroundColor:Color.light.main, height:60}}>
-    <View style={{backgroundColor:"white", opacity:0.5,  width:horizontalScale(315), height:60}}>
-    <ActivityIndicator animating={true} color={Color.light.black} style={{marginTop:15}}/>
+    <View style={{width:horizontalScale(315), borderRadius:4, backgroundColor:Color.light.main, height:60, alignItems:"center", justifyContent:"center"}}>
+    <View style={{backgroundColor:"white", opacity:0.5,  width:horizontalScale(315), height:60, alignItems:"center", justifyContent:"center"}}>
+    <ActivityIndicator animating={true} color={Color.light.black} />
     </View>
   </View>
   )

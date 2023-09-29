@@ -19,7 +19,7 @@ import ReactNativeModal from "react-native-modal";
 import { Flag } from "./components/ModalLanguage";
 import { useCustomFonts } from "../utilities/Fonts";
 import { BlurView } from "expo-blur";
-import { CloseCircle, CloudChange, DocumentText, InfoCircle, Refresh, Refresh2, RefreshSquare, } from "iconsax-react-native";
+import { CloseCircle, CloudChange, DocumentText, Global, InfoCircle, Refresh, Refresh2, RefreshSquare, } from "iconsax-react-native";
 import AlertModal from "./components/AlertModal";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
@@ -63,12 +63,11 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
           <View style={{alignItems:"center"}}>
          {
           changes?<Image 
-          resizeMode="contain"
-            style={{ width:210, height:88, top: 106 }}
+            style={{ width:335, height:140, top: 106 }}
             source={require("../assets/GearniYellow.png")}
           />:   <Image 
-          resizeMode="contain"
-            style={{ width:210, height:88, top: 106 }}
+          
+            style={{ width:335, height:140, top: 106 }}
             source={require("../assets/GearniFull.png")}
           /> 
          }
@@ -108,7 +107,7 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
             }}>
   
             <View>
-              <Feather name="globe" size={moderateScale(25)} color={changes?Color.light.main:"black"} />
+              <Global  size={moderateScale(25)} color={changes?Color.light.main:"black"} />
             </View>
             <View>
               <Text
@@ -134,7 +133,7 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
 
       {/* Modal */}
       <Modal
-        animationType="slide"
+        animationType="fade"
         visible={visible}
         onRequestClose={() => setVisible(!visible)}
         transparent={true}
@@ -177,10 +176,11 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
                 >
                   Select Language
                 </Text>
-                {Flag.map((item) => (
+                {Flag.map((item, index) => (
                   <TouchableOpacity
                     style={{ padding: 3 }}
                     onPress={() => setChecked(item.language, { item })}
+                    key={index}
                   >
                     <View
                       style={{
@@ -261,7 +261,7 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: verticalScale(300),
+    marginTop: verticalScale(250),
     alignItems:"center"
   },
   btn: {

@@ -9,7 +9,7 @@ const InputsText = ({onPress, borderColor,padding,width,iconsLeft,onChangeText,v
       return null;
     }
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 30 }}>
     <View
       style={{
         borderWidth: 1,
@@ -33,7 +33,7 @@ const InputsText = ({onPress, borderColor,padding,width,iconsLeft,onChangeText,v
           fontSize: 14,
           paddingLeft: 10,
           paddingRight:padding?230:60,
-          fontFamily: fontGotham.regular,
+          fontFamily: fontGotham.book,
           width: horizontalScale(300),
           height:56,
         }}

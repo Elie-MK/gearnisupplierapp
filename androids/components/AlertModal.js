@@ -18,6 +18,7 @@ const AlertModal = ({ subtext,show, visible, dismis, onPress, text, btnText, tit
       visible={visible}
       onDismiss={dismis}
       onRequestClose={dismis}
+      animationType="fade"
       >
       <TouchableWithoutFeedback onPress={dismis}>
             <BlurView

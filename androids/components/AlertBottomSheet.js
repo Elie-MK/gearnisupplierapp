@@ -6,6 +6,7 @@ import { LogoutCurve } from 'iconsax-react-native'
 import Color from '../../utilities/Color'
 import { useCustomFonts } from '../../utilities/Fonts'
 import { verticalScale } from '../../utilities/Metrics'
+import { Modal } from 'react-native'
 
 const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, textbtn, pressBtn, pressValidBtn }) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -13,7 +14,7 @@ const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, text
       return null;
     }
   return (
-    <BottomSheet isVisible={isVisible} >
+    <Modal animationType='fade'  visible={isVisible} >
           <TouchableOpacity onPress={onPress}>
             <BlurView  intensity={8}
             tint="dark"
@@ -84,7 +85,7 @@ const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, text
         </View>
             </BlurView>
           </TouchableOpacity>
-        </BottomSheet>
+        </Modal>
   )
 }
 

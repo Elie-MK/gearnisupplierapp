@@ -32,14 +32,14 @@ const UserList = ({navigation, route}) => {
     if (!users.some(user => user?.id === item?.id)) {
         setUsers(prev => [...prev, item]);
     } else {
-        alert("L'utilisateur existe déjà dans le tableau.");
+        alert("The user already exists");
     }
   }
   useEffect(()=>{
     setUsers(prev=>prev?.concat(datasUsers))
   },[navigation])
 
-console.log(users);
+// console.log(users);
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;

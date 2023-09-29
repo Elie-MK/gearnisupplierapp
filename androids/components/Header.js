@@ -26,7 +26,7 @@ const Header = ({nav, title, children}) => {
     <TouchableOpacity onPress={nav} ><MaterialIcons name="arrow-back-ios" size={24} color="black" /></TouchableOpacity>   
     <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium}}>{title}</Text>
     <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
-      <NotificationBing size={30} color='black' />
+      <NotificationBing size={25} color='black' />
     </TouchableOpacity>
 </View>
 <View>{children}</View>

@@ -11,7 +11,7 @@ const InputCountries = ({press, country, label, }) => {
       return null
     }
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 30 }}>
     <Pressable onPress={press}
       style={{
         borderWidth: 1,

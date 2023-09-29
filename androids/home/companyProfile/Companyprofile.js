@@ -104,20 +104,9 @@ const Companyprofile = ({navigation}) => {
       placeholder={"Input"} editable={false}
       />
     </View>
-     <View>
-     <InputsText width={horizontalScale(315)} label={"Identity Card *"} iconsLeft={<Hashtag color='black' />} 
-       defaultValue={"123456698"} iconsRight={<CloseCircle color='black' />}
-      />
-     </View>
-    <View>
-    <InputsText width={horizontalScale(315)} label={"Date of Birth *"} iconsLeft={<CalendarSearch color='black' />} 
-      placeholder={"mm/dd/yyyy"}  iconsRight={<CloseCircle color='black' />}
-      />
-    </View>
-     <View>
-     <InputCountries label={"Nationality *"} country={country} press={(item)=>onCountryChange(item)} />
-
-     </View>
+ 
+ 
+  
      <View>
      <InputsText width={horizontalScale(315)} label={"Tax Registration Number *"} iconsLeft={<Hashtag color='black' />} 
       placeholder={"Input"} defaultValue={"123456987/M/A/E/001"}  iconsRight={<CloseCircle color='black' />}
@@ -156,7 +145,7 @@ const Companyprofile = ({navigation}) => {
 </View>
     </View>
     <View style={{alignItems:"center"}}>
-    <Divider color='black' width={2} style={{marginTop:10, width:horizontalScale(315)}} />
+    <Divider color='black' width={2} style={{marginTop:30, width:horizontalScale(315)}} />
     </View>
 
 
@@ -179,15 +168,7 @@ const Companyprofile = ({navigation}) => {
               }  
 
            </View>
-           <View>
-           <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
-              Upload CIN*
-      </Text>
-      {
-        fileName3|selectedImage3 === null?  <EmptyUploadButton onPress={()=>pickImage(setSelectedImage3, setFileName3)} /> : <UploadInput selectedImage={selectedImage3} uploadProgress={uploadProgress3} clear={()=>handleClear(setSelectedImage3, setFileName3)} pickImage={()=>pickImage(setSelectedImage3, setFileName3)} fileName={fileName3} />
 
-      }
-           </View>
               
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
             <Buttons title={"Save"} />

@@ -12,7 +12,7 @@ const InputsNumber = ({flag, label, countryCode, number, onChangeNumber, default
     return null
   }
   return (
-    <View style={{  marginTop: verticalScale(15),
+    <View style={{  marginTop: verticalScale(30),
         borderWidth: 1,
         width:horizontalScale(315),
         flexDirection: "row",

@@ -13,7 +13,7 @@ const Notifications = ({ navigation }) => {
   }
   return (
     <HeaderHome title={"Notifications"} show>
-      <View>
+      <View style={{marginLeft:20, marginRight:20}}>
         
         <ScrollView showsVerticalScrollIndicator={false}  style={{ marginTop: verticalScale(20) }}>
           <Text

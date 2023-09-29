@@ -85,10 +85,10 @@ const Branches = ({navigation}) => {
             <View style={{flexDirection:"row", justifyContent:"space-between", marginTop:13}}>
               <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>Nasir Al Qasimi</Text>
               <TouchableOpacity onPress={()=>navigation.navigate('editbranch')}>
-              <Text style={{fontSize:14, fontFamily:fontGotham.bold, color:!open?'black':"white", display:!open?"flex":"none"}}>Manage</Text>
+              <Animatable.Text animation={!open&&"zoomIn"} duration={1000} style={{fontSize:14, fontFamily:fontGotham.bold, color:!open?'black':"white", display:!open?"flex":"none"}}>Manage</Animatable.Text>
               </TouchableOpacity>
             </View>
-            <View style={{marginTop:5, display:!open?"none":"flex"}}>
+            <Animatable.View animation={!open?"fadeInDown":"fadeIn"} duration={3000} style={{marginTop:5, display:!open?"none":"flex"}}>
               <Divider  color={!open?"white":'black'} style={{marginTop:12}} />
              <View style={{marginTop:8}}>
              <View style={{marginTop:10}}>
@@ -119,7 +119,7 @@ const Branches = ({navigation}) => {
               </View>
              </View>
             
-            </View>
+            </Animatable.View>
         </View>
           <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
               <Buttons handleSubmit={()=>navigation.navigate('addbranches')}  title={"Add New Branch"} />

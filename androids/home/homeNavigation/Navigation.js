@@ -13,6 +13,8 @@ import UserList from '../Users/UserList';
 import CreateUser from '../Users/CreateUser';
 import EditBranch from '../Branches/EditBranch/EditBranch';
 import EditUser from '../Users/EditUser';
+import Requests from '../Requests/Requests';
+import NewBid from '../Requests/NewBid';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -48,6 +50,8 @@ const Navigation = () => {
         <Stack.Screen name='addbranches' component={AddBranches} />
         <Stack.Screen name='editbranch' component={EditBranch} />
         <Stack.Screen name='edituser' component={EditUser} />
+        <Stack.Screen name='requests' component={Requests} />
+        <Stack.Screen name='newbid' component={NewBid} />
       </Stack.Navigator>
 )}
 

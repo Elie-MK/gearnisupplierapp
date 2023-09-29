@@ -135,7 +135,7 @@ const Registercompany = ({ navigation }) => {
               {/* Comany Name */}
               <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
-              <View style={{  marginTop: verticalScale(15),}}>
+              <View style={{  marginTop: verticalScale(30),}}>
         <Inputs  placeholder={"12345678"} label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setOpen(!open)} />
         </View>
               {/* Comapny Registration Number */}

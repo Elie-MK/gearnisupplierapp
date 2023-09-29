@@ -18,6 +18,8 @@ import NotEditableInput from '../../components/NotEditableInput'
 import InputCountries from '../../components/InputCountries'
 import Buttons from '../../components/Buttons'
 import EmptyUploadButton from '../../components/EmptyUploadButton'
+import DateTimePicker from "@react-native-community/datetimepicker"
+
 
 
 const Profiles = ({navigation}) => {
@@ -37,6 +39,9 @@ const Profiles = ({navigation}) => {
   const [fileName2, setFileName2] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadProgress2, setUploadProgress2] = useState(0);
+  const [date, setDate]=useState(new Date())
+  const [showPicker, setShowPicker]=useState(false)
+  const [dateBirth, setDateBirth]=useState('')
 
 
   const pickImage = async (selected, fileNames) => {
@@ -67,6 +72,23 @@ const Profiles = ({navigation}) => {
       namesFiles(null)
       imagesSelected(null)
     }
+
+    const toggleDatePicker = ()=>{
+      setShowPicker(!showPicker)
+    }
+    
+    const onChange = ({type}, selectedDate)=>{
+      if(type== "set"){
+        const currentDate = selectedDate
+        setDate(currentDate)
+        if(Platform.OS == "android"){
+          toggleDatePicker()
+          setDateBirth(currentDate.toDateString())
+        }
+      }else{
+        toggleDatePicker()
+      }
+    }
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null
@@ -87,11 +109,11 @@ const Profiles = ({navigation}) => {
               {/* Last Name */}
              <InputsText padding placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
-            <View style={{  marginTop: verticalScale(15),}}>
+            <View style={{  marginTop: verticalScale(30),}}>
         <Inputs placeholder={"12345678"} label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />
         </View>
         {/* Mobile Number */}
-        <View style={{  marginTop: verticalScale(15),
+        <View style={{  marginTop: verticalScale(30),
     borderWidth: 1,
     width:horizontalScale(315),
     flexDirection: "row",
@@ -130,7 +152,14 @@ const Profiles = ({navigation}) => {
         </View>
         </View>
          {/* Birthday */}
-         <InputsText label={"Birthdate *"} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} iconsRight={<CloseCircle color='black' />} iconsLeft={<CalendarSearch  color='black'/>} />
+         {
+              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="spinner" value={date}  />
+
+            }
+         <Pressable onPress={toggleDatePicker}>
+            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+
+            </Pressable>            
             {/* Email */}
             <InputsText label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"} iconsRight={<CloseCircle color='black' />} iconsLeft={<Sms color='black' />} />
             {/* Job Title */}

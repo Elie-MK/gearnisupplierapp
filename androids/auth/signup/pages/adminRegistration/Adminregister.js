@@ -15,6 +15,7 @@ import Color from "../../../../../utilities/Color";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useCustomFonts } from "../../../../../utilities/Fonts";
 import { Button, Input } from "@rneui/base";
+import DateTimePicker from "@react-native-community/datetimepicker"
 import ModalCountry from "../../../../components/ModalCountry";
 import KeyboardAvoid from "../../../../components/KeyboardAvoid";
 import {User, CalendarSearch, CloseCircle, Sms, Location, Flag} from 'iconsax-react-native';
@@ -22,6 +23,7 @@ import InputsText from "../../../../components/InputsText";
 import InputCountries from "../../../../components/InputCountries";
 import Buttons from "../../../../components/Buttons";
 import { horizontalScale, verticalScale } from "../../../../../utilities/Metrics";
+import { Platform } from "react-native";
 
 
 const Adminregister = ({ navigation }) => {
@@ -29,18 +31,36 @@ const Adminregister = ({ navigation }) => {
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [date, setDate]=useState(new Date())
+  const [showPicker, setShowPicker]=useState(false)
+  const [dateBirth, setDateBirth]=useState('')
 
   const onCountryChange = (item) => {
     setNameCountry(item.name)
     setModalOpen(!modalOpen);
   };
+const toggleDatePicker = ()=>{
+  setShowPicker(!showPicker)
+}
 
+const onChange = ({type}, selectedDate)=>{
+  if(type== "set"){
+    const currentDate = selectedDate
+    setDate(currentDate)
+    if(Platform.OS == "android"){
+      toggleDatePicker()
+      setDateBirth(currentDate.toDateString())
+    }
+  }else{
+    toggleDatePicker()
+  }
+}
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
   }
 
-  // console.log(namecountry);
+  console.log(dateBirth);
   return (
     <KeyboardAvoid>
     <View style={styles.container}>
@@ -64,7 +84,14 @@ const Adminregister = ({ navigation }) => {
              <InputsText placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
             {/* Birthday */}
-            <InputsText placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+            {
+              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="spinner" value={date}  />
+
+            }
+            <Pressable onPress={toggleDatePicker}>
+            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+
+            </Pressable>
             {/* Email */}
            <InputsText width={horizontalScale(315)} iconsLeft={<Sms color="black" />} label={"Email"} placeholder={"Email"} />
             {/* Adress */}

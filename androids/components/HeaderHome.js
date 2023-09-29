@@ -17,7 +17,7 @@ const HeaderHome = ({children, show, title, onPress}) => {
   return (
     <View style={styles.container}>
         <View style={styles.secondContainer}>
-          <View style={{flexDirection:"row", justifyContent:"space-between", marginRight:20}}>
+          <View style={{flexDirection:"row", justifyContent:"space-between", marginRight:20, marginLeft:20}}>
             <TouchableOpacity onPress={()=>navigation.openDrawer()}>
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
         height: Dimensions.get("screen").height,
       },
       secondContainer: {
-        marginLeft: 20,
         marginTop: verticalScale(20),
       },
 })

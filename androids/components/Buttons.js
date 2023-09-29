@@ -20,11 +20,12 @@ const Buttons = ({title, handleSubmit, hide, hided}) => {
           borderWidth:2,
               width:horizontalScale(315),
               borderRadius :8,
-              height:60}}>
-            <Text style={{ color:hided?"red":hide?Color.light.main:Color.light.black,
+              height:60, alignItems:"center", justifyContent:"center"}}>
+           
+           <Text style={{ color:hided?"red":hide?Color.light.main:Color.light.black,
               fontSize: 15,
-              fontFamily: fontGotham.medium, textAlign:"center", marginTop:18}}>{title}</Text>
-          </View>
+              fontFamily: fontGotham.medium, textAlign:"center",}}>{title}</Text>
+           </View>
           </TouchableOpacity>
     // <Button
     //     title={}

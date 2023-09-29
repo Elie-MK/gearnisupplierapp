@@ -2,7 +2,7 @@ import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
-import { Buildings, Car, Card, Home, Information, LogoutCurve, Menu, People, Shop, User } from 'iconsax-react-native'
+import { Buildings, Car, Card, Home, Information, LogoutCurve, Menu, People, ReceiptSearch, Shop, User } from 'iconsax-react-native'
 import { useCustomFonts } from '../../../utilities/Fonts'
 import { TouchableOpacity } from 'react-native'
 import { useState } from 'react'
@@ -54,12 +54,12 @@ const DrawerContent = (props) => {
         <View style={{marginTop:15}}>
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
+          {/* My Order */}
+          <MenuItems icons={<ReceiptSearch size={30} color="black" />} touchable={touchable} items={"requests"} title={"Requests"} onPress={()=>handleNavigation("requests")} />
         {/* Branches */}
         <MenuItems icons={<Shop size={30} color="black" />} touchable={touchable} items={"branches"} title={"Branches"} onPress={()=>handleNavigation("branches")} />
         {/* Users */}
         <MenuItems icons={<People size={30} color="black" />} touchable={touchable} items={"users"} title={"Users"} onPress={()=>handleNavigation("listusers")} />
-        {/* My Order */}
-        <MenuItems icons={<Card size={30} color="black" />} touchable={touchable} items={"order"} title={"My Order"} onPress={()=>handleNavigation("orders")} />
         {/* Divider */}
         <View style={{marginTop:verticalScale(15), marginRight:20}}>
           <Divider color="black" width={1} />
@@ -75,8 +75,8 @@ const DrawerContent = (props) => {
         {/* Logout */}
         <TouchableOpacity onPress={()=>setIsVisible(!isVisible)} style={{marginTop:verticalScale(50)}}>
           <View style={{flexDirection:"row", alignItems:"center", gap:10,marginLeft:12}}>
-          <LogoutCurve size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Logout</Text>
+          <LogoutCurve size={30} color="red" />
+          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium, color:"red"}}>Logout</Text>
           </View>
         </TouchableOpacity>
         </View>

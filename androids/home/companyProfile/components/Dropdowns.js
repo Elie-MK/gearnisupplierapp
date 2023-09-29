@@ -20,7 +20,7 @@ const Dropdowns = ({icons, label}) => {
 
 //   console.log(value);
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 30 }}>
       <View
         style={{
           alignItems: "center",
