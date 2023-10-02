@@ -15,6 +15,9 @@ import EditBranch from '../Branches/EditBranch/EditBranch';
 import EditUser from '../Users/EditUser';
 import Requests from '../Requests/Requests';
 import NewBid from '../Requests/NewBid';
+import Manages from '../MakeModels/Manages';
+import AddMakeModel from '../MakeModels/AddMakeModel';
+import EditModel from '../MakeModels/EditModel';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -52,6 +55,9 @@ const Navigation = () => {
         <Stack.Screen name='edituser' component={EditUser} />
         <Stack.Screen name='requests' component={Requests} />
         <Stack.Screen name='newbid' component={NewBid} />
+        <Stack.Screen name='makemodels' component={Manages} />
+        <Stack.Screen name='addnewmake' component={AddMakeModel} />
+        <Stack.Screen name='editmodel' component={EditModel} />
       </Stack.Navigator>
 )}
 

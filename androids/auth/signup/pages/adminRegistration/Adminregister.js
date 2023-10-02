@@ -85,7 +85,7 @@ const onChange = ({type}, selectedDate)=>{
              </View>
             {/* Birthday */}
             {
-              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="spinner" value={date}  />
+              showPicker &&<DateTimePicker   style={styles.calendar} dateFormat="day month year" onChange={onChange} positiveButton={{textColor:"black"}}   negativeButton={{textColor:"black"}} mode="date" display="calendar" value={date}  />
 
             }
             <Pressable onPress={toggleDatePicker}>
@@ -132,4 +132,8 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(5),
     marginRight: 20,
   },
+  calendar:{
+    backgroundColor:"red",
+    color:"red"
+  }
 });

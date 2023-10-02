@@ -45,7 +45,7 @@ const DrawerContent = (props) => {
         {/* Company Profile */}
         <MenuItems icons={<Buildings size={30} color="black" />} touchable={touchable} items={"companyprofile"} title={"Company Profile"} onPress={()=>handleNavigation("companyprofile")} />
         {/* Make and Models */}
-        <MenuItems icons={<Car size={30} color="black" />} touchable={touchable} items={"makemodel"} title={"Make and Models"} onPress={()=>handleNavigation("makemodel")} />
+        <MenuItems icons={<Car size={30} color="black" />} touchable={touchable} items={"makemodels"} title={"Make and Models"} onPress={()=>handleNavigation("makemodels")} />
         {/* Divider */}
         <View style={{marginTop:15, marginRight:20}}>
           <Divider color="black" width={1} />

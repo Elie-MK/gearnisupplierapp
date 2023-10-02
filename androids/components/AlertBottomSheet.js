@@ -8,14 +8,14 @@ import { useCustomFonts } from '../../utilities/Fonts'
 import { verticalScale } from '../../utilities/Metrics'
 import { Modal } from 'react-native'
 
-const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, textbtn, pressBtn, pressValidBtn }) => {
+const AlertBottomSheet = ({isVisible,hide, subtext, icons, title, onPress, text, textbtn, pressBtn, pressValidBtn }) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
     }
   return (
     <Modal animationType='fade'  visible={isVisible} >
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
             <BlurView  intensity={8}
             tint="dark"
             style={{
@@ -50,15 +50,17 @@ const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, text
                 >
                   {text}
                 </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontFamily: fontGotham.book,
-                    textAlign:"center"
-                  }}
-                >
-                  {subtext}
-                </Text>
+               {
+                !hide &&  <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: fontGotham.book,
+                  textAlign:"center"
+                }}
+              >
+                {subtext}
+              </Text>
+               }
               </View>
   
             </View>
@@ -74,7 +76,7 @@ const AlertBottomSheet = ({isVisible, subtext, icons, title, onPress, text, text
               <Button
               type="outline"
                 title="Cancel"
-                onPress={pressBtn}
+                onPress={onPress}
                 containerStyle={{ width: 116,  }}
                 buttonStyle={{ borderColor:"red", fontFamily:fontGotham.medium,borderRadius: 4 }}
                 titleStyle={{ color: "red", fontSize:14, }}
