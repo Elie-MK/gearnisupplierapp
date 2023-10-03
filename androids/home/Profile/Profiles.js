@@ -153,23 +153,23 @@ const Profiles = ({navigation}) => {
         </View>
          {/* Birthday */}
          {
-              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="spinner" value={date}  />
+              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="default" value={date}          />
 
             }
          <Pressable onPress={toggleDatePicker}>
-            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"}  iconsLeft={<CalendarSearch color="black" />} />
 
             </Pressable>            
             {/* Email */}
-            <InputsText label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"} iconsRight={<CloseCircle color='black' />} iconsLeft={<Sms color='black' />} />
+            <InputsText label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"}  iconsLeft={<Sms color='black' />} />
             {/* Job Title */}
-           <InputsText label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}iconsRight={<CloseCircle color='black' />}  iconsLeft={<SearchNormal color='black' />} />
+           <InputsText label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}  iconsLeft={<SearchNormal color='black' />} />
             {/* Role */}
-            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} iconsRight={<CloseCircle color='#dfdfdf' />}/>
+            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} />
           {/* Branch */}
-          <NotEditableInput width iconsLeft={<Shop color='#dfdfdf' />}  label={"Branch *"} placeholder={"Branch Name"} iconsRight={<CloseCircle color='#dfdfdf' />} />
+          <NotEditableInput width iconsLeft={<Shop color='#dfdfdf' />}  label={"Branch *"} placeholder={"Branch Name"}  />
             {/* Identity Card */}
-           <InputsText label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)} iconsRight={<CloseCircle color='black' />} />
+           <InputsText label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)}  />
             {/* Nationality */}
             <InputCountries country={country} label={"Nationality"} press={()=>setVisibleM(!visibleM)} />
         {/* Country */}

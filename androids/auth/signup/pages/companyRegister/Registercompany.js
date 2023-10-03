@@ -139,7 +139,7 @@ const Registercompany = ({ navigation }) => {
         <Inputs  placeholder={"12345678"} label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setOpen(!open)} />
         </View>
               {/* Comapny Registration Number */}
-             <InputsText iconsRight={<CloseCircle color="black" />} label={"Company Registration Number"} width={horizontalScale(315)}  placeholder={"1234567/M/A/E/001"}  iconsLeft={<Hashtag color="black" />} />
+             <InputsText  label={"Company Registration Number"} width={horizontalScale(315)}  placeholder={"1234567/M/A/E/001"}  iconsLeft={<Hashtag color="black" />} />
               {/* Company Location */}
               <InputsText label={"Company Location"} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} width={horizontalScale(315)}  />
               {/* Country */}

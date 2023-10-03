@@ -8,7 +8,7 @@ import { useCustomFonts } from '../../utilities/Fonts'
 import { verticalScale } from '../../utilities/Metrics'
 import { Modal } from 'react-native'
 
-const AlertBottomSheet = ({isVisible,hide, subtext, icons, title, onPress, text, textbtn, pressBtn, pressValidBtn }) => {
+const AlertBottomSheet = ({isVisible,hide, hidebtn, subtext, icons, title, onPress, text, textbtn, pressBtn, pressValidBtn }) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -73,7 +73,8 @@ const AlertBottomSheet = ({isVisible,hide, subtext, icons, title, onPress, text,
                 buttonStyle={{  backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
                 titleStyle={{ color: Color.light.black, fontSize:14}}
               />
-              <Button
+            {
+              !hidebtn &&  <Button
               type="outline"
                 title="Cancel"
                 onPress={onPress}
@@ -81,6 +82,7 @@ const AlertBottomSheet = ({isVisible,hide, subtext, icons, title, onPress, text,
                 buttonStyle={{ borderColor:"red", fontFamily:fontGotham.medium,borderRadius: 4 }}
                 titleStyle={{ color: "red", fontSize:14, }}
               />
+            }
             </View>
           </View>
           </View>

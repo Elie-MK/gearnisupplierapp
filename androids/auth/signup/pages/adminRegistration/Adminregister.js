@@ -89,7 +89,7 @@ const onChange = ({type}, selectedDate)=>{
 
             }
             <Pressable onPress={toggleDatePicker}>
-            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"} iconsRight={<CloseCircle color="black" />}  iconsLeft={<CalendarSearch color="black" />} />
+            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"}  iconsLeft={<CalendarSearch color="black" />} />
 
             </Pressable>
             {/* Email */}

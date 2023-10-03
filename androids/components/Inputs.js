@@ -48,7 +48,7 @@ const Inputs = ({placeholder,namecountry, countryCode, number, onChangeText, onP
             backgroundColor: Color.light.themeColor,
           }}
         >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>{label}</Text>
+          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.book}}>{label}</Text>
         </View>
         </View>
   )

@@ -57,9 +57,10 @@ const KeybordAvoidHome = ({ title, children, size, nav }) => {
         >
           {title}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("notification")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("notification")}>
           <NotificationBing size={25} color="black" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View></View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

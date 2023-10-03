@@ -109,7 +109,7 @@ const Companyprofile = ({navigation}) => {
   
      <View>
      <InputsText width={horizontalScale(315)} label={"Tax Registration Number *"} iconsLeft={<Hashtag color='black' />} 
-      placeholder={"Input"} defaultValue={"123456987/M/A/E/001"}  iconsRight={<CloseCircle color='black' />}
+      placeholder={"Input"} defaultValue={"123456987/M/A/E/001"}  
       />
      </View>
    <View>
@@ -132,7 +132,7 @@ const Companyprofile = ({navigation}) => {
 </View>
 <View>
 <InputsText width={horizontalScale(315)} label={"Email *"} iconsLeft={<Sms color='black' />} 
-      placeholder={"Input"} defaultValue={"name@email.com"}  iconsRight={<CloseCircle color='black' />}
+      placeholder={"Input"} defaultValue={"name@email.com"}  
       />
 </View>
 <View>
@@ -140,7 +140,7 @@ const Companyprofile = ({navigation}) => {
 </View>
 <View>
 <InputsText width={horizontalScale(315)} label={"Physical adress *"} iconsLeft={<Location color='black' />} 
-       defaultValue={"tunis tunisie "}  iconsRight={<CloseCircle color='black' />}
+       defaultValue={"tunis tunisie "}  
       />
 </View>
     </View>

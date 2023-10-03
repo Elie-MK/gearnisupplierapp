@@ -22,7 +22,7 @@ const HeaderHome = ({children, show, title, onPress}) => {
               <HambergerMenu size={30} color='black' />
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
-              <NotificationBing size={30} color='black' />
+              <NotificationBing size={25} color='black' />
             </TouchableOpacity>
         </View>
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:show?"center":"space-between", marginTop:20 }}>

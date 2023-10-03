@@ -63,12 +63,13 @@ const iconRotation = changes ? { transform: [{ rotate: '180deg' }] } :  { transf
           <View style={{alignItems:"center"}}>
          {
           changes?<Image 
-            style={{ width:335, height:140, top: 106 }}
+          resizeMode="contain"
+            style={{  top: 106, height:110, width:260 }}
             source={require("../assets/GearniYellow.png")}
           />:   <Image 
-          
-            style={{ width:335, height:140, top: 106 }}
-            source={require("../assets/GearniFull.png")}
+          resizeMode="contain"
+            style={{  top: 106, height:110, width:260 }}
+            source={require("../assets/gearniofficial.png")}
           /> 
          }
           </View>

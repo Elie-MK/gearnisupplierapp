@@ -18,6 +18,8 @@ import NewBid from '../Requests/NewBid';
 import Manages from '../MakeModels/Manages';
 import AddMakeModel from '../MakeModels/AddMakeModel';
 import EditModel from '../MakeModels/EditModel';
+import DeleteProfile from '../DeleteAccount/DeleteProfile';
+import DeleteReason from '../DeleteAccount/DeleteReason';
 
 const Navigation = () => {
     const Stack = createStackNavigator();
@@ -58,6 +60,8 @@ const Navigation = () => {
         <Stack.Screen name='makemodels' component={Manages} />
         <Stack.Screen name='addnewmake' component={AddMakeModel} />
         <Stack.Screen name='editmodel' component={EditModel} />
+        <Stack.Screen name='deleteprofile' component={DeleteProfile} />
+        <Stack.Screen name='deletereasons' component={DeleteReason} />
       </Stack.Navigator>
 )}
 
