@@ -9,7 +9,7 @@ const NotEditableInput = ({width,iconsLeft, iconsRight, label, placeholder, edit
     return null
   }
   return (
-    <View style={{ marginTop: 15,  }}>
+    <View style={{ marginTop: 30,  }}>
       <View style={{backgroundColor:"#fff"}}>
     <View
       style={{

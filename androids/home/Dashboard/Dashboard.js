@@ -15,6 +15,7 @@ const Dashboard = ({navigation}) => {
     }
   return (
     <HeaderHome title={"Dashboard"} show>
+     
        <View>
        <View style={{alignItems:"center", marginTop:verticalScale(20)}}>
           <Image style={{width:68, height:63}} source={require("../../../assets/profile.png")} />

@@ -19,9 +19,6 @@ export const Userdata = [
         "id": 5,
         "name":"Sami",
     },
-    {
-        "id": 6,
-        "name":"Yusuf",
-    },
+
 ]
 

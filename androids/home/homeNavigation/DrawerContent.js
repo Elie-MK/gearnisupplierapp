@@ -2,7 +2,7 @@ import { View, Text, Dimensions } from 'react-native'
 import React from 'react'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
-import { Buildings, Car, Card, Home, Information, LogoutCurve, Menu, People, ReceiptSearch, Shop, User } from 'iconsax-react-native'
+import { Buildings, Car, Card, Home, Information, LogoutCurve, Menu, People, ReceiptSearch, ShieldTick, Shop, User } from 'iconsax-react-native'
 import { useCustomFonts } from '../../../utilities/Fonts'
 import { TouchableOpacity } from 'react-native'
 import { useState } from 'react'
@@ -33,6 +33,7 @@ const DrawerContent = (props) => {
   return (
     <DrawerContentScrollView {...props}>
      <View style={{marginTop:verticalScale(40), marginLeft:15}}>
+
         <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium}}>Section Header</Text>
@@ -55,7 +56,7 @@ const DrawerContent = (props) => {
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
           {/* My Order */}
-          <MenuItems icons={<ReceiptSearch size={30} color="black" />} touchable={touchable} items={"requests"} title={"Requests"} onPress={()=>handleNavigation("requests")} />
+          <MenuItems icons={<ReceiptSearch size={30} color="black" />} touchable={touchable} items={"requests"} title={"Orders"} onPress={()=>handleNavigation("requests")} />
         {/* Branches */}
         <MenuItems icons={<Shop size={30} color="black" />} touchable={touchable} items={"branches"} title={"Branches"} onPress={()=>handleNavigation("branches")} />
         {/* Users */}
@@ -68,8 +69,9 @@ const DrawerContent = (props) => {
         <View style={{marginTop:verticalScale(15)}}>
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
+        <MenuItems icons={<ShieldTick size={30} color="black" />} touchable={touchable} items={"report"} title={"Privacy and sharing"} onPress={()=>alert("In development")} />
         {/* Customer Support */}
-        <MenuItems icons={<Information size={30} color="black" />} touchable={touchable} items={"contact"} title={"Customer Support"} onPress={()=>handleNavigation("contact")} />
+        <MenuItems icons={<Information size={30} color="black" />} touchable={touchable} items={"report"} title={"Customer Support"} onPress={()=>handleNavigation("report")} />
 
 
         {/* Logout */}

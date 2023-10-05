@@ -14,8 +14,10 @@ import Login from "./androids/auth/signin/Login";
 import Register from "./androids/auth/signup/Register";
 import Otp from "./androids/auth/otp/Otp";
 import Flow from "./androids/components/Flow";
-import Navigation from "./androids/home/homeNavigation/Navigation";
 import NavigationPage from "./androids/auth/signup/pages/NavigationPage";
+import BottomNavigation from "./androids/home/homeNavigation/BottomNavigation";
+import DrawerNavigation from "./androids/home/homeNavigation/DrawerNavigation";
+import Profiles from "./androids/home/Profile/Profiles";
 
 
 export default function App() {
@@ -31,7 +33,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="welcome"
+              initialRouteName="drawer"
             >
               <Stack.Screen name="welcome" component={WelcomeAndroid} />
               <Stack.Screen name="login" component={Login} />
@@ -39,7 +41,8 @@ export default function App() {
               <Stack.Screen name="otp" component={Otp} />
               <Stack.Screen name="flow" component={Flow} />
               <Stack.Screen  name='navppage'component= {NavigationPage}/>
-              <Stack.Screen name="home" component={Navigation} />
+              <Stack.Screen name="drawer" component={DrawerNavigation} />
+          
             </Stack.Navigator>
           </NavigationContainer>
       )}

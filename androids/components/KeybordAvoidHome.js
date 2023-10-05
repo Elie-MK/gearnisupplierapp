@@ -53,7 +53,7 @@ const KeybordAvoidHome = ({ title, children, size, nav }) => {
           <MaterialIcons name="arrow-back-ios" size={24} color="black" />
         </TouchableOpacity>
         <Text
-          style={{ fontSize: size ? 22 : 14, fontFamily: fontGotham.medium }}
+          style={{ fontSize: size ? 22 : 14, marginRight:30, fontFamily: fontGotham.medium }}
         >
           {title}
         </Text>

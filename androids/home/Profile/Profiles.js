@@ -19,6 +19,7 @@ import InputCountries from '../../components/InputCountries'
 import Buttons from '../../components/Buttons'
 import EmptyUploadButton from '../../components/EmptyUploadButton'
 import DateTimePicker from "@react-native-community/datetimepicker"
+import { useColorScheme } from 'react-native'
 
 
 
@@ -59,7 +60,8 @@ const Profiles = ({navigation}) => {
     }
   };
   
-  
+  const colorScheme = useColorScheme();
+  const themeTextStyle = colorScheme === 'light'?Color.light.main:Color.light.main
   const onCountryChange = (item) => {
     setCountryCode(item.dial_code);
     setNationality(item.name)
@@ -153,7 +155,7 @@ const Profiles = ({navigation}) => {
         </View>
          {/* Birthday */}
          {
-              showPicker &&<DateTimePicker dateFormat="day month year" onChange={onChange} mode="date" display="default" value={date}          />
+              showPicker &&<DateTimePicker  style={{backgroundColor:"red"}} dateFormat="day month year" onChange={onChange} mode="date" display="default" value={date}          />
 
             }
          <Pressable onPress={toggleDatePicker}>
