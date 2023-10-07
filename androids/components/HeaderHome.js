@@ -25,7 +25,7 @@ const HeaderHome = ({children, show, title, onPress}) => {
               <NotificationBing size={25} color='black' />
             </TouchableOpacity>
         </View>
-            <View style={{flexDirection:"row", alignItems:"center", justifyContent:show?"center":"space-between", marginTop:20 }}>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:show?"center":"space-between", marginTop:20, marginLeft:20 }}>
             {
                 show?null: <TouchableOpacity onPress={onPress} ><MaterialIcons name="arrow-back-ios" size={24} color="black" /></TouchableOpacity>
             }

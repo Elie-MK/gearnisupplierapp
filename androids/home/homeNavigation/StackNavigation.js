@@ -19,6 +19,7 @@ import ReachSupport from "../Report/ReachSupport";
 import { createStackNavigator } from "@react-navigation/stack";
 import Dashboard from "../Dashboard/Dashboard";
 import Notifications from "../Dashboard/Notifications";
+import ViewImgCamera from "../ViewImgCamera/ViewImgCamera";
 
 const StackNavigation = () => {
   const Stack = createStackNavigator();
@@ -48,6 +49,7 @@ const StackNavigation = () => {
       <Stack.Screen name="deletereasons" component={DeleteReason} />
       <Stack.Screen name="report" component={ReachSupport} />
       <Stack.Screen name="notification" component={Notifications} />
+      <Stack.Screen name="viewimgcamera" component={ViewImgCamera} />
     </Stack.Navigator>
   );
 };

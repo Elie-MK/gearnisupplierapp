@@ -34,7 +34,7 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
             justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity style={{ flexDirection: "row", alignItems:"center", gap:10 }} onPress={pickImage}>
+          <TouchableOpacity style={{ flexDirection: "row", alignItems:"center", gap:10 }} onPress={()=>pickImage}>
             <View>
             {selectedImage && (
         <Image  width={40}

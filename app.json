@@ -22,6 +22,11 @@
         "foregroundImage": "./assets/BlackAndYellowGearni.png",
         "backgroundColor": "#FFC244"
       },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "package": "com.gearnisupplierapp.gearnisupplierapp"
     },
     "web": {

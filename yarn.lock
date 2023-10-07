@@ -3346,6 +3346,13 @@ expo-blur@~12.4.1:
   resolved "https://registry.npmjs.org/expo-blur/-/expo-blur-12.4.1.tgz"
   integrity sha512-lGN8FS9LuGUlEriULTC62cCWyg5V7zSVQeJ6Duh1wSq8aAETinZ2/7wrT6o+Uhd/XVVxFNON2T25AGCOtMG6ew==
 
+expo-camera@~13.4.4:
+  version "13.4.4"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-13.4.4.tgz#e01ead31a3150398d37e94c307f6937480680690"
+  integrity sha512-7k54APbpSulUDR2CrD5SrmKjCdfdg4tqKRpbBOKc2J2MIBHhunExU77435JDYSejHRY5bfRHZsEp3yKwR862uw==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-constants@~14.4.2:
   version "14.4.2"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-14.4.2.tgz"
@@ -3353,6 +3360,11 @@ expo-constants@~14.4.2:
   dependencies:
     "@expo/config" "~8.1.0"
     uuid "^3.3.2"
+
+expo-document-picker@~11.5.4:
+  version "11.5.4"
+  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-11.5.4.tgz#11c274d1a2f4aa1f0ca7c0403ca02017a20d832e"
+  integrity sha512-4lpRixi33kjoQQy9lfrGs48yFRMOgBgdnqjYWVFe85WFy/WkEoFC2E8usxcFdrIigtfy9Z+HY3/je4lHEYqyLg==
 
 expo-eas-client@~0.6.0:
   version "0.6.0"
@@ -3437,10 +3449,10 @@ expo-updates-interface@~0.10.0:
   resolved "https://registry.npmjs.org/expo-updates-interface/-/expo-updates-interface-0.10.1.tgz"
   integrity sha512-I6JMR7EgjXwckrydDmrkBEX/iw750dcqpzQVsjznYWfi0HTEOxajLHB90fBFqQkUV5i5s4Fd3hYQ1Cn0oMzUbA==
 
-expo-updates@~0.18.15:
-  version "0.18.15"
-  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.18.15.tgz#b3d2831726e60aac10e7eb5ff63a940c93ca9378"
-  integrity sha512-H3IERMG7d2flvj1pknJyXhRaYrkDEz7HPNNX+LCWqoWkNBslbGfFednW3gAtSlqJoTS8AzZIn5gEMvgFgV8fuA==
+expo-updates@~0.18.16:
+  version "0.18.16"
+  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.18.16.tgz#d81bff0178d7d9dd279aad51ee25bc71d237f8ab"
+  integrity sha512-5/3Yh6FHG8oRDz1pqpn7NEO6GQBH5GV/sygnkkn3JxsiXzlOsuOY7+x+gFr4CdKVyreaoJV863ZxKvxplVE4fA==
   dependencies:
     "@expo/code-signing-certificates" "0.0.5"
     "@expo/config" "~8.1.0"
