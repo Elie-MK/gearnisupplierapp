@@ -40,7 +40,7 @@ const DrawerContent = (props) => {
         </View>
         <View style={{marginTop:verticalScale(10)}}>
           {/* Dashboard */}
-        <MenuItems icons={<Menu size={30} color="black" />} touchable={touchable} items={"dashboard"} title={"Dashboard"} onPress={()=>handleNavigation("dashboard")} />
+        <MenuItems icons={<Menu size={30} color="black" />} touchable={touchable} items={"dashboard"} title={"Dashboard"} onPress={()=>handleNavigation("main")} />
         {/* My Profile */}
         <MenuItems icons={<User size={30} color="black" />} touchable={touchable} items={"profile"} title={"My Profile"} onPress={()=>handleNavigation("profile")} />
         {/* Company Profile */}

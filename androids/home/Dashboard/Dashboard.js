@@ -18,7 +18,7 @@ const Dashboard = ({navigation}) => {
      
        <View>
        <View style={{alignItems:"center", marginTop:verticalScale(20)}}>
-          <Image style={{width:68, height:63}} source={require("../../../assets/profile.png")} />
+          <Image style={{width:68, height:63, marginLeft:30}} source={require("../../../assets/profile.png")} />
         </View>
         <View style={{marginTop:30}}>
           <Itemshome />

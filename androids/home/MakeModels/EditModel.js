@@ -37,10 +37,10 @@ const EditModel = ({navigation}) => {
           />
           <InputsSearch
             icon={<Setting2 color="black" />}
-            handleSearch={handleSearch}
-            search={search}
-            value={value}
-            label={"Select Make"}
+            // handleSearch={handleSearch}
+            // search={search}
+            // value={value}
+            label={"Select Model"}
           />
           <View style={{ marginTop: 50 }}>
             <Buttons hide hided title={"Delete"} handleSubmit={() => togglePopup(setShow, show)} />
@@ -56,7 +56,7 @@ const EditModel = ({navigation}) => {
           hide
           icons={<ProfileDelete color="black" size={30} />}
           text={
-            "Dear [Gearni], are you sure you want to delte [Make] and all it's associated models"
+            "Dear [Gearni], are you sure you want to delete [Make] and all it's associated models"
           }
           textbtn={"Delete"}
           pressBtn={() => togglePopup(setShow, show)}

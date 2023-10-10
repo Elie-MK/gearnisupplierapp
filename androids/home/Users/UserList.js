@@ -21,17 +21,17 @@ import Color from "../../../utilities/Color";
 import Buttons from "../../components/Buttons";
 import Header from "../../components/Header";
 
-const UserList = ({ navigation, route }) => {
-  const datasUsers = route.params?.datas;
+const UserList = ({ navigation }) => {
+  // const datasUsers = route.params?.datas;
 
-  const [search, setSearch] = useState([datasUsers]);
+  const [search, setSearch] = useState(Userdata);
   const [value, setValue] = useState("");
   const [users, setUsers] = useState([]);
 
   const handleSearch = (text) => {
     setValue(text);
     const filtered = search.filter((item) =>
-      item.fname.toLowerCase().includes(text.toLowerCase())
+      item.name.toLowerCase().includes(text.toLowerCase())
     );
     setSearch(filtered);
   };
@@ -42,9 +42,9 @@ const UserList = ({ navigation, route }) => {
       alert("The user already exists");
     }
   };
-  useEffect(() => {
-    setUsers((prev) => prev?.concat(datasUsers));
-  }, [navigation]);
+  // useEffect(() => {
+  //   setUsers((prev) => prev?.concat(Userdata));
+  // }, [navigation]);
 
   // console.log(users);
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -68,11 +68,10 @@ const UserList = ({ navigation, route }) => {
         {value && (
           <View style={{ alignItems: "center", marginTop: 2 }}>
             <FlatList
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item?.id}
               style={{
                 height: 128,
                 width: horizontalScale(315),
-
                 elevation: 10,
                 backgroundColor: "white",
               }}
@@ -86,7 +85,7 @@ const UserList = ({ navigation, route }) => {
                       fontFamily: fontGotham.regular,
                     }}
                   >
-                    {item?.fname}
+                    {item?.name}
                   </Text>
                 </TouchableOpacity>
               )}
@@ -188,6 +187,95 @@ const UserList = ({ navigation, route }) => {
             </View>
           )}
         />
+               <View
+              style={{ alignItems: "center", marginTop: 15, marginBottom: 10 }}
+            >
+              <View
+                style={{
+                  width: horizontalScale(315),
+                  height: 80,
+                  elevation: 5,
+                  backgroundColor: Color.light.themeColor,
+                }}
+              >
+                <View
+                  style={{
+                    marginRight: 15,
+                    marginLeft: 15,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 10,
+                    alignItems: "center",
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      gap: 20,
+                      alignItems: "center",
+                    }}
+                  >
+                    <View>
+                      <Image
+                        style={{ height: 56, width: 56, borderRadius: 4 }}
+                        source={require("../../../assets/emptyprofile.jpg")}
+                      />
+                    </View>
+                    <View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <View>
+                          <View style={{ flexDirection: "row", gap: 10 }}>
+                            <Text
+                              style={{
+                                fontSize: 14,
+                                fontFamily: fontGotham.medium,
+                              }}
+                            >
+                              John
+                              {/* {item?.fname} */}
+                            </Text>
+                            <Text
+                              style={{
+                                fontSize: 14,
+                                fontFamily: fontGotham.medium,
+                              }}
+                            >
+                              Doe
+                              {/* {item?.lname} */}
+                            </Text>
+                          </View>
+                        </View>
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            marginLeft: 20,
+                            fontFamily: fontGotham.regular,
+                          }}
+                        >
+                          Role Type
+                        </Text>
+                      </View>
+                      <Text
+                        style={{ fontSize: 12, fontFamily: fontGotham.regular }}
+                      >
+                        Branch Name
+                      </Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("edituser")}
+                  >
+                    <Edit color="black" size={30} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
 
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <View style={{ marginTop: 10 }}>

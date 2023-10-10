@@ -2,10 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import KeybordAvoidHome from "../../components/KeybordAvoidHome";
 import Picturepprofile from "../../components/Picturepprofile";
-import {
-  horizontalScale,
-  verticalScale,
-} from "../../../utilities/Metrics";
+import { horizontalScale, verticalScale } from "../../../utilities/Metrics";
 import {
   Hashtag,
   Shop,
@@ -30,8 +27,7 @@ import NotEditableInput from "../../components/NotEditableInput";
 import EmptyUploadButton from "../../components/EmptyUploadButton";
 import ModalChooseUpload from "../../components/ModalChooseUpload";
 import { Camera } from "expo-camera";
-import * as DocumentPicker from 'expo-document-picker';
-
+import * as DocumentPicker from "expo-document-picker";
 
 const Companyprofile = ({ navigation }) => {
   const defaultCountryCode = "+216";
@@ -58,56 +54,57 @@ const Companyprofile = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(null);
   const [showVisible, setShowVisible] = useState(false);
-  const [selectedDocument, setSelectedDocument] = useState(null);
-
-
-
-
- 
 
   const pickImage = async (imgSelected, fileNamesSeleted) => {
-    if(visibled == true | showVisible== true){
-      setShowVisible(false)
-      setVisibled(false)
+    if ((visibled == true) | (showVisible == true)) {
+      setShowVisible(false);
+      setVisibled(false);
     }
-    if(visibled == false){
+    
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
       });
-  
+
       if (!result.canceled && result.assets.length > 0) {
         const selectedAsset = result.assets[0];
-        imgSelected({uri:selectedAsset.uri});
-  
+        imgSelected({ uri: selectedAsset.uri });
+
         const uriComponents = selectedAsset.uri.split("/");
         const fileName = uriComponents[uriComponents.length - 1];
         fileNamesSeleted(fileName);
-      }
+      
     }
   };
 
-  const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
+  const allowedExtensions = [".pdf", ".jpeg", ".jpg", ".png"];
 
   const pickDocument = async (Img, FileNames) => {
+    if ((visibled == true) | (showVisible == true)) {
+      setShowVisible(false);
+      setVisibled(false);
+    }
     try {
       const result = await DocumentPicker.getDocumentAsync();
       if (!result.canceled) {
-        const uriParts = result.assets[0].uri.split('.');
+        const uriParts = result.assets[0].uri.split(".");
         const fileExtension = uriParts[uriParts.length - 1].toLowerCase();
 
         if (allowedExtensions.includes(`.${fileExtension}`)) {
           FileNames(result.assets[0].name);
-          Img(fileExtension === "pdf"?require("../../../assets/PDFImg.png"):{uri:result.assets[0].uri} )
-        
+          Img(
+            fileExtension === "pdf"
+              ? require("../../../assets/PDFImg.png")
+              : { uri: result.assets[0].uri }
+          );
         } else {
-          console.log('Document format is not supported');
-          alert('Document format is not supported')
+          console.log("Document format is not supported");
+          alert("Document format is not supported");
         }
       } else {
-        console.log('Canceling document selection');
+        console.log("Canceling document selection");
       }
     } catch (error) {
-      console.error('Error selecting document:', error);
+      console.error("Error selecting document:", error);
     }
   };
 
@@ -115,21 +112,24 @@ const Companyprofile = ({ navigation }) => {
 
   const pickCamera = async () => {
     try {
-      const CameraStatus = await Camera .requestCameraPermissionsAsync()
-      setHasCameraPermission(CameraStatus.status === 'granted')
-     if (camera){
-      const data = await camera.takePictureAsync(null)
-      setCameraImg(data.uri)
-      navigation.navigate('viewimgcamera', {data:data.uri})
-     }
-     setType(type === Camera.Constants.Type.back? Camera.Constants.Type.front:Camera.Constants.Type.back)
-   
+      const CameraStatus = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(CameraStatus.status === "granted");
+      if (camera) {
+        const data = await camera.takePictureAsync(null);
+        setCameraImg(data.uri);
+        navigation.navigate("viewimgcamera", { data: data.uri });
+      }
+      setType(
+        type === Camera.Constants.Type.back
+          ? Camera.Constants.Type.front
+          : Camera.Constants.Type.back
+      );
     } catch (error) {
       console.error("Error selecting camera:", error);
     }
   };
-  
-// console.log(selectedDocument);
+
+  // console.log(selectedDocument);
   const onCountryChange = (item) => {
     setCountryCode(item.dial_code);
     // setNationality(item.name)
@@ -279,15 +279,15 @@ const Companyprofile = ({ navigation }) => {
             >
               Upload VAT file*
             </Text>
-           {fileName | (selectedImage === null) ? (
-              <EmptyUploadButton onPress={()=>setVisibled(!visibled)} />
+            {fileName | (selectedImage === null) ? (
+              <EmptyUploadButton onPress={() => setVisibled(!visibled)} />
             ) : (
               <UploadInput
                 selectedImage={selectedImage}
                 percent={0.1}
                 uploadProgress={uploadProgress}
                 clear={() => handleClear(setSelectedImage, setFileName)}
-                pickImage={()=>pickImage(setSelectedImage, setFileName)}
+                pickImage={() => pickImage(setSelectedImage, setFileName)}
                 fileName={fileName}
               />
             )}
@@ -303,7 +303,7 @@ const Companyprofile = ({ navigation }) => {
               Upload License file*
             </Text>
             {fileName2 | (selectedImage2 === null) ? (
-              <EmptyUploadButton onPress={()=>setShowVisible(!showVisible)} />
+              <EmptyUploadButton onPress={() => setShowVisible(!showVisible)} />
             ) : (
               <UploadInput
                 selectedImage={selectedImage2}
@@ -337,20 +337,19 @@ const Companyprofile = ({ navigation }) => {
           onCountryChange={(item) => onCountryChange2(item)}
         />
         <ModalChooseUpload
-          onGallery={()=>pickImage(setSelectedImage, setFileName)}
+          onGallery={() => pickImage(setSelectedImage, setFileName)}
           onCamera={pickCamera}
-          onFile={()=>pickDocument(setSelectedImage, setFileName)}
+          onFile={() => pickDocument(setSelectedImage, setFileName)}
           visible={visibled}
           cancelBtn={() => setVisibled(!visibled)}
         />
         <ModalChooseUpload
-          onGallery={()=>pickImage(setSelectedImage2, setFileName2)}
+          onGallery={() => pickImage(setSelectedImage2, setFileName2)}
           onCamera={pickCamera}
-          onFile={()=>pickDocument(setSelectedImage2, setFileName2)}
+          onFile={() => pickDocument(setSelectedImage2, setFileName2)}
           visible={showVisible}
           cancelBtn={() => setShowVisible(!showVisible)}
         />
-  
       </View>
     </KeybordAvoidHome>
   );

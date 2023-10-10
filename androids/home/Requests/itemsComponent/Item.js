@@ -14,6 +14,18 @@ import { TouchableOpacity } from 'react-native'
 const Item = () => {
     const [slide, setSlide]=useState(false)
     const [switsh, setSwitsh]=useState(false)
+    const [count, setCount]=useState(2)
+
+    const handleCount = ()=>{
+      setCount(count + 1)
+    }
+    const handleCountDecrement = ()=>{
+      if(count==0){
+        return
+      }else{
+        setCount(count - 1)
+      }
+    }
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -58,13 +70,13 @@ const Item = () => {
                     </View>
 
                     <View style={{flexDirection:"row", justifyContent:"space-between", marginTop:20, alignItems:"center"}}>
-                      <TouchableOpacity  style={{width:64, height:64, backgroundColor:Color.light.graylight, alignItems:"center", justifyContent:"center", borderRadius:4}}>
+                      <TouchableOpacity onPress={handleCountDecrement}  style={{width:64, height:64, backgroundColor:Color.light.graylight, alignItems:"center", justifyContent:"center", borderRadius:4}}>
                       <Ionicons name="remove-outline" size={24} color="black" />
                       </TouchableOpacity>
                       <View>
-                        <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>02</Text>
+                        <Text style={{fontSize:14, fontFamily:fontGotham.regular}}>0{count}</Text>
                       </View>
-                      <TouchableOpacity style={{width:64, height:64, backgroundColor:Color.light.graylight, alignItems:"center", justifyContent:"center", borderRadius:4}}>
+                      <TouchableOpacity onPress={handleCount} style={{width:64, height:64, backgroundColor:Color.light.graylight, alignItems:"center", justifyContent:"center", borderRadius:4}}>
                       <Ionicons name="add-outline" size={24} color="black" />
                       </TouchableOpacity>
                     </View>
