@@ -4,14 +4,9 @@ import KeybordAvoidHome from "../../components/KeybordAvoidHome";
 import Picturepprofile from "../../components/Picturepprofile";
 import {
   horizontalScale,
-  moderateScale,
   verticalScale,
 } from "../../../utilities/Metrics";
-import Inputs from "./components/Inputs";
 import {
-  CalendarSearch,
-  CloseCircle,
-  Flag,
   Hashtag,
   Shop,
   User,
@@ -28,8 +23,6 @@ import InputsNumber from "./components/InputsNumber";
 import * as ImagePicker from "expo-image-picker";
 import { Divider } from "@rneui/base";
 import UploadInput from "../../components/UploadInput";
-import { Button } from "@rneui/themed";
-import Color from "../../../utilities/Color";
 import InputCountries from "../../components/InputCountries";
 import InputsText from "../../components/InputsText";
 import Buttons from "../../components/Buttons";
