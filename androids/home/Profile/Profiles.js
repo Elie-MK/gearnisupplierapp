@@ -20,6 +20,11 @@ import Buttons from '../../components/Buttons'
 import EmptyUploadButton from '../../components/EmptyUploadButton'
 import DateTimePicker from "@react-native-community/datetimepicker"
 import { useColorScheme } from 'react-native'
+import ModalChooseUpload from '../../components/ModalChooseUpload'
+import * as DocumentPicker from 'expo-document-picker';
+import { Camera } from "expo-camera";
+
+
 
 
 
@@ -42,26 +47,77 @@ const Profiles = ({navigation}) => {
   const [uploadProgress2, setUploadProgress2] = useState(0);
   const [date, setDate]=useState(new Date())
   const [showPicker, setShowPicker]=useState(false)
+  const [openShow, setOpenShow]=useState(false)
+  const [showVisibled, setShowVisibled]=useState(false)
   const [dateBirth, setDateBirth]=useState('')
 
 
-  const pickImage = async (selected, fileNames) => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-    });
+
+  const pickImage = async (imgSelected, fileNamesSeleted) => {
+    if(openShow == true | showVisibled== true){
+      setOpenShow(false)
+      setShowVisibled(false)
+    }
+   
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+      });
   
-    if (!result.canceled && result.assets.length > 0) {
-      const selectedAsset = result.assets[0];
-      selected(selectedAsset.uri);
+      if (!result.canceled && result.assets.length > 0) {
+        const selectedAsset = result.assets[0];
+        imgSelected({uri:selectedAsset.uri});
   
-      const uriComponents = selectedAsset.uri.split('/');
-      const fileName = uriComponents[uriComponents.length - 1];
-      fileNames(fileName);
+        const uriComponents = selectedAsset.uri.split("/");
+        const fileName = uriComponents[uriComponents.length - 1];
+        fileNamesSeleted(fileName);
+      }
+    
+  };
+  const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
+  const pickDocument = async (Img, FileNames) => {
+    if(openShow == true | showVisibled== true){
+      setOpenShow(false)
+      setShowVisibled(false)
+    }
+    try {
+      const result = await DocumentPicker.getDocumentAsync();
+      if (!result.canceled) {
+        const uriParts = result.assets[0].uri.split('.');
+        const fileExtension = uriParts[uriParts.length - 1].toLowerCase();
+
+        if (allowedExtensions.includes(`.${fileExtension}`)) {
+          FileNames(result.assets[0].name);
+          Img(fileExtension === "pdf"?require("../../../assets/PDFImg.png"):{uri:result.assets[0].uri} )
+        
+        } else {
+          console.log('Document format is not supported');
+          alert('Document format is not supported')
+        }
+      } else {
+        console.log('Canceling document selection');
+      }
+    } catch (error) {
+      console.error('Error selecting document:', error);
+    }
+  };
+
+
+  const pickCamera = async () => {
+    try {
+      const CameraStatus = await Camera .requestCameraPermissionsAsync()
+      setHasCameraPermission(CameraStatus.status === 'granted')
+     if (camera){
+      const data = await camera.takePictureAsync(null)
+      setCameraImg(data.uri)
+      navigation.navigate('viewimgcamera', {data:data.uri})
+     }
+     setType(type === Camera.Constants.Type.back? Camera.Constants.Type.front:Camera.Constants.Type.back)
+   
+    } catch (error) {
+      console.error("Error selecting camera:", error);
     }
   };
   
-  const colorScheme = useColorScheme();
-  const themeTextStyle = colorScheme === 'light'?Color.light.main:Color.light.main
   const onCountryChange = (item) => {
     setCountryCode(item.dial_code);
     setNationality(item.name)
@@ -187,13 +243,13 @@ const Profiles = ({navigation}) => {
         Upload Front Identity Card
       </Text>
       {
-        fileName|selectedImage === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage, setFileName)} /> : <UploadInput  clear={()=>handleClear(setSelectedImage, setFileName)}  selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+        fileName|selectedImage === null ? <EmptyUploadButton onPress={()=>setOpenShow(!openShow)} /> : <UploadInput  clear={()=>handleClear(setSelectedImage, setFileName)}  selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
        }
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload Back Identity Card
       </Text>
       {
-        fileName2|selectedImage2 === null ? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage2, setFileName2)} /> : <UploadInput clear={()=>handleClear(setSelectedImage2, setFileName2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+        fileName2|selectedImage2 === null ? <EmptyUploadButton onPress={()=>setShowVisibled(!showVisibled)} /> : <UploadInput clear={()=>handleClear(setSelectedImage2, setFileName2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
       }
               
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
@@ -206,6 +262,20 @@ const Profiles = ({navigation}) => {
           hideModal={() => setVisibleM(!visibleM)}
           setValue={(text) => setValue(text)}
           onCountryChange={(item) => onCountryChange(item)}  />
+                <ModalChooseUpload
+          onGallery={()=>pickImage(setSelectedImage, setFileName)}
+          onCamera={pickCamera}
+          onFile={()=>pickDocument(setSelectedImage, setFileName)}
+          visible={openShow}
+          cancelBtn={() => setOpenShow(!openShow)}
+        />
+                <ModalChooseUpload
+          onGallery={()=>pickImage(setSelectedImage2, setFileName2)}
+          onCamera={pickCamera}
+          onFile={()=>pickDocument(setSelectedImage2, setFileName2)}
+          visible={showVisibled}
+          cancelBtn={() => setShowVisibled(!showVisibled)}
+        />
           </View>
  </KeybordAvoidHome>
   )

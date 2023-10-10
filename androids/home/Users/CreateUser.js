@@ -116,7 +116,7 @@ console.log(users);
             width={horizontalScale(315)}
             label={"Email (optional)"}
             iconsLeft={<Sms color="black" />}
-            iconsRight={<CloseCircle color="black" />}
+            
           />
           {/* Search Branch */}
           <InputsText
@@ -126,7 +126,6 @@ console.log(users);
             width={horizontalScale(315)}
             label={"Search Branch"}
             iconsLeft={<Shop color="black" />}
-            iconsRight={<CloseCircle color="black" />}
           />
           {/* Pick Role */}
           <InputsText

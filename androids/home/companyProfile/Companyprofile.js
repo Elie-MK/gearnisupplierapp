@@ -64,26 +64,27 @@ const Companyprofile = ({ navigation }) => {
   const [cameraImg, setCameraImg] = useState(null);
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(null);
+  const [showVisible, setShowVisible] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState(null);
 
 
 
 
-  const HandleOpen = () => {
-    setVisibled(!visibled);
-  };
  
 
   const pickImage = async (imgSelected, fileNamesSeleted) => {
-    setVisibled(!visibled)
-    if(visible == false){
+    if(visibled == true | showVisible== true){
+      setShowVisible(false)
+      setVisibled(false)
+    }
+    if(visibled == false){
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
       });
   
       if (!result.canceled && result.assets.length > 0) {
         const selectedAsset = result.assets[0];
-        imgSelected(selectedAsset.uri);
+        imgSelected({uri:selectedAsset.uri});
   
         const uriComponents = selectedAsset.uri.split("/");
         const fileName = uriComponents[uriComponents.length - 1];
@@ -94,7 +95,7 @@ const Companyprofile = ({ navigation }) => {
 
   const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
 
-  const pickDocument = async () => {
+  const pickDocument = async (Img, FileNames) => {
     try {
       const result = await DocumentPicker.getDocumentAsync();
       if (!result.canceled) {
@@ -102,7 +103,9 @@ const Companyprofile = ({ navigation }) => {
         const fileExtension = uriParts[uriParts.length - 1].toLowerCase();
 
         if (allowedExtensions.includes(`.${fileExtension}`)) {
-          setSelectedDocument(result);
+          FileNames(result.assets[0].name);
+          Img(fileExtension === "pdf"?require("../../../assets/PDFImg.png"):{uri:result.assets[0].uri} )
+        
         } else {
           console.log('Document format is not supported');
           alert('Document format is not supported')
@@ -115,7 +118,7 @@ const Companyprofile = ({ navigation }) => {
     }
   };
 
-  // console.log("Doc ", selectedDocument );
+  // console.log("Doc ", selectedDocument.assets[0].name );
 
   const pickCamera = async () => {
     try {
@@ -284,7 +287,7 @@ const Companyprofile = ({ navigation }) => {
               Upload VAT file*
             </Text>
            {fileName | (selectedImage === null) ? (
-              <EmptyUploadButton onPress={HandleOpen} />
+              <EmptyUploadButton onPress={()=>setVisibled(!visibled)} />
             ) : (
               <UploadInput
                 selectedImage={selectedImage}
@@ -307,7 +310,7 @@ const Companyprofile = ({ navigation }) => {
               Upload License file*
             </Text>
             {fileName2 | (selectedImage2 === null) ? (
-              <EmptyUploadButton onPress={()=>HandleOpen(setSelectedImage, setFileName)} />
+              <EmptyUploadButton onPress={()=>setShowVisible(!showVisible)} />
             ) : (
               <UploadInput
                 selectedImage={selectedImage2}
@@ -343,17 +346,17 @@ const Companyprofile = ({ navigation }) => {
         <ModalChooseUpload
           onGallery={()=>pickImage(setSelectedImage, setFileName)}
           onCamera={pickCamera}
-          onFile={pickDocument}
+          onFile={()=>pickDocument(setSelectedImage, setFileName)}
           visible={visibled}
           cancelBtn={() => setVisibled(!visibled)}
         />
-        {/* <ModalChooseUpload
+        <ModalChooseUpload
           onGallery={()=>pickImage(setSelectedImage2, setFileName2)}
           onCamera={pickCamera}
-          onFile={pickDocument}
-          visible={visibled}
-          cancelBtn={() => setVisibled(!visibled)}
-        /> */}
+          onFile={()=>pickDocument(setSelectedImage2, setFileName2)}
+          visible={showVisible}
+          cancelBtn={() => setShowVisible(!showVisible)}
+        />
   
       </View>
     </KeybordAvoidHome>

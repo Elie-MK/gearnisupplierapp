@@ -27,7 +27,7 @@ const Requests = ({navigation}) => {
                         <Text style={{fontSize:12, fontFamily:fontGotham.regular, marginTop:5}}>Lancer 2004</Text>
                     </View>
                     </View>
-                    <View>
+                    <View style={{justifyContent:"center"}}>
                         <TouchableOpacity onPress={()=>navigation.navigate("newbid")}>
                         <ArrowCircleRight2 color='black' size={38}/>
                         </TouchableOpacity>

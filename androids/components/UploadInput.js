@@ -37,8 +37,8 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
           <TouchableOpacity style={{ flexDirection: "row", alignItems:"center", gap:10 }} onPress={()=>pickImage}>
             <View>
             {selectedImage && (
-        <Image  width={40}
-        height={40} source={{ uri: selectedImage }}  />
+        <Image resizeMode="contain"  width={40}
+        height={40} source={selectedImage } style={{width:40, height:40}}  />
       )}
             </View>
             <View

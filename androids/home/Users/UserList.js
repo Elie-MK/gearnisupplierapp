@@ -147,7 +147,8 @@ const UserList = ({ navigation, route }) => {
                                 fontFamily: fontGotham.medium,
                               }}
                             >
-                              {item?.fname}
+                              John
+                              {/* {item?.fname} */}
                             </Text>
                             <Text
                               style={{
@@ -155,7 +156,8 @@ const UserList = ({ navigation, route }) => {
                                 fontFamily: fontGotham.medium,
                               }}
                             >
-                              {item?.lname}
+                              Doe
+                              {/* {item?.lname} */}
                             </Text>
                           </View>
                         </View>

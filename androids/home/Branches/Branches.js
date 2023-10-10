@@ -69,7 +69,7 @@ const Branches = ({navigation}) => {
            style={{transform:[{rotateZ:arrowTransform}]}}
            >
                     <MaterialIcons
-                    name='keyboard-arrow-down'
+                    name='keyboard-arrow-up'
                     size={moderateScale(30)}
                     color={Color.light.main}
                   />

@@ -28,6 +28,9 @@ import Inputs from "../../../../components/Inputs";
 import InputCountries from "../../../../components/InputCountries";
 import Buttons from "../../../../components/Buttons";
 import EmptyUploadButton from "../../../../components/EmptyUploadButton";
+import ModalChooseUpload from "../../../../components/ModalChooseUpload";
+import { Camera } from "expo-camera";
+import * as DocumentPicker from 'expo-document-picker';
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
@@ -47,22 +50,79 @@ const Registercompany = ({ navigation }) => {
   const [fileName2, setFileName2] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadProgress2, setUploadProgress2] = useState(0);
+  const [modalOpen, setModalOpen]=useState(false)
+  const [showOpen, setShowOpen]=useState(false)
+  const [modalShow, setModalShow]=useState(false)
+  const [modalShow2, setModalShow2]=useState(false)
 
 
   const SERVER_URL = 'URL_DU_SERVEUR'; 
 
-  const pickImage = async (selected, fileNames) => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    });
+  const pickImage = async (imgSelected, fileNamesSeleted) => {
+    if(modalShow == true | showOpen== true){
+      setModalShow(false)
+      setShowOpen(false)
+    }
+    if(modalOpen == false){
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+      });
   
-    if (!result.canceled && result.assets.length > 0) {
-      const selectedAsset = result.assets[0];
-      selected(selectedAsset.uri);
+      if (!result.canceled && result.assets.length > 0) {
+        const selectedAsset = result.assets[0];
+        imgSelected({uri:selectedAsset.uri});
   
-      const uriComponents = selectedAsset.uri.split('/');
-      const fileName = uriComponents[uriComponents.length - 1];
-      fileNames(fileName);
+        const uriComponents = selectedAsset.uri.split("/");
+        const fileName = uriComponents[uriComponents.length - 1];
+        fileNamesSeleted(fileName);
+      }
+    }
+  };
+
+  const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
+
+  const pickDocument = async (Img, FileNames) => {
+    if(modalShow == true | modalShow2== true){
+      setModalShow(false)
+      setModalShow2(false)
+    }
+    try {
+      const result = await DocumentPicker.getDocumentAsync();
+      if (!result.canceled) {
+        const uriParts = result.assets[0].uri.split('.');
+        const fileExtension = uriParts[uriParts.length - 1].toLowerCase();
+
+        if (allowedExtensions.includes(`.${fileExtension}`)) {
+          FileNames(result.assets[0].name);
+          Img(fileExtension === "pdf"?require("../../../../../assets/PDFImg.png"):{uri:result.assets[0].uri} )
+        
+        } else {
+          console.log('Document format is not supported');
+          alert('Document format is not supported')
+        }
+      } else {
+        console.log('Canceling document selection');
+      }
+    } catch (error) {
+      console.error('Error selecting document:', error);
+    }
+  };
+
+  // console.log("Doc ", selectedDocument.assets[0].name );
+
+  const pickCamera = async () => {
+    try {
+      const CameraStatus = await Camera .requestCameraPermissionsAsync()
+      setHasCameraPermission(CameraStatus.status === 'granted')
+     if (camera){
+      const data = await camera.takePictureAsync(null)
+      setCameraImg(data.uri)
+      navigation.navigate('viewimgcamera', {data:data.uri})
+     }
+     setType(type === Camera.Constants.Type.back? Camera.Constants.Type.front:Camera.Constants.Type.back)
+   
+    } catch (error) {
+      console.error("Error selecting camera:", error);
     }
   };
 
@@ -154,14 +214,14 @@ const Registercompany = ({ navigation }) => {
         Upload Licence file
       </Text>
       {
-        fileName|selectedImage === null? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage, setFileName)} /> : <UploadInput clear={()=>handleClear(setFileName, setSelectedImage)} selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+        fileName|selectedImage === null? <EmptyUploadButton onPress={()=>setModalShow(!modalShow)} /> : <UploadInput clear={()=>handleClear(setFileName, setSelectedImage)} selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
 
       }
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
         Upload VAT file
       </Text>
       {
-        fileName2|selectedImage2 ===null? <EmptyUploadButton onPress={()=>pickImage(setSelectedImage2, setFileName2)} />:<UploadInput clear={()=>handleClear(setFileName2, setSelectedImage2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+        fileName2|selectedImage2 ===null? <EmptyUploadButton onPress={()=>setModalShow2(!modalShow2)} />:<UploadInput clear={()=>handleClear(setFileName2, setSelectedImage2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
 
       }
    </View>
@@ -179,6 +239,20 @@ const Registercompany = ({ navigation }) => {
           hideModal={() => setOpen(!open)}
           setValue={(text) => setValue(text)}
           onCountryChange={(item) => onCountryChange(item)}
+        />
+            <ModalChooseUpload
+          onGallery={()=>pickImage(setSelectedImage, setFileName)}
+          onCamera={pickCamera}
+          onFile={()=>pickDocument(setSelectedImage, setFileName)}
+          visible={modalShow}
+          cancelBtn={() => setModalShow(!modalShow)}
+        />
+            <ModalChooseUpload
+          onGallery={()=>pickImage(setSelectedImage2, setFileName2)}
+          onCamera={pickCamera}
+          onFile={()=>pickDocument(setSelectedImage2, setFileName2)}
+          visible={modalShow2}
+          cancelBtn={() => setModalShow2(!modalShow2)}
         />
       </View>
     </KeyboardAvoid>

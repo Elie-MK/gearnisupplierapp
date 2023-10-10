@@ -72,7 +72,7 @@ const Completeregistration = ({navigation}) => {
         </View>
         <View>
         <View style={{marginTop:verticalScale(120), alignItems:"center"}}>
-         <Buttons title={"Go to Company Profile"} handleSubmit={()=>navigation.navigate('home')} />
+         <Buttons title={"Go to Company Profile"} handleSubmit={()=>navigation.navigate('drawer')} />
         </View>
         </View>
       </View>
