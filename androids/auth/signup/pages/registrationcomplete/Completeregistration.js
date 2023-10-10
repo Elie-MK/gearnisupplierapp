@@ -5,8 +5,7 @@ import { StatusBar } from 'react-native'
 import Color from '../../../../../utilities/Color'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useCustomFonts } from '../../../../../utilities/Fonts'
-import { Button } from'@rneui/base'
-import { DocumentText, DocumentText1 } from 'iconsax-react-native'
+import { DocumentText1 } from 'iconsax-react-native'
 import Buttons from '../../../../components/Buttons'
 
 const Completeregistration = ({navigation}) => {
