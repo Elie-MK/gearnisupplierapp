@@ -19,6 +19,7 @@ import InputsNumber from "../companyProfile/components/InputsNumber";
 import ModalCountry from "../../components/ModalCountry";
 import Buttons from "../../components/Buttons";
 import AlertModal from "../../components/AlertModal";
+import KeybordAvoidHome from "../../components/KeybordAvoidHome";
 
 const CreateUser = ({ navigation }) => {
   const defaultFlag = "🇹🇳";
@@ -68,7 +69,7 @@ console.log(users);
   }
 
   return (
-    <Header title={"Create User"} nav={() => navigation.goBack()}>
+    <KeybordAvoidHome title={"Create User"} nav={() => navigation.goBack()}>
       <View style={{ marginLeft: 20, marginRight: 20 }}>
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <View
@@ -159,7 +160,7 @@ console.log(users);
           onCountryChange={(item) => onCountryChange(item)}
         />
       </View>
-    </Header>
+    </KeybordAvoidHome>
   );
 };
 

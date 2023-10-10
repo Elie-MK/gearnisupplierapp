@@ -5,7 +5,7 @@ import { ArrowDown2, SearchNormal1 } from "iconsax-react-native";
 import { horizontalScale } from "../../utilities/Metrics";
 import { useCustomFonts } from "../../utilities/Fonts";
 
-const InputsSearch = ({ value, handleSearch, icon, search, label, handleUser }) => {
+const InputsSearch = ({ value, hidden, handleSearch, icon, search, label, handleUser }) => {
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -35,7 +35,8 @@ const InputsSearch = ({ value, handleSearch, icon, search, label, handleUser }) 
             }}
             data={search}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleUser(item)}>
+              
+                !hidden? <TouchableOpacity onPress={() => handleUser(item)}>
                 <Text
                   style={{
                     fontSize: 14,
@@ -46,7 +47,19 @@ const InputsSearch = ({ value, handleSearch, icon, search, label, handleUser }) 
                 >
                   {item?.name}
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> :  <View>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    padding: 20,
+                    fontFamily: fontGotham.regular,
+                    color:"black"
+                  }}
+                >
+                  {item?.name}
+                </Text>
+              </View>
+              
             )}
           />
         </View>

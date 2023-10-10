@@ -25,7 +25,7 @@ const EditBranch = ({navigation}) => {
   const [value, setValue] = useState("Folani");
   const [valueBranch, setValueBranch] = useState("Input");
   return (
-    <Header nav={()=>navigation.goBack()} title={"Edit Branch"}>
+    <KeybordAvoidHome nav={()=>navigation.goBack()} title={"Edit Branch"}>
       <View
         style={{
           marginLeft: 20,
@@ -118,7 +118,7 @@ const EditBranch = ({navigation}) => {
           icons={<UserEdit color="black" size={30} />}
         />
       </View>
-    </Header>
+    </KeybordAvoidHome>
   );
 };
 

@@ -29,15 +29,19 @@ const EditModel = ({navigation}) => {
       <View style={{marginTop:50}}>
         <View style={{ alignItems: "center" }}>
           <InputsSearch
+          hidden
             icon={<Car color="black" />}
             handleSearch={handleSearch}
+            handleUser={value}
             search={search}
             value={value}
             label={"Select Make"}
           />
           <InputsSearch
+          hidden
             icon={<Setting2 color="black" />}
-            // handleSearch={handleSearch}
+            handleSearch={handleSearch}
+            handleUser={value}
             // search={search}
             // value={value}
             label={"Select Model"}

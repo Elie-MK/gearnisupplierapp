@@ -28,8 +28,8 @@ const AddMakeModel = ({navigation}) => {
   return (
     <Header title={"Add Makes and Model"} nav={()=>navigation.goBack()}>
       <View style={{alignItems:"center"}}>
-        <InputsSearch icon={<Car color='black'  />} handleSearch={handleSearch} search={search} value={value} label={"Select Make"} />
-        <InputsSearch icon={<Setting2 color='black'  />} handleSearch={handleSearchModel} search={search} value={model} label={"Select Model"} />
+        <InputsSearch hidden icon={<Car color='black'  />} handleSearch={handleSearch} search={search} value={value} label={"Select Make"} />
+        <InputsSearch hidden icon={<Setting2 color='black'  />} handleSearch={handleSearchModel} search={search} value={model} label={"Select Model"} />
         <View style={{marginTop:50, marginBottom:30}}>
         <Buttons title={"Save"}/>
         </View>
