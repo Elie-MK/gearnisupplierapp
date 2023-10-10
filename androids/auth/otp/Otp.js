@@ -49,7 +49,7 @@ const Otp = ({ navigation, route }) => {
       }else{
         setValided(!valided)
         setTimeout(() => {
-          navigation.navigate('home')
+          navigation.navigate('drawer')
           setValided(false)
         }, 3000);
       }
