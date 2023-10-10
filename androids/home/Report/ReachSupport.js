@@ -90,7 +90,7 @@ const handleSubmit = ()=>{
             {/* Not Editable Input Number */}
             <NumberNotEditable />
             {/* Check Inputs */}
-            <CheckInputs />
+            <CheckInputs label={"Select the Issue"} />
 
             <View style={{ marginTop: 30 }}>
               <View

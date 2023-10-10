@@ -40,8 +40,8 @@ const EditModel = ({navigation}) => {
           <InputsSearch
           hidden
             icon={<Setting2 color="black" />}
-            handleSearch={handleSearch}
-            handleUser={value}
+            // handleSearch={handleSearch}
+            // handleUser={value}
             // search={search}
             // value={value}
             label={"Select Model"}

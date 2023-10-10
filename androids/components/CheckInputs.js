@@ -12,7 +12,7 @@ import Color from "../../utilities/Color";
 import { CheckBox } from "@rneui/base";
 import { TextInput } from "react-native";
 
-const CheckInputs = () => {
+const CheckInputs = ({label}) => {
   const [search, setSearch] = useState(Userdata);
   const [value, setValue] = useState("");
   const [checked, setChecked] = useState("");
@@ -38,7 +38,7 @@ const CheckInputs = () => {
         {/* Search User */}
         <InputsText
           value={value}
-          label={"Search User"}
+          label={label}
           onChangeText={handleSearch}
           iconsLeft={<More2 color="black" />}
           width={horizontalScale(315)}
