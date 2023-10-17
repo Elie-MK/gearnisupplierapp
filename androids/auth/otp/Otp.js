@@ -25,7 +25,8 @@ import { Lock, SmsTracking } from "iconsax-react-native";
 const Otp = ({ navigation, route }) => {
     const otpRefs = useRef([]);
 
-    const {routes}=route.params
+    const {routes, Numbers}=route.params
+   
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [time, setTime] = useState({minutes :0, secondes:30});
   const [attempts, setAttempts] = useState(0);
