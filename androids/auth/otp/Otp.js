@@ -11,7 +11,11 @@ import {
 import React, { useEffect, useRef } from "react";
 import Color from "../../../utilities/Color";
 import { AntDesign } from "@expo/vector-icons";
-import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from "../../../utilities/Metrics";
 import { useState } from "react";
 import { Button } from "@rneui/base";
 import Alert from "../../components/AlertModal";
@@ -21,240 +25,393 @@ import Buttons from "../../components/Buttons";
 import ActivityIndicators from "../../components/ActivityIndicator";
 import AlertModal from "../../components/AlertModal";
 import { Lock, SmsTracking } from "iconsax-react-native";
+import Axios from "axios";
+import {
+  CLIENT_ID,
+  CLIENT_SECRET,
+  GRANT_TYPE_URL,
+  URL_VALIDATED_CODE,
+  SEND_CODE_URL
+} from "@env";
 
 const Otp = ({ navigation, route }) => {
-    const otpRefs = useRef([]);
-
-    const {routes, Numbers}=route.params
-   
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
-  const [time, setTime] = useState({minutes :0, secondes:30});
+  const otpRefs = useRef([]);
+  const { routes, Numbers } = route.params;
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [time, setTime] = useState({ minutes: 0, secondes: 30 });
   const [attempts, setAttempts] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isFocused, setIsFocused] = useState([false, false, false, false, false, false]);
-
+  const [isFocused, setIsFocused] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const [dismis, setDismis] = useState(false);
   const [visible, setVisible] = useState(false);
   const [valided, setValided] = useState(false);
   const [visibled, setVisibled] = useState(false);
+  const [error, setError]=useState(false)
 
+  const otpCode = otp.join("");
+  const urlValitedCode = URL_VALIDATED_CODE;
+  const validOtp = {
+    grant_type: GRANT_TYPE_URL,
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    username: Numbers,
+    otp: otpCode,
+    realm: "sms",
+    audience: "https://gearni-backend-api/",
+    scope: "offline_access openid profile email",
+  };
+  const apiUrl = SEND_CODE_URL;
+  const requestData = {
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    connection: "sms",
+    phone_number: Numbers,
+    send: "code",
+    authParams: {
+      state: "Testing",
+    },
+  };
 
-
-
-  const handleSubmit = () => {
-    const otpValue = otp.join('')
-    setAttempts(1)
-    if(routes == "login"){
-      if(otpValue.length < 6){
-        alert("Enter your otp code")
-      }else{
-        setValided(!valided)
-        setTimeout(() => {
-          navigation.navigate('drawer')
-          setValided(false)
-        }, 3000);
+  const resendCode = async () => {
+    try{
+        const response = await Axios.post(apiUrl, requestData);
+        console.log("Server Response :", response.data);
+      } catch (error) {
+        console.error("Erreur lors de la requête :", error);
       }
-    }else{
-      if(routes == "register"){
-        if(otpValue.length < 6){
-          alert("Enter your otp code")
-        }else{
-          setValided(!valided)
-          setTimeout(() => {
-            navigation.navigate('flow')
-            setValided(false)
-          }, 3000);
+    }
+  
+  
+   const handleSubmitRegistration = async ()=>{
+    setAttempts(1);
+    if (routes == "register") {
+      if (otpCode.length < 6) {
+        setError(true)
+      } else {
+        try {
+          setValided(!valided);
+          const response = await Axios.post(urlValitedCode, validOtp);
+          if(response.status === 200){
+            setTimeout(() => {
+              setValided(false);
+              navigation.replace("flow");
+            }, 3000);
+          }
+          console.log("Server Response :", response.data);
+        } catch (error) {
+          setValided(false);
+          setError(true)
+          console.log("Erreur lors de la requête :", error);
         }
       }
+    }else{
+      
+    }
+   }
+  const handleSubmitLogin = async () => {
+    const otpValue = otp.join("");
+    setAttempts(1);
+    if (routes == "login") {
+      if (otpValue.length < 6) {
+        alert("Enter your otp code");
+      } else {
+        setValided(!valided);
+        setTimeout(() => {
+          navigation.replace("drawer");
+          setValided(false);
+        }, 3000);
+      }
+    } else {
+     
     }
   };
 
   const handleOtpChange = (text, index) => {
     const newOtp = [...otp];
-  
+
     if (text.length === 1) {
       newOtp[index] = text;
       setOtp(newOtp);
-  
+
       if (index < 5) {
         otpRefs.current[index + 1].focus();
       }
     } else if (text.length === 0) {
-      newOtp[index] = '';
+      newOtp[index] = "";
       setOtp(newOtp);
-  
+
       if (index > 0) {
         otpRefs.current[index - 1].focus();
       }
     }
-  
+
     const newIsFocused = [...isFocused];
     newIsFocused[index] = text.length === 1;
     setIsFocused(newIsFocused);
   };
-  useEffect(()=>{
-    const interval = setInterval(()=>{
+  useEffect(() => {
+    const interval = setInterval(() => {
       if (!isPaused) {
         if (time.minutes === 0 && time.secondes === 0) {
           if (attempts <= 2) {
             setIsPaused(true);
             setAttempts(attempts + 1);
-          } else{
+            
+          } else {
             setTime({ minutes: 59, secondes: 59 });
-            setDismis(!dismis)
-            setVisible(!visible)
+            setDismis(!dismis);
+            setVisible(!visible);
           }
         } else {
           setTime((prevTime) => {
             if (prevTime.secondes === 0) {
               return { minutes: prevTime.minutes - 1, secondes: 59 };
             } else {
-              return { minutes: prevTime.minutes, secondes: prevTime.secondes - 1 };
+              return {
+                minutes: prevTime.minutes,
+                secondes: prevTime.secondes - 1,
+              };
             }
           });
         }
       }
-    },1000)
+   
+    }, 1000);
+  
+    return () => clearInterval(interval);
+ 
+  }, [time, attempts, isPaused]);
+  useEffect(()=>{
+    if(otpCode.length >= 1){
+      setError(false)
+    }
+  },[otpCode])
 
-    return ()=>clearInterval(interval)
-  },[ time, attempts, isPaused])
   const handleResend = () => {
     if (isPaused) {
       setTime({ minutes: 0, secondes: 30 });
       setAttempts(attempts + 1);
+      resendCode()
       setIsPaused(false);
-      setVisibled(!visibled)
+      setVisibled(!visibled);
+      
     }
-   };
+  };
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
   }
-// console.log(routes);
+  // console.log(routes);
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
-        <Pressable onPress={() => navigation.navigate('login')}>
+        <Pressable onPress={() => navigation.navigate("login")}>
           <AntDesign name="arrowleft" size={35} color={Color.light.black} />
         </Pressable>
-        <View style={{marginTop:20}}>
-        <View >
-          <Text style={{ color: Color.light.main, fontSize:32, lineHeight:38, fontFamily:fontGotham.medium }}>
-            VERIFICATION
-          </Text>
-          <Text style={{ fontSize:20, fontFamily:fontGotham.medium }}>
-            PLEASE ENTER YOUR 
-          </Text>
-          <Text style={{ fontSize:20, fontFamily:fontGotham.medium }}>
-           VERIFICATION CODE
-          </Text>
-        </View>
+        <View style={{ marginTop: 20 }}>
+          <View>
+            <Text
+              style={{
+                color: Color.light.main,
+                fontSize: 32,
+                lineHeight: 38,
+                fontFamily: fontGotham.medium,
+              }}
+            >
+              VERIFICATION
+            </Text>
+            <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+              PLEASE ENTER YOUR
+            </Text>
+            <Text style={{ fontSize: 20, fontFamily: fontGotham.medium }}>
+              VERIFICATION CODE
+            </Text>
+          </View>
 
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent:"center",
-            gap: 10,
-            marginTop: verticalScale(50),
-          }}
-        >
-         
-         {otp.map((digit, index) => (
-          <TextInput
-            key={index}
-            ref={(ref) => (otpRefs.current[index] = ref)}
-            editable={!dismis}
+          <View
             style={{
-              borderWidth: 1,
-              borderRadius: 4,
-              fontSize: 14,
-              width:50,
-              height:50,
-             borderColor:!dismis?isFocused[index]?Color.light.main:"black":"#dfdfdf"
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+              marginTop: verticalScale(50),
             }}
-            keyboardType="numeric"
-            textAlign="center"
-            selectionColor={Color.light.main}
-            maxLength={1}
-            value={digit}
-            onChangeText={(text) => handleOtpChange(text, index)}
-         
-          />
-        ))}
-        
-        </View>
-        <View style={{ alignItems: "center", marginTop: verticalScale(17) }}>
-          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(12)}}>An SMS should arrive shortly</Text>
-          {
-            dismis? <Text style={{ marginTop: verticalScale(15), fontSize: moderateScale(14), textAlign:"center", color:"red", fontFamily:fontGotham.regular }}>
-            Account has been templorarily locked for 24 houres due to suspicious activity
-          </Text> : <Text style={{ marginTop: verticalScale(15), fontSize:moderateScale(20), fontFamily:fontGotham.bold }}>
-            {String(time.minutes).padStart(2, '0')}:{String(time.secondes).padStart(2, '0')}
-          </Text>  
-          }
-         
-        </View>
-        <View style={{marginTop:verticalScale(60), alignItems:"center"}}>
-          {
-             valided? <ActivityIndicators /> : <Buttons disabled={dismis} title={"Verify"} handleSubmit={handleSubmit} />
-          }
-          
-        </View>
+          >
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => (otpRefs.current[index] = ref)}
+                editable={!dismis}
+                style={{
+                  borderWidth: 1,
+                  borderRadius: 4,
+                  fontSize: 14,
+                  width: 50,
+                  height: 50,
+                  borderColor: error == true?"red":!dismis
+                  ? isFocused[index]
+                    ? Color.light.main
+                    : "black"
+                  : "#dfdfdf",
+                }}
+                keyboardType="numeric"
+                textAlign="center"
+                selectionColor={Color.light.main}
+                maxLength={1}
+                value={digit}
+                onChangeText={(text) => handleOtpChange(text, index)}
+              />
+            ))}
+          </View>
+          <View style={{ alignItems: "center", marginTop: verticalScale(17) }}>
+           {
+            error &&  <Text
+            style={{
+              fontFamily: fontGotham.regular,
+              color:"red",
+              fontSize: moderateScale(12),
+            }}
+          >
+            Enter a valid code or your code is expire
+          </Text>
+           }
+            <Text
+              style={{
+                fontFamily: fontGotham.regular,
+                fontSize: moderateScale(12),
+              }}
+            >
+              An SMS should arrive shortly
+            </Text>
+            {dismis ? (
+              <Text
+                style={{
+                  marginTop: verticalScale(15),
+                  fontSize: moderateScale(14),
+                  textAlign: "center",
+                  color: "red",
+                  fontFamily: fontGotham.regular,
+                }}
+              >
+                Account has been templorarily locked for 24 houres due to
+                suspicious activity
+              </Text>
+            ) : (
+              <Text
+                style={{
+                  marginTop: verticalScale(15),
+                  fontSize: moderateScale(20),
+                  fontFamily: fontGotham.bold,
+                }}
+              >
+                {String(time.minutes).padStart(2, "0")}:
+                {String(time.secondes).padStart(2, "0")}
+              </Text>
+            )}
+          </View>
+          <View style={{ marginTop: verticalScale(60), alignItems: "center" }}>
+            {valided ? (
+              <ActivityIndicators />
+            ) : (
+              <Buttons
+                disabled={dismis}
+                title={"Verify"}
+                handleSubmit={routes == "login"? handleSubmitLogin : handleSubmitRegistration }
+              />
+            )}
+          </View>
 
-        {
-          !dismis?
-        <View
-          style={{
-            flexDirection: "row",
-            alignContent: "center",
-            justifyContent: "center",
-            marginTop: verticalScale(20),
-          }}
-        >
-          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>I haven't received the code.  </Text>
-          <Pressable onPress={handleResend} >
-            <Text style={{ fontFamily:fontGotham.bold, fontSize:moderateScale(14) }}>Resend </Text>
-          </Pressable> 
-          
-        </View>:   <View
-          style={{
-            flexDirection: "row",
-            alignContent: "center",
-            justifyContent: "center",
-            marginTop: verticalScale(20),
-          }}
-        >
-          <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>Encoutering issues ?  </Text>
-          <Pressable onPress={()=>navigation.navigate('contact')}>
-            <Text style={{ fontFamily:fontGotham.bold, fontSize:moderateScale(14) }}>Contact Support</Text>
-          </Pressable> 
-          
+          {!dismis ? (
+            <View
+              style={{
+                flexDirection: "row",
+                alignContent: "center",
+                justifyContent: "center",
+                marginTop: verticalScale(20),
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: fontGotham.regular,
+                  fontSize: moderateScale(14),
+                }}
+              >
+                I haven't received the code.{" "}
+              </Text>
+              <Pressable onPress={handleResend}>
+                <Text
+                  style={{
+                    fontFamily: fontGotham.bold,
+                    fontSize: moderateScale(14),
+                  }}
+                >
+                  Resend{" "}
+                </Text>
+              </Pressable>
+            </View>
+          ) : (
+            <View
+              style={{
+                flexDirection: "row",
+                alignContent: "center",
+                justifyContent: "center",
+                marginTop: verticalScale(20),
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: fontGotham.regular,
+                  fontSize: moderateScale(14),
+                }}
+              >
+                Encoutering issues ?{" "}
+              </Text>
+              <Pressable onPress={() => navigation.navigate("contact")}>
+                <Text
+                  style={{
+                    fontFamily: fontGotham.bold,
+                    fontSize: moderateScale(14),
+                  }}
+                >
+                  Contact Support
+                </Text>
+              </Pressable>
+            </View>
+          )}
         </View>
-        }
+        <View>
+          <AlertModal
+            visible={visibled}
+            btnText={"Close"}
+            icons={<SmsTracking color="black" size={34} />}
+            title={"Code sent"}
+            dismis={() => setVisibled(!visibled)}
+            text={
+              "We sent you a verification code, an SMS should arrive shortly"
+            }
+            onPress={() => setVisibled(!visibled)}
+          />
+          <Alert
+            visible={visible}
+            icons={<Lock color="black" size={34} />}
+            title={"Account Locked"}
+            dismis={() => setVisible(!visible)}
+            onPress={() => setVisible(!visible)}
+            btnText={"Close"}
+            text={
+              "We're sorry, but your acoount has been temporarily locked for 24 houres. Please feel free to contact our support team."
+            }
+          />
+        </View>
       </View>
-      <View>
-      <AlertModal
-         visible={visibled}
-         btnText={"Close"}
-         icons={<SmsTracking color="black" size={34} />}
-         title={"Code sent"}
-          dismis={() => setVisibled(!visibled)}
-          text={"We sent you a verification code, an SMS should arrive shortly"}
-        onPress={() => setVisibled(!visibled)}
-      />
-        <Alert
-          visible={visible}
-          icons={<Lock color="black" size={34} />}
-          title={"Account Locked"}
-          dismis={() => setVisible(!visible)}
-          onPress={() => setVisible(!visible)}
-          btnText={"Close"}
-          text={"We're sorry, but your acoount has been temporarily locked for 24 houres. Please feel free to contact our support team."}
-        />
-      </View>
-    </View>
     </View>
   );
 };
@@ -270,7 +427,6 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(24),
     marginRight: 20,
   },
-
 });
 
 export default Otp;
