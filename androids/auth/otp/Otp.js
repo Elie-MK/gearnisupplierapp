@@ -33,6 +33,7 @@ import {
   URL_VALIDATED_CODE,
   SEND_CODE_URL
 } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Otp = ({ navigation, route }) => {
   const otpRefs = useRef([]);
@@ -99,6 +100,11 @@ const Otp = ({ navigation, route }) => {
           setValided(!valided);
           const response = await Axios.post(urlValitedCode, validOtp);
           if(response.status === 200){
+            const dataToStore = {
+              value: response.data.access_token,
+              expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
+            };            
+            await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
             setTimeout(() => {
               setValided(false);
               navigation.replace("flow");
@@ -112,7 +118,7 @@ const Otp = ({ navigation, route }) => {
         }
       }
     }else{
-      
+      console.log("Route not found");
     }
    }
   const handleSubmitLogin = async () => {
@@ -129,7 +135,7 @@ const Otp = ({ navigation, route }) => {
         }, 3000);
       }
     } else {
-     
+      console.log("Route not found");
     }
   };
 

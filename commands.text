@@ -20,3 +20,4 @@ Generate apk file
 
 
 eas build -p android --profile preview
+git rm --cached .env

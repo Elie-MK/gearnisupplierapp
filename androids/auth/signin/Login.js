@@ -18,6 +18,7 @@ import Inputs from "../../components/Inputs";
 import ModalCountry from "../../components/ModalCountry";
 import Buttons from "../../components/Buttons";
 import ActivityIndicators from "../../components/ActivityIndicator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation, route }) => {
   const routes = route.name;
@@ -76,6 +77,32 @@ const handleSubmit = ()=>{
      
   }
 }
+
+const TOKEN = async ()=> {
+  await AsyncStorage.getItem("access_token").then((result) => {
+    if (result) {
+      const storedData = JSON.parse(result);
+      // Vérifiez si la donnée est encore valide
+      if (storedData && new Date().getTime() < storedData.expirationTime) {
+        console.log('Donnée valide :', storedData.value);
+      } else {
+        console.log('La donnée a expiré.');
+         AsyncStorage.removeItem("access_token").then(() => {
+          console.log('Donnée supprimée avec succès.');
+        }).catch((error) => {
+          console.log('Erreur lors de la suppression de la donnée :', error);
+        });
+        
+      }
+    } else {
+      console.log('La donnée n\'existe pas.');
+    }
+  }).catch((error) => {
+    console.log('Erreur lors de la récupération de la donnée :', error);
+  });
+}
+
+
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
