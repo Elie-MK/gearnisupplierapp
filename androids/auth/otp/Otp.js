@@ -26,14 +26,15 @@ import ActivityIndicators from "../../components/ActivityIndicator";
 import AlertModal from "../../components/AlertModal";
 import { Lock, SmsTracking } from "iconsax-react-native";
 import Axios from "axios";
-import {
-  CLIENT_ID,
-  CLIENT_SECRET,
-  GRANT_TYPE_URL,
-  URL_VALIDATED_CODE,
-  SEND_CODE_URL
-} from "@env";
+// import {
+//   CLIENT_ID,
+//   CLIENT_SECRET,
+//   GRANT_TYPE_URL,
+//   URL_VALIDATED_CODE,
+//   SEND_CODE_URL
+// } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { privateKeys } from "../../../utilities/privateKeys";
 
 const Otp = ({ navigation, route }) => {
   const otpRefs = useRef([]);
@@ -57,21 +58,21 @@ const Otp = ({ navigation, route }) => {
   const [error, setError]=useState(false)
 
   const otpCode = otp.join("");
-  const urlValitedCode = URL_VALIDATED_CODE;
+  const urlValitedCode = privateKeys.URL_VALIDATED_CODE;
   const validOtp = {
-    grant_type: GRANT_TYPE_URL,
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
+    grant_type: privateKeys.GRANT_TYPE_URL,
+    client_id: privateKeys.CLIENT_ID,
+    client_secret: privateKeys.CLIENT_SECRET,
     username: Numbers,
     otp: otpCode,
     realm: "sms",
     audience: "https://gearni-backend-api/",
     scope: "offline_access openid profile email",
   };
-  const apiUrl = SEND_CODE_URL;
+  const apiUrl = privateKeys.SEND_CODE_URL;
   const requestData = {
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
+    client_id: privateKeys.CLIENT_ID,
+    client_secret: privateKeys.CLIENT_SECRET,
     connection: "sms",
     phone_number: Numbers,
     send: "code",
@@ -107,7 +108,7 @@ const Otp = ({ navigation, route }) => {
             await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
             setTimeout(() => {
               setValided(false);
-              navigation.replace("flow");
+              navigation.replace("flow", Numbers );
             }, 3000);
           }
           console.log("Server Response :", response.data);

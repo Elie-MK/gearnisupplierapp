@@ -9,7 +9,7 @@ import slide from "./slide";
 import { useCustomFonts } from "../../utilities/Fonts";
 import Buttons from "./Buttons";
 
-const FlowItems = () => {
+const FlowItems = ({data}) => {
     const navigation = useNavigation()
   const [currentIndex, setCurrentIndex] = useState(0);
   const ScrollX = useRef(new Animated.Value(0)).current;
@@ -96,7 +96,7 @@ const FlowItems = () => {
       <View style={{ marginTop: 20, marginBottom:15 }}>
         {currentIndex === 3 ? (
        <View style={{alignItems:"center", marginTop:verticalScale(60)}}>
-          <Buttons title={"Continue"} handleSubmit={()=>navigation.replace('navppage')} />
+          <Buttons title={"Continue"} handleSubmit={()=>navigation.replace('adminRegistration', data)} />
        </View>
         ) : (
        <View style={{alignItems:"center",marginTop:verticalScale(60)}}>

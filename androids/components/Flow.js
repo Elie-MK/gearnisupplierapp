@@ -18,6 +18,8 @@ import { useCustomFonts } from "../../utilities/Fonts";
 
 const Flow = ({navigation, route}) => {
   const routes = route.name
+  const routeNumber = route.params
+  
   const { width } = useWindowDimensions();
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
@@ -39,12 +41,12 @@ const Flow = ({navigation, route}) => {
           <Pressable onPress={() => navigation.navigate('welcome',{routes})}>
             <AntDesign name="arrowleft" size={30} color={Color.light.black} />
           </Pressable>
-          <Pressable onPress={() => navigation.replace("navppage")}>
+          <Pressable onPress={() => navigation.replace("adminRegistration", routeNumber)}>
             <Text style={{fontFamily:fontGotham.regular, fontSize:moderateScale(14)}}>SKIP</Text>
           </Pressable>
         </View>
         <View style={{marginTop:30}}>
-         <FlowItems />
+         <FlowItems data={routeNumber} />
         </View>
        
       </View>

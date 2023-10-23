@@ -20,7 +20,8 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/BlackAndYellowGearni.png",
-        "backgroundColor": "#FFC244"
+        "backgroundColor": "#FFC244",
+        "resizeMode": "contain"
       },
       "permissions": [
         "CAMERA",

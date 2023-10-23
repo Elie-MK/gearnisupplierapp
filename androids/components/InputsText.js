@@ -3,7 +3,7 @@ import React from 'react'
 import { useCustomFonts } from '../../utilities/Fonts';
 import { horizontalScale } from '../../utilities/Metrics';
 
-const InputsText = ({onPress, borderColor,padding,width,iconsLeft,onChangeText,value, hide, iconsRight, label, placeholder, editable,defaultValue }) => {
+const InputsText = ({onPress, color, borderColor,padding,width,iconsLeft,onChangeText,value, hide, iconsRight, label, placeholder, editable,defaultValue }) => {
     const { fontGotham, fontsLoaded } = useCustomFonts();
     if (!fontsLoaded) {
       return null;
@@ -36,6 +36,8 @@ const InputsText = ({onPress, borderColor,padding,width,iconsLeft,onChangeText,v
           fontFamily: fontGotham.book,
           width: horizontalScale(300),
           height:56,
+          color:color
+         
         }}
       />
       <TouchableOpacity onPress={onPress} style={{marginLeft:-50}}>

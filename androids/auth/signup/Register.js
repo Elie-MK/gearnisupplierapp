@@ -25,7 +25,8 @@ import Inputs from "../../components/Inputs";
 import AlertModal from "../../components/AlertModal";
 import { SmsTracking } from "iconsax-react-native";
 import Axios from "axios";
-import { CLIENT_ID, CLIENT_SECRET, SEND_CODE_URL } from "@env";
+// import { CLIENT_ID, CLIENT_SECRET, SEND_CODE_URL } from "@env";
+import { privateKeys } from "../../../utilities/privateKeys";
 
 const Register = ({ navigation, route }) => {
   const routes = route.name;
@@ -37,17 +38,17 @@ const Register = ({ navigation, route }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [visible, setVisible]=useState(false)
 
-  const [number, setNumber] = useState("");
+  const [number, setNumber] = useState("")
   const [visibled, setVisibled] = useState(false);
   const [visibleModal, setVisibleModal] = useState(false);
   const [isError, setIsError] = useState(false);
   const [valided, setValided] = useState(false);
 
-  const apiUrl = SEND_CODE_URL;
+  const apiUrl = privateKeys.SEND_CODE_URL;
   const Numbers = countryCode + number;
   const requestData = {
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
+    client_id: privateKeys.CLIENT_ID,
+    client_secret: privateKeys.CLIENT_SECRET,
     connection: "sms",
     phone_number: Numbers,
     send: "code",
@@ -61,9 +62,9 @@ const Register = ({ navigation, route }) => {
     if(number.length>=1){
       setIsError(false)
     }
-  }, [value, number]);
+  }, [value, number])
 
-  const datas = CountryList.getAll();
+  const datas = CountryList.getAll()
   const handleCountry = (value) => {
     if (value) {
       const data = datas.filter(
@@ -96,7 +97,7 @@ const Register = ({ navigation, route }) => {
         const response = await Axios.post(apiUrl, requestData);
         console.log("Server Response :", response.data);
       } catch (error) {
-        console.error("Erreur lors de la requête :", error);
+        console.error("Erreur lors de la requête :", error)
       }
     }
   };
