@@ -30,7 +30,6 @@ export default function App() {
     <>
       {/* Android */}
       {Platform.OS === "android" && (
-     
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{

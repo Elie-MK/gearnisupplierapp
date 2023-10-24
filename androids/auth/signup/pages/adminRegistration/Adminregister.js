@@ -28,6 +28,7 @@ import { postAdminRegistration } from "../../../../../utilities/API";
 import { privateKeys } from "../../../../../utilities/privateKeys";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ActivityIndicators from "../../../../components/ActivityIndicator";
 
 
 const Adminregister = ({ navigation, route }) => {
@@ -44,6 +45,9 @@ const Adminregister = ({ navigation, route }) => {
   const [firstName, setFirstName]=useState('')
   const [lastName, setLastName]=useState('')
   const [token, setToken]=useState('')
+  const [errorMsg, setErrorMsg]=useState('')
+  const [errorStatus, setErrorStatus]=useState(false)
+  const [actived, setActived]=useState(false)
 
 
   const TOKEN = async ()=> {
@@ -60,6 +64,7 @@ const Adminregister = ({ navigation, route }) => {
   }
 useEffect(()=>{
 TOKEN()
+
 },[])
 
 
@@ -76,6 +81,8 @@ const handleSubmit = async ()=>{
   if(!address || !namecountry || !dateBirth || !firstName || !lastName || !email){
     alert("Please fill all fields")
   }else{
+    try {
+      setActived(!actived)
     const Datas = 
       {
         "mobileNumber": Number,
@@ -90,15 +97,21 @@ const handleSubmit = async ()=>{
         "isProfileSet": true,
         "nationality": namecountry,
       }
-    
-    try {
       const response = await instance.post("auth/register/verify", Datas);
-     if(response.status == 201){
-      console.log(response.data);      
-      navigation.replace("companyRegistration")
+      if(response.status === 200){
+       navigation.replace("companyRegistration")
+       console.log(response.data);    
+       setActived(!actived)
      }
+   
     } catch (error) {
       console.log("Datas no posted ", error)
+      setActived(false)
+
+      setErrorStatus(error.message === "Request failed with status code 302" && !errorStatus)
+      setErrorMsg(!errorStatus && "Account already exists with this sub.");
+      setErrorStatus(error.message === "Request failed with status code 400" && !errorStatus)
+      setErrorMsg(!errorStatus && "Verify your email adress");
     }
   }
 }
@@ -178,8 +191,15 @@ const onChange = ({type}, selectedDate)=>{
 
             {/* Btn */}
             <View style={{ marginTop: verticalScale(30), alignItems:"center" }}>
+              {
+                actived?<ActivityIndicators />:
+
               <Buttons title={"Continue"} handleSubmit={handleSubmit} />
+              }
             </View>
+            <Text style={{marginTop:15, color:"red"}}>
+              {errorStatus && errorMsg}
+            </Text>
           </View>
       </View>
     </View>
