@@ -2,27 +2,20 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions,
-  StatusBar,
   Pressable,
-  TextInput,
-  Image,
-  ScrollView,
-  TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Color from "../../../../../utilities/Color";
-import { Platform } from "react-native";
 import { horizontalScale, moderateScale, verticalScale } from "../../../../../utilities/Metrics";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useCustomFonts } from "../../../../../utilities/Fonts";
 import ModalCountry from "../../../../components/ModalCountry";
 import KeyboardAvoid from "../../../../components/KeyboardAvoid";
-import { Button, Divider } from "@rneui/base";
+import {  Divider } from "@rneui/base";
 import UploadInput from "../../../../components/UploadInput";
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
-import { CloseCircle, Flag, Hashtag, Location, ShopAdd } from "iconsax-react-native";
+import { Hashtag, Location, ShopAdd } from "iconsax-react-native";
 import InputsText from "../../../../components/InputsText";
 import Inputs from "../../../../components/Inputs";
 import InputCountries from "../../../../components/InputCountries";
@@ -31,19 +24,19 @@ import EmptyUploadButton from "../../../../components/EmptyUploadButton";
 import ModalChooseUpload from "../../../../components/ModalChooseUpload";
 import { Camera } from "expo-camera";
 import * as DocumentPicker from 'expo-document-picker';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { privateKeys } from "../../../../../utilities/privateKeys";
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
   const defaultFlag = "🇹🇳"
   const defaultCountryName = "Tunisia";
   const [number, setNumber] = useState("");
-
   const [open, setOpen] = useState(false);
   const [countryCode, setCountryCode] = useState(defaultCountryCode);
   const [flag, setFlag] = useState(defaultFlag);
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
-
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImage2, setSelectedImage2] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -54,9 +47,42 @@ const Registercompany = ({ navigation }) => {
   const [showOpen, setShowOpen]=useState(false)
   const [modalShow, setModalShow]=useState(false)
   const [modalShow2, setModalShow2]=useState(false)
+  // Datas form
+const [nameCompany, setNameCompany] = useState("");
+const [companyRegisNumber, setCompanyRegisNumber] = useState("");
+const [companyLocation, setCompanyLocation] = useState("");
+const [billingAdress, setBillingAdress] = useState("");
+const [token, setToken] = useState("");
 
 
-  const SERVER_URL = 'URL_DU_SERVEUR'; 
+
+const TOKEN = async ()=> {
+  await AsyncStorage.getItem("access_token").then((result) => {
+    if (result) {
+      const storedData = JSON.parse(result);
+        setToken(storedData.value);
+    } else {
+      console.log('La donnée n\'existe pas.');
+    }
+  }).catch((error) => {
+    console.log('Erreur lors de la récupération de la donnée :', error);
+  });
+}
+useEffect(()=>{
+TOKEN()
+},[])
+
+const instance = axios.create({
+  baseURL: "https://backend.gearni.com/",
+  headers:{
+     'Authorization':`Bearer ${token}`, 
+     'Api-Key':`${privateKeys.API_KEY}`,
+     'Content-Type':'multipart/form-data',
+     'Accept':'application/json'
+  }
+});
+
+
 
   const pickImage = async (imgSelected, fileNamesSeleted) => {
     if(modalShow == true | showOpen== true){
@@ -134,12 +160,19 @@ const Registercompany = ({ navigation }) => {
 
     const uriParts = selectedImage.split('.');
     const fileType = uriParts[uriParts.length - 1];
+    const uriParts2 = selectedImage2.split('.');
+    const fileType2 = uriParts2[uriParts2.length - 1];
 
     const formData = new FormData();
     formData.append('file', {
       uri: selectedImage,
       name: `file.${fileType}`,
       type: `image/${fileType}`,
+    });
+    formData.append('file', {
+      uri: selectedImage2,
+      name: `file.${fileType2}`,
+      type: `image/${fileType2}`,
     });
 
     try {
@@ -168,7 +201,79 @@ const Registercompany = ({ navigation }) => {
       namesFiles(null)
       imagesSelected(null)
     }
-
+      
+    
+   
+    const handleSubmit = async () => {
+      if (
+        !nameCompany ||
+        !number ||
+        !companyRegisNumber ||
+        !companyLocation ||
+        !namecountry ||
+        !billingAdress ||
+        !selectedImage2 ||
+        !selectedImage
+      ) {
+        alert("Veuillez remplir tous les champs");
+        if (number.length < 8) {
+          alert("Veuillez entrer un numéro de téléphone correct");
+        }
+      } else {
+        const formData = new FormData();
+        const uriParts = selectedImage.uri.split('.');
+        const fileType = uriParts[uriParts.length - 1];
+        const uriParts2 = selectedImage2.uri.split('.');
+        const fileType2 = uriParts2[uriParts2.length - 1];
+        const image1 = selectedImage.uri;
+        const image2 = selectedImage2.uri;
+    
+        formData.append('commercialLicenceFile', {
+          uri: image1,
+          name: image1.split("/").pop(),
+          type: `image/${fileType}`,
+        });
+    
+        formData.append('vatNumberFile', {
+          uri: image2,
+          name: image1.split("/").pop(),
+          type: `image/${fileType2}`,
+        });
+    
+        const postDatas = formData; 
+    
+        postDatas.append("name", "Elie");
+        postDatas.append("phoneNumber", "+21656373135");
+        postDatas.append("taxRegistrationNumber", "5698855");
+        postDatas.append("location", "tunisia");
+        postDatas.append("country", "Tunis");
+        postDatas.append("logo", "string");
+        postDatas.append("mobileNumber", "+21656373135");
+        postDatas.append("address", "tunisia");
+    
+        console.log(postDatas);
+    
+        try {
+          const response = await instance.post("company/create", postDatas,
+            {
+              onUploadProgress: (progressEvent) => {
+                const progress = (progressEvent.loaded / progressEvent.total) * 100;
+                setUploadProgress(progress);
+              },
+          });
+    
+          if (response.status === 201) {
+            console.log(response.data);
+          } else {
+            console.log("Réponse inattendue du serveur:", response);
+          }
+        } catch (error) {
+          console.log("Erreur lors de l'envoi des données", error);
+        }
+      }
+    };
+    
+    
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
@@ -193,19 +298,19 @@ const Registercompany = ({ navigation }) => {
             <View style={{}} >
               <View style={{alignItems:"center", marginTop:verticalScale(56)}}>
               {/* Comany Name */}
-              <InputsText label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
+              <InputsText value={nameCompany} onChangeText={(n)=>setNameCompany(n)} label={"Conpany Name"} width={horizontalScale(315)} placeholder={"Top Gear"} iconsLeft={<ShopAdd color="black" />} />
               {/* Company Phone Number */}
               <View style={{  marginTop: verticalScale(30),}}>
         <Inputs  placeholder={"12345678"} label={"Company Phone Number"} countryCode={countryCode} namecountry={flag} number={number} onChangeText={(e) => setNumber(e)} onPress={()=>setOpen(!open)} />
         </View>
               {/* Comapny Registration Number */}
-             <InputsText  label={"Company Registration Number"} width={horizontalScale(315)}  placeholder={"1234567/M/A/E/001"}  iconsLeft={<Hashtag color="black" />} />
+             <InputsText value={companyRegisNumber} onChangeText={(c)=>setCompanyRegisNumber(c)}  label={"Company Registration Number"} width={horizontalScale(315)}  placeholder={"1234567/M/A/E/001"}  iconsLeft={<Hashtag color="black" />} />
               {/* Company Location */}
-              <InputsText label={"Company Location"} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} width={horizontalScale(315)}  />
+              <InputsText value={companyLocation} onChangeText={(l)=>setCompanyLocation(l)} label={"Company Location"} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} width={horizontalScale(315)}  />
               {/* Country */}
               <InputCountries country={namecountry} label={"Country"} press={(item)=>onCountryChange(item)} />
               {/* Billing Adress */}
-              <InputsText label={"Billing Adress"} width={horizontalScale(315)} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} />
+              <InputsText value={billingAdress} onChangeText={(b)=>setBillingAdress(b)} label={"Billing Adress"} width={horizontalScale(315)} iconsLeft={<Location color="black" />} placeholder={"Min Street 20 Mars 1956, Bardo"} />
               </View>
               <Divider color="black" style={{marginTop:verticalScale(30)}} />
               <View style={{alignItems:"center"}}>
@@ -214,7 +319,7 @@ const Registercompany = ({ navigation }) => {
         Upload Licence file
       </Text>
       {
-        fileName|selectedImage === null? <EmptyUploadButton onPress={()=>setModalShow(!modalShow)} /> : <UploadInput clear={()=>handleClear(setFileName, setSelectedImage)} selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
+        fileName|selectedImage === null? <EmptyUploadButton  onPress={()=>setModalShow(!modalShow)} /> : <UploadInput clear={()=>handleClear(setFileName, setSelectedImage)} selectedImage={selectedImage} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage, setFileName)} fileName={fileName} />
 
       }
               <Text style={{ fontFamily: fontGotham.bold, fontSize: 16, marginTop:30 }}>
@@ -226,7 +331,7 @@ const Registercompany = ({ navigation }) => {
       }
    </View>
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-             <Buttons title={"Continue"} handleSubmit={()=>navigation.navigate("registrationComplete")} />
+             <Buttons title={"Continue"} handleSubmit={handleSubmit} />
             </View>
             </View>
 

@@ -53,9 +53,9 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
                 <Text style={{fontSize:10}}>{fileName}</Text>
                 <ProgressBar  progress={uploadProgress/1.0} style={{marginTop:5}} color={Color.light.main} />
               </View>
-              <View >
+              <View style={{marginLeft:-67}}>
               {uploadProgress > 0 && (
-        <Text >{` ${uploadProgress.toFixed(2)}%`}</Text>
+        <Text >{` ${uploadProgress.toFixed(2)*1}%`}</Text>
       )}
               </View>
             </View>
