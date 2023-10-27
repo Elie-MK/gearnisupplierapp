@@ -27,8 +27,9 @@
     "expo-file-system": "~15.4.4",
     "expo-font": "~11.4.0",
     "expo-image-picker": "~14.3.2",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
-    "expo-updates": "~0.18.16",
+    "expo-updates": "~0.18.17",
     "iconsax-react-native": "^0.0.8",
     "react": "18.2.0",
     "react-native": "0.72.6",
@@ -43,8 +44,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-vector-icons": "^10.0.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
-    "expo-splash-screen": "~0.20.5"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

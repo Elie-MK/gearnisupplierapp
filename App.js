@@ -22,7 +22,6 @@ import Adminregister from "./androids/auth/signup/pages/adminRegistration/Adminr
 import Registercompany from "./androids/auth/signup/pages/companyRegister/Registercompany";
 import Completeregistration from "./androids/auth/signup/pages/registrationcomplete/Completeregistration";
 
-
 export default function App() {
   const Stack = createStackNavigator();
 
@@ -30,25 +29,30 @@ export default function App() {
     <>
       {/* Android */}
       {Platform.OS === "android" && (
-          <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}
-              initialRouteName="welcome"
-            >
-              <Stack.Screen name="welcome" component={WelcomeAndroid} />
-              <Stack.Screen name="login" component={Login} />
-              <Stack.Screen name="register" component={Register} />
-              <Stack.Screen name="otp" component={Otp} />
-              <Stack.Screen name="flow" component={Flow} />
-              <Stack.Screen name="adminRegistration" component={Adminregister} />
-         <Stack.Screen name="companyRegistration" component={Registercompany} />
-         <Stack.Screen name="registrationComplete" component={Completeregistration} />
-              <Stack.Screen name="drawer" component={DrawerNavigation} />
-          
-            </Stack.Navigator>
-          </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+            initialRouteName="welcome"
+          >
+            <Stack.Screen name="welcome" component={WelcomeAndroid} />
+            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen name="register" component={Register} />
+            <Stack.Screen name="otp" component={Otp} />
+            <Stack.Screen name="flow" component={Flow} />
+            <Stack.Screen name="adminRegistration" component={Adminregister} />
+            <Stack.Screen
+              name="companyRegistration"
+              component={Registercompany}
+            />
+            <Stack.Screen
+              name="registrationComplete"
+              component={Completeregistration}
+            />
+            <Stack.Screen name="drawer" component={DrawerNavigation} />
+          </Stack.Navigator>
+        </NavigationContainer>
       )}
 
       {/* IOS */}

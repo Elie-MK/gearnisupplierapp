@@ -66,6 +66,9 @@ useEffect(()=>{
 TOKEN()
 
 },[])
+useEffect(()=>{
+setErrorStatus(false)
+},[email])
 
 
 
@@ -103,15 +106,17 @@ const handleSubmit = async ()=>{
        console.log(response.data);    
        setActived(!actived)
      }
-   
     } catch (error) {
-      console.log("Datas no posted ", error)
       setActived(false)
-      setErrorStatus(error.message === "Request failed with status code 302" && !errorStatus)
-      setErrorMsg(!errorStatus && "Account already exists with this sub.");
+      if (error.message === "Request failed with status code 302") {
+        setErrorStatus(true) 
+        setErrorMsg("Account already exists with this sub.");
+      }else if (error.message === "Request failed with status code 400"){
+        setErrorStatus(true) 
+        setErrorMsg("Verify your email adress")
+      }
+      console.log("Datas no posted ", error)
       // navigation.replace(error.message === "Request failed with status code 302" && "login")
-      setErrorStatus(error.message === "Request failed with status code 400" && !errorStatus)
-      setErrorMsg(!errorStatus && "Verify your email adress");
     }
   }
 }

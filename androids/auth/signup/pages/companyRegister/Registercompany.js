@@ -26,6 +26,7 @@ import { Camera } from "expo-camera";
 import * as DocumentPicker from 'expo-document-picker';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { privateKeys } from "../../../../../utilities/privateKeys";
+import ActivityIndicators from "../../../../components/ActivityIndicator";
 
 const Registercompany = ({ navigation }) => {
   const defaultCountryCode = "+216"
@@ -47,6 +48,7 @@ const Registercompany = ({ navigation }) => {
   const [showOpen, setShowOpen]=useState(false)
   const [modalShow, setModalShow]=useState(false)
   const [modalShow2, setModalShow2]=useState(false)
+  const [refresh, setRefresh]=useState(false)
   // Datas form
 const [nameCompany, setNameCompany] = useState("");
 const [companyRegisNumber, setCompanyRegisNumber] = useState("");
@@ -180,6 +182,7 @@ const instance = axios.create({
         onUploadProgress: (progressEvent) => {
           const progress = (progressEvent.loaded / progressEvent.total) * 100;
           setUploadProgress(progress);
+          
         },
       });
 
@@ -220,6 +223,7 @@ const instance = axios.create({
           alert("Veuillez entrer un numéro de téléphone correct");
         }
       } else {
+        setRefresh(!refresh)
         const formData = new FormData();
         const uriParts = selectedImage.uri.split('.');
         const fileType = uriParts[uriParts.length - 1];
@@ -232,26 +236,25 @@ const instance = axios.create({
           uri: image1,
           name: image1.split("/").pop(),
           type: `image/${fileType}`,
-        });
+        })
     
         formData.append('vatNumberFile', {
           uri: image2,
           name: image1.split("/").pop(),
           type: `image/${fileType2}`,
-        });
-    
+        })
         const postDatas = formData; 
     
-        postDatas.append("name", "Elie");
-        postDatas.append("phoneNumber", "+21656373135");
-        postDatas.append("taxRegistrationNumber", "5698855");
-        postDatas.append("location", "tunisia");
-        postDatas.append("country", "Tunis");
+        postDatas.append("name", nameCompany);
+        postDatas.append("phoneNumber", countryCode+number);
+        postDatas.append("taxRegistrationNumber", companyRegisNumber);
+        postDatas.append("location", companyLocation);
+        postDatas.append("country", namecountry);
         postDatas.append("logo", "string");
-        postDatas.append("mobileNumber", "+21656373135");
-        postDatas.append("address", "tunisia");
+        postDatas.append("mobileNumber", countryCode+number);
+        postDatas.append("address", billingAdress);
     
-        console.log(postDatas);
+        // console.log(postDatas);
     
         try {
           const response = await instance.post("company/create", postDatas,
@@ -263,11 +266,15 @@ const instance = axios.create({
           });
     
           if (response.status === 201) {
+            setRefresh(false)
+            navigation.replace("registrationComplete")
             console.log(response.data);
           } else {
+            setRefresh(false)
             console.log("Réponse inattendue du serveur:", response);
           }
         } catch (error) {
+          setRefresh(false)
           console.log("Erreur lors de l'envoi des données", error);
         }
       }
@@ -326,12 +333,14 @@ const instance = axios.create({
         Upload VAT file
       </Text>
       {
-        fileName2|selectedImage2 ===null? <EmptyUploadButton onPress={()=>setModalShow2(!modalShow2)} />:<UploadInput clear={()=>handleClear(setFileName2, setSelectedImage2)} selectedImage={selectedImage2} uploadProgress={uploadProgress2} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
+        fileName2|selectedImage2 ===null? <EmptyUploadButton onPress={()=>setModalShow2(!modalShow2)} />:<UploadInput clear={()=>handleClear(setFileName2, setSelectedImage2)} selectedImage={selectedImage2} uploadProgress={uploadProgress} pickImage={()=>pickImage(setSelectedImage2, setFileName2)} fileName={fileName2} />
 
       }
    </View>
               <View style={{ marginTop: 30, marginBottom:20, alignItems:"center" }}>
-             <Buttons title={"Continue"} handleSubmit={handleSubmit} />
+             {
+              refresh? <ActivityIndicators/> : <Buttons title={"Continue"} handleSubmit={handleSubmit} />
+             }
             </View>
             </View>
 
