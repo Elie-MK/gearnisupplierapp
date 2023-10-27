@@ -115,6 +115,11 @@ const Otp = ({ navigation, route }) => {
         } catch (error) {
           setValided(false);
           setError(true)
+          if(error.message === "Network Error" ){
+            alert('Connection error, check your connection')
+          }else if (error.message === "Request failed with status code 429" ){
+            alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+          }
           console.log("Erreur lors de la requête :", error);
         }
       }

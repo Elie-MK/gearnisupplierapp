@@ -43,6 +43,7 @@ const Register = ({ navigation, route }) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [isError, setIsError] = useState(false);
   const [valided, setValided] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const apiUrl = privateKeys.SEND_CODE_URL;
   const Numbers = countryCode + number;
@@ -63,6 +64,9 @@ const Register = ({ navigation, route }) => {
       setIsError(false)
     }
   }, [value, number])
+  useEffect(()=>{
+    setErrorStatus(false)
+  },[valided])
 
   const datas = CountryList.getAll()
   const handleCountry = (value) => {
@@ -82,6 +86,13 @@ const Register = ({ navigation, route }) => {
     setVisibleModal(!visibleModal);
   };
 
+const handleActive = ()=>{
+  setValided(!valided);
+  setTimeout(() => {
+    setVisibled(!visibled);
+    setValided(false);
+  }, 1000);
+}
   const handleSubmit = async () => {
     if (!number) {
       setIsError(true) 
@@ -95,9 +106,17 @@ const Register = ({ navigation, route }) => {
           setValided(false);
         }, 1000);
         const response = await Axios.post(apiUrl, requestData);
+        if (response.status === 200) {
+          navigation.replace("otp", { routes, Numbers  })
+        }
         console.log("Server Response :", response.data);
       } catch (error) {
+        if(error.message === "Network Error" ){
+          setErrorStatus(true)
+        }
+        setVisibled(false);
         console.error("Erreur lors de la requête :", error)
+        
       }
     }
   };
@@ -166,7 +185,7 @@ const Register = ({ navigation, route }) => {
               {valided ? (
                 <ActivityIndicators />
               ) : (
-                <Buttons handleSubmit={handleSubmit} title={"Confirm"} />
+                <Buttons handleSubmit={handleActive} title={"Confirm"} />
               )}
             </View>
             <View
@@ -196,6 +215,11 @@ const Register = ({ navigation, route }) => {
                 </Text>
               </Pressable>
             </View>
+            <View style={{alignItems:"center"}}>
+           {
+            errorStatus &&  <Text style={{fontFamily:fontGotham.book, fontSize:14, marginTop:15, color:"red"}}>Connection error, check your connection</Text>
+           }
+            </View>
           </View>
           <View>
             <ModalCountry
@@ -216,7 +240,7 @@ const Register = ({ navigation, route }) => {
           title={"Code sent"}
           dismis={() => setVisibled(!visibled)}
           text={"We sent you a verification code, an SMS should arrive shortly"}
-          onPress={() => navigation.replace("otp", { routes, Numbers  })}
+          onPress={handleSubmit}
         />
       </View>
     </View>
