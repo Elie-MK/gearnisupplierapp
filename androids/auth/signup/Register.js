@@ -87,11 +87,15 @@ const Register = ({ navigation, route }) => {
   };
 
 const handleActive = ()=>{
-  setValided(!valided);
-  setTimeout(() => {
-    setVisibled(!visibled);
-    setValided(false);
-  }, 1000);
+  if(!number || number.length < 8){
+    setIsError(true) 
+  }else{
+    setValided(!valided);
+    setTimeout(() => {
+      setVisibled(!visibled);
+      setValided(false);
+    }, 1000);
+  }
 }
   const handleSubmit = async () => {
     if (!number) {

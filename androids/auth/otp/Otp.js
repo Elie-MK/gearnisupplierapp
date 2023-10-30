@@ -93,7 +93,7 @@ const Otp = ({ navigation, route }) => {
   
    const handleSubmitRegistration = async ()=>{
     setAttempts(1);
-    if (routes == "register") {
+    if (routes === "register") {
       if (otpCode.length < 6) {
         setError(true)
       } else {
@@ -127,20 +127,84 @@ const Otp = ({ navigation, route }) => {
       console.log("Route not found");
     }
    }
+   const instance = Axios.create({
+    baseURL: "https://backend.gearni.com/",
+    headers:{
+      'Api-Key':`${privateKeys.API_KEY}`,
+      //  'Authorization':`Bearer ${token}`, 
+    }
+  });
+   const verifyData = {
+    "mobileNumber": Numbers
+  }
+  
   const handleSubmitLogin = async () => {
-    const otpValue = otp.join("");
     setAttempts(1);
-    if (routes == "login") {
-      if (otpValue.length < 6) {
-        alert("Enter your otp code");
+    if (routes === "login") {
+      if (otpCode.length < 6) {
+        setError(true)
       } else {
-        setValided(!valided);
-        setTimeout(() => {
-          navigation.replace("drawer");
-          setValided(false);
-        }, 3000);
+        try {
+          const responseVerify = await instance.post('auth/login/sendOTP', verifyData)
+          console.log("response ", responseVerify.status);
+          if(responseVerify.status === 200){
+            try {
+              setValided(!valided);
+              const response = await Axios.post(urlValitedCode, validOtp);
+              if(response.status === 200){
+                const dataToStore = {
+                  value: response.data.access_token,
+                  expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
+                };            
+                await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
+                setTimeout(() => {
+                  setValided(false);
+                  navigation.replace("drawer", Numbers );
+                }, 3000);
+              }
+              console.log("Server Response :", response.data);
+            } catch (error) {
+                setValided(false);
+                setError(true)
+                if(error.message === "Network Error" ){
+                  alert('Connection error, check your connection')
+                }else if (error.message === "Request failed with status code 429" ){
+                  alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+                }
+                console.log("Erreur lors de la requête :", error);
+              }
+              }
+        } catch (error) {
+          if(error.message === "Request failed with status code 404"){
+            try {
+              setValided(!valided);
+              const response = await Axios.post(urlValitedCode, validOtp);
+              if(response.status === 200){
+                const dataToStore = {
+                  value: response.data.access_token,
+                  expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
+                };            
+                await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
+                setTimeout(() => {
+                  setValided(false);
+                  navigation.replace("flow", Numbers );
+                }, 3000);
+              }
+              console.log("Server Response :", response.data);
+            } catch (error) {
+              setValided(false);
+              setError(true)
+              if(error.message === "Network Error" ){
+                alert('Connection error, check your connection')
+              }else if (error.message === "Request failed with status code 429" ){
+                alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+              }
+              console.log("Erreur lors de la requête :", error);
+            }
+          }
+        }
       }
-    } else {
+    }else{
       console.log("Route not found");
     }
   };
