@@ -114,11 +114,12 @@ const Otp = ({ navigation, route }) => {
           console.log("Server Response :", response.data);
         } catch (error) {
           setValided(false);
-          setError(true)
           if(error.message === "Network Error" ){
             alert('Connection error, check your connection')
           }else if (error.message === "Request failed with status code 429" ){
-            alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+            setVisible(true)
+            // alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+            setDismis(true)
           }
           console.log("Erreur lors de la requête :", error);
         }
@@ -145,11 +146,11 @@ const Otp = ({ navigation, route }) => {
         setError(true)
       } else {
         try {
+          setValided(!valided);
           const responseVerify = await instance.post('auth/login/sendOTP', verifyData)
-          console.log("response ", responseVerify.status);
+          // console.log("response ", responseVerify.status);
           if(responseVerify.status === 200){
             try {
-              setValided(!valided);
               const response = await Axios.post(urlValitedCode, validOtp);
               if(response.status === 200){
                 const dataToStore = {
@@ -176,8 +177,8 @@ const Otp = ({ navigation, route }) => {
               }
         } catch (error) {
           if(error.message === "Request failed with status code 404"){
+            setValided(!valided);
             try {
-              setValided(!valided);
               const response = await Axios.post(urlValitedCode, validOtp);
               if(response.status === 200){
                 const dataToStore = {
@@ -193,11 +194,12 @@ const Otp = ({ navigation, route }) => {
               console.log("Server Response :", response.data);
             } catch (error) {
               setValided(false);
-              setError(true)
               if(error.message === "Network Error" ){
                 alert('Connection error, check your connection')
               }else if (error.message === "Request failed with status code 429" ){
-                alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+                setVisible(true)
+                // alert("Your account has been blocked after multiple consecutive login attempts. Retry after 24Hours")
+                setDismis(true)
               }
               console.log("Erreur lors de la requête :", error);
             }
@@ -450,7 +452,7 @@ const Otp = ({ navigation, route }) => {
               >
                 Encoutering issues ?{" "}
               </Text>
-              <Pressable onPress={() => navigation.navigate("contact")}>
+              <Pressable onPress={() => navigation.replace("contact", Numbers)}>
                 <Text
                   style={{
                     fontFamily: fontGotham.bold,
@@ -483,7 +485,7 @@ const Otp = ({ navigation, route }) => {
             onPress={() => setVisible(!visible)}
             btnText={"Close"}
             text={
-              "We're sorry, but your acoount has been temporarily locked for 24 houres. Please feel free to contact our support team."
+              "We're sorry, but your acoount has been temporarily locked for 24 hours. Please feel free to contact our support team."
             }
           />
         </View>

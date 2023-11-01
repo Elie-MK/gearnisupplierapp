@@ -42,7 +42,7 @@ const handleSubmit = ()=>{
           marginRight: 20,
         }}
       >
-        <TouchableOpacity  onPress={() => navigation.navigate("main")}>
+        <TouchableOpacity  onPress={() => navigation.goBack()}>
           <AntDesign name="arrowleft" size={24} color="black" />
         </TouchableOpacity>
       </View>

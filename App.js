@@ -21,6 +21,7 @@ import Profiles from "./androids/home/Profile/Profiles";
 import Adminregister from "./androids/auth/signup/pages/adminRegistration/Adminregister";
 import Registercompany from "./androids/auth/signup/pages/companyRegister/Registercompany";
 import Completeregistration from "./androids/auth/signup/pages/registrationcomplete/Completeregistration";
+import ReachSupport from "./androids/home/Report/ReachSupport";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -41,6 +42,7 @@ export default function App() {
             <Stack.Screen name="register" component={Register} />
             <Stack.Screen name="otp" component={Otp} />
             <Stack.Screen name="flow" component={Flow} />
+            <Stack.Screen name="contact" component={ReachSupport} />
             <Stack.Screen name="adminRegistration" component={Adminregister} />
             <Stack.Screen
               name="companyRegistration"

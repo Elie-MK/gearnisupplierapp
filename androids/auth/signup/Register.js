@@ -104,13 +104,13 @@ const handleActive = ()=>{
       setIsError(true) 
     } else {
       try {
-        setValided(!valided);
         setTimeout(() => {
           setVisibled(!visibled);
           setValided(false);
         }, 1000);
         const response = await Axios.post(apiUrl, requestData);
         if (response.status === 200) {
+          setValided(!valided);
           navigation.replace("otp", { routes, Numbers  })
         }
         console.log("Server Response :", response.data);

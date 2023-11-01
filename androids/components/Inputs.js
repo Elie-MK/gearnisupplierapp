@@ -1,12 +1,20 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useCustomFonts } from '../../utilities/Fonts';
 import { horizontalScale, verticalScale } from '../../utilities/Metrics';
 import { AntDesign } from '@expo/vector-icons';
 import Color from '../../utilities/Color';
 
 const Inputs = ({placeholder,namecountry, Error, countryCode, number, onChangeText, onPress, label}) => {
-    
+  const [isFocused, setIsFocused] = useState(false);
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -18,7 +26,7 @@ const Inputs = ({placeholder,namecountry, Error, countryCode, number, onChangeTe
         width:horizontalScale(315),
         flexDirection: "row",
           height:56,
-        borderRadius:8, borderColor:Error == true ? "red" : "black"}}>
+        borderRadius:8, borderColor:isFocused? Color.light.main:Error == true ? "red" : "black"}}>
           <TouchableOpacity onPress={onPress} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
             <Text style={{ fontSize: 14 }}>
               {namecountry}
@@ -32,6 +40,8 @@ const Inputs = ({placeholder,namecountry, Error, countryCode, number, onChangeTe
               style={{fontFamily: fontGotham.book,     borderLeftWidth: 1,
                 paddingLeft: 20,
                 fontSize: 14, }}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               onChangeText={onChangeText}
               placeholder={placeholder}
               value={number}
