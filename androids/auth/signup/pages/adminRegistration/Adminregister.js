@@ -54,7 +54,7 @@ const Adminregister = ({ navigation, route }) => {
     await AsyncStorage.getItem("access_token").then((result) => {
       if (result) {
         const storedData = JSON.parse(result);
-          setToken(storedData.value);
+          setToken(storedData.value.access_token);
       } else {
         console.log('La donnée n\'existe pas.');
       }

@@ -62,7 +62,7 @@ const TOKEN = async ()=> {
   await AsyncStorage.getItem("access_token").then((result) => {
     if (result) {
       const storedData = JSON.parse(result);
-        setToken(storedData.value);
+        setToken(storedData.value.access_token);
     } else {
       console.log('La donnée n\'existe pas.');
     }
@@ -275,6 +275,9 @@ const instance = axios.create({
           }
         } catch (error) {
           setRefresh(false)
+          if(error.message === "Request failed with status code 302"){
+            alert("Please verify your company register number")
+          }
           console.log("Erreur lors de l'envoi des données", error);
         }
       }

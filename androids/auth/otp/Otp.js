@@ -102,10 +102,11 @@ const Otp = ({ navigation, route }) => {
           const response = await Axios.post(urlValitedCode, validOtp);
           if(response.status === 200){
             const dataToStore = {
-              value: response.data.access_token,
+              value: response.data,
               expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
             };            
             await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
+            await AsyncStorage.setItem("refresh_token", response.data.refresh_token).then(()=>console.log("Refresh_Token save Succefully"))
             setTimeout(() => {
               setValided(false);
               navigation.replace("flow", Numbers );
@@ -154,10 +155,11 @@ const Otp = ({ navigation, route }) => {
               const response = await Axios.post(urlValitedCode, validOtp);
               if(response.status === 200){
                 const dataToStore = {
-                  value: response.data.access_token,
+                  value: response.data,
                   expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
                 };            
                 await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
+                await AsyncStorage.setItem("refresh_token", response.data.refresh_token).then(()=>console.log("Refresh_Token save Succefully"))
                 setTimeout(() => {
                   setValided(false);
                   navigation.replace("drawer", Numbers );
@@ -182,10 +184,11 @@ const Otp = ({ navigation, route }) => {
               const response = await Axios.post(urlValitedCode, validOtp);
               if(response.status === 200){
                 const dataToStore = {
-                  value: response.data.access_token,
+                  value: response.data,
                   expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
                 };            
                 await AsyncStorage.setItem("access_token", JSON.stringify(dataToStore)).then(()=>console.log("Data Save Succefully"))
+                await AsyncStorage.setItem("refresh_token", response.data.refresh_token).then(()=>console.log("Refresh_Token save Succefully"))
                 setTimeout(() => {
                   setValided(false);
                   navigation.replace("flow", Numbers );

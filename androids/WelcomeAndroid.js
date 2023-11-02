@@ -22,6 +22,9 @@ import { BlurView } from "expo-blur";
 import { CloseCircle, CloudChange, DocumentText, Global, InfoCircle, Refresh, Refresh2, RefreshSquare, } from "iconsax-react-native";
 import AlertModal from "./components/AlertModal";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { privateKeys } from "../utilities/privateKeys";
+import  Axios  from "axios";
 
 const WelcomeAndroid = ({ navigation, route }) => {
   const [visible, setVisible] = useState(false);
@@ -29,14 +32,70 @@ const WelcomeAndroid = ({ navigation, route }) => {
   const [show, setShow]=useState(false)
   const [splah, setSplah]=useState(false)
   const [checked, setChecked] = useState("English");
+  const [tokenData, setTokenData] = useState(false);
 
+  const refreshAccessToken = async () => {
+    try {
+      const result = await AsyncStorage.getItem("access_token");
+      if (result) {
+        const refreshToken = await AsyncStorage.getItem("refresh_token");
+        const Data = {
+          grant_type: "refresh_token",
+          client_id: privateKeys.CLIENT_ID,
+          client_secret: privateKeys.CLIENT_SECRET,
+          refresh_token: refreshToken,
+        };
+        const response = await Axios.post(privateKeys.REFRESH_TOKEN_URL, Data);
+        if (response.status === 200) {
+          const dataToStore = {
+            value: response.data,
+            expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
+          };
+          console.log(response.data);
+          await AsyncStorage.setItem(
+            "access_token",
+            JSON.stringify(dataToStore)
+          ).then(() => console.log("Data Save Succefully"));
+        }
+      }
+    } catch (error) {
+      console.log("Erreur de refresh ", error);
+    }
+  };
+
+  const checkAndRefreshToken = async () => {
+    try {
+      const result = await AsyncStorage.getItem("access_token");
+      if (result) {
+        const storedData = JSON.parse(result);
+        // Vérifiez si la donnée est encore valide
+        if (storedData && new Date().getTime() < storedData.expirationTime) {
+          console.log("Donnée valide" );
+          navigation.replace("drawer")
+        } else {
+          console.log("Donnée refresh");
+          await refreshAccessToken();
+          navigation.replace("drawer")
+        }
+        
+      } else {
+        console.log("La donnée n'existe pas.");
+        // navigation.replace("welcome")
+      }
+    } catch (error) {
+      console.log("Erreur lors de la récupération de la donnée :", error);
+      navigation.replace("welcome")
+    }
+  };
 
   useEffect(()=>{
     setSplah(!splah)
     setTimeout(() => {
       setSplah(false)
     }, 2000);
+    checkAndRefreshToken();
   },[])
+  
 const toggleChange = ()=>{
   setChanges(!changes)
   if(!changes){

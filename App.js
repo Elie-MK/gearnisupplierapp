@@ -22,9 +22,75 @@ import Adminregister from "./androids/auth/signup/pages/adminRegistration/Adminr
 import Registercompany from "./androids/auth/signup/pages/companyRegister/Registercompany";
 import Completeregistration from "./androids/auth/signup/pages/registrationcomplete/Completeregistration";
 import ReachSupport from "./androids/home/Report/ReachSupport";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { privateKeys } from "./utilities/privateKeys";
+import Axios from "axios";
 
 export default function App() {
   const Stack = createStackNavigator();
+  // const [tokenData, setTokenData] = useState(false);
+
+  // const refreshAccessToken = async () => {
+  //   try {
+  //     const result = await AsyncStorage.getItem("access_token");
+  //     if (result) {
+  //       const refreshToken = await AsyncStorage.getItem("refresh_token");
+  //       const Data = {
+  //         grant_type: "refresh_token",
+  //         client_id: privateKeys.CLIENT_ID,
+  //         client_secret: privateKeys.CLIENT_SECRET,
+  //         refresh_token: refreshToken,
+  //       };
+  //       const response = await Axios.post(privateKeys.REFRESH_TOKEN_URL, Data);
+  //       if (response.status === 200) {
+  //         const dataToStore = {
+  //           value: response.data,
+  //           expirationTime: new Date().getTime() + 24 * 60 * 60 * 1000,
+  //         };
+  //         console.log(response.data);
+  //         await AsyncStorage.setItem(
+  //           "access_token",
+  //           JSON.stringify(dataToStore)
+  //         ).then(() => console.log("Data Save Succefully"));
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log("Erreur de refresh ", error);
+  //   }
+  // };
+
+  // const checkAndRefreshToken = async () => {
+  //   try {
+  //     const result = await AsyncStorage.getItem("access_token");
+  //     if (result) {
+  //       const storedData = JSON.parse(result);
+  //       // Vérifiez si la donnée est encore valide
+  //       if (storedData && new Date().getTime() < storedData.expirationTime) {
+  //         console.log("Donnée valide", storedData );
+  //       } else {
+  //         console.log("Donnée refresh" );
+  //         await refreshAccessToken();
+  //       }
+  //       setTokenData(false)
+  //     } else {
+  //       console.log("La donnée n'existe pas.");
+  //       setTokenData(false);
+  //     }
+  //   } catch (error) {
+  //     console.log("Erreur lors de la récupération de la donnée :", error);
+  //     setTokenData(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   checkAndRefreshToken();
+  //   const refreshInterval = 24 * 60 * 60 * 1000; // 24 heures
+  //   const refreshTimer = setInterval(checkAndRefreshToken, refreshInterval);
+
+  //   return () => {
+  //     clearInterval(refreshTimer);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -35,7 +101,7 @@ export default function App() {
             screenOptions={{
               headerShown: false,
             }}
-            initialRouteName="welcome"
+            initialRouteName={"welcome"}
           >
             <Stack.Screen name="welcome" component={WelcomeAndroid} />
             <Stack.Screen name="login" component={Login} />

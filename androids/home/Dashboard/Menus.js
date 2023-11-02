@@ -9,6 +9,7 @@ import MenuItems from "../../components/MenuItems";
 import { BlurView } from "expo-blur";
 import Color from "../../../utilities/Color";
 import HeaderHome from "../../components/HeaderHome";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Menus = ({navigation}) => {
   const [touchable, setTouchable]=useState("dashboard")
@@ -18,11 +19,27 @@ const Menus = ({navigation}) => {
     setTouchable(section)
       navigation.navigate(section)
   }
-  const handleLogout = ()=>{
-    navigation.replace("welcome")
-    setIsVisible(!isVisible)
+  const handleLogout = async () => {
+    try {
+      const access_token = await AsyncStorage.removeItem('access_token');
+      if (access_token !== null) {
+        console.log(`Access token deleted: ${access_token}`);
+      }
+      
+      const refresh_token = await AsyncStorage.removeItem('refresh_token');
+      if (refresh_token !== null) {
+        console.log(`Refresh token deleted: ${refresh_token}`);
+      }
+      
+      console.log("Access token and refresh token deleted");
+      
+      navigation.replace("welcome");
+      setIsVisible(!isVisible);
+    } catch (error) {
+      console.error("Erreur lors de la suppression des jetons :", error);
+    }
   }
-
+  
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
@@ -68,12 +85,12 @@ const Menus = ({navigation}) => {
 
 
         {/* Logout */}
-        <TouchableOpacity onPress={()=>setIsVisible(!isVisible)} style={{marginTop:verticalScale(50)}}>
+        {/* <TouchableOpacity onPress={()=>setIsVisible(!isVisible)} style={{marginTop:verticalScale(50)}}>
           <View style={{flexDirection:"row", alignItems:"center", gap:10,marginLeft:12}}>
           <LogoutCurve size={30} color="black" />
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Logout</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         </View>
         </ScrollView>
         <BottomSheet isVisible={isVisible} >
