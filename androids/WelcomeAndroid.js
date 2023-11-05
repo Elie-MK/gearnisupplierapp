@@ -8,20 +8,17 @@ import {
   TouchableOpacity,
   Modal,
   TouchableWithoutFeedback,
-  TouchableOpacityBase,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Color from "../utilities/Color";
-import { horizontalScale, moderateScale, verticalScale } from "../utilities/Metrics";
+import {  moderateScale, verticalScale } from "../utilities/Metrics";
 import { Button, CheckBox, Divider } from "@rneui/base";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
-import ReactNativeModal from "react-native-modal";
+import {  MaterialIcons } from "@expo/vector-icons";
 import { Flag } from "./components/ModalLanguage";
 import { useCustomFonts } from "../utilities/Fonts";
 import { BlurView } from "expo-blur";
 import { CloseCircle, CloudChange, DocumentText, Global, InfoCircle, Refresh, Refresh2, RefreshSquare, } from "iconsax-react-native";
 import AlertModal from "./components/AlertModal";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { privateKeys } from "../utilities/privateKeys";
 import  Axios  from "axios";
@@ -32,7 +29,6 @@ const WelcomeAndroid = ({ navigation, route }) => {
   const [show, setShow]=useState(false)
   const [splah, setSplah]=useState(false)
   const [checked, setChecked] = useState("English");
-  const [tokenData, setTokenData] = useState(false);
 
   const refreshAccessToken = async () => {
     try {
@@ -73,8 +69,8 @@ const WelcomeAndroid = ({ navigation, route }) => {
           console.log("Donnée valide" );
           navigation.replace("drawer")
         } else {
-          console.log("Donnée refresh");
           await refreshAccessToken();
+          console.log("Donnée refresh");
           navigation.replace("drawer")
         }
         
@@ -88,12 +84,13 @@ const WelcomeAndroid = ({ navigation, route }) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect( ()=>{
     setSplah(!splah)
     setTimeout(() => {
       setSplah(false)
     }, 2000);
     checkAndRefreshToken();
+   
   },[])
   
 const toggleChange = ()=>{
