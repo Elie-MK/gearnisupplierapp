@@ -67,7 +67,7 @@ const WelcomeAndroid = ({ navigation, route }) => {
         // Vérifiez si la donnée est encore valide
         if (storedData && new Date().getTime() < storedData.expirationTime) {
           console.log("Donnée valide" );
-          navigation.replace("drawer")
+          navigation.replace("drawer" )
         } else {
           await refreshAccessToken();
           console.log("Donnée refresh");

@@ -1,14 +1,11 @@
 import { View, Text, TouchableOpacity, TextInput, Pressable } from 'react-native'
-import React, { useState } from 'react'
-import Global from '../../components/Global'
+import React, { useEffect, useState } from 'react'
 import { CalendarSearch, CloseCircle, Flag, HambergerMenu, Hashtag, Notification, SearchNormal, Shop, Sms, User } from 'iconsax-react-native'
 import { horizontalScale, moderateScale, verticalScale } from '../../../utilities/Metrics'
 import { useCustomFonts } from '../../../utilities/Fonts'
 import Picturepprofile from '../../components/Picturepprofile'
-import Color from '../../../utilities/Color'
 import ModalCountry from '../../components/ModalCountry'
 import KeybordAvoidHome from '../../components/KeybordAvoidHome'
-import { MaterialIcons } from '@expo/vector-icons'
 import { Button, Divider } from '@rneui/base'
 import UploadInput from '../../components/UploadInput'
 import * as ImagePicker from 'expo-image-picker';
@@ -19,10 +16,12 @@ import InputCountries from '../../components/InputCountries'
 import Buttons from '../../components/Buttons'
 import EmptyUploadButton from '../../components/EmptyUploadButton'
 import DateTimePicker from "@react-native-community/datetimepicker"
-import { useColorScheme } from 'react-native'
 import ModalChooseUpload from '../../components/ModalChooseUpload'
 import * as DocumentPicker from 'expo-document-picker';
 import { Camera } from "expo-camera";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { privateKeys } from '../../../utilities/privateKeys'
+import axios from 'axios'
 
 
 
@@ -50,6 +49,84 @@ const Profiles = ({navigation}) => {
   const [openShow, setOpenShow]=useState(false)
   const [showVisibled, setShowVisibled]=useState(false)
   const [dateBirth, setDateBirth]=useState('')
+  const [token, setToken]=useState(null)
+  const [datas, setDatas]=useState(null)
+
+// Hooks datas 
+const [firstName, setFirstName]=useState('')
+const [lastName, setLastName]=useState('')
+const [phoneNumber, setPhoneNumber]=useState('')
+const [email, setEmail]=useState('')
+const [jobTitle, setJobTitle]=useState('')
+const [role, setRole]=useState('')
+const [cin, setCin]=useState('')
+
+  const TOKEN = async ()=> {
+    await AsyncStorage.getItem("access_token").then((result) => {
+      if (result) {
+        const storedData = JSON.parse(result);
+        setToken(storedData.value.access_token);
+      } else {
+        console.log('La donnée n\'existe pas.');
+      }
+    }).catch((error) => {
+      console.log('Erreur lors de la récupération de la donnée :', error);
+    });
+  }
+  useEffect(()=>{
+      TOKEN()
+    },[])
+
+  const instance = axios.create({
+    baseURL: "https://backend.gearni.com/",
+    headers:{
+       'Authorization':`Bearer ${token}`, 
+       'Api-Key':`${privateKeys.API_KEY}`
+    }
+  });
+  const getDatas = async ()=>{
+    try {
+      const response = await instance.get("user/currentUser")
+      if(response.status === 200){
+        const datas = response.data.data
+        await AsyncStorage.setItem("myProfileData", JSON.stringify(datas)).then(()=>console.log("Data Save Succefully"))
+        console.log(datas)
+      }
+    } catch (error) {
+      console.log("Erreur lors de la recuperation des données ", error);
+    }
+  }
+  useEffect(()=>{
+    getDatas()
+  },[TOKEN()])
+
+  const dataMyProfile = async ()=> {
+    await AsyncStorage.getItem("myProfileData").then((result) => {
+      if (result) {
+        const storedData = JSON.parse(result);
+        setDatas(storedData)
+       setFirstName(storedData.firstName)
+       setLastName(storedData.lastName)
+       const number = storedData.mobileNumber
+       setPhoneNumber(number.slice(4))
+       setDateBirth(storedData.birthDate)
+       setEmail(storedData.email)
+       setJobTitle(storedData.jobTitle)
+       setRole(storedData.roles)
+       setCountry(storedData.nationality)
+       setCin(storedData.cin)
+      } else {
+        console.log('La donnée n\'existe pas.');
+      }
+    }).catch((error) => {
+      console.log('Erreur lors de la récupération de la donnée :', error);
+    });
+  }
+  
+  useEffect(()=>{
+    dataMyProfile()
+  },[])
+  
 
 
 
@@ -163,12 +240,12 @@ const Profiles = ({navigation}) => {
         <View style={{marginTop:verticalScale(50), alignItems:"center"}}>
         <View style={{ flexDirection: "row", gap: 5, width:horizontalScale(315) }}>
               {/* First Name */}
-             <InputsText padding placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
+             <InputsText padding value={firstName} onChangeText={(f)=>setFirstName(f)}  placeholder={"Joe"} width={horizontalScale(155)} label={"First Name"} iconsLeft={<User color="black" />} />
               {/* Last Name */}
-             <InputsText padding placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
+             <InputsText padding value={lastName} placeholder={"Smith"} width={horizontalScale(155)} label={"Last Name"} iconsLeft={<User color="black" />} />
              </View>
             <View style={{  marginTop: verticalScale(30),}}>
-        <Inputs placeholder={"12345678"} label={"Phone Number"} countryCode={countryCode} number={number} onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setNumber(e)} namecountry={flag} />
+        <Inputs  placeholder={"12345678"} label={"Phone Number"} countryCode={countryCode} number={phoneNumber}  onPress={()=>setVisibleM(!visibleM)} onChangeText={(e) => setPhoneNumber(e)} namecountry={flag} />
         </View>
         {/* Mobile Number */}
         <View style={{  marginTop: verticalScale(30),
@@ -192,6 +269,7 @@ const Profiles = ({navigation}) => {
                 paddingLeft: 20,
                 color:"#dfdfdf",
                 fontSize: 14, }}
+                value={phoneNumber}
               editable={false}
               maxLength={10}
               keyboardType="numeric"
@@ -211,23 +289,23 @@ const Profiles = ({navigation}) => {
         </View>
          {/* Birthday */}
          {
-              showPicker &&<DateTimePicker  style={{backgroundColor:"red"}} dateFormat="day month year" onChange={onChange} mode="date" display="default" value={date}          />
+              showPicker &&<DateTimePicker maximumDate={new Date()}  style={{backgroundColor:"red"}} dateFormat="day month year" onChange={onChange} mode="date" display="default" value={date}          />
 
             }
          <Pressable onPress={toggleDatePicker}>
-            <InputsText value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"}  iconsLeft={<CalendarSearch color="black" />} />
+            <InputsText color={"black"} value={dateBirth}  editable={false} placeholder={"mm/dd/yyyy"} width={horizontalScale(315)} label={"Birthdate"}  iconsLeft={<CalendarSearch color="black" />} />
 
             </Pressable>            
             {/* Email */}
-            <InputsText label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"}  iconsLeft={<Sms color='black' />} />
+            <InputsText value={email} onChangeText={(e)=>setEmail(e)} label={"Email"} width={horizontalScale(315)} placeholder={"name@email.com"}  iconsLeft={<Sms color='black' />} />
             {/* Job Title */}
-           <InputsText label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}  iconsLeft={<SearchNormal color='black' />} />
+           <InputsText value={jobTitle} onChangeText={(j)=>setJobTitle(j)} label={"Job Title"} placeholder={"Job Title"} width={horizontalScale(315)}  iconsLeft={<SearchNormal color='black' />} />
             {/* Role */}
-            <NotEditableInput placeholder={"Company Owner"} label={"Role *"} />
+            <NotEditableInput defaultValue={role}  placeholder={"Company Owner"} label={"Role *"} />
           {/* Branch */}
           <NotEditableInput width iconsLeft={<Shop color='#dfdfdf' />}  label={"Branch *"} placeholder={"Branch Name"}  />
             {/* Identity Card */}
-           <InputsText label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)}  />
+           <InputsText value={cin} onChangeText={(c)=>setCin(c)} label={"Identity Card"} placeholder={"12345678"} iconsLeft={<Hashtag color='black' />} width={horizontalScale(315)}  />
             {/* Nationality */}
             <InputCountries country={country} label={"Nationality"} press={()=>setVisibleM(!visibleM)} />
         {/* Country */}
