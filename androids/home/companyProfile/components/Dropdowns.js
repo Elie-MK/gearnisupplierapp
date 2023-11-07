@@ -20,7 +20,7 @@ const Dropdowns = ({icons, label}) => {
 
 //   console.log(value);
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 30 }}>
       <View
         style={{
           alignItems: "center",
@@ -28,7 +28,11 @@ const Dropdowns = ({icons, label}) => {
         }}
       >
         <Dropdown
-        style={styles.dropdown}
+        style={{borderBottomColor: 'gray',
+        borderWidth:1, 
+        width:horizontalScale(316),
+        padding: 10,
+        borderRadius:5}}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -67,21 +71,14 @@ const Dropdowns = ({icons, label}) => {
 export default Dropdowns;
 
 const styles = StyleSheet.create({
-    dropdown: {
-      borderBottomColor: 'gray',
-      borderWidth:1, 
-      width:horizontalScale(316),
-      padding: 10,
-      borderRadius:5
-    },
     icon: {
       paddingRight: 5,
     },
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 14,
     },
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 14,
       paddingLeft:20
     },
     iconStyle: {
@@ -90,6 +87,6 @@ const styles = StyleSheet.create({
     },
     inputSearchStyle: {
       height: 40,
-      fontSize: 16,
+      fontSize: 14,
     },
   });

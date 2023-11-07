@@ -1,0 +1,30 @@
+Generate apk file 
+{
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {}
+  }
+}
+
+
+eas build -p android --profile preview
+git rm --cached .env
+
+    <item name="android:datePickerDialogTheme">@style/DialogDatePicker.Theme</item>
+    
+  <style name="DialogDatePicker.Theme" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">#FFC244</item>
+    <item name="android:textColor">#000</item>
+  </style>

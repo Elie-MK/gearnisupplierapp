@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gearni Supplier",
     "slug": "gearnisupplierapp",
-    "version": "1.0.1 ",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/BlackAndYellowGearni.png",
     "userInterfaceStyle": "automatic",
@@ -22,6 +22,11 @@
         "foregroundImage": "./assets/BlackAndYellowGearni.png",
         "backgroundColor": "#FFC244"
       },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "package": "com.gearnisupplierapp.gearnisupplierapp"
     },
     "web": {

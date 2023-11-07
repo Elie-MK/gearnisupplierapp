@@ -1,123 +1,163 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import { View, Text, TouchableOpacity, ScrollView, Pressable, Dimensions } from "react-native";
+import React, { useState } from "react";
 import Global from "../../components/Global";
 import { useCustomFonts } from "../../../utilities/Fonts";
-import { Notification, Menu,   User, Buildings, Car, Shop, People, LogoutCurve, Information } from "iconsax-react-native";
+import { Notification, Menu,   User, Buildings, Car, Shop, People, LogoutCurve, Information, LoginCurve, Logout } from "iconsax-react-native";
 import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
-import { Divider } from "@rneui/base";
+import { BottomSheet, Button, Divider } from "@rneui/base";
+import MenuItems from "../../components/MenuItems";
+import { BlurView } from "expo-blur";
+import Color from "../../../utilities/Color";
+import HeaderHome from "../../components/HeaderHome";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Menus = ({navigation}) => {
+  const [touchable, setTouchable]=useState("dashboard")
+  const [isVisible, setIsVisible]=useState(false)
+
+  const handleNavigation = (section)=>{
+    setTouchable(section)
+      navigation.navigate(section)
+  }
+  const handleLogout = async () => {
+    try {
+      const access_token = await AsyncStorage.removeItem('access_token');
+      if (access_token !== null) {
+        console.log(`Access token deleted: ${access_token}`);
+      }
+      
+      const refresh_token = await AsyncStorage.removeItem('refresh_token');
+      if (refresh_token !== null) {
+        console.log(`Refresh token deleted: ${refresh_token}`);
+      }
+      
+      console.log("Access token and refresh token deleted");
+      
+      navigation.replace("welcome");
+      setIsVisible(!isVisible);
+    } catch (error) {
+      console.error("Erreur lors de la suppression des jetons :", error);
+    }
+  }
+  
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
   }
   return (
-    <Global>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginRight:20
-        }}
-      >
-        <View></View>
-        <View>
-          <Text
-            style={{
-              fontFamily: fontGotham.medium,
-              fontSize: moderateScale(22),
-            }}
-          >
-            Menu
-          </Text>
-        </View>
-        <TouchableOpacity onPress={()=>navigation.navigate('notification')}>
-          <Notification size={30} color="black" />
-        </TouchableOpacity>
-      </View>
+    <HeaderHome title={"Menu"} show >
       <View style={{marginTop:verticalScale(40)}}>
         <ScrollView showsVerticalScrollIndicator={false}>
-
         <View>
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
-        <View style={{marginTop:verticalScale(20)}}>
+        <View style={{marginTop:verticalScale(10)}}>
           {/* Dashboard */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <Menu size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Dashboard</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<Menu size={30} color="black" />} touchable={touchable} items={"dashboard"} title={"Dashboard"} onPress={()=>handleNavigation("dashboard")} />
         {/* My Profile */}
-        <TouchableOpacity onPress={()=>navigation.navigate('profile')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <User size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>My Profile</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<User size={30} color="black" />} touchable={touchable} items={"profile"} title={"My Profile"} onPress={()=>handleNavigation("profile")} />
         {/* Company Profile */}
-        <TouchableOpacity onPress={()=>navigation.navigate('companyprofile')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <Buildings size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Company Profile</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<Buildings size={30} color="black" />} touchable={touchable} items={"companyprofile"} title={"Company Profile"} onPress={()=>handleNavigation("companyprofile")} />
         {/* Make and Models */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <Car size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Make and Models</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<Car size={30} color="black" />} touchable={touchable} items={"makemodel"} title={"Make and Models"} onPress={()=>handleNavigation("makemodel")} />
+        {/* Divider */}
         <View style={{marginTop:15, marginRight:20}}>
           <Divider color="black" width={1} />
         </View>
+        {/* Section Header */}
         <View style={{marginTop:15}}>
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
         {/* Branches */}
-        <TouchableOpacity onPress={()=>navigation.navigate('branches')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <Shop size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Branches</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<Shop size={30} color="black" />} touchable={touchable} items={"branches"} title={"Branches"} onPress={()=>handleNavigation("branches")} />
         {/* Users */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <People size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Users</Text>
-          </View>
-        </TouchableOpacity>
-
+        <MenuItems icons={<People size={30} color="black" />} touchable={touchable} items={"users"} title={"Users"} onPress={()=>handleNavigation("users")} />
+        {/* Divider */}
         <View style={{marginTop:verticalScale(15), marginRight:20}}>
           <Divider color="black" width={1} />
         </View>
+        {/* Section Header */}
         <View style={{marginTop:verticalScale(15)}}>
           <Text style={{fontSize:14, fontFamily:fontGotham.medium}}>Section Header</Text>
         </View>
-
         {/* Customer Support */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(15)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
-          <Information size={30} color="black" />
-          <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Customer Support</Text>
-          </View>
-        </TouchableOpacity>
+        <MenuItems icons={<Information size={30} color="black" />} touchable={touchable} items={"contact"} title={"Customer Support"} onPress={()=>handleNavigation("contact")} />
+
 
         {/* Logout */}
-        <TouchableOpacity onPress={()=>navigation.navigate('dashboard')} style={{marginTop:verticalScale(20)}}>
-          <View style={{flexDirection:"row", alignItems:"center", gap:10}}>
+        {/* <TouchableOpacity onPress={()=>setIsVisible(!isVisible)} style={{marginTop:verticalScale(50)}}>
+          <View style={{flexDirection:"row", alignItems:"center", gap:10,marginLeft:12}}>
           <LogoutCurve size={30} color="black" />
           <Text style={{fontSize:moderateScale(14), fontFamily:fontGotham.regular}}>Logout</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         </View>
         </ScrollView>
+        <BottomSheet isVisible={isVisible} >
+          <TouchableOpacity onPress={()=>setIsVisible(!isVisible)}>
+            <BlurView  intensity={8}
+            tint="dark"
+            style={{
+              height: Dimensions.get("window").height,
+              width: Dimensions.get("window").width,
+            }}>
+               <View style={{ alignItems: "center", marginTop:200 }}>
+          <View
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: 14,
+              borderWidth: 1,
+              borderColor: "black",
+              width: 312,
+              height:260,
+            }}
+          >
+            <View style={{ alignItems: "center", marginTop:30 }}>
+              <View style={{ alignItems: "center" }}>
+                <LogoutCurve color="black" size={30} />
+                <Text style={{
+                    marginTop: 20,
+                    fontSize: 16,
+                    fontFamily: fontGotham.medium,
+                  }}>Logout</Text>
+                <Text
+                  style={{
+                    marginTop: 20,
+                    fontSize: 14,
+                    fontFamily: fontGotham.book,
+                  }}
+                >
+                  Are you sure want to log out?
+                </Text>
+              </View>
+  
+            </View>
+          <View style={{alignItems:"center"}}>
+          <View style={{ alignItems:"center",  marginTop: verticalScale(30), flexDirection:"row", gap:10}}>
+              <Button
+                title="Logout"
+                onPress={handleLogout}
+                containerStyle={{ width:116, borderRadius: 4 }}
+                buttonStyle={{  backgroundColor: Color.light.main, fontFamily:fontGotham.medium }}
+                titleStyle={{ color: Color.light.black, fontSize:14}}
+              />
+              <Button
+              type="outline"
+                title="Cancel"
+                onPress={()=>setIsVisible(!isVisible)}
+                containerStyle={{ width: 116,  }}
+                buttonStyle={{ borderColor:"red", fontFamily:fontGotham.medium,borderRadius: 4 }}
+                titleStyle={{ color: "red", fontSize:14, }}
+              />
+            </View>
+          </View>
+          </View>
+        </View>
+            </BlurView>
+          </TouchableOpacity>
+        </BottomSheet>
       </View>
-    </Global>
+    </HeaderHome>
   );
 };
 

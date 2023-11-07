@@ -4,35 +4,52 @@ import {
   StyleSheet,
   StatusBar,
   Pressable,
-  TextInput,
   Dimensions,
-  Modal,
-  TouchableOpacity,
-  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import Color from "../../../utilities/Color";
-import { horizontalScale, moderateScale, verticalScale } from "../../../utilities/Metrics";
-import { Button, Divider, Input } from "@rneui/base";
+import { moderateScale, verticalScale } from "../../../utilities/Metrics";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { useCustomFonts } from "../../../utilities/Fonts";
-import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator } from "react-native-paper";
+import Inputs from "../../components/Inputs";
+import ModalCountry from "../../components/ModalCountry";
+import Buttons from "../../components/Buttons";
+import ActivityIndicators from "../../components/ActivityIndicator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { privateKeys } from "../../../utilities/privateKeys";
+import Axios from "axios";
 
 const Login = ({ navigation, route }) => {
   const routes = route.name;
-  const defaultCountryCode = "+216"
-  const defaultCountryName = "🇹🇳"
+  const defaultCountryCode = "+216";
+  const defaultCountryName = "🇹🇳";
   const [countryCode, setCountryCode] = useState(defaultCountryCode);
   const [namecountry, setNameCountry] = useState(defaultCountryName);
   const [value, setValue] = useState("");
   const [filteredPosts, setFilteredPosts] = useState([]);
-
   const [number, setNumber] = useState("");
   const [visible, setVisible] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [valided, setValided] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
+
+
+  const apiUrl = privateKeys.SEND_CODE_URL;
+  const Numbers = countryCode + number;
+  const requestData = {
+    client_id: privateKeys.CLIENT_ID,
+    client_secret: privateKeys.CLIENT_SECRET,
+    connection: "sms",
+    phone_number: Numbers,
+    send: "code",
+    authParams: {
+      state: "Testing",
+    },
+  };
 
   useEffect(() => {
     const regex = /^\+\d{1,4}$/;
@@ -43,195 +60,203 @@ const Login = ({ navigation, route }) => {
     } else {
       setIsValid(!isValid);
     }
-    handleCountry(value)
-  }, [value]);
+    handleCountry(value);
+    setIsError(false)
+  }, [value, number]);
+
 
   const datas = CountryList.getAll();
   const handleCountry = (value) => {
-   if(value){
-      const data = datas.filter((item) =>
-        (item.name.indexOf(value)> - 1 || item.flag.indexOf(value)>-1))
-    
+    if (value) {
+      const data = datas.filter(
+        (item) => item.name.indexOf(value) > -1 || item.flag.indexOf(value) > -1
+      );
       setFilteredPosts(data);
-  
-   }else{
-    setFilteredPosts(datas)
-   }
+    } else {
+      setFilteredPosts(datas);
+    }
+  };
+  const onCountryChange = (item) => {
+    setCountryCode(item.dial_code);
+    setNameCountry(item.flag);
+    setVisible(!visible);
   };
 
-  const onCountryChange = (item)=>{
-    setCountryCode(item.dial_code)
-    setNameCountry(item.flag)
-    setVisible(!visible)
-  }
+  const handleSubmit = async () => {
+    if (!number || number.length < 8) {
+      setIsError(!isError)
+    } else {
+     try {
+      setValided(!valided);
+      const response = await Axios.post(apiUrl, requestData)
+      if(response.status === 200){
+        setTimeout(() => {
+          navigation.replace("otp", { routes, Numbers });
+          setValided(false);
+        }, 1000);
+      }
+      console.log(response.data);
+     } catch (error) {
+      setValided(false);
+      console.log(error.message);
+      if(error.message === "Network Error" ){
+        setErrorStatus(true)
+        alert('Please verify your Network')
+      }else if (error.message === "Request failed with status code 400" ){
+        alert('There was a problem sending the code, please try again later')
+      }
+     }
+    }
+  };
 
-const handleSubmit = ()=>{
-  if(!number){
-    alert("Enter your number")
-  }else{
-    setValided(!valided)
-      setTimeout(() => {
-        navigation.navigate("otp", { routes })
-        setValided(false)
-      }, 3000);
-     
-  }
-}
+  const TOKEN = async () => {
+    await AsyncStorage.getItem("access_token")
+      .then((result) => {
+        if (result) {
+          const storedData = JSON.parse(result);
+          // Vérifiez si la donnée est encore valide
+          if (storedData && new Date().getTime() < storedData.expirationTime) {
+            console.log("Donnée valide :", storedData.value);
+          } else {
+            console.log("La donnée a expiré.");
+            AsyncStorage.removeItem("access_token")
+              .then(() => {
+                console.log("Donnée supprimée avec succès.");
+              })
+              .catch((error) => {
+                console.log(
+                  "Erreur lors de la suppression de la donnée :",
+                  error
+                );
+              });
+          }
+        } else {
+          console.log("La donnée n'existe pas.");
+        }
+      })
+      .catch((error) => {
+        console.log("Erreur lors de la récupération de la donnée :", error);
+      });
+  };
 
   const { fontGotham, fontsLoaded } = useCustomFonts();
   if (!fontsLoaded) {
     return null;
   }
 
-
   // console.log(countryFlag);
 
   return (
     <View style={styles.container}>
-      <View style={styles.secondContainer}>
-        <Pressable onPress={() => navigation.navigate("welcome")}>
-          <AntDesign name="arrowleft" size={moderateScale(35)} color={Color.light.black} />
-        </Pressable>
-        <View style={{marginTop:verticalScale(15)}}>
-        <View style={styles.textContainer}>
-          <Text
-            style={{
-              color: Color.light.main,
-              fontSize: moderateScale(32),
-              fontFamily: fontGotham.medium,
-            }}
-          >
-            HELLO
-          </Text>
-         <View style={{marginTop:15}}>
-         <Text style={{ fontSize: moderateScale(20), fontFamily: fontGotham.medium }}>
-            WHAT'S YOUR PHONE 
-          </Text>
-          <Text style={{ fontSize: moderateScale(20), fontFamily: fontGotham.medium }}>
-             NUMBER?
-          </Text>
-         </View>
-        </View>
-        <View style={{alignItems:"center"}}>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity onPress={()=>setVisible(!visible)} style={{ flexDirection: "row", alignItems: "center", paddingLeft:10, gap:5, justifyContent:"center" }}>
-            <Text style={{ fontSize: 14 }}>
-              {namecountry}
-            </Text>
-            <AntDesign name="caretdown" size={14} color="black" />
-            <Text style={{ fontSize: 14 }}>
-            {countryCode}
-
-            </Text>
-          </TouchableOpacity>
-          <View style={{ padding: 12, width: horizontalScale(150)}}>
-            <TextInput
-              style={[styles.input2, { fontFamily: fontGotham.medium }]}
-              onChangeText={(e) => setNumber(e)}
-              value={number}
-              maxLength={10}
-              keyboardType="numeric"
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.secondContainer}>
+          <Pressable onPress={() => navigation.navigate("welcome")}>
+            <AntDesign
+              name="arrowleft"
+              size={moderateScale(35)}
+              color={Color.light.black}
             />
-          </View>
-        <View
-          style={{
-            position: "absolute",
-            marginTop: -11,
-            marginLeft: 20,
-            width: 130,
-            backgroundColor: Color.light.themeColor,
-          }}
-        >
-          <Text style={{textAlign:"center", fontSize:12, fontFamily:fontGotham.regular}}>Your mobile Number</Text>
-        </View>
-        </View>
-        </View>
-
-        
-
-        <View style={styles.btnContainer}>
-       {
-        valided? <View style={{width:315, borderWidth:1, borderRadius:4, padding:15, backgroundColor:"gray"}}>
-          <ActivityIndicator animating={true} color={Color.light.main}/>
-        </View> :  <Button
-        title="Confirm"
-        buttonStyle={{ backgroundColor: Color.light.main, height:60}}
-        titleStyle={{
-          color: Color.light.black,
-          fontFamily: fontGotham.medium,
-          fontSize:moderateScale(15)
-        }}
-        containerStyle={{width:horizontalScale(315), borderRadius:4, }}
-        onPress={handleSubmit}
-      />
-       }
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignContent: "center",
-            justifyContent: "center",
-            marginTop: verticalScale(17),
-          }}
-        >
-          <Text style={{ fontFamily: fontGotham.regular, fontSize:moderateScale(14) }}>
-            Don't have an account ?{" "}
-          </Text>
-          <Pressable onPress={() => navigation.navigate("register")}>
-            <Text style={{ fontSize:moderateScale(14), fontFamily: fontGotham.bold }}>
-              Sign Up{" "}
-            </Text>
           </Pressable>
-        </View>
-        </View>
-      </View>
-      <View>
-        <Modal visible={visible} animationType="slide">
-          <View style={{ padding: 10 }}>
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 30 }}
-            >
-              <Pressable onPress={() => setVisible(!visible)}>
-                <MaterialIcons name="cancel" size={24} color="black" />
-              </Pressable>
-              <TextInput
+          <View style={{ marginTop: verticalScale(15) }}>
+            <View style={styles.textContainer}>
+              <Text
                 style={{
+                  color: Color.light.main,
+                  fontSize: moderateScale(32),
                   fontFamily: fontGotham.medium,
-                  width: horizontalScale(250),
-                  padding: 5,
-                  paddingLeft: 15,
-                  fontSize: 15,
                 }}
-                onChangeText={(newVal) => setValue(newVal)}
-                value={value}
-                maxLength={10}
-                placeholder="Enter country name"
+              >
+                HELLO
+              </Text>
+              <View style={{ marginTop: 15 }}>
+                <Text
+                  style={{
+                    fontSize: moderateScale(20),
+                    fontFamily: fontGotham.medium,
+                  }}
+                >
+                  WHAT'S YOUR PHONE
+                </Text>
+                <Text
+                  style={{
+                    fontSize: moderateScale(20),
+                    fontFamily: fontGotham.medium,
+                  }}
+                >
+                  NUMBER?
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{ alignItems: "center", marginTop: verticalScale(56) }}
+            >
+              <Inputs
+                Error={isError}
+                label={"Your mobile Number"}
+                countryCode={countryCode}
+                namecountry={namecountry}
+                number={number}
+                onPress={() => setVisible(!visible)}
+                onChangeText={(e) => setNumber(e)}
               />
+              {isError && (
+                <Text
+                  style={{
+                    color: "red",
+                    fontFamily: fontGotham.book,
+                    fontSize: 12,
+                  }}
+                >
+                  Enter correcte number
+                </Text>
+              )}
+            </View>
+            <View style={styles.btnContainer}>
+              {valided ? (
+                <ActivityIndicators />
+              ) : (
+                <Buttons handleSubmit={handleSubmit} title={"Confirm"} />
+              )}
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignContent: "center",
+                justifyContent: "center",
+                marginTop: verticalScale(17),
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: fontGotham.regular,
+                  fontSize: moderateScale(14),
+                }}
+              >
+                Don't have an account ?{" "}
+              </Text>
+              <Pressable onPress={() => navigation.navigate("register")}>
+                <Text
+                  style={{
+                    fontSize: moderateScale(14),
+                    fontFamily: fontGotham.bold,
+                  }}
+                >
+                  Sign Up{" "}
+                </Text>
+              </Pressable>
             </View>
           </View>
           <View>
-            <ScrollView style={{ padding: 15 }}>
-              {filteredPosts.map((item, index) => (
-                <TouchableOpacity key={index} onPress={()=>onCountryChange(item)}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 10,
-                      padding: 10,
-                    }}
-                  >
-                    <Text >{item.flag}</Text>
-                    <Text>{item.name}</Text>
-                    <Text>({item.dial_code})</Text>
-                  </View>
-                  <Divider />
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
+            <ModalCountry
+              isVisible={visible}
+              onCountryChange={(item) => onCountryChange(item)}
+              hideModal={() => setVisible(!visible)}
+              setValue={(e) => setValue(e)}
+              values={value}
+            />
           </View>
-        </Modal>
-      </View>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
@@ -250,22 +275,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
   },
-  inputContainer: {
-    marginTop: verticalScale(56),
-    borderWidth: 1,
-    width:horizontalScale(315),
-    padding:8,
-    flexDirection: "row",
-    borderRadius:8
-  },
-  input2: {
-    borderLeftWidth: 1,
-    paddingLeft: 20,
-    fontSize: 14,
-  },
   btnContainer: {
-    marginTop:verticalScale(60),
-    alignItems:"center"
+    marginTop: verticalScale(60),
+    alignItems: "center",
   },
 });
 export default Login;

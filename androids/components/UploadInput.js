@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { useCustomFonts } from "../../utilities/Fonts";
 import Color from "../../utilities/Color";
 import { ProgressBar } from "react-native-paper";
-import * as FileSystem from 'expo-file-system';
-import * as ImagePicker from 'expo-image-picker';
-import axios from 'axios';
 import { horizontalScale } from "../../utilities/Metrics";
 import { CloseCircle } from "iconsax-react-native";
 const SERVER_URL = 'URL_DU_SERVEUR'; // Remplacez par l'URL de votre serveur
@@ -23,7 +20,7 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
       <View
         style={{
           borderWidth: 2,
-          marginTop: 20,
+          marginTop: 15,
           borderColor: Color.light.main,
           padding: 5,
           borderRadius :8 ,
@@ -37,11 +34,11 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
             justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity style={{ flexDirection: "row", alignItems:"center", gap:10 }} onPress={pickImage}>
+          <TouchableOpacity style={{ flexDirection: "row", alignItems:"center", gap:10 }} onPress={()=>pickImage}>
             <View>
             {selectedImage && (
-        <Image  width={40}
-        height={40} source={{ uri: selectedImage }}  />
+        <Image resizeMode="contain"  width={40}
+        height={40} source={selectedImage } style={{width:40, height:40}}  />
       )}
             </View>
             <View
@@ -56,9 +53,9 @@ const UploadInput = ({selectedImage, fileName, percent, pickImage, uploadProgres
                 <Text style={{fontSize:10}}>{fileName}</Text>
                 <ProgressBar  progress={uploadProgress/1.0} style={{marginTop:5}} color={Color.light.main} />
               </View>
-              <View >
+              <View style={{marginLeft:-67}}>
               {uploadProgress > 0 && (
-        <Text >{` ${uploadProgress.toFixed(2)}%`}</Text>
+        <Text >{` ${uploadProgress.toFixed(2)*1}%`}</Text>
       )}
               </View>
             </View>
