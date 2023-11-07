@@ -276,7 +276,7 @@ const instance = axios.create({
         } catch (error) {
           setRefresh(false)
           if(error.message === "Request failed with status code 302"){
-            alert("Please verify your company register number")
+            alert("Company name already exists. Please choose a different name.")
           }
           console.log("Erreur lors de l'envoi des données", error);
         }

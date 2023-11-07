@@ -117,6 +117,8 @@ const handleActive = ()=>{
       } catch (error) {
         if(error.message === "Network Error" ){
           setErrorStatus(true)
+        }else if (error.message === "Request failed with status code 400" ){
+          alert('There was a problem sending the code, please try again later')
         }
         setVisibled(false);
         console.error("Erreur lors de la requête :", error)

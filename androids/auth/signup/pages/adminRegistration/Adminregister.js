@@ -29,6 +29,7 @@ import { privateKeys } from "../../../../../utilities/privateKeys";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ActivityIndicators from "../../../../components/ActivityIndicator";
+import moment from "moment";
 
 
 const Adminregister = ({ navigation, route }) => {
@@ -135,7 +136,7 @@ const onChange = ({type}, selectedDate)=>{
     setDate(currentDate)
     if(Platform.OS == "android"){
       toggleDatePicker()
-      setDateBirth(currentDate.toDateString())
+      setDateBirth(moment(currentDate).format('L'))
     }
   }else{
     toggleDatePicker()

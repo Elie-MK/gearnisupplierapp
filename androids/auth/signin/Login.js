@@ -102,6 +102,8 @@ const Login = ({ navigation, route }) => {
       if(error.message === "Network Error" ){
         setErrorStatus(true)
         alert('Please verify your Network')
+      }else if (error.message === "Request failed with status code 400" ){
+        alert('There was a problem sending the code, please try again later')
       }
      }
     }

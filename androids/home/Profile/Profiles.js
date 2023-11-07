@@ -22,6 +22,9 @@ import { Camera } from "expo-camera";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { privateKeys } from '../../../utilities/privateKeys'
 import axios from 'axios'
+import { ActivityIndicator } from 'react-native-paper'
+import Color from '../../../utilities/Color'
+import moment from 'moment/moment'
 
 
 
@@ -76,7 +79,7 @@ const [cin, setCin]=useState('')
   useEffect(()=>{
       TOKEN()
     },[])
-
+console.log(token);
   const instance = axios.create({
     baseURL: "https://backend.gearni.com/",
     headers:{
@@ -218,7 +221,7 @@ const [cin, setCin]=useState('')
         setDate(currentDate)
         if(Platform.OS == "android"){
           toggleDatePicker()
-          setDateBirth(currentDate.toDateString())
+          setDateBirth(moment(currentDate).format('L'))
         }
       }else{
         toggleDatePicker()
@@ -231,6 +234,9 @@ const [cin, setCin]=useState('')
   return (
     <KeybordAvoidHome nav={()=>navigation.goBack()} title={"My Profile"}>
       <View>
+        {
+          datas===null && <ActivityIndicator animating={true} color={Color.light.main} />
+        }
         {/* Profile Image */}
         <View style={{marginTop:verticalScale(20), alignItems:"center"}}>
           <Picturepprofile />
